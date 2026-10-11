@@ -5,9 +5,10 @@
 GROUPS, ORDER и SKIP из gen_catalog_prem_mtk.py (одна карточка на модель, как в каталоге).
 Фото — ~/auto-china/catalog/site_photos/final/<модель>.jpg (Wikimedia Commons, авторы и лицензии — sources.json):
 окно 17:10 вокруг машины (рамка rembg, кэш data/premium_bbox.json), только обрезка и уменьшение, номера не трогаются.
-Цена «от» (Юрий 11.10.2026: «цены возьми из каталога») — младшая строка карточки в PDF премиум-каталога на PRICE_DATE
-(catalog/out/Katalog-MTK-Premium-*-SPB-telefon-<дата>.pdf); ставится, только если совпадает с расчётом prem26_calc.py
-по тем же версиям, что в каталоге. Нет в PDF или расходится — карточка без цены.
+Цена «от» (Юрий 11.10.2026) — младшая строка карточки каталога, посчитанная prem26_calc.py по курсам дня (day_prices,
+вызывает site.py каждое утро). Цена ставится, только если тот же расчёт по курсам каталога совпадает со строками PDF
+премиум-каталога на PRICE_DATE (catalog/out/Katalog-MTK-Premium-*-SPB-telefon-<дата>.pdf); нет в PDF или расходится —
+карточка без цены.
 Запуск: python3 new/premium.py (после — python3 new/site.py --offline)
 """
 import ast
@@ -68,18 +69,23 @@ def models():
         o = order.get(b, [])
         keys = sorted(fams, key=lambda k: (o.index(k) if k in o else len(o), min(v["msrp_cny"] for x in fams[k] for v in x["versions"])))
         for k in keys:
-            out.append({"vs": calc_rows(fams[k]), "key": k, "name": fams[k][0]["model"].split(" PHEV")[0], "cn": fams[k][0].get("cn") or "", "brand": b,
+            out.append({"mdls": fams[k], "key": k, "name": fams[k][0]["model"].split(" PHEV")[0], "cn": fams[k][0].get("cn") or "", "brand": b,
                         "origin": ORIGIN[b]})
     rank = {k: i for i, (k, _) in enumerate(ORIGINS)}
     out.sort(key=lambda m: rank[m["origin"]])         # sort устойчивый: внутри группы — порядок марок и моделей каталога
     return out
 
 
-def calc_rows(mdls):
-    """Цены строк карточки каталога, как в load_group (gen_catalog_prem_mtk.py): три версии, по цене под ключ."""
+def _calc():
     if str(CAT) not in sys.path:
         sys.path.insert(0, str(CAT))
-    import prem26_calc as C
+    import prem26_calc
+    return prem26_calc
+
+
+def calc_rows(mdls):
+    """Цены строк карточки каталога, как в load_group (gen_catalog_prem_mtk.py): три версии, по цене под ключ."""
+    C = _calc()
     vs = sorted((v for x in mdls for v in x["versions"]), key=lambda v: v["msrp_cny"])
     vs = vs if len(vs) <= 3 else [vs[0], vs[len(vs) // 2], vs[-1]]
     return sorted(C.up10k(C.price(v)["total"]) for v in vs)
@@ -101,6 +107,21 @@ def pdf_prices(names, date):
             if m and cur:
                 out[cur].append(int(re.sub(r"\D", "", m.group(2))))
     return out, [f.name for f in pdfs]
+
+
+def day_prices(vtb, cny, eur):
+    """{модель: цена «от»} по курсам дня — для моделей, у которых расчёт по курсам каталога совпал с PDF; и список
+    моделей без цены."""
+    C = _calc()
+    ms = models()
+    pdf, _ = pdf_prices({m["name"] for m in ms}, catalog_rules()[3])
+    ok = [m for m in ms if pdf.get(m["name"]) == calc_rows(m["mdls"])]
+    old = C.set_rates(vtb, cny, eur)
+    try:
+        out = {m["key"]: calc_rows(m["mdls"])[0] for m in ok}
+    finally:
+        C.set_rates(*old)
+    return out, [m["name"] for m in ms if m["key"] not in out]
 
 
 def bbox(src, im):
@@ -163,8 +184,8 @@ def main():
     date = catalog_rules()[3]
     pdf, pdfs = pdf_prices({m["name"] for m in ms}, date)
     for m in ms:
-        rows = m.pop("vs")
-        m["price"] = rows[0] if pdf.get(m["name"]) == rows else None
+        rows = calc_rows(m.pop("mdls"))
+        m["price"] = rows[0] if pdf.get(m["name"]) == rows else None   # для проверки; на сайте — day_prices
         p = PHOTOS / f"{m['key']}.jpg"
         s = src.get(m["key"])
         if not p.exists() or not s:

@@ -5,7 +5,8 @@
   ~/auto-china/catalog/cars_data.py — 92 модели каталога (цены «Авто»);
   new/data/models.json — описания моделей; new/data/kp_cars.json + new/price.py — машины из КП и расчёт под ключ;
   new/data/faq.json — частые вопросы; new/src/s.css, s.js — оформление.
-Курс: ЦБ — cbr-xml-daily.ru; курс юаня для расчёта — new/data/kurs.json (см. vtb_rate()).
+Курс: ЦБ — cbr-xml-daily.ru; курс юаня для расчёта — ВТБ на сегодня (day_rate(), «Авто» 11.10.2026), записывается
+в new/data/kurs_dnya.json — оттуда его берут КП. Цены всех трёх разделов (Каталог, Авто в Китае, Премиум) — по нему.
 Запуск: python3 new/site.py [--offline]
 """
 import hashlib
@@ -127,14 +128,47 @@ def cbr_rates(offline=False):
     return json.loads(keep.read_text())
 
 
-def vtb_rate(cbr):
-    """Курс юаня для расчёта. Если в kurs.json есть курс ВТБ на сегодня (присланный Юрием) — он.
-    Иначе — ЦБ × наценка ВТБ, снятая с последнего курса Юрия (сайт ВТБ с сервера за границей не открывается)."""
-    k = json.loads((DATA / "kurs.json").read_text())
-    if k.get("date") == TODAY.isoformat():
-        return k["vtb"], "ВТБ"
-    m = k["vtb"] / k["cbr_cny"]
-    return round(cbr["cny"] * m, 2), "ВТБ, оценка"
+VTB_URL = "https://www.vtb.ru/api/currencyrates/table?category=3&type=1"   # интернет- и мобильный банк
+VTB_CA = DATA / "russian_trusted_root_ca.pem"          # сертификат ВТБ — от Минцифры, в системных корневых его нет
+VTB_K = 1.0211                                          # запасной: ЦБ × 1,0211 — разница ВТБ и ЦБ на 11.10 (12,9415 / 12,6739)
+KURS = DATA / "kurs_dnya.json"                          # курс дня для сайта и КП: дата, курс, источник
+
+
+def vtb_cny():
+    """Продажа юаня ВТБ в интернет- и мобильном банке, строка «до 100.00» (поле offer), и время, с которого он действует."""
+    import ssl
+    req = urllib.request.Request(VTB_URL, headers={
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36",
+        "Accept": "application/json, text/plain, */*", "Accept-Language": "ru-RU,ru;q=0.9",
+        "Referer": "https://www.vtb.ru/personal/platezhi-i-perevody/obmen-valjuty/"})
+    with urllib.request.urlopen(req, timeout=30, context=ssl.create_default_context(cafile=str(VTB_CA))) as r:
+        d = json.load(r)
+    row = next(x for x in d["rates"] if x["currency1"]["code"] == "CNY" and x.get("tooltip") == "до 100.00")
+    return float(row["offer"]), d.get("dateFrom", "")[:16].replace("T", " ")
+
+
+def day_rate(cbr, offline=False):
+    """Курс юаня для расчёта на сегодня (задача «Авто» 11.10.2026): ВТБ; если ВТБ не ответил или его курс отличается
+    от ЦБ больше чем на 5% — ЦБ × 1,0211. Записывается в kurs_dnya.json. --offline: курс, записанный сегодня, иначе запасной."""
+    if offline:
+        k = json.loads(KURS.read_text()) if KURS.exists() else {}
+        if k.get("date") == TODAY.isoformat():
+            return k["vtb"], k["source"]
+        return round(cbr["cny"] * VTB_K, 4), f"ЦБ {cbr['cny']:.4f} × {VTB_K} (без сети)"
+    why = ""
+    try:
+        v, since = vtb_cny()
+        if abs(v / cbr["cny"] - 1) <= 0.05:
+            rate, src = v, f"ВТБ, интернет- и мобильный банк, продажа юаня до 100 ¥, курс с {since} МСК"
+        else:
+            why = f"курс ВТБ {v} отличается от ЦБ {cbr['cny']:.4f} больше чем на 5%"
+    except Exception as e:  # noqa: BLE001
+        why = f"ВТБ не ответил: {e}"
+    if why:
+        rate, src = round(cbr["cny"] * VTB_K, 4), f"ЦБ {cbr['cny']:.4f} × {VTB_K} ({why})"
+    KURS.write_text(json.dumps({"date": TODAY.isoformat(), "vtb": rate, "source": src, "cbr_cny": cbr["cny"], "cbr_eur": cbr["eur"],
+                                "cbr_date": cbr["date"], "at": datetime.now().strftime("%Y-%m-%d %H:%M")}, ensure_ascii=False, indent=1))
+    return rate, src
 
 
 # ---------- оформление ----------
@@ -288,9 +322,43 @@ DIR_TEXT = {"ev": "Новые электромобили, которые про�
 FUEL_RU = {"ev": "Электро", "erev": "Гибрид EREV", "hybrid": "Гибрид", "petrol": "Бензин", "ice": "Бензин"}
 
 
-def load_models():
+def catalog_recalc(rates):
+    """Пересчёт цен «Каталога» на курсы дня (задача «Авто» 11.10.2026) тем же методом, каким «Авто» пересчитывает каталог
+    (~/auto-china/catalog/update_2026_10_01_1275.py, функции total и reverse из recalc_catalog.py): известные юани — прямой
+    расчёт, остальные — обратным методом от цены каталога; цены «от» с Drom не пересчитываются. База — курсы, по которым
+    посчитан cars_data.py (NEW в том же файле). Возвращает f(имя, "from"|"to", цена, электро) -> цена на сегодня."""
+    import ast
+    cat = AC / "catalog"
+    src = (cat / "recalc_catalog.py").read_text()
+    ns = {}
+    exec(src[:src.index("# --- ТОЧНО ПО КП")], ns)   # noqa: S102 — R, total, reverse, floor10 без остального скрипта
+    vol = next(ast.literal_eval(n.value) for n in ast.parse(src).body
+               if isinstance(n, ast.Assign) and getattr(n.targets[0], "id", "") == "VOL")
+    up = ast.parse((cat / "update_2026_10_01_1275.py").read_text()).body
+    lit = {n.targets[0].id: n.value for n in up if isinstance(n, ast.Assign) and isinstance(n.targets[0], ast.Name)}
+    vol.update(next(ast.literal_eval(n.value.args[0]) for n in up if isinstance(n, ast.Expr) and isinstance(n.value, ast.Call) and ast.unparse(n.value.func) == "VOL.update"))
+    drom, yuan = ast.literal_eval(lit["DROM"]), ast.literal_eval(lit["YUAN"])
+    R, total, reverse, floor10 = ns["R"], ns["total"], ns["reverse"], ns["floor10"]
+    base = R(*[ast.literal_eval(a) for a in lit["NEW"].args])
+    day = R(rates["vtb"], rates["cny"], rates["eur"])
+
+    def f(name, k, v, ev):
+        if v is None or (k == "from" and drom.get(name) == v):
+            return v
+        i = 0 if k == "from" else 1
+        kind, vl = ("ev", 0) if ev else ("ice", vol[name][i])
+        y = yuan.get(name, (None, None))[i]
+        if y and floor10(total(y, kind, vl, base)) == v:
+            return floor10(total(y, kind, vl, day))
+        y = reverse(v + 5_000, kind, vl, base)          # разница дня к цене каталога: на ступенях пошлины обратный метод
+        return floor10(v + 5_000 + total(y, kind, vl, day) - total(y, kind, vl, base))   # иначе сдвигает цену и при тех же курсах
+    return f
+
+
+def load_models(rates=None):
     extra = json.loads((DATA / "models.json").read_text()) if (DATA / "models.json").exists() else {}
     out, seen = [], set()
+    rc = catalog_recalc(rates) if rates else None
     for key, label, cat, _, fuel in DIRS:
         c = next(x for x in cars_data.CATEGORIES if x["cat"] == cat)
         cond = "Новые" if "НОВ" in c.get("cond", "") else "С пробегом 3–5 лет"
@@ -306,6 +374,11 @@ def load_models():
                     f = "ev erev"
                 photo = CARS_MTK / m["photo"] if (CARS_MTK / m["photo"]).exists() else CARS / m["photo"]
                 brand_ = x.get("brand") or m["name"].split()[0]
+                if rc:
+                    try:
+                        m = dict(m, **{k: rc(m["name"], k, m[k], cat == "ЭЛЕКТРО") for k in ("from", "to")})
+                    except Exception as e:  # noqa: BLE001
+                        print("Каталог: цена не пересчитана, оставлена из каталога —", m["name"], e)
                 out.append(dict(m, slug=slug, dir=key, dir_label=label, fuel=f, cond=cond, awd=key == "awd", brand=brand_,
                                 body=x.get("body"), size=x.get("size"), seats=x.get("seats"), china=x.get("china_name"),
                                 desc=x.get("desc"), points=x.get("points") or [], src=photo, stem=Path(m["photo"]).stem))
@@ -582,7 +655,7 @@ def catalog_page(models):
 <select data-sort aria-label="Сортировка"><option value="price-asc">Сначала дешевле</option><option value="price-desc">Сначала дороже</option><option value="name-asc">По названию</option></select></span></div>
 <div class="list" data-list>{"".join(model_card(m) for m in models)}</div>
 <p class="empty" id="empty">По&nbsp;таким условиям моделей нет. <a class="more" href="#" data-reset>Сбросить фильтры</a></p>
-<p class="note">Цены&nbsp;— ориентир под&nbsp;ключ в&nbsp;Санкт-Петербурге: автомобиль, доставка, растаможка, документы и&nbsp;наши услуги. Курс юаня в&nbsp;каталоге&nbsp;— на&nbsp;дату выпуска каталога; точную цену конкретной машины считаем по&nbsp;курсу дня.</p>
+<p class="note">Цены&nbsp;— ориентир под&nbsp;ключ в&nbsp;Санкт-Петербурге: автомобиль, доставка, растаможка, документы и&nbsp;наши услуги. Пересчитаны {ddmm(TODAY)} по&nbsp;курсу юаня на&nbsp;сегодня; точную цену конкретной машины считаем при&nbsp;подборе.</p>
 </div></div></section>
 {fin_block()}"""
     ld = [bc_ld(("katalog/", "Каталог")),
@@ -740,11 +813,15 @@ def car_page(c, kp, models, rates):
          body, active="avto/", jsonld=ld, og=f'img/kp/{c["slug"]}/1.webp', prio="0.7")
 
 
-def premium_page(prem):
-    """Новые премиальные автомобили из Китая (Юрий 11.10.2026): карточки с ценой «от» из PDF премиум-каталога, фильтр по стране марки,
+def premium_page(prem, rates):
+    """Новые премиальные автомобили из Китая (Юрий 11.10.2026): карточки с ценой «от» по курсу дня (как строки PDF премиум-каталога),
     авторы фото.
     Данные и фото готовит new/premium.py."""
-    cards = prem["cards"]
+    import premium as P
+    day, noprice = P.day_prices(rates["vtb"], rates["cny"], rates["eur"])
+    if noprice:
+        print("Премиум без цены (нет в PDF каталога или расходится с ним):", ", ".join(noprice))
+    cards = [dict(c, price=day.get(c["key"])) for c in prem["cards"]]
     origins = [(k, t) for k, t in prem["origins"]]
     chips = "".join(f'<button class="chip" type="button" data-v="{k}">{t} <i>{sum(c["origin"] == k for c in cards)}</i></button>' for k, t in origins)
     grid = "".join(f'<div class="card pc" data-origin="{c["origin"]}"><div class="im{" ct" if c.get("bg") else ""}"'
@@ -758,7 +835,7 @@ def premium_page(prem):
     body = f"""
 <section class="phead"><div class="wrap">{crumbs((None, "Премиум"))}
 <h1 class="rv in">Новые премиальные автомобили <em>из&nbsp;Китая</em></h1>
-<p class="lead">Цены ориентировочные, под&nbsp;ключ до&nbsp;Санкт-Петербурга, на&nbsp;{prem["price_date"]}</p>
+<p class="lead">Цены ориентировочные, под&nbsp;ключ до&nbsp;Санкт-Петербурга, на&nbsp;{ddmm(TODAY)}</p>
 </div></section>
 <section class="sec tight prem"><div class="wrap">
 <div class="pfl"><div class="chips" data-f="origin" data-one><button class="chip all" type="button" data-reset>Все <i>{len(cards)}</i></button>{chips}</div>
@@ -921,9 +998,10 @@ def main():
         webp(CARS / f"hero_sec{k}.jpg", IMG / f"sec{k}_m.webp", 1100, 74)
 
     cbr = cbr_rates(offline)
-    vtb, src = vtb_rate(cbr)
+    vtb, src = day_rate(cbr, offline)
+    print(f"курс юаня на {ddmm(TODAY)}: {vtb} — {src}")
     rates = {"vtb": vtb, "vtb_src": src, "cny": cbr["cny"], "eur": cbr["eur"], "cbr_date": cbr["date"]}
-    models = load_models()
+    models = load_models(rates)
     for m in models:
         model_imgs(m)
     kp = load_kp(rates)
@@ -941,7 +1019,7 @@ def main():
     home(models, kp, rates, faq)
     catalog_page(models)
     if (DATA / "premium.json").exists():
-        premium_page(json.loads((DATA / "premium.json").read_text()))
+        premium_page(json.loads((DATA / "premium.json").read_text()), rates)
     for m in models:
         model_page(m, models, kp)
     if kp:
