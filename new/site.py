@@ -159,7 +159,7 @@ def day_rate(cbr, offline=False):
     try:
         v, since = vtb_cny()
         if abs(v / cbr["cny"] - 1) <= 0.05:
-            rate, src = v, f"ВТБ, интернет- и мобильный банк, продажа юаня до 100 ¥, курс с {since} МСК"
+            rate, src = v, f"ВТБ, интернет- и мобильный банк, продажа юаня до 100 ¥, курс действует с {since} по данным ВТБ"
         else:
             why = f"курс ВТБ {v} отличается от ЦБ {cbr['cny']:.4f} больше чем на 5%"
     except Exception as e:  # noqa: BLE001
