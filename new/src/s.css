@@ -457,3 +457,38 @@ body{font-size:16px}
 .gmain button{opacity:1}
 }
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}}
+
+/* премиум: новые премиальные автомобили из Китая (11.10.2026) */
+/* восьмой пункт меню: шапка шире, кнопка «Написать специалисту» — только там, где влезает (раньше на 1280 px уже вылезала за край) */
+.hrow{max-width:1600px}
+@media (max-width:1599px){.hdr .cta{display:none}}
+.pfl{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:26px}
+.pfl .cnt{font-size:16px;color:var(--muted)}
+.pfl .cnt b{color:var(--ink);font-weight:600}
+.prem .chip i{font-style:normal;opacity:.55;margin-left:3px}
+.prem .chips:not(:has(.chip.on)) .chip.all{background:var(--navy2);border-color:var(--navy2);color:#fff}
+.prem .list{grid-template-columns:repeat(4,1fr);gap:18px}
+.pc{cursor:default}
+.pc:hover{transform:none;box-shadow:none}
+.pc:hover .im img{transform:none}
+.pc .im.ct img{object-fit:contain}
+.pc .t{padding:14px 18px 16px}
+.pc h3{font-size:17px}
+.pcta{margin-top:44px;display:flex;flex-wrap:wrap;gap:20px;align-items:center;justify-content:space-between}
+.pcta p{color:var(--muted);margin-top:6px;max-width:680px}
+.credits{margin-top:60px;color:var(--muted);font-size:13px;line-height:1.5}
+.credits h2{font-family:var(--ui);font-size:18px;font-weight:600;color:var(--ink);letter-spacing:0}
+.credits p{margin-top:6px}
+.credits ul{list-style:none;margin:14px 0 0;padding:0;columns:3 300px;column-gap:30px}
+.credits li{break-inside:avoid;margin-bottom:5px}
+.credits a{text-decoration:underline;text-underline-offset:2px}
+.credits a:hover{color:var(--blue)}
+@media (max-width:1279px){.prem .list{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:760px){
+.prem .list{grid-template-columns:repeat(2,1fr);gap:10px}
+.pc{border-radius:16px}
+.pc .t{padding:10px 12px 12px}
+.pc h3{font-size:14.5px}
+.prem .chip{height:36px;padding:0 13px;font-size:14.5px}
+.pcta .btn{width:100%;justify-content:center}
+}

@@ -49,7 +49,7 @@ TEAM = _mb.TEAM
 MAX_HREF = "https://max.ru/u/f9LHodD0cOLQzwPoUyWBoejqc5iq940FAYmSIsMAm8Hr1FcNu85zWG126zY"
 CHANNEL = "https://t.me/mtk_vostok_avto"
 
-MENU = [("katalog/", "Каталог"), ("avto/", "Авто в Китае"), ("kak-kupit/", "Как купить"), ("stoimost/", "Стоимость"),
+MENU = [("katalog/", "Каталог"), ("premium/", "Премиум"), ("avto/", "Авто в Китае"),("kak-kupit/", "Как купить"), ("stoimost/", "Стоимость"),
         ("vydannye/", "Выданные"), ("voprosy/", "Вопросы"), ("kontakty/", "Контакты")]
 PAGES = []                                              # (путь, приоритет) — для sitemap.xml
 MIN_YEAR = 2022                                         # машины 2021 года не показывать (Юрий 06.10.2026)
@@ -740,6 +740,41 @@ def car_page(c, kp, models, rates):
          body, active="avto/", jsonld=ld, og=f'img/kp/{c["slug"]}/1.webp', prio="0.7")
 
 
+def premium_page(prem):
+    """Новые премиальные автомобили из Китая (Юрий 11.10.2026): карточки без цен, фильтр по стране марки, авторы фото.
+    Данные и фото готовит new/premium.py."""
+    cards = prem["cards"]
+    origins = [(k, t) for k, t in prem["origins"]]
+    n_brands = len({c["brand"] for c in cards})
+    chips = "".join(f'<button class="chip" type="button" data-v="{k}">{t} <i>{sum(c["origin"] == k for c in cards)}</i></button>' for k, t in origins)
+    grid = "".join(f'<div class="card pc" data-origin="{c["origin"]}"><div class="im{" ct" if c.get("bg") else ""}"'
+                   + (f' style="background:linear-gradient({c["bg"][0]},{c["bg"][1]} 50%,{c["bg"][2]} 50%)"' if c.get("bg") else "")
+                   + f'><img src="{u(c["img"])}" alt="{E(c["name"])}" loading="lazy" width="{c["size"][0]}" height="{c["size"][1]}"></div>'
+                   f'<div class="t"><h3>{E(c["name"])}</h3></div></div>' for c in cards)
+    credits = "".join(f'<li>{E(c["name"])}&nbsp;— {E(c["author"])}, <a href="{E(c["license_url"])}" rel="license noopener" target="_blank">{E(c["license"])}</a>, '
+                      f'<a href="{E(c["page"])}" rel="noopener" target="_blank">Wikimedia Commons</a></li>' for c in cards)
+    body = f"""
+<section class="phead"><div class="wrap">{crumbs((None, "Премиум"))}
+<h1 class="rv in">Новые премиальные автомобили <em>из&nbsp;Китая</em></h1>
+<p class="lead">{len(cards)} {plural(len(cards), "модель", "модели", "моделей")} {n_brands} {plural(n_brands, "марки", "марок", "марок")}: новые машины для&nbsp;рынка Китая. Подберём комплектацию, привезём и&nbsp;растаможим под&nbsp;ключ. Цену под&nbsp;ключ на&nbsp;нужную комплектацию посчитает специалист.</p>
+</div></section>
+<section class="sec tight prem"><div class="wrap">
+<div class="pfl"><div class="chips" data-f="origin" data-one><button class="chip all" type="button" data-reset>Все <i>{len(cards)}</i></button>{chips}</div>
+<span class="cnt">Найдено: <b id="cnt">{len(cards)}</b></span></div>
+<div class="list" data-list>{grid}</div>
+<p class="empty" id="empty">Моделей нет. <a class="more" href="#" data-reset>Показать все</a></p>
+<div class="box pcta"><div><h3>Узнать цену под&nbsp;ключ</h3><p>Фото&nbsp;— пример модели, не&nbsp;конкретный автомобиль. Цвет, комплектацию и&nbsp;город выдачи подберём под&nbsp;Ваш запрос и&nbsp;посчитаем итог до&nbsp;рубля.</p></div>
+<a class="btn b" href="{u("kontakty/")}">Написать специалисту <span class="ar">→</span></a></div>
+<div class="credits"><h2>Авторы фото</h2><p>Фото моделей&nbsp;— с&nbsp;Wikimedia Commons по&nbsp;свободным лицензиям. Снимки обрезаны и&nbsp;уменьшены под&nbsp;карточки.</p><ul>{credits}</ul></div>
+</div></section>"""
+    ld = [bc_ld(("premium/", "Премиум")),
+          {"@context": "https://schema.org", "@type": "ItemList", "name": "Новые премиальные автомобили из Китая",
+           "itemListElement": [{"@type": "ListItem", "position": i, "name": c["name"]} for i, c in enumerate(cards, 1)]}]
+    page("premium/", "Новые премиальные автомобили из Китая под ключ | МТК Восток-Авто",
+         f"{len(cards)} моделей новых премиальных автомобилей из Китая: европейские, японские, корейские, американские и китайские марки. Подбор, доставка и растаможка под ключ.",
+         body, active="premium/", jsonld=ld, og=cards[0]["img"], prio="0.8")
+
+
 def how_page(faq):
     tl = []
     for n, h, p, pay, ph in STEPS:
@@ -903,6 +938,8 @@ def main():
     PAGES.clear()
     home(models, kp, rates, faq)
     catalog_page(models)
+    if (DATA / "premium.json").exists():
+        premium_page(json.loads((DATA / "premium.json").read_text()))
     for m in models:
         model_page(m, models, kp)
     if kp:

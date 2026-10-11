@@ -1,0 +1,3167 @@
+{
+ "origins": [
+  [
+   "eu",
+   "Европейские"
+  ],
+  [
+   "jp",
+   "Японские"
+  ],
+  [
+   "kr",
+   "Корейские"
+  ],
+  [
+   "us",
+   "Американские"
+  ],
+  [
+   "cn",
+   "Китайские"
+  ]
+ ],
+ "cards": [
+  {
+   "key": "mb_a",
+   "name": "Mercedes-Benz A-Class",
+   "cn": "奔驰A级",
+   "brand": "mercedes",
+   "origin": "eu",
+   "img": "img/p/mb_a.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "Jengtingchen",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Mercedes-Benz_A-class_Z177_001.jpg"
+  },
+  {
+   "key": "mb_cla",
+   "name": "Mercedes-Benz CLA",
+   "cn": "奔驰CLA(进口)",
+   "brand": "mercedes",
+   "origin": "eu",
+   "img": "img/p/mb_cla.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "© M 93",
+   "license": "CC BY-SA 3.0 de",
+   "license_url": "https://creativecommons.org/licenses/by-sa/3.0/de/deed.en",
+   "page": "https://commons.wikimedia.org/wiki/File:Mercedes-Benz_CLA_220_4MATIC_AMG_Line_(C_178)_%E2%80%93_f_11052026.jpg"
+  },
+  {
+   "key": "mb_cla_ev",
+   "name": "Mercedes-Benz CLA электро",
+   "cn": "奔驰CLA EV",
+   "brand": "mercedes",
+   "origin": "eu",
+   "img": "img/p/mb_cla_ev.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "Dinkun Chen",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:MERCEDES-BENZ_CLA_LWB_C174_China.jpg"
+  },
+  {
+   "key": "mb_c",
+   "name": "Mercedes-Benz C-Class",
+   "cn": "奔驰C级",
+   "brand": "mercedes",
+   "origin": "eu",
+   "img": "img/p/mb_c.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "Alexander-93",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Mercedes-AMG_C_43_(W206)_IMG_7393.jpg"
+  },
+  {
+   "key": "mb_cle",
+   "name": "Mercedes-Benz CLE",
+   "cn": "奔驰CLE级",
+   "brand": "mercedes",
+   "origin": "eu",
+   "img": "img/p/mb_cle.webp",
+   "size": [
+    640,
+    335
+   ],
+   "bg": [
+    "to bottom",
+    "#25221f",
+    "#645b52"
+   ],
+   "author": "© M 93",
+   "license": "CC BY-SA 3.0 de",
+   "license_url": "https://creativecommons.org/licenses/by-sa/3.0/de/deed.en",
+   "page": "https://commons.wikimedia.org/wiki/File:Mercedes-Benz_CLE_200_Coup%C3%A9_AMG_Line_(C_236)_%E2%80%93_f_21012024.jpg"
+  },
+  {
+   "key": "mb_e",
+   "name": "Mercedes-Benz E-Class",
+   "cn": "奔驰E级",
+   "brand": "mercedes",
+   "origin": "eu",
+   "img": "img/p/mb_e.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "Alexander Migl",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Mercedes-Benz_W214_1X7A0885.jpg"
+  },
+  {
+   "key": "mb_s",
+   "name": "Mercedes-Benz S-Class",
+   "cn": "奔驰S级",
+   "brand": "mercedes",
+   "origin": "eu",
+   "img": "img/p/mb_s.webp",
+   "size": [
+    640,
+    280
+   ],
+   "bg": [
+    "to bottom",
+    "#a6a8ae",
+    "#cec5bc"
+   ],
+   "author": "Alexander Migl",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Mercedes-Benz_W223_IAA_2021_1X7A0206.jpg"
+  },
+  {
+   "key": "mb_maybach_s",
+   "name": "Mercedes-Maybach S-Class",
+   "cn": "迈巴赫S级",
+   "brand": "mercedes",
+   "origin": "eu",
+   "img": "img/p/mb_maybach_s.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "Dinkun Chen",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:MERCEDES_MAYBACH_S-CLASS_(W223)_China_(2).jpg"
+  },
+  {
+   "key": "mb_amg_gt",
+   "name": "Mercedes-AMG GT",
+   "cn": "AMG GT",
+   "brand": "mercedes",
+   "origin": "eu",
+   "img": "img/p/mb_amg_gt.webp",
+   "size": [
+    640,
+    329
+   ],
+   "bg": [
+    "to bottom",
+    "#4c5038",
+    "#9f9555"
+   ],
+   "author": "TTTNIS",
+   "license": "CC0",
+   "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+   "page": "https://commons.wikimedia.org/wiki/File:Mercedes-AMG_GT43_Coupe_C192.jpg"
+  },
+  {
+   "key": "mb_sl",
+   "name": "Mercedes-AMG SL",
+   "cn": "奔驰SL级AMG",
+   "brand": "mercedes",
+   "origin": "eu",
+   "img": "img/p/mb_sl.webp",
+   "size": [
+    640,
+    318
+   ],
+   "bg": [
+    "to bottom",
+    "#484d3f",
+    "#8d8d51"
+   ],
+   "author": "TTTNIS",
+   "license": "CC0",
+   "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+   "page": "https://commons.wikimedia.org/wiki/File:Mercedes-AMG_SL43_R232.jpg"
+  },
+  {
+   "key": "mb_gla",
+   "name": "Mercedes-Benz GLA",
+   "cn": "奔驰GLA",
+   "brand": "mercedes",
+   "origin": "eu",
+   "img": "img/p/mb_gla.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "Dinkun Chen",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:MERCEDES-BENZ_GLA_(H247)_China.jpg"
+  },
+  {
+   "key": "mb_glb",
+   "name": "Mercedes-Benz GLB",
+   "cn": "奔驰GLB",
+   "brand": "mercedes",
+   "origin": "eu",
+   "img": "img/p/mb_glb.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "Alexander-93",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Mercedes-AMG_GLB_35_4MATIC_(X247)_(2023)_IMG_9649.jpg"
+  },
+  {
+   "key": "mb_glc",
+   "name": "Mercedes-Benz GLC",
+   "cn": "奔驰GLC",
+   "brand": "mercedes",
+   "origin": "eu",
+   "img": "img/p/mb_glc.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "Dinkun Chen",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:MERCEDES-BENZ_GLC_(X254)_China.jpg"
+  },
+  {
+   "key": "mb_glc_coupe",
+   "name": "Mercedes-Benz GLC Coupé",
+   "cn": "奔驰GLC轿跑",
+   "brand": "mercedes",
+   "origin": "eu",
+   "img": "img/p/mb_glc_coupe.webp",
+   "size": [
+    547,
+    376
+   ],
+   "bg": [
+    "to right",
+    "#929ea8",
+    "#7b7b78"
+   ],
+   "author": "Dinkun Chen",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:MERCEDES-BENZ_GLC_COUPE_(C254)_HONG_KONG.jpg"
+  },
+  {
+   "key": "mb_gle",
+   "name": "Mercedes-Benz GLE",
+   "cn": "奔驰GLE",
+   "brand": "mercedes",
+   "origin": "eu",
+   "img": "img/p/mb_gle.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "Charles from Port Chester, New York",
+   "license": "CC0",
+   "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+   "page": "https://commons.wikimedia.org/wiki/File:Mercedes-Benz_GLE_450_4MATIC_(W167,_2026)_(55211989821).jpg"
+  },
+  {
+   "key": "mb_gle_coupe",
+   "name": "Mercedes-Benz GLE Coupé",
+   "cn": "奔驰GLE轿跑",
+   "brand": "mercedes",
+   "origin": "eu",
+   "img": "img/p/mb_gle_coupe.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "Dinkun Chen",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:MERCEDES-BENZ_GLE_COUPE_(C167)_China_(6).jpg"
+  },
+  {
+   "key": "mb_gls",
+   "name": "Mercedes-Benz GLS",
+   "cn": "奔驰GLS",
+   "brand": "mercedes",
+   "origin": "eu",
+   "img": "img/p/mb_gls.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "Dinkun Chen",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:MERCEDES-BENZ_GLS_(X167)_China_(14).jpg"
+  },
+  {
+   "key": "mb_maybach_gls",
+   "name": "Mercedes-Maybach GLS",
+   "cn": "迈巴赫GLS",
+   "brand": "mercedes",
+   "origin": "eu",
+   "img": "img/p/mb_maybach_gls.webp",
+   "size": [
+    573,
+    376
+   ],
+   "bg": [
+    "to right",
+    "#8c8884",
+    "#7c7c77"
+   ],
+   "author": "Oleg Yunakov",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:2025_Mercedes-Maybach_GLS_600_4MATIC_(Night_Series).jpg"
+  },
+  {
+   "key": "mb_g",
+   "name": "Mercedes-Benz G-Class",
+   "cn": "奔驰G级",
+   "brand": "mercedes",
+   "origin": "eu",
+   "img": "img/p/mb_g.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "Alexander Migl",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Mercedes-Benz_W_463_(2018)_Professional_Line_1X7A6057.jpg"
+  },
+  {
+   "key": "mb_v",
+   "name": "Mercedes-Benz V-Class",
+   "cn": "奔驰V级",
+   "brand": "mercedes",
+   "origin": "eu",
+   "img": "img/p/mb_v.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "Alexander-93",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:2023_Mercedes-Benz_V-Class_300d_(W447)_IMG_9812.jpg"
+  },
+  {
+   "key": "mb_vito",
+   "name": "Mercedes-Benz Vito",
+   "cn": "威霆",
+   "brand": "mercedes",
+   "origin": "eu",
+   "img": "img/p/mb_vito.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "Dinkun Chen",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:MERCEDES-BENZ_VITO_(W447)_China_(5).jpg"
+  },
+  {
+   "key": "mb_eqa",
+   "name": "Mercedes-Benz EQA",
+   "cn": "奔驰EQA",
+   "brand": "mercedes",
+   "origin": "eu",
+   "img": "img/p/mb_eqa.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "Dinkun Chen",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:MERCEDES-BENZ_EQA_China.jpg"
+  },
+  {
+   "key": "mb_eqb",
+   "name": "Mercedes-Benz EQB",
+   "cn": "奔驰EQB",
+   "brand": "mercedes",
+   "origin": "eu",
+   "img": "img/p/mb_eqb.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "Dinkun Chen",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:MERCEDES-EQ_EQB_China.jpg"
+  },
+  {
+   "key": "mb_eqe",
+   "name": "Mercedes-Benz EQE",
+   "cn": "奔驰EQE",
+   "brand": "mercedes",
+   "origin": "eu",
+   "img": "img/p/mb_eqe.webp",
+   "size": [
+    640,
+    322
+   ],
+   "bg": [
+    "to bottom",
+    "#5f6c68",
+    "#a1968e"
+   ],
+   "author": "Alexander-93",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Mercedes-AMG_EQE_53_(V295)_1X7A7355.jpg"
+  },
+  {
+   "key": "mb_eqe_suv",
+   "name": "Mercedes-Benz EQE SUV",
+   "cn": "奔驰EQE SUV",
+   "brand": "mercedes",
+   "origin": "eu",
+   "img": "img/p/mb_eqe_suv.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "Alexander-93",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Mercedes-AMG_EQE_SUV_43_(X294)_IMG_0231.jpg"
+  },
+  {
+   "key": "mb_eqs",
+   "name": "Mercedes-Benz EQS",
+   "cn": "奔驰EQS",
+   "brand": "mercedes",
+   "origin": "eu",
+   "img": "img/p/mb_eqs.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "Benespit",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:24_Mercedes-Benz_EQS_V297_1.jpg"
+  },
+  {
+   "key": "mb_eqs_suv",
+   "name": "Mercedes-Benz EQS SUV",
+   "cn": "奔驰EQS SUV",
+   "brand": "mercedes",
+   "origin": "eu",
+   "img": "img/p/mb_eqs_suv.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "Damian B Oh",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Mercedes-Benz_X296_EQS_450_4MATIC_SUV_AMG_Line_Obsidian_Black.jpg"
+  },
+  {
+   "key": "mb_maybach_eqs",
+   "name": "Mercedes-Maybach EQS SUV",
+   "cn": "迈巴赫EQS SUV",
+   "brand": "mercedes",
+   "origin": "eu",
+   "img": "img/p/mb_maybach_eqs.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "Damian B Oh",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Mercedes-Maybach_X296_EQS_680_SUV_Obsidian_Black_(6).jpg"
+  },
+  {
+   "key": "bmw_2",
+   "name": "BMW 2 Series",
+   "cn": "宝马2系",
+   "brand": "bmw",
+   "origin": "eu",
+   "img": "img/p/bmw_2.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "Alexander Migl",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:BMW_220d_(F74)_DSC_7359.jpg"
+  },
+  {
+   "key": "bmw_3",
+   "name": "BMW 3 Series",
+   "cn": "宝马3系",
+   "brand": "bmw",
+   "origin": "eu",
+   "img": "img/p/bmw_3.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "Dinkun Chen",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:BMW_3_SERIES_LWB_SEDAN_(G28)_China_(3).jpg"
+  },
+  {
+   "key": "bmw_4",
+   "name": "BMW 4 Series",
+   "cn": "宝马4系",
+   "brand": "bmw",
+   "origin": "eu",
+   "img": "img/p/bmw_4.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "Dinkun Chen",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:BMW_4_SERIES_COUPE_(G22)_China.jpg"
+  },
+  {
+   "key": "bmw_5",
+   "name": "BMW 5 Series",
+   "cn": "宝马5系",
+   "brand": "bmw",
+   "origin": "eu",
+   "img": "img/p/bmw_5.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "Dinkun Chen",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:BMW_5_SERIES_LWB_SEDAN_(G60)_China.jpg"
+  },
+  {
+   "key": "bmw_7",
+   "name": "BMW 7 Series",
+   "cn": "宝马7系",
+   "brand": "bmw",
+   "origin": "eu",
+   "img": "img/p/bmw_7.webp",
+   "size": [
+    640,
+    325
+   ],
+   "bg": [
+    "to bottom",
+    "#3c4034",
+    "#bfb4a8"
+   ],
+   "author": "Alexander-93",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:BMW_7-Series_(G70)_750e_IMG_9358.jpg"
+  },
+  {
+   "key": "bmw_8",
+   "name": "BMW 8 Series",
+   "cn": "宝马8系",
+   "brand": "bmw",
+   "origin": "eu",
+   "img": "img/p/bmw_8.webp",
+   "size": [
+    640,
+    289
+   ],
+   "bg": [
+    "to bottom",
+    "#6d6a67",
+    "#ac937e"
+   ],
+   "author": "Dinkun Chen",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:BMW_8_SERIES_GRAN_COUPE_(G15)_China_(4).jpg"
+  },
+  {
+   "key": "bmw_x1",
+   "name": "BMW X1",
+   "cn": "宝马X1",
+   "brand": "bmw",
+   "origin": "eu",
+   "img": "img/p/bmw_x1.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "Alexander Migl",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:BMW_U11_X1_M35i_DSC_9809.jpg"
+  },
+  {
+   "key": "bmw_x2",
+   "name": "BMW X2",
+   "cn": "宝马X2(进口)",
+   "brand": "bmw",
+   "origin": "eu",
+   "img": "img/p/bmw_x2.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "Alexander-93",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:BMW_U10_X2_M35i_1X7A1879.jpg"
+  },
+  {
+   "key": "bmw_x3",
+   "name": "BMW X3",
+   "cn": "宝马X3",
+   "brand": "bmw",
+   "origin": "eu",
+   "img": "img/p/bmw_x3.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "Alexander Migl",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:BMW_G45_X3_M50_DSC_8509.jpg"
+  },
+  {
+   "key": "bmw_x4",
+   "name": "BMW X4",
+   "cn": "宝马X4",
+   "brand": "bmw",
+   "origin": "eu",
+   "img": "img/p/bmw_x4.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "Damian B Oh",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:BMW_G02_LCI_X4_xDrive_20i_M_Sport_Phytonic_Blue_Metallic_(1).jpg"
+  },
+  {
+   "key": "bmw_x5",
+   "name": "BMW X5",
+   "cn": "宝马X5",
+   "brand": "bmw",
+   "origin": "eu",
+   "img": "img/p/bmw_x5.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "Damian B Oh",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:BMW_G05_LCI_X5_X_Line_Black_Sapphire_Metallic.jpg"
+  },
+  {
+   "key": "bmw_x6",
+   "name": "BMW X6",
+   "cn": "宝马X6",
+   "brand": "bmw",
+   "origin": "eu",
+   "img": "img/p/bmw_x6.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "Damian B Oh",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:BMW_G06_LCI_X6_xDrive40i_M_Sport_Carbon_Black_Metallic_(10).jpg"
+  },
+  {
+   "key": "bmw_x7",
+   "name": "BMW X7",
+   "cn": "宝马X7",
+   "brand": "bmw",
+   "origin": "eu",
+   "img": "img/p/bmw_x7.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "Damian B Oh",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:BMW_G07_LCI_X7_xDrive40i_M_Sport_Black_Sapphire_Metallic_(8).jpg"
+  },
+  {
+   "key": "bmw_xm",
+   "name": "BMW XM",
+   "cn": "宝马XM",
+   "brand": "bmw",
+   "origin": "eu",
+   "img": "img/p/bmw_xm.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "Alexander-93",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:BMW_XM_(G09)_IMG_7778.jpg"
+  },
+  {
+   "key": "bmw_i3",
+   "name": "BMW i3",
+   "cn": "宝马i3",
+   "brand": "bmw",
+   "origin": "eu",
+   "img": "img/p/bmw_i3.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "Dinkun Chen",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:BMW_i3_(G28)_China_(12).jpg"
+  },
+  {
+   "key": "bmw_i4",
+   "name": "BMW i4",
+   "cn": "宝马i4",
+   "brand": "bmw",
+   "origin": "eu",
+   "img": "img/p/bmw_i4.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "Alexander-93",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:BMW_i4_M50_1X7A7379.jpg"
+  },
+  {
+   "key": "bmw_i5",
+   "name": "BMW i5",
+   "cn": "宝马i5",
+   "brand": "bmw",
+   "origin": "eu",
+   "img": "img/p/bmw_i5.webp",
+   "size": [
+    640,
+    340
+   ],
+   "bg": [
+    "to bottom",
+    "#5e493f",
+    "#7b6c52"
+   ],
+   "author": "Dinkun Chen",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:BMW_i5_(G60)_China_(4).jpg"
+  },
+  {
+   "key": "bmw_i7",
+   "name": "BMW i7",
+   "cn": "宝马i7",
+   "brand": "bmw",
+   "origin": "eu",
+   "img": "img/p/bmw_i7.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "Dinkun Chen",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:BMW_i7_(G70)_China_(2).jpg"
+  },
+  {
+   "key": "bmw_ix1",
+   "name": "BMW iX1",
+   "cn": "宝马iX1",
+   "brand": "bmw",
+   "origin": "eu",
+   "img": "img/p/bmw_ix1.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "© M 93",
+   "license": "CC BY-SA 3.0 de",
+   "license_url": "https://creativecommons.org/licenses/by-sa/3.0/de/deed.en",
+   "page": "https://commons.wikimedia.org/wiki/File:BMW_iX1_xDrive30_(U11)_%E2%80%93_f_05052024.jpg"
+  },
+  {
+   "key": "bmw_ix",
+   "name": "BMW iX",
+   "cn": "宝马iX",
+   "brand": "bmw",
+   "origin": "eu",
+   "img": "img/p/bmw_ix.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "Damian B Oh",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:BMW_I20_iX_xDrive40_Sport_Aventurin_Red_Metallic_(32).jpg"
+  },
+  {
+   "key": "audi_a3",
+   "name": "Audi A3",
+   "cn": "奥迪A3",
+   "brand": "audi",
+   "origin": "eu",
+   "img": "img/p/audi_a3.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "Alexander-93",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:2024_Audi_A3_8Y_Sedan_IMG_1019.jpg"
+  },
+  {
+   "key": "audi_a4",
+   "name": "Audi A4",
+   "cn": "奥迪A4L",
+   "brand": "audi",
+   "origin": "eu",
+   "img": "img/p/audi_a4.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "Dinkun Chen",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:AUDI_A4L_(B9)_China_(4).jpg"
+  },
+  {
+   "key": "audi_a5",
+   "name": "Audi A5",
+   "cn": "奥迪A5",
+   "brand": "audi",
+   "origin": "eu",
+   "img": "img/p/audi_a5.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "Alexander Migl",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Audi_A5_B10_DSC_7314.jpg"
+  },
+  {
+   "key": "audi_a6",
+   "name": "Audi A6",
+   "cn": "奥迪A6L",
+   "brand": "audi",
+   "origin": "eu",
+   "img": "img/p/audi_a6.webp",
+   "size": [
+    640,
+    337
+   ],
+   "bg": [
+    "to bottom",
+    "#9e9698",
+    "#b7b0b0"
+   ],
+   "author": "Dinkun Chen",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:AUDI_A6L_C8_China_(41).jpg"
+  },
+  {
+   "key": "audi_a7",
+   "name": "Audi A7",
+   "cn": "奥迪A7L",
+   "brand": "audi",
+   "origin": "eu",
+   "img": "img/p/audi_a7.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "JustAnotherCarDesigner",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Audi_A7L_007.jpg"
+  },
+  {
+   "key": "audi_a8",
+   "name": "Audi A8",
+   "cn": "奥迪A8",
+   "brand": "audi",
+   "origin": "eu",
+   "img": "img/p/audi_a8.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "Damian B Oh",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Audi_A8_L_60_TFSI_quattro_Premium_D5_FL_Mythos_Black_Metallic_(3).jpg"
+  },
+  {
+   "key": "audi_q2l",
+   "name": "Audi Q2L",
+   "cn": "奥迪Q2L",
+   "brand": "audi",
+   "origin": "eu",
+   "img": "img/p/audi_q2l.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "Dinkun Chen",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:AUDI_Q2L_E-TRON_China_(9).jpg"
+  },
+  {
+   "key": "audi_q3",
+   "name": "Audi Q3",
+   "cn": "奥迪Q3",
+   "brand": "audi",
+   "origin": "eu",
+   "img": "img/p/audi_q3.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "Alexander Migl",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Audi_Q3_F3_DSC_7495.jpg"
+  },
+  {
+   "key": "audi_q5",
+   "name": "Audi Q5",
+   "cn": "奥迪Q5L",
+   "brand": "audi",
+   "origin": "eu",
+   "img": "img/p/audi_q5.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "Alexander Migl",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Audi_Q5_GU_DSC_8556.jpg"
+  },
+  {
+   "key": "audi_q6",
+   "name": "Audi Q6",
+   "cn": "奥迪Q6",
+   "brand": "audi",
+   "origin": "eu",
+   "img": "img/p/audi_q6.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "User3204",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:2022_SAIC-Audi_Q6.jpg"
+  },
+  {
+   "key": "audi_q7",
+   "name": "Audi Q7",
+   "cn": "奥迪Q7",
+   "brand": "audi",
+   "origin": "eu",
+   "img": "img/p/audi_q7.webp",
+   "size": [
+    501,
+    376
+   ],
+   "bg": [
+    "to right",
+    "#333533",
+    "#969896"
+   ],
+   "author": "Ethan Llamas",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:2024_Audi_Q7_50_TDI_quattro,_front_left,_05-18-2024.jpg"
+  },
+  {
+   "key": "audi_q8",
+   "name": "Audi Q8",
+   "cn": "奥迪Q8",
+   "brand": "audi",
+   "origin": "eu",
+   "img": "img/p/audi_q8.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "Alexander Migl",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Audi_Q8_Facelift_DSC_7381.jpg"
+  },
+  {
+   "key": "audi_q4",
+   "name": "Audi Q4 e-tron",
+   "cn": "奥迪Q4 e-tron",
+   "brand": "audi",
+   "origin": "eu",
+   "img": "img/p/audi_q4.webp",
+   "size": [
+    640,
+    328
+   ],
+   "bg": [
+    "to bottom",
+    "#586773",
+    "#89898b"
+   ],
+   "author": "Alexander Migl",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Audi_Q4_e-tron_IAA_2021_1X7A0227.jpg"
+  },
+  {
+   "key": "audi_q6l_etron",
+   "name": "Audi Q6L e-tron",
+   "cn": "奥迪Q6L e-tron",
+   "brand": "audi",
+   "origin": "eu",
+   "img": "img/p/audi_q6l_etron.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "JustAnotherCarDesigner",
+   "license": "CC0",
+   "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+   "page": "https://commons.wikimedia.org/wiki/File:Audi_Q6L_e-tron_001.jpg"
+  },
+  {
+   "key": "porsche_718",
+   "name": "Porsche 718",
+   "cn": "保时捷718",
+   "brand": "porsche",
+   "origin": "eu",
+   "img": "img/p/porsche_718.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "Alexander-93",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Porsche_718_Cayman_GTS_1X7A7165.jpg"
+  },
+  {
+   "key": "porsche_panamera",
+   "name": "Porsche Panamera",
+   "cn": "Panamera",
+   "brand": "porsche",
+   "origin": "eu",
+   "img": "img/p/porsche_panamera.webp",
+   "size": [
+    640,
+    299
+   ],
+   "bg": [
+    "to bottom",
+    "#9a9999",
+    "#5a5654"
+   ],
+   "author": "Alexander Migl",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Porsche_971_Panamera_Turbo_1X7A6497.jpg"
+  },
+  {
+   "key": "porsche_911",
+   "name": "Porsche 911",
+   "cn": "保时捷911",
+   "brand": "porsche",
+   "origin": "eu",
+   "img": "img/p/porsche_911.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "Matti Blume",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0/deed.en",
+   "page": "https://commons.wikimedia.org/wiki/File:Porsche_911,_EMS_2024,_Essen_(P1032183).jpg"
+  },
+  {
+   "key": "porsche_macan",
+   "name": "Porsche Macan",
+   "cn": "Macan",
+   "brand": "porsche",
+   "origin": "eu",
+   "img": "img/p/porsche_macan.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "Alexander-93",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Porsche_Macan_4_IMG_2153.jpg"
+  },
+  {
+   "key": "porsche_cayenne",
+   "name": "Porsche Cayenne",
+   "cn": "Cayenne",
+   "brand": "porsche",
+   "origin": "eu",
+   "img": "img/p/porsche_cayenne.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "Alexander Migl",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Porsche_Cayenne_(PO536)_GTS_IMG_3952.jpg"
+  },
+  {
+   "key": "porsche_cayenne_coupe",
+   "name": "Porsche Cayenne Coupé",
+   "cn": "Cayenne Coupé",
+   "brand": "porsche",
+   "origin": "eu",
+   "img": "img/p/porsche_cayenne_coupe.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "Alexander Migl",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:2024_Porsche_Cayenne_Coup%C3%A9_GTS_DSC_7903.jpg"
+  },
+  {
+   "key": "porsche_taycan",
+   "name": "Porsche Taycan",
+   "cn": "Taycan",
+   "brand": "porsche",
+   "origin": "eu",
+   "img": "img/p/porsche_taycan.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "Alexander Migl",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Porsche_Taycan_Turbo_GT_MYLE_Festival_2025_DSC_9442.jpg"
+  },
+  {
+   "key": "porsche_cayenne_ev",
+   "name": "Porsche Cayenne Electric",
+   "cn": "Cayenne EV",
+   "brand": "porsche",
+   "origin": "eu",
+   "img": "img/p/porsche_cayenne_ev.webp",
+   "size": [
+    640,
+    332
+   ],
+   "bg": [
+    "to bottom",
+    "#6d7577",
+    "#939694"
+   ],
+   "author": "Alexander Migl",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Porsche_Cayenne_Electric_IMG_6129.jpg"
+  },
+  {
+   "key": "S60",
+   "name": "Volvo S60",
+   "cn": "沃尔沃S60",
+   "brand": "volvo",
+   "origin": "eu",
+   "img": "img/p/s60.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "Alexander-93",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Volvo_S60_(3rd_generation)_IMG_8468.jpg"
+  },
+  {
+   "key": "V60",
+   "name": "Volvo V60",
+   "cn": "沃尔沃V60",
+   "brand": "volvo",
+   "origin": "eu",
+   "img": "img/p/v60.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "Alexander Migl",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Volvo_V60_(SPA)_1X7A0386.jpg"
+  },
+  {
+   "key": "S90",
+   "name": "Volvo S90",
+   "cn": "沃尔沃S90",
+   "brand": "volvo",
+   "origin": "eu",
+   "img": "img/p/s90.webp",
+   "size": [
+    640,
+    292
+   ],
+   "bg": [
+    "to bottom",
+    "#78797e",
+    "#9e9798"
+   ],
+   "author": "Dinkun Chen",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:VOLVO_S90_China_(11).jpg"
+  },
+  {
+   "key": "V90",
+   "name": "Volvo V90 Cross Country",
+   "cn": "沃尔沃V90 Cross Country",
+   "brand": "volvo",
+   "origin": "eu",
+   "img": "img/p/v90.webp",
+   "size": [
+    640,
+    338
+   ],
+   "bg": [
+    "to bottom",
+    "#878181",
+    "#b0a9a8"
+   ],
+   "author": "Dinkun Chen",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:VOLVO_V90_CROSS_COUNTRY_China.jpg"
+  },
+  {
+   "key": "XC40",
+   "name": "Volvo XC40",
+   "cn": "沃尔沃XC40",
+   "brand": "volvo",
+   "origin": "eu",
+   "img": "img/p/xc40.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "Alexander Migl",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Volvo_XC40_1X7A6311.jpg"
+  },
+  {
+   "key": "XC60",
+   "name": "Volvo XC60",
+   "cn": "沃尔沃XC60",
+   "brand": "volvo",
+   "origin": "eu",
+   "img": "img/p/xc60.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "Alexander Migl",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:2026_Volvo_XC60_(SPA)_DSC_2675.jpg"
+  },
+  {
+   "key": "XC70",
+   "name": "Volvo XC70",
+   "cn": "沃尔沃XC70 插电式混动",
+   "brand": "volvo",
+   "origin": "eu",
+   "img": "img/p/xc70.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "JustAnotherCarDesigner",
+   "license": "CC0",
+   "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+   "page": "https://commons.wikimedia.org/wiki/File:Volvo_XC70_IV_001.jpg"
+  },
+  {
+   "key": "XC90",
+   "name": "Volvo XC90",
+   "cn": "沃尔沃XC90",
+   "brand": "volvo",
+   "origin": "eu",
+   "img": "img/p/xc90.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "Alexander Migl",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:2025_Volvo_XC90_II_autoMOBIL_T%C3%BCbingen_2025_DSC_2767.jpg"
+  },
+  {
+   "key": "EX30",
+   "name": "Volvo EX30",
+   "cn": "沃尔沃EX30",
+   "brand": "volvo",
+   "origin": "eu",
+   "img": "img/p/ex30.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "Alexander-93",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Volvo_EX30_1X7A1947.jpg"
+  },
+  {
+   "key": "ES90",
+   "name": "Volvo ES90",
+   "cn": "沃尔沃ES90",
+   "brand": "volvo",
+   "origin": "eu",
+   "img": "img/p/es90.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "Alexander-93",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Volvo_ES90_IAA_2025_DSC_1357.jpg"
+  },
+  {
+   "key": "EX90",
+   "name": "Volvo EX90",
+   "cn": "沃尔沃EX90",
+   "brand": "volvo",
+   "origin": "eu",
+   "img": "img/p/ex90.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "Alexander Migl",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Volvo_EX90_DSC_7862.jpg"
+  },
+  {
+   "key": "EM90",
+   "name": "Volvo EM90",
+   "cn": "沃尔沃EM90",
+   "brand": "volvo",
+   "origin": "eu",
+   "img": "img/p/em90.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "JustAnotherCarDesigner",
+   "license": "CC0",
+   "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+   "page": "https://commons.wikimedia.org/wiki/File:Volvo_EM90_001.jpg"
+  },
+  {
+   "key": "lr_evoque",
+   "name": "Range Rover Evoque",
+   "cn": "揽胜极光",
+   "brand": "landrover",
+   "origin": "eu",
+   "img": "img/p/lr_evoque.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "Alexander Migl",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Range_Rover_Evoque_(L551)_IMG_2660.jpg"
+  },
+  {
+   "key": "lr_velar",
+   "name": "Range Rover Velar",
+   "cn": "揽胜星脉",
+   "brand": "landrover",
+   "origin": "eu",
+   "img": "img/p/lr_velar.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "Dinkun Chen",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:LAND_ROVER_RANGE_ROVER_VELAR_China.jpg"
+  },
+  {
+   "key": "lr_discovery",
+   "name": "Land Rover Discovery",
+   "cn": "发现",
+   "brand": "landrover",
+   "origin": "eu",
+   "img": "img/p/lr_discovery.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "Damian B Oh",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Land_Rover_Discovery_Dynamic_HSE_L462_FL_Fuji_White_(1).jpg"
+  },
+  {
+   "key": "lr_defender",
+   "name": "Land Rover Defender",
+   "cn": "卫士",
+   "brand": "landrover",
+   "origin": "eu",
+   "img": "img/p/lr_defender.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "Alexander-93",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Land_Rover_Defender_90_(L663)_IMG_9441.jpg"
+  },
+  {
+   "key": "lr_rrs",
+   "name": "Range Rover Sport",
+   "cn": "揽胜运动",
+   "brand": "landrover",
+   "origin": "eu",
+   "img": "img/p/lr_rrs.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "Damian B Oh",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Land_Rover_Range_Rover_Sport_L461_Varesine_Blue_(11).jpg"
+  },
+  {
+   "key": "lr_rr",
+   "name": "Range Rover",
+   "cn": "揽胜",
+   "brand": "landrover",
+   "origin": "eu",
+   "img": "img/p/lr_rr.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "Dinkun Chen",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:LAND_ROVER_RANGE_ROVER_(L460)_China.jpg"
+  },
+  {
+   "key": "lotus_emeya",
+   "name": "Lotus Emeya",
+   "cn": "Emeya",
+   "brand": "lotus",
+   "origin": "eu",
+   "img": "img/p/lotus_emeya.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "Alexander-93",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Lotus_Emeya_Auto_Zuerich_2024_DSC_6171.jpg"
+  },
+  {
+   "key": "lotus_emira",
+   "name": "Lotus Emira",
+   "cn": "Emira",
+   "brand": "lotus",
+   "origin": "eu",
+   "img": "img/p/lotus_emira.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "Alexander-93",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Lotus_Emira_IMG_8023.jpg"
+  },
+  {
+   "key": "lotus_eletre",
+   "name": "Lotus Eletre",
+   "cn": "Eletre",
+   "brand": "lotus",
+   "origin": "eu",
+   "img": "img/p/lotus_eletre.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "Alexander-93",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Lotus_Eletre_IAA_2023_1X7A0635.jpg"
+  },
+  {
+   "key": "lexus_es",
+   "name": "Lexus ES",
+   "cn": "雷克萨斯ES",
+   "brand": "lexus",
+   "origin": "jp",
+   "img": "img/p/lexus_es.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "JamesYoung8167",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Lexus_ES_XZ10_Hybrid_Facelift_Shishi_01_2022-09-23.jpg"
+  },
+  {
+   "key": "lexus_ls",
+   "name": "Lexus LS",
+   "cn": "雷克萨斯LS",
+   "brand": "lexus",
+   "origin": "jp",
+   "img": "img/p/lexus_ls.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "Dinkun Chen",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:LEXUS_LS_500h_F-SPORT_(XF50)_China.jpg"
+  },
+  {
+   "key": "lexus_lc",
+   "name": "Lexus LC",
+   "cn": "雷克萨斯LC",
+   "brand": "lexus",
+   "origin": "jp",
+   "img": "img/p/lexus_lc.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "Ethan Llamas",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Lexus_LC_500_URZ100_White_Nova_Glass_Flake_01.jpg"
+  },
+  {
+   "key": "lexus_nx",
+   "name": "Lexus NX",
+   "cn": "雷克萨斯NX",
+   "brand": "lexus",
+   "origin": "jp",
+   "img": "img/p/lexus_nx.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "Alexander Migl",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Lexus_NX_450h%2B_(AAZH26)_Auto_Zuerich_2021_IMG_0444.jpg"
+  },
+  {
+   "key": "lexus_rx",
+   "name": "Lexus RX",
+   "cn": "雷克萨斯RX",
+   "brand": "lexus",
+   "origin": "jp",
+   "img": "img/p/lexus_rx.webp",
+   "size": [
+    528,
+    376
+   ],
+   "bg": [
+    "to right",
+    "#6d7072",
+    "#808078"
+   ],
+   "author": "Tokumeigakarinoaoshima",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Lexus_RX_450h%2B_PROTOTYPE_(AALH16)_front.jpg"
+  },
+  {
+   "key": "lexus_gx",
+   "name": "Lexus GX",
+   "cn": "雷克萨斯GX",
+   "brand": "lexus",
+   "origin": "jp",
+   "img": "img/p/lexus_gx.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "HJUdall",
+   "license": "CC0",
+   "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+   "page": "https://commons.wikimedia.org/wiki/File:24_Lexus_GX_550_Luxury.jpg"
+  },
+  {
+   "key": "lexus_lx",
+   "name": "Lexus LX",
+   "cn": "雷克萨斯LX",
+   "brand": "lexus",
+   "origin": "jp",
+   "img": "img/p/lexus_lx.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "Dinkun Chen",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:LEXUS_LX_600_(J310)_China_(3).jpg"
+  },
+  {
+   "key": "lexus_lm",
+   "name": "Lexus LM",
+   "cn": "雷克萨斯LM",
+   "brand": "lexus",
+   "origin": "jp",
+   "img": "img/p/lexus_lm.webp",
+   "size": [
+    509,
+    376
+   ],
+   "bg": [
+    "to right",
+    "#686e6b",
+    "#a99299"
+   ],
+   "author": "Dinkun Chen",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:LEXUS_LM_500h_(AW10)_China_(5).jpg"
+  },
+  {
+   "key": "lexus_rz",
+   "name": "Lexus RZ",
+   "cn": "雷克萨斯RZ",
+   "brand": "lexus",
+   "origin": "jp",
+   "img": "img/p/lexus_rz.webp",
+   "size": [
+    539,
+    376
+   ],
+   "bg": [
+    "to right",
+    "#686764",
+    "#706d6d"
+   ],
+   "author": "Alexander-93",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Lexus_RZ_450e_(XEBM15)_1X7A1667.jpg"
+  },
+  {
+   "key": "infiniti_qx50",
+   "name": "Infiniti QX50",
+   "cn": "英菲尼迪QX50",
+   "brand": "infiniti",
+   "origin": "jp",
+   "img": "img/p/infiniti_qx50.webp",
+   "size": [
+    640,
+    348
+   ],
+   "bg": [
+    "to bottom",
+    "#c5c1be",
+    "#544f4c"
+   ],
+   "author": "Dinkun Chen",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:INFINITI_QX50_(J55)_China_(40).jpg"
+  },
+  {
+   "key": "infiniti_qx60",
+   "name": "Infiniti QX60",
+   "cn": "英菲尼迪QX60",
+   "brand": "infiniti",
+   "origin": "jp",
+   "img": "img/p/infiniti_qx60.webp",
+   "size": [
+    640,
+    334
+   ],
+   "bg": [
+    "to bottom",
+    "#88867b",
+    "#a1a5ae"
+   ],
+   "author": "Dinkun Chen",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:INFINITI_QX60_(L51)_China_(9).jpg"
+  },
+  {
+   "key": "infiniti_qx80",
+   "name": "Infiniti QX80",
+   "cn": "英菲尼迪QX80",
+   "brand": "infiniti",
+   "origin": "jp",
+   "img": "img/p/infiniti_qx80.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "TTTNIS",
+   "license": "CC0",
+   "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+   "page": "https://commons.wikimedia.org/wiki/File:Infiniti_QX80_Autograph.jpg"
+  },
+  {
+   "key": "genesis_g80",
+   "name": "Genesis G80",
+   "cn": "捷尼赛思G80",
+   "brand": "genesis",
+   "origin": "kr",
+   "img": "img/p/genesis_g80.webp",
+   "size": [
+    640,
+    322
+   ],
+   "bg": [
+    "to bottom",
+    "#434c51",
+    "#433e3b"
+   ],
+   "author": "Alexander Migl",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Genesis_G80_(RG3)_IAA_2021_1X7A0161.jpg"
+  },
+  {
+   "key": "genesis_g90",
+   "name": "Genesis G90",
+   "cn": "捷尼赛思G90",
+   "brand": "genesis",
+   "origin": "kr",
+   "img": "img/p/genesis_g90.webp",
+   "size": [
+    640,
+    316
+   ],
+   "bg": [
+    "to bottom",
+    "#606a64",
+    "#b4b1b1"
+   ],
+   "author": "Alexander Migl",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Genesis_G90_(RS4)_DSC_9032.jpg"
+  },
+  {
+   "key": "genesis_gv70",
+   "name": "Genesis GV70",
+   "cn": "捷尼赛思GV70",
+   "brand": "genesis",
+   "origin": "kr",
+   "img": "img/p/genesis_gv70.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "Alexander Migl",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Genesis_GV70_IAA_2021_1X7A0228.jpg"
+  },
+  {
+   "key": "genesis_gv80",
+   "name": "Genesis GV80",
+   "cn": "捷尼赛思GV80",
+   "brand": "genesis",
+   "origin": "kr",
+   "img": "img/p/genesis_gv80.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "Alexander Migl",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Genesis_GV80_IAA_2021_1X7A0232.jpg"
+  },
+  {
+   "key": "cad_ct5",
+   "name": "Cadillac CT5",
+   "cn": "凯迪拉克CT5",
+   "brand": "cadillac",
+   "origin": "us",
+   "img": "img/p/cad_ct5.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "Elise240SX",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:2021_Cadillac_CT5-V,_Front_Right_2,_11-21-2021.jpg"
+  },
+  {
+   "key": "cad_ct6",
+   "name": "Cadillac CT6",
+   "cn": "凯迪拉克CT6",
+   "brand": "cadillac",
+   "origin": "us",
+   "img": "img/p/cad_ct6.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "JustAnotherCarDesigner",
+   "license": "CC0",
+   "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+   "page": "https://commons.wikimedia.org/wiki/File:Cadillac_CT6_II_010.jpg"
+  },
+  {
+   "key": "cad_gt4",
+   "name": "Cadillac GT4",
+   "cn": "凯迪拉克GT4",
+   "brand": "cadillac",
+   "origin": "us",
+   "img": "img/p/cad_gt4.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "Quzhouliulian",
+   "license": "CC0",
+   "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+   "page": "https://commons.wikimedia.org/wiki/File:Cadillac_GT4_008.jpg"
+  },
+  {
+   "key": "cad_xt4",
+   "name": "Cadillac XT4",
+   "cn": "凯迪拉克XT4",
+   "brand": "cadillac",
+   "origin": "us",
+   "img": "img/p/cad_xt4.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "Dinkun Chen",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:CADILLAC_XT4_China.jpg"
+  },
+  {
+   "key": "cad_xt5",
+   "name": "Cadillac XT5",
+   "cn": "凯迪拉克XT5",
+   "brand": "cadillac",
+   "origin": "us",
+   "img": "img/p/cad_xt5.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "JustAnotherCarDesigner",
+   "license": "CC0",
+   "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+   "page": "https://commons.wikimedia.org/wiki/File:Cadillac_XT5_II_003.jpg"
+  },
+  {
+   "key": "cad_xt6",
+   "name": "Cadillac XT6",
+   "cn": "凯迪拉克XT6",
+   "brand": "cadillac",
+   "origin": "us",
+   "img": "img/p/cad_xt6.webp",
+   "size": [
+    589,
+    376
+   ],
+   "bg": [
+    "to right",
+    "#bab6b5",
+    "#aea297"
+   ],
+   "author": "Dinkun Chen",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:CADILLAC_XT6_China_(7).jpg"
+  },
+  {
+   "key": "cad_optiq",
+   "name": "Cadillac Optiq",
+   "cn": "IQ傲歌",
+   "brand": "cadillac",
+   "origin": "us",
+   "img": "img/p/cad_optiq.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "Alexander Migl",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Cadillac_Optiq_Auto_Zuerich_2025_DSC_3328.jpg"
+  },
+  {
+   "key": "cad_vistiq",
+   "name": "Cadillac Vistiq",
+   "cn": "凯威德",
+   "brand": "cadillac",
+   "origin": "us",
+   "img": "img/p/cad_vistiq.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "HJUdall",
+   "license": "CC0",
+   "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+   "page": "https://commons.wikimedia.org/wiki/File:26_Cadillac_Vistiq_Sport.jpg"
+  },
+  {
+   "key": "tesla_m3",
+   "name": "Tesla Model 3",
+   "cn": "Model 3",
+   "brand": "tesla",
+   "origin": "us",
+   "img": "img/p/tesla_m3.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "Chanokchon",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:2024_Tesla_Model_3_Highland_Performance_AWD.jpg"
+  },
+  {
+   "key": "tesla_my",
+   "name": "Tesla Model Y",
+   "cn": "Model Y",
+   "brand": "tesla",
+   "origin": "us",
+   "img": "img/p/tesla_my.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "Damian B Oh",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Tesla_Model_Y_Juniper_Stealth_Grey_(5).jpg"
+  },
+  {
+   "key": "tesla_myl",
+   "name": "Tesla Model Y L",
+   "cn": "Model Y L",
+   "brand": "tesla",
+   "origin": "us",
+   "img": "img/p/tesla_myl.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "Ethan Llamas",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Tesla_Model_Y_L_Premium_Long_Range_AWD_Cosmic_Silver.jpg"
+  },
+  {
+   "key": "li_l6",
+   "name": "Li Auto L6",
+   "cn": "理想L6",
+   "brand": "liauto",
+   "origin": "cn",
+   "img": "img/p/li_l6.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "毕明明",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Li_Auto_L6_001.jpg"
+  },
+  {
+   "key": "li_l8",
+   "name": "Li Auto L8",
+   "cn": "理想L8",
+   "brand": "liauto",
+   "origin": "cn",
+   "img": "img/p/li_l8.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "JustAnotherCarDesigner",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Li_Auto_L8_006.jpg"
+  },
+  {
+   "key": "li_l9",
+   "name": "Li Auto L9",
+   "cn": "理想L9",
+   "brand": "liauto",
+   "origin": "cn",
+   "img": "img/p/li_l9.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "SAIC GM sucks",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Li_Auto_L9_001.jpg"
+  },
+  {
+   "key": "li_i6",
+   "name": "Li Auto i6",
+   "cn": "理想i6",
+   "brand": "liauto",
+   "origin": "cn",
+   "img": "img/p/li_i6.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "S5A-0043",
+   "license": "CC BY 4.0",
+   "license_url": "https://creativecommons.org/licenses/by/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:(CHN-Shanghai)_Showcar_Li_i6_No-plate_2025-12-19.jpg"
+  },
+  {
+   "key": "li_i8",
+   "name": "Li Auto i8",
+   "cn": "理想i8",
+   "brand": "liauto",
+   "origin": "cn",
+   "img": "img/p/li_i8.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "KitsuneDP",
+   "license": "CC0",
+   "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+   "page": "https://commons.wikimedia.org/wiki/File:Li_Auto_i8_003.jpg"
+  },
+  {
+   "key": "li_mega",
+   "name": "Li Auto MEGA",
+   "cn": "理想MEGA",
+   "brand": "liauto",
+   "origin": "cn",
+   "img": "img/p/li_mega.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "Zotyefan",
+   "license": "CC0",
+   "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+   "page": "https://commons.wikimedia.org/wiki/File:Li_Auto_Mega_IMG001.jpg"
+  },
+  {
+   "key": "xiaomi_su7",
+   "name": "Xiaomi SU7",
+   "cn": "小米SU7",
+   "brand": "xiaomi",
+   "origin": "cn",
+   "img": "img/p/xiaomi_su7.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "S5A-0043",
+   "license": "CC BY 4.0",
+   "license_url": "https://creativecommons.org/licenses/by/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:(CHN-Shanghai)_Private_Xiaomi_SU7_%E6%B2%AAA7WE106_2024-11-24.jpg"
+  },
+  {
+   "key": "xiaomi_yu7",
+   "name": "Xiaomi YU7",
+   "cn": "小米YU7",
+   "brand": "xiaomi",
+   "origin": "cn",
+   "img": "img/p/xiaomi_yu7.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "Ethan Llamas",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Xiaomi_YU7_Titanium_Silver_Metallic_01.jpg"
+  },
+  {
+   "key": "zeekr_007",
+   "name": "Zeekr 007",
+   "cn": "ZEEKR 007",
+   "brand": "zeekr",
+   "origin": "cn",
+   "img": "img/p/zeekr_007.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "JustAnotherCarDesigner",
+   "license": "CC0",
+   "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+   "page": "https://commons.wikimedia.org/wiki/File:Zeekr_007_006_(cropped).jpg"
+  },
+  {
+   "key": "zeekr_007gt",
+   "name": "Zeekr 007 GT",
+   "cn": "ZEEKR 007GT",
+   "brand": "zeekr",
+   "origin": "cn",
+   "img": "img/p/zeekr_007gt.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "JustAnotherCarDesigner",
+   "license": "CC0",
+   "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+   "page": "https://commons.wikimedia.org/wiki/File:Zeekr_007_GT_001.jpg"
+  },
+  {
+   "key": "zeekr_001",
+   "name": "Zeekr 001",
+   "cn": "ZEEKR 001",
+   "brand": "zeekr",
+   "origin": "cn",
+   "img": "img/p/zeekr_001.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "Юрий Д.К.",
+   "license": "CC BY 4.0",
+   "license_url": "https://creativecommons.org/licenses/by/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Moscow_-_Zeekr_001_-_2025-9_1.jpg"
+  },
+  {
+   "key": "zeekr_x",
+   "name": "Zeekr X",
+   "cn": "ZEEKR X",
+   "brand": "zeekr",
+   "origin": "cn",
+   "img": "img/p/zeekr_x.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "User3204",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:2023_Zeekr_X_(front).jpg"
+  },
+  {
+   "key": "zeekr_7x",
+   "name": "Zeekr 7X",
+   "cn": "ZEEKR 7X",
+   "brand": "zeekr",
+   "origin": "cn",
+   "img": "img/p/zeekr_7x.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "JustAnotherCarDesigner",
+   "license": "CC0",
+   "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+   "page": "https://commons.wikimedia.org/wiki/File:Zeekr_7X_005_(cropped).jpg"
+  },
+  {
+   "key": "zeekr_8x",
+   "name": "Zeekr 8X",
+   "cn": "ZEEKR 8X",
+   "brand": "zeekr",
+   "origin": "cn",
+   "img": "img/p/zeekr_8x.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "JustAnotherCarDesigner",
+   "license": "CC0",
+   "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+   "page": "https://commons.wikimedia.org/wiki/File:Zeekr_8X_007.jpg"
+  },
+  {
+   "key": "zeekr_9x",
+   "name": "Zeekr 9X",
+   "cn": "ZEEKR 9X",
+   "brand": "zeekr",
+   "origin": "cn",
+   "img": "img/p/zeekr_9x.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "Retired electrician",
+   "license": "CC0",
+   "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+   "page": "https://commons.wikimedia.org/wiki/File:Moscow,_Zeekr_9X_black,_Mar_2026_02.jpg"
+  },
+  {
+   "key": "zeekr_mix",
+   "name": "Zeekr MIX",
+   "cn": "ZEEKR MIX",
+   "brand": "zeekr",
+   "origin": "cn",
+   "img": "img/p/zeekr_mix.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "JustAnotherCarDesigner",
+   "license": "CC0",
+   "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+   "page": "https://commons.wikimedia.org/wiki/File:Zeekr_Mix_005.jpg"
+  },
+  {
+   "key": "zeekr_009",
+   "name": "Zeekr 009",
+   "cn": "ZEEKR 009",
+   "brand": "zeekr",
+   "origin": "cn",
+   "img": "img/p/zeekr_009.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "JustAnotherCarDesigner",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Zeekr_009_013.jpg"
+  },
+  {
+   "key": "nio_et5",
+   "name": "NIO ET5",
+   "cn": "蔚来ET5",
+   "brand": "nio",
+   "origin": "cn",
+   "img": "img/p/nio_et5.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "Alexander-93",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:NIO_ET5_IMG_8291.jpg"
+  },
+  {
+   "key": "nio_et5t",
+   "name": "NIO ET5T",
+   "cn": "蔚来ET5T",
+   "brand": "nio",
+   "origin": "cn",
+   "img": "img/p/nio_et5t.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "KitsuneDP",
+   "license": "CC0",
+   "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+   "page": "https://commons.wikimedia.org/wiki/File:Nio_ET5T_facelift_001.jpg"
+  },
+  {
+   "key": "nio_et7",
+   "name": "NIO ET7",
+   "cn": "蔚来ET7",
+   "brand": "nio",
+   "origin": "cn",
+   "img": "img/p/nio_et7.webp",
+   "size": [
+    640,
+    316
+   ],
+   "bg": [
+    "to bottom",
+    "#98989c",
+    "#8f8578"
+   ],
+   "author": "Alexander Migl",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:NIO_ET7_1X7A6679_(cropped).jpg"
+  },
+  {
+   "key": "nio_et9",
+   "name": "NIO ET9",
+   "cn": "蔚来ET9",
+   "brand": "nio",
+   "origin": "cn",
+   "img": "img/p/nio_et9.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "Zoerides",
+   "license": "CC0",
+   "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+   "page": "https://commons.wikimedia.org/wiki/File:Nio_ET9_004.jpg"
+  },
+  {
+   "key": "nio_es6",
+   "name": "NIO ES6",
+   "cn": "蔚来ES6",
+   "brand": "nio",
+   "origin": "cn",
+   "img": "img/p/nio_es6.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "JustAnotherCarDesigner",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:NIO_ES6_II_001.jpg"
+  },
+  {
+   "key": "nio_ec6",
+   "name": "NIO EC6",
+   "cn": "蔚来EC6",
+   "brand": "nio",
+   "origin": "cn",
+   "img": "img/p/nio_ec6.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "Jengtingchen",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:NIO_EC6_005.jpg"
+  },
+  {
+   "key": "nio_es8",
+   "name": "NIO ES8",
+   "cn": "蔚来ES8",
+   "brand": "nio",
+   "origin": "cn",
+   "img": "img/p/nio_es8.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "JustAnotherCarDesigner",
+   "license": "CC0",
+   "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+   "page": "https://commons.wikimedia.org/wiki/File:Nio_ES8_III_001.jpg"
+  },
+  {
+   "key": "nio_ec7",
+   "name": "NIO EC7",
+   "cn": "蔚来EC7",
+   "brand": "nio",
+   "origin": "cn",
+   "img": "img/p/nio_ec7.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "Zotyefan",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Nio_EC7_IMG003.jpg"
+  },
+  {
+   "key": "nio_es9",
+   "name": "NIO ES9",
+   "cn": "蔚来ES9",
+   "brand": "nio",
+   "origin": "cn",
+   "img": "img/p/nio_es9.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "JustAnotherCarDesigner",
+   "license": "CC0",
+   "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+   "page": "https://commons.wikimedia.org/wiki/File:Nio_ES9_006.jpg"
+  },
+  {
+   "key": "avatr_06",
+   "name": "Avatr 06",
+   "cn": "阿维塔 06",
+   "brand": "avatr",
+   "origin": "cn",
+   "img": "img/p/avatr_06.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "JustAnotherCarDesigner",
+   "license": "CC0",
+   "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+   "page": "https://commons.wikimedia.org/wiki/File:Avatr_06_009.jpg"
+  },
+  {
+   "key": "avatr_06t",
+   "name": "Avatr 06T",
+   "cn": "阿维塔 06T",
+   "brand": "avatr",
+   "origin": "cn",
+   "img": "img/p/avatr_06t.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "JustAnotherCarDesigner",
+   "license": "CC0",
+   "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+   "page": "https://commons.wikimedia.org/wiki/File:Avatr_06T_005.jpg"
+  },
+  {
+   "key": "avatr_12",
+   "name": "Avatr 12",
+   "cn": "阿维塔 12",
+   "brand": "avatr",
+   "origin": "cn",
+   "img": "img/p/avatr_12.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "Alexander-93",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Avatr_12_IAA_2023_1X7A0579.jpg"
+  },
+  {
+   "key": "avatr_07",
+   "name": "Avatr 07",
+   "cn": "阿维塔 07",
+   "brand": "avatr",
+   "origin": "cn",
+   "img": "img/p/avatr_07.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "Quzhouliulian",
+   "license": "CC0",
+   "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+   "page": "https://commons.wikimedia.org/wiki/File:Avatr_07_IMG001.jpg"
+  },
+  {
+   "key": "avatr_07l",
+   "name": "Avatr 07L",
+   "cn": "阿维塔 07L",
+   "brand": "avatr",
+   "origin": "cn",
+   "img": "img/p/avatr_07l.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "JustAnotherCarDesigner",
+   "license": "CC0",
+   "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+   "page": "https://commons.wikimedia.org/wiki/File:Avatr_07L_003.jpg"
+  },
+  {
+   "key": "avatr_11",
+   "name": "Avatr 11",
+   "cn": "阿维塔 11",
+   "brand": "avatr",
+   "origin": "cn",
+   "img": "img/p/avatr_11.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "User3204",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:2022_Avatr_11_(front).jpg"
+  },
+  {
+   "key": "voyah_passion",
+   "name": "Voyah Passion",
+   "cn": "岚图追光 PHEV",
+   "brand": "voyah",
+   "origin": "cn",
+   "img": "img/p/voyah_passion.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "Retired electrician",
+   "license": "CC0",
+   "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+   "page": "https://commons.wikimedia.org/wiki/File:Moscow,_Voyah_Passion_July_2025_01.jpg"
+  },
+  {
+   "key": "voyah_passion_l",
+   "name": "Voyah Passion L",
+   "cn": "岚图追光L",
+   "brand": "voyah",
+   "origin": "cn",
+   "img": "img/p/voyah_passion_l.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "S5A-0043",
+   "license": "CC BY 4.0",
+   "license_url": "https://creativecommons.org/licenses/by/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:(CHN-Shanghai)_Showcar_Voyah_Passion_L_No-plate_2025-12-21.jpg"
+  },
+  {
+   "key": "voyah_courage",
+   "name": "Voyah Courage",
+   "cn": "岚图知音",
+   "brand": "voyah",
+   "origin": "cn",
+   "img": "img/p/voyah_courage.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "Alexander Migl",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Voyah_Courage_Auto_Zuerich_2025_DSC_3018.jpg"
+  },
+  {
+   "key": "voyah_free",
+   "name": "Voyah FREE+",
+   "cn": "岚图FREE+",
+   "brand": "voyah",
+   "origin": "cn",
+   "img": "img/p/voyah_free.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "JustAnotherCarDesigner",
+   "license": "CC0",
+   "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+   "page": "https://commons.wikimedia.org/wiki/File:Voyah_Free%2B_003.jpg"
+  },
+  {
+   "key": "voyah_taishan",
+   "name": "Voyah Taishan",
+   "cn": "岚图泰山 PHEV",
+   "brand": "voyah",
+   "origin": "cn",
+   "img": "img/p/voyah_taishan.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "S5A-0043",
+   "license": "CC BY 4.0",
+   "license_url": "https://creativecommons.org/licenses/by/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:(CHN-Shanghai)_Showcar_Voyah_Taishan_%E6%B2%AAAFA7735_2025-12-21.jpg"
+  },
+  {
+   "key": "voyah_dream",
+   "name": "Voyah Dream",
+   "cn": "岚图梦想家 PHEV",
+   "brand": "voyah",
+   "origin": "cn",
+   "img": "img/p/voyah_dream.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "User3204",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:2022_V%D0%BEyah_Dreamer.jpg"
+  },
+  {
+   "key": "aito_m5",
+   "name": "AITO M5",
+   "cn": "问界M5",
+   "brand": "aito",
+   "origin": "cn",
+   "img": "img/p/aito_m5.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "JamesYoung8167",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Aito_M5_Shishi_01_2022-09-12.jpg"
+  },
+  {
+   "key": "aito_m6",
+   "name": "AITO M6",
+   "cn": "问界M6",
+   "brand": "aito",
+   "origin": "cn",
+   "img": "img/p/aito_m6.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "JustAnotherCarDesigner",
+   "license": "CC0",
+   "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+   "page": "https://commons.wikimedia.org/wiki/File:AITO_M6_006.jpg"
+  },
+  {
+   "key": "aito_m7",
+   "name": "AITO M7",
+   "cn": "问界M7",
+   "brand": "aito",
+   "origin": "cn",
+   "img": "img/p/aito_m7.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "Evnerd",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Aito_M7_2023081901.jpg"
+  },
+  {
+   "key": "aito_m8",
+   "name": "AITO M8",
+   "cn": "问界M8",
+   "brand": "aito",
+   "origin": "cn",
+   "img": "img/p/aito_m8.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "JustAnotherCarDesigner",
+   "license": "CC0",
+   "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+   "page": "https://commons.wikimedia.org/wiki/File:AITO_M8_010.jpg"
+  },
+  {
+   "key": "aito_m9",
+   "name": "AITO M9",
+   "cn": "问界M9",
+   "brand": "aito",
+   "origin": "cn",
+   "img": "img/p/aito_m9.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "JustAnotherCarDesigner",
+   "license": "CC0",
+   "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+   "page": "https://commons.wikimedia.org/wiki/File:Aito_M9_011.jpg"
+  },
+  {
+   "key": "denza_z9gt",
+   "name": "Denza Z9 GT",
+   "cn": "腾势Z9GT DM",
+   "brand": "denza",
+   "origin": "cn",
+   "img": "img/p/denza_z9gt.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "Alexander-93",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Denza_Z9_GT_IAA_2025_DSC_2124.jpg"
+  },
+  {
+   "key": "denza_n7",
+   "name": "Denza N7",
+   "cn": "腾势N7",
+   "brand": "denza",
+   "origin": "cn",
+   "img": "img/p/denza_n7.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "Alexander-93",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Denza_N7_EV_GIMS_2024_1X7A2383.jpg"
+  },
+  {
+   "key": "denza_n8l",
+   "name": "Denza N8L",
+   "cn": "腾势N8L DM",
+   "brand": "denza",
+   "origin": "cn",
+   "img": "img/p/denza_n8l.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "JustAnotherCarDesigner",
+   "license": "CC0",
+   "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+   "page": "https://commons.wikimedia.org/wiki/File:Denza_N8L_005.jpg"
+  },
+  {
+   "key": "denza_n9",
+   "name": "Denza N9",
+   "cn": "腾势N9 DM",
+   "brand": "denza",
+   "origin": "cn",
+   "img": "img/p/denza_n9.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "JustAnotherCarDesigner",
+   "license": "CC0",
+   "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+   "page": "https://commons.wikimedia.org/wiki/File:Denza_N9_006.jpg"
+  },
+  {
+   "key": "denza_d9",
+   "name": "Denza D9",
+   "cn": "腾势D9 DM",
+   "brand": "denza",
+   "origin": "cn",
+   "img": "img/p/denza_d9.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "Alexander Migl",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Denza_D9_DM-i_IAA_2025_DSC_2043.jpg"
+  },
+  {
+   "key": "yangwang_u7",
+   "name": "Yangwang U7",
+   "cn": "仰望U7 EV",
+   "brand": "yangwang",
+   "origin": "cn",
+   "img": "img/p/yangwang_u7.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "Retired electrician",
+   "license": "CC0",
+   "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+   "page": "https://commons.wikimedia.org/wiki/File:Moscow,_BYD_Yangwang_U7,_May_2026_01.jpg"
+  },
+  {
+   "key": "yangwang_u8",
+   "name": "Yangwang U8",
+   "cn": "仰望U8",
+   "brand": "yangwang",
+   "origin": "cn",
+   "img": "img/p/yangwang_u8.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "User3204",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:2024_Yangwang_U8_(front).jpg"
+  },
+  {
+   "key": "hongqi_h9",
+   "name": "Hongqi H9",
+   "cn": "红旗H9",
+   "brand": "hongqi",
+   "origin": "cn",
+   "img": "img/p/hongqi_h9.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "Alexander Migl",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:2024_Hongqi_H9_DSC_1251.jpg"
+  },
+  {
+   "key": "hongqi_guoya",
+   "name": "Hongqi Guoya",
+   "cn": "红旗金葵花国雅",
+   "brand": "hongqi",
+   "origin": "cn",
+   "img": "img/p/hongqi_guoya.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "毕明明",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Hongqi_Guoya_20240819_003.jpg"
+  },
+  {
+   "key": "hongqi_guoyao",
+   "name": "Hongqi Guoyao",
+   "cn": "红旗金葵花国耀",
+   "brand": "hongqi",
+   "origin": "cn",
+   "img": "img/p/hongqi_guoyao.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "Zoerides",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Hongqi_LS7_001.jpg"
+  },
+  {
+   "key": "hongqi_hq9",
+   "name": "Hongqi HQ9",
+   "cn": "红旗HQ9",
+   "brand": "hongqi",
+   "origin": "cn",
+   "img": "img/p/hongqi_hq9.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "JustAnotherCarDesigner",
+   "license": "CC0",
+   "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+   "page": "https://commons.wikimedia.org/wiki/File:Hongqi_HQ9_010.jpg"
+  },
+  {
+   "key": "hongqi_ehs9",
+   "name": "Hongqi E-HS9",
+   "cn": "红旗E-HS9",
+   "brand": "hongqi",
+   "origin": "cn",
+   "img": "img/p/hongqi_ehs9.webp",
+   "size": [
+    640,
+    337
+   ],
+   "bg": [
+    "to bottom",
+    "#4f5b46",
+    "#b9b4ae"
+   ],
+   "author": "Alexander-93",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:Hongqi_E-HS9_IMG_0762.jpg"
+  },
+  {
+   "key": "im_l6",
+   "name": "IM L6",
+   "cn": "智己L6",
+   "brand": "im",
+   "origin": "cn",
+   "img": "img/p/im_l6.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "JustAnotherCarDesigner",
+   "license": "CC0",
+   "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+   "page": "https://commons.wikimedia.org/wiki/File:IM_L6_009.jpg"
+  },
+  {
+   "key": "im_l7",
+   "name": "IM L7",
+   "cn": "智己L7",
+   "brand": "im",
+   "origin": "cn",
+   "img": "img/p/im_l7.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "Alexander-93",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:IM_L7_GIMS_2024_1X7A2241.jpg"
+  },
+  {
+   "key": "im_ls6",
+   "name": "IM LS6",
+   "cn": "智己LS6",
+   "brand": "im",
+   "origin": "cn",
+   "img": "img/p/im_ls6.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "Zoerides",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:IM_LS6_002.jpg"
+  },
+  {
+   "key": "im_ls7",
+   "name": "IM LS7",
+   "cn": "智己LS7",
+   "brand": "im",
+   "origin": "cn",
+   "img": "img/p/im_ls7.webp",
+   "size": [
+    640,
+    376
+   ],
+   "bg": null,
+   "author": "User3204",
+   "license": "CC BY-SA 4.0",
+   "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:2021_IM_LS7.jpg"
+  },
+  {
+   "key": "im_ls8",
+   "name": "IM LS8",
+   "cn": "智己LS8",
+   "brand": "im",
+   "origin": "cn",
+   "img": "img/p/im_ls8.webp",
+   "size": [
+    572,
+    376
+   ],
+   "bg": [
+    "to right",
+    "#b4b6ba",
+    "#b1b1b7"
+   ],
+   "author": "JustAnotherCarDesigner",
+   "license": "CC0",
+   "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+   "page": "https://commons.wikimedia.org/wiki/File:IM_LS8_003.jpg"
+  }
+ ],
+ "nophoto": [
+  "Lotus For Me"
+ ]
+}
