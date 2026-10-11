@@ -5,10 +5,16 @@
 GROUPS, ORDER и SKIP из gen_catalog_prem_mtk.py (одна карточка на модель, как в каталоге).
 Фото — ~/auto-china/catalog/site_photos/final/<модель>.jpg (Wikimedia Commons, авторы и лицензии — sources.json):
 окно 17:10 вокруг машины (рамка rembg, кэш data/premium_bbox.json), только обрезка и уменьшение, номера не трогаются.
+Цена «от» (Юрий 11.10.2026: «цены возьми из каталога») — младшая строка карточки в PDF премиум-каталога на PRICE_DATE
+(catalog/out/Katalog-MTK-Premium-*-SPB-telefon-<дата>.pdf); ставится, только если совпадает с расчётом prem26_calc.py
+по тем же версиям, что в каталоге. Нет в PDF или расходится — карточка без цены.
 Запуск: python3 new/premium.py (после — python3 new/site.py --offline)
 """
 import ast
 import json
+import re
+import subprocess
+import sys
 from pathlib import Path
 
 from PIL import Image
@@ -38,16 +44,16 @@ def catalog_rules():
     for node in tree.body:
         if isinstance(node, ast.Assign) and len(node.targets) == 1 and isinstance(node.targets[0], ast.Name):
             name = node.targets[0].id
-            if name in ("GROUPS", "ORDER", "SKIP") and name not in got:
+            if name in ("GROUPS", "ORDER", "SKIP", "PRICE_DATE") and name not in got:
                 try:
                     got[name] = ast.literal_eval(node.value)
                 except ValueError:
                     pass
-    return got["GROUPS"], got["ORDER"], got["SKIP"]
+    return got["GROUPS"], got["ORDER"], got["SKIP"], got["PRICE_DATE"]
 
 
 def models():
-    groups, order, skip = catalog_rules()
+    groups, order, skip, _ = catalog_rules()
     brands = [b for _, _, bs in groups for b in bs]
     out = []
     for b in brands:
@@ -62,11 +68,39 @@ def models():
         o = order.get(b, [])
         keys = sorted(fams, key=lambda k: (o.index(k) if k in o else len(o), min(v["msrp_cny"] for x in fams[k] for v in x["versions"])))
         for k in keys:
-            out.append({"key": k, "name": fams[k][0]["model"].split(" PHEV")[0], "cn": fams[k][0].get("cn") or "", "brand": b,
+            out.append({"vs": calc_rows(fams[k]), "key": k, "name": fams[k][0]["model"].split(" PHEV")[0], "cn": fams[k][0].get("cn") or "", "brand": b,
                         "origin": ORIGIN[b]})
     rank = {k: i for i, (k, _) in enumerate(ORIGINS)}
     out.sort(key=lambda m: rank[m["origin"]])         # sort устойчивый: внутри группы — порядок марок и моделей каталога
     return out
+
+
+def calc_rows(mdls):
+    """Цены строк карточки каталога, как в load_group (gen_catalog_prem_mtk.py): три версии, по цене под ключ."""
+    if str(CAT) not in sys.path:
+        sys.path.insert(0, str(CAT))
+    import prem26_calc as C
+    vs = sorted((v for x in mdls for v in x["versions"]), key=lambda v: v["msrp_cny"])
+    vs = vs if len(vs) <= 3 else [vs[0], vs[len(vs) // 2], vs[-1]]
+    return sorted(C.up10k(C.price(v)["total"]) for v in vs)
+
+
+def pdf_prices(names, date):
+    """Цены строк каждой модели из телефонных PDF премиум-каталога на дату: {модель: [цены по порядку]}."""
+    pdfs = sorted((CAT / "out").glob(f"Katalog-MTK-Premium-*-SPB-telefon-{date}.pdf"))
+    out, cur = {}, None
+    for f in pdfs:
+        txt = subprocess.run(["pdftotext", "-layout", str(f), "-"], capture_output=True, text=True, check=True).stdout
+        for ln in txt.splitlines():
+            s = ln.strip()
+            if s in names:
+                cur = s
+                out.setdefault(cur, [])
+                continue
+            m = re.match(r"^(БАЗОВАЯ|СРЕДНЯЯ|МАКСИМАЛЬНАЯ|ВЕРСИЯ)\s+([\d\s]+)₽", s)
+            if m and cur:
+                out[cur].append(int(re.sub(r"\D", "", m.group(2))))
+    return out, [f.name for f in pdfs]
 
 
 def bbox(src, im):
@@ -124,8 +158,13 @@ def edge_colors(im):
 def main():
     src = json.loads(SOURCES.read_text())
     OUT_IMG.mkdir(parents=True, exist_ok=True)
-    cards, nophoto, fitted = [], [], []
-    for m in models():
+    cards, nophoto, fitted, noprice = [], [], [], []
+    ms = models()
+    date = catalog_rules()[3]
+    pdf, pdfs = pdf_prices({m["name"] for m in ms}, date)
+    for m in ms:
+        rows = m.pop("vs")
+        m["price"] = rows[0] if pdf.get(m["name"]) == rows else None
         p = PHOTOS / f"{m['key']}.jpg"
         s = src.get(m["key"])
         if not p.exists() or not s:
@@ -140,15 +179,18 @@ def main():
         im.save(OUT_IMG / f"{slug}.webp", quality=72, method=6)
         if fit:
             fitted.append(m["name"])
+        if m["price"] is None:
+            noprice.append(m["name"])
         cards.append(dict(m, img=f"img/p/{slug}.webp", size=list(im.size), bg=list(edge_colors(im)) if fit else None,
                           author=s["author"], license=s["license"], license_url=s["license_url"], page=s["page"]))
     live = {Path(c["img"]).name for c in cards}
     for f in OUT_IMG.glob("*.webp"):
         if f.name not in live:
             f.unlink()
-    (DATA / "premium.json").write_text(json.dumps({"origins": ORIGINS, "cards": cards, "nophoto": nophoto}, ensure_ascii=False, indent=1))
+    (DATA / "premium.json").write_text(json.dumps({"origins": ORIGINS, "price_date": date, "pdfs": pdfs, "cards": cards, "nophoto": nophoto, "noprice": noprice}, ensure_ascii=False, indent=1))
     by = {k: sum(c["origin"] == k for c in cards) for k, _ in ORIGINS}
     size = sum(f.stat().st_size for f in OUT_IMG.glob("*.webp"))
+    print(f"PDF: {pdfs}; цены на {date}: с ценой {len(cards) - len(noprice)}, без цены {noprice}")
     print(f"карточек {len(cards)}: {by}; без фото: {nophoto}; вписаны целиком: {len(fitted)} {fitted}; фото {size / 1e6:.1f} МБ")
 
 

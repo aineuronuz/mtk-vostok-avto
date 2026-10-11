@@ -21,6 +21,11 @@
    "Китайские"
   ]
  ],
+ "price_date": "10.10.2026",
+ "pdfs": [
+  "Katalog-MTK-Premium-Evropa-Yaponiya-Koreya-SShA-SPB-telefon-10.10.2026.pdf",
+  "Katalog-MTK-Premium-Kitai-SPB-telefon-10.10.2026.pdf"
+ ],
  "cards": [
   {
    "key": "mb_a",
@@ -28,6 +33,7 @@
    "cn": "奔驰A级",
    "brand": "mercedes",
    "origin": "eu",
+   "price": 5480000,
    "img": "img/p/mb_a.webp",
    "size": [
     640,
@@ -45,6 +51,7 @@
    "cn": "奔驰CLA(进口)",
    "brand": "mercedes",
    "origin": "eu",
+   "price": 7490000,
    "img": "img/p/mb_cla.webp",
    "size": [
     640,
@@ -62,6 +69,7 @@
    "cn": "奔驰CLA EV",
    "brand": "mercedes",
    "origin": "eu",
+   "price": 6150000,
    "img": "img/p/mb_cla_ev.webp",
    "size": [
     640,
@@ -79,6 +87,7 @@
    "cn": "奔驰C级",
    "brand": "mercedes",
    "origin": "eu",
+   "price": 7360000,
    "img": "img/p/mb_c.webp",
    "size": [
     640,
@@ -96,6 +105,7 @@
    "cn": "奔驰CLE级",
    "brand": "mercedes",
    "origin": "eu",
+   "price": 10440000,
    "img": "img/p/mb_cle.webp",
    "size": [
     640,
@@ -117,6 +127,7 @@
    "cn": "奔驰E级",
    "brand": "mercedes",
    "origin": "eu",
+   "price": 8890000,
    "img": "img/p/mb_e.webp",
    "size": [
     640,
@@ -134,6 +145,7 @@
    "cn": "奔驰S级",
    "brand": "mercedes",
    "origin": "eu",
+   "price": 20740000,
    "img": "img/p/mb_s.webp",
    "size": [
     640,
@@ -155,6 +167,7 @@
    "cn": "迈巴赫S级",
    "brand": "mercedes",
    "origin": "eu",
+   "price": 30590000,
    "img": "img/p/mb_maybach_s.webp",
    "size": [
     640,
@@ -172,6 +185,7 @@
    "cn": "AMG GT",
    "brand": "mercedes",
    "origin": "eu",
+   "price": 22090000,
    "img": "img/p/mb_amg_gt.webp",
    "size": [
     640,
@@ -193,6 +207,7 @@
    "cn": "奔驰SL级AMG",
    "brand": "mercedes",
    "origin": "eu",
+   "price": 43830000,
    "img": "img/p/mb_sl.webp",
    "size": [
     640,
@@ -214,6 +229,7 @@
    "cn": "奔驰GLA",
    "brand": "mercedes",
    "origin": "eu",
+   "price": 7310000,
    "img": "img/p/mb_gla.webp",
    "size": [
     640,
@@ -231,6 +247,7 @@
    "cn": "奔驰GLB",
    "brand": "mercedes",
    "origin": "eu",
+   "price": 6810000,
    "img": "img/p/mb_glb.webp",
    "size": [
     640,
@@ -248,6 +265,7 @@
    "cn": "奔驰GLC",
    "brand": "mercedes",
    "origin": "eu",
+   "price": 8370000,
    "img": "img/p/mb_glc.webp",
    "size": [
     640,
@@ -265,6 +283,7 @@
    "cn": "奔驰GLC轿跑",
    "brand": "mercedes",
    "origin": "eu",
+   "price": 9890000,
    "img": "img/p/mb_glc_coupe.webp",
    "size": [
     547,
@@ -286,6 +305,7 @@
    "cn": "奔驰GLE",
    "brand": "mercedes",
    "origin": "eu",
+   "price": 15170000,
    "img": "img/p/mb_gle.webp",
    "size": [
     640,
@@ -303,6 +323,7 @@
    "cn": "奔驰GLE轿跑",
    "brand": "mercedes",
    "origin": "eu",
+   "price": 17250000,
    "img": "img/p/mb_gle_coupe.webp",
    "size": [
     640,
@@ -320,6 +341,7 @@
    "cn": "奔驰GLS",
    "brand": "mercedes",
    "origin": "eu",
+   "price": 22180000,
    "img": "img/p/mb_gls.webp",
    "size": [
     640,
@@ -337,6 +359,7 @@
    "cn": "迈巴赫GLS",
    "brand": "mercedes",
    "origin": "eu",
+   "price": 32520000,
    "img": "img/p/mb_maybach_gls.webp",
    "size": [
     573,
@@ -358,6 +381,7 @@
    "cn": "奔驰G级",
    "brand": "mercedes",
    "origin": "eu",
+   "price": 39890000,
    "img": "img/p/mb_g.webp",
    "size": [
     640,
@@ -375,6 +399,7 @@
    "cn": "奔驰V级",
    "brand": "mercedes",
    "origin": "eu",
+   "price": 11250000,
    "img": "img/p/mb_v.webp",
    "size": [
     640,
@@ -392,6 +417,7 @@
    "cn": "威霆",
    "brand": "mercedes",
    "origin": "eu",
+   "price": 8140000,
    "img": "img/p/mb_vito.webp",
    "size": [
     640,
@@ -409,6 +435,7 @@
    "cn": "奔驰EQA",
    "brand": "mercedes",
    "origin": "eu",
+   "price": 7510000,
    "img": "img/p/mb_eqa.webp",
    "size": [
     640,
@@ -426,6 +453,7 @@
    "cn": "奔驰EQB",
    "brand": "mercedes",
    "origin": "eu",
+   "price": 8070000,
    "img": "img/p/mb_eqb.webp",
    "size": [
     640,
@@ -443,6 +471,7 @@
    "cn": "奔驰EQE",
    "brand": "mercedes",
    "origin": "eu",
+   "price": 11400000,
    "img": "img/p/mb_eqe.webp",
    "size": [
     640,
@@ -464,6 +493,7 @@
    "cn": "奔驰EQE SUV",
    "brand": "mercedes",
    "origin": "eu",
+   "price": 11540000,
    "img": "img/p/mb_eqe_suv.webp",
    "size": [
     640,
@@ -481,6 +511,7 @@
    "cn": "奔驰EQS",
    "brand": "mercedes",
    "origin": "eu",
+   "price": 19250000,
    "img": "img/p/mb_eqs.webp",
    "size": [
     640,
@@ -498,6 +529,7 @@
    "cn": "奔驰EQS SUV",
    "brand": "mercedes",
    "origin": "eu",
+   "price": 19790000,
    "img": "img/p/mb_eqs_suv.webp",
    "size": [
     640,
@@ -515,6 +547,7 @@
    "cn": "迈巴赫EQS SUV",
    "brand": "mercedes",
    "origin": "eu",
+   "price": 31890000,
    "img": "img/p/mb_maybach_eqs.webp",
    "size": [
     640,
@@ -532,6 +565,7 @@
    "cn": "宝马2系",
    "brand": "bmw",
    "origin": "eu",
+   "price": 5650000,
    "img": "img/p/bmw_2.webp",
    "size": [
     640,
@@ -549,6 +583,7 @@
    "cn": "宝马3系",
    "brand": "bmw",
    "origin": "eu",
+   "price": 6560000,
    "img": "img/p/bmw_3.webp",
    "size": [
     640,
@@ -566,6 +601,7 @@
    "cn": "宝马4系",
    "brand": "bmw",
    "origin": "eu",
+   "price": 8240000,
    "img": "img/p/bmw_4.webp",
    "size": [
     640,
@@ -583,6 +619,7 @@
    "cn": "宝马5系",
    "brand": "bmw",
    "origin": "eu",
+   "price": 8680000,
    "img": "img/p/bmw_5.webp",
    "size": [
     640,
@@ -600,6 +637,7 @@
    "cn": "宝马7系",
    "brand": "bmw",
    "origin": "eu",
+   "price": 18780000,
    "img": "img/p/bmw_7.webp",
    "size": [
     640,
@@ -621,6 +659,7 @@
    "cn": "宝马8系",
    "brand": "bmw",
    "origin": "eu",
+   "price": 22270000,
    "img": "img/p/bmw_8.webp",
    "size": [
     640,
@@ -642,6 +681,7 @@
    "cn": "宝马X1",
    "brand": "bmw",
    "origin": "eu",
+   "price": 6610000,
    "img": "img/p/bmw_x1.webp",
    "size": [
     640,
@@ -659,6 +699,7 @@
    "cn": "宝马X2(进口)",
    "brand": "bmw",
    "origin": "eu",
+   "price": 6360000,
    "img": "img/p/bmw_x2.webp",
    "size": [
     640,
@@ -676,6 +717,7 @@
    "cn": "宝马X3",
    "brand": "bmw",
    "origin": "eu",
+   "price": 7710000,
    "img": "img/p/bmw_x3.webp",
    "size": [
     640,
@@ -693,6 +735,7 @@
    "cn": "宝马X4",
    "brand": "bmw",
    "origin": "eu",
+   "price": 16460000,
    "img": "img/p/bmw_x4.webp",
    "size": [
     640,
@@ -710,6 +753,7 @@
    "cn": "宝马X5",
    "brand": "bmw",
    "origin": "eu",
+   "price": 13480000,
    "img": "img/p/bmw_x5.webp",
    "size": [
     640,
@@ -727,6 +771,7 @@
    "cn": "宝马X6",
    "brand": "bmw",
    "origin": "eu",
+   "price": 14300000,
    "img": "img/p/bmw_x6.webp",
    "size": [
     640,
@@ -744,6 +789,7 @@
    "cn": "宝马X7",
    "brand": "bmw",
    "origin": "eu",
+   "price": 21530000,
    "img": "img/p/bmw_x7.webp",
    "size": [
     640,
@@ -761,6 +807,7 @@
    "cn": "宝马XM",
    "brand": "bmw",
    "origin": "eu",
+   "price": 28880000,
    "img": "img/p/bmw_xm.webp",
    "size": [
     640,
@@ -778,6 +825,7 @@
    "cn": "宝马i3",
    "brand": "bmw",
    "origin": "eu",
+   "price": 7050000,
    "img": "img/p/bmw_i3.webp",
    "size": [
     640,
@@ -795,6 +843,7 @@
    "cn": "宝马i4",
    "brand": "bmw",
    "origin": "eu",
+   "price": 8330000,
    "img": "img/p/bmw_i4.webp",
    "size": [
     640,
@@ -812,6 +861,7 @@
    "cn": "宝马i5",
    "brand": "bmw",
    "origin": "eu",
+   "price": 8700000,
    "img": "img/p/bmw_i5.webp",
    "size": [
     640,
@@ -833,6 +883,7 @@
    "cn": "宝马i7",
    "brand": "bmw",
    "origin": "eu",
+   "price": 17920000,
    "img": "img/p/bmw_i7.webp",
    "size": [
     640,
@@ -850,6 +901,7 @@
    "cn": "宝马iX1",
    "brand": "bmw",
    "origin": "eu",
+   "price": 5800000,
    "img": "img/p/bmw_ix1.webp",
    "size": [
     640,
@@ -867,6 +919,7 @@
    "cn": "宝马iX",
    "brand": "bmw",
    "origin": "eu",
+   "price": 15900000,
    "img": "img/p/bmw_ix.webp",
    "size": [
     640,
@@ -884,6 +937,7 @@
    "cn": "奥迪A3",
    "brand": "audi",
    "origin": "eu",
+   "price": 3830000,
    "img": "img/p/audi_a3.webp",
    "size": [
     640,
@@ -901,6 +955,7 @@
    "cn": "奥迪A4L",
    "brand": "audi",
    "origin": "eu",
+   "price": 7120000,
    "img": "img/p/audi_a4.webp",
    "size": [
     640,
@@ -918,6 +973,7 @@
    "cn": "奥迪A5",
    "brand": "audi",
    "origin": "eu",
+   "price": 6460000,
    "img": "img/p/audi_a5.webp",
    "size": [
     640,
@@ -935,6 +991,7 @@
    "cn": "奥迪A6L",
    "brand": "audi",
    "origin": "eu",
+   "price": 7810000,
    "img": "img/p/audi_a6.webp",
    "size": [
     640,
@@ -956,6 +1013,7 @@
    "cn": "奥迪A7L",
    "brand": "audi",
    "origin": "eu",
+   "price": 9720000,
    "img": "img/p/audi_a7.webp",
    "size": [
     640,
@@ -973,6 +1031,7 @@
    "cn": "奥迪A8",
    "brand": "audi",
    "origin": "eu",
+   "price": 17060000,
    "img": "img/p/audi_a8.webp",
    "size": [
     640,
@@ -990,6 +1049,7 @@
    "cn": "奥迪Q2L",
    "brand": "audi",
    "origin": "eu",
+   "price": 3940000,
    "img": "img/p/audi_q2l.webp",
    "size": [
     640,
@@ -1007,6 +1067,7 @@
    "cn": "奥迪Q3",
    "brand": "audi",
    "origin": "eu",
+   "price": 5490000,
    "img": "img/p/audi_q3.webp",
    "size": [
     640,
@@ -1024,6 +1085,7 @@
    "cn": "奥迪Q5L",
    "brand": "audi",
    "origin": "eu",
+   "price": 7560000,
    "img": "img/p/audi_q5.webp",
    "size": [
     640,
@@ -1041,6 +1103,7 @@
    "cn": "奥迪Q6",
    "brand": "audi",
    "origin": "eu",
+   "price": 10690000,
    "img": "img/p/audi_q6.webp",
    "size": [
     640,
@@ -1058,6 +1121,7 @@
    "cn": "奥迪Q7",
    "brand": "audi",
    "origin": "eu",
+   "price": 13560000,
    "img": "img/p/audi_q7.webp",
    "size": [
     501,
@@ -1079,6 +1143,7 @@
    "cn": "奥迪Q8",
    "brand": "audi",
    "origin": "eu",
+   "price": 16970000,
    "img": "img/p/audi_q8.webp",
    "size": [
     640,
@@ -1096,6 +1161,7 @@
    "cn": "奥迪Q4 e-tron",
    "brand": "audi",
    "origin": "eu",
+   "price": 6930000,
    "img": "img/p/audi_q4.webp",
    "size": [
     640,
@@ -1117,6 +1183,7 @@
    "cn": "奥迪Q6L e-tron",
    "brand": "audi",
    "origin": "eu",
+   "price": 7320000,
    "img": "img/p/audi_q6l_etron.webp",
    "size": [
     640,
@@ -1134,6 +1201,7 @@
    "cn": "保时捷718",
    "brand": "porsche",
    "origin": "eu",
+   "price": 14200000,
    "img": "img/p/porsche_718.webp",
    "size": [
     640,
@@ -1151,6 +1219,7 @@
    "cn": "Panamera",
    "brand": "porsche",
    "origin": "eu",
+   "price": 22760000,
    "img": "img/p/porsche_panamera.webp",
    "size": [
     640,
@@ -1172,6 +1241,7 @@
    "cn": "保时捷911",
    "brand": "porsche",
    "origin": "eu",
+   "price": 31940000,
    "img": "img/p/porsche_911.webp",
    "size": [
     640,
@@ -1189,6 +1259,7 @@
    "cn": "Macan",
    "brand": "porsche",
    "origin": "eu",
+   "price": 12950000,
    "img": "img/p/porsche_macan.webp",
    "size": [
     640,
@@ -1206,6 +1277,7 @@
    "cn": "Cayenne",
    "brand": "porsche",
    "origin": "eu",
+   "price": 21220000,
    "img": "img/p/porsche_cayenne.webp",
    "size": [
     640,
@@ -1223,6 +1295,7 @@
    "cn": "Cayenne Coupé",
    "brand": "porsche",
    "origin": "eu",
+   "price": 21630000,
    "img": "img/p/porsche_cayenne_coupe.webp",
    "size": [
     640,
@@ -1240,6 +1313,7 @@
    "cn": "Taycan",
    "brand": "porsche",
    "origin": "eu",
+   "price": 19480000,
    "img": "img/p/porsche_taycan.webp",
    "size": [
     640,
@@ -1257,6 +1331,7 @@
    "cn": "Cayenne EV",
    "brand": "porsche",
    "origin": "eu",
+   "price": 25960000,
    "img": "img/p/porsche_cayenne_ev.webp",
    "size": [
     640,
@@ -1278,6 +1353,7 @@
    "cn": "沃尔沃S60",
    "brand": "volvo",
    "origin": "eu",
+   "price": 7500000,
    "img": "img/p/s60.webp",
    "size": [
     640,
@@ -1295,6 +1371,7 @@
    "cn": "沃尔沃V60",
    "brand": "volvo",
    "origin": "eu",
+   "price": 8140000,
    "img": "img/p/v60.webp",
    "size": [
     640,
@@ -1312,6 +1389,7 @@
    "cn": "沃尔沃S90",
    "brand": "volvo",
    "origin": "eu",
+   "price": 9490000,
    "img": "img/p/s90.webp",
    "size": [
     640,
@@ -1333,6 +1411,7 @@
    "cn": "沃尔沃V90 Cross Country",
    "brand": "volvo",
    "origin": "eu",
+   "price": 10310000,
    "img": "img/p/v90.webp",
    "size": [
     640,
@@ -1354,6 +1433,7 @@
    "cn": "沃尔沃XC40",
    "brand": "volvo",
    "origin": "eu",
+   "price": 7060000,
    "img": "img/p/xc40.webp",
    "size": [
     640,
@@ -1371,6 +1451,7 @@
    "cn": "沃尔沃XC60",
    "brand": "volvo",
    "origin": "eu",
+   "price": 9300000,
    "img": "img/p/xc60.webp",
    "size": [
     640,
@@ -1388,6 +1469,7 @@
    "cn": "沃尔沃XC70 插电式混动",
    "brand": "volvo",
    "origin": "eu",
+   "price": 10030000,
    "img": "img/p/xc70.webp",
    "size": [
     640,
@@ -1405,6 +1487,7 @@
    "cn": "沃尔沃XC90",
    "brand": "volvo",
    "origin": "eu",
+   "price": 13990000,
    "img": "img/p/xc90.webp",
    "size": [
     640,
@@ -1422,6 +1505,7 @@
    "cn": "沃尔沃EX30",
    "brand": "volvo",
    "origin": "eu",
+   "price": 5680000,
    "img": "img/p/ex30.webp",
    "size": [
     640,
@@ -1439,6 +1523,7 @@
    "cn": "沃尔沃ES90",
    "brand": "volvo",
    "origin": "eu",
+   "price": 12880000,
    "img": "img/p/es90.webp",
    "size": [
     640,
@@ -1456,6 +1541,7 @@
    "cn": "沃尔沃EX90",
    "brand": "volvo",
    "origin": "eu",
+   "price": 19560000,
    "img": "img/p/ex90.webp",
    "size": [
     640,
@@ -1473,6 +1559,7 @@
    "cn": "沃尔沃EM90",
    "brand": "volvo",
    "origin": "eu",
+   "price": 16990000,
    "img": "img/p/em90.webp",
    "size": [
     640,
@@ -1490,6 +1577,7 @@
    "cn": "揽胜极光",
    "brand": "landrover",
    "origin": "eu",
+   "price": 9930000,
    "img": "img/p/lr_evoque.webp",
    "size": [
     640,
@@ -1507,6 +1595,7 @@
    "cn": "揽胜星脉",
    "brand": "landrover",
    "origin": "eu",
+   "price": 12620000,
    "img": "img/p/lr_velar.webp",
    "size": [
     640,
@@ -1524,6 +1613,7 @@
    "cn": "发现",
    "brand": "landrover",
    "origin": "eu",
+   "price": 14650000,
    "img": "img/p/lr_discovery.webp",
    "size": [
     640,
@@ -1541,6 +1631,7 @@
    "cn": "卫士",
    "brand": "landrover",
    "origin": "eu",
+   "price": 15250000,
    "img": "img/p/lr_defender.webp",
    "size": [
     640,
@@ -1558,6 +1649,7 @@
    "cn": "揽胜运动",
    "brand": "landrover",
    "origin": "eu",
+   "price": 20830000,
    "img": "img/p/lr_rrs.webp",
    "size": [
     640,
@@ -1575,6 +1667,7 @@
    "cn": "揽胜",
    "brand": "landrover",
    "origin": "eu",
+   "price": 30750000,
    "img": "img/p/lr_rr.webp",
    "size": [
     640,
@@ -1592,6 +1685,7 @@
    "cn": "Emeya",
    "brand": "lotus",
    "origin": "eu",
+   "price": 13930000,
    "img": "img/p/lotus_emeya.webp",
    "size": [
     640,
@@ -1609,6 +1703,7 @@
    "cn": "Emira",
    "brand": "lotus",
    "origin": "eu",
+   "price": 20250000,
    "img": "img/p/lotus_emira.webp",
    "size": [
     640,
@@ -1626,6 +1721,7 @@
    "cn": "Eletre",
    "brand": "lotus",
    "origin": "eu",
+   "price": 14290000,
    "img": "img/p/lotus_eletre.webp",
    "size": [
     640,
@@ -1643,6 +1739,7 @@
    "cn": "雷克萨斯ES",
    "brand": "lexus",
    "origin": "jp",
+   "price": 7360000,
    "img": "img/p/lexus_es.webp",
    "size": [
     640,
@@ -1660,6 +1757,7 @@
    "cn": "雷克萨斯LS",
    "brand": "lexus",
    "origin": "jp",
+   "price": 20960000,
    "img": "img/p/lexus_ls.webp",
    "size": [
     640,
@@ -1677,6 +1775,7 @@
    "cn": "雷克萨斯LC",
    "brand": "lexus",
    "origin": "jp",
+   "price": 28880000,
    "img": "img/p/lexus_lc.webp",
    "size": [
     640,
@@ -1694,6 +1793,7 @@
    "cn": "雷克萨斯NX",
    "brand": "lexus",
    "origin": "jp",
+   "price": 7310000,
    "img": "img/p/lexus_nx.webp",
    "size": [
     640,
@@ -1711,6 +1811,7 @@
    "cn": "雷克萨斯RX",
    "brand": "lexus",
    "origin": "jp",
+   "price": 8970000,
    "img": "img/p/lexus_rx.webp",
    "size": [
     528,
@@ -1732,6 +1833,7 @@
    "cn": "雷克萨斯GX",
    "brand": "lexus",
    "origin": "jp",
+   "price": 18390000,
    "img": "img/p/lexus_gx.webp",
    "size": [
     640,
@@ -1749,6 +1851,7 @@
    "cn": "雷克萨斯LX",
    "brand": "lexus",
    "origin": "jp",
+   "price": 28550000,
    "img": "img/p/lexus_lx.webp",
    "size": [
     640,
@@ -1766,6 +1869,7 @@
    "cn": "雷克萨斯LM",
    "brand": "lexus",
    "origin": "jp",
+   "price": 26210000,
    "img": "img/p/lexus_lm.webp",
    "size": [
     509,
@@ -1787,6 +1891,7 @@
    "cn": "雷克萨斯RZ",
    "brand": "lexus",
    "origin": "jp",
+   "price": 8150000,
    "img": "img/p/lexus_rz.webp",
    "size": [
     539,
@@ -1808,6 +1913,7 @@
    "cn": "英菲尼迪QX50",
    "brand": "infiniti",
    "origin": "jp",
+   "price": 8410000,
    "img": "img/p/infiniti_qx50.webp",
    "size": [
     640,
@@ -1829,6 +1935,7 @@
    "cn": "英菲尼迪QX60",
    "brand": "infiniti",
    "origin": "jp",
+   "price": 9080000,
    "img": "img/p/infiniti_qx60.webp",
    "size": [
     640,
@@ -1850,6 +1957,7 @@
    "cn": "英菲尼迪QX80",
    "brand": "infiniti",
    "origin": "jp",
+   "price": 27550000,
    "img": "img/p/infiniti_qx80.webp",
    "size": [
     640,
@@ -1867,6 +1975,7 @@
    "cn": "捷尼赛思G80",
    "brand": "genesis",
    "origin": "kr",
+   "price": 9380000,
    "img": "img/p/genesis_g80.webp",
    "size": [
     640,
@@ -1888,6 +1997,7 @@
    "cn": "捷尼赛思G90",
    "brand": "genesis",
    "origin": "kr",
+   "price": 18400000,
    "img": "img/p/genesis_g90.webp",
    "size": [
     640,
@@ -1909,6 +2019,7 @@
    "cn": "捷尼赛思GV70",
    "brand": "genesis",
    "origin": "kr",
+   "price": 8840000,
    "img": "img/p/genesis_gv70.webp",
    "size": [
     640,
@@ -1926,6 +2037,7 @@
    "cn": "捷尼赛思GV80",
    "brand": "genesis",
    "origin": "kr",
+   "price": 13500000,
    "img": "img/p/genesis_gv80.webp",
    "size": [
     640,
@@ -1943,6 +2055,7 @@
    "cn": "凯迪拉克CT5",
    "brand": "cadillac",
    "origin": "us",
+   "price": 7230000,
    "img": "img/p/cad_ct5.webp",
    "size": [
     640,
@@ -1960,6 +2073,7 @@
    "cn": "凯迪拉克CT6",
    "brand": "cadillac",
    "origin": "us",
+   "price": 8770000,
    "img": "img/p/cad_ct6.webp",
    "size": [
     640,
@@ -1977,6 +2091,7 @@
    "cn": "凯迪拉克GT4",
    "brand": "cadillac",
    "origin": "us",
+   "price": 5820000,
    "img": "img/p/cad_gt4.webp",
    "size": [
     640,
@@ -1994,6 +2109,7 @@
    "cn": "凯迪拉克XT4",
    "brand": "cadillac",
    "origin": "us",
+   "price": 6010000,
    "img": "img/p/cad_xt4.webp",
    "size": [
     640,
@@ -2011,6 +2127,7 @@
    "cn": "凯迪拉克XT5",
    "brand": "cadillac",
    "origin": "us",
+   "price": 6610000,
    "img": "img/p/cad_xt5.webp",
    "size": [
     640,
@@ -2028,6 +2145,7 @@
    "cn": "凯迪拉克XT6",
    "brand": "cadillac",
    "origin": "us",
+   "price": 10350000,
    "img": "img/p/cad_xt6.webp",
    "size": [
     589,
@@ -2049,6 +2167,7 @@
    "cn": "IQ傲歌",
    "brand": "cadillac",
    "origin": "us",
+   "price": 6340000,
    "img": "img/p/cad_optiq.webp",
    "size": [
     640,
@@ -2066,6 +2185,7 @@
    "cn": "凯威德",
    "brand": "cadillac",
    "origin": "us",
+   "price": 12650000,
    "img": "img/p/cad_vistiq.webp",
    "size": [
     640,
@@ -2083,6 +2203,7 @@
    "cn": "Model 3",
    "brand": "tesla",
    "origin": "us",
+   "price": 6270000,
    "img": "img/p/tesla_m3.webp",
    "size": [
     640,
@@ -2100,6 +2221,7 @@
    "cn": "Model Y",
    "brand": "tesla",
    "origin": "us",
+   "price": 7020000,
    "img": "img/p/tesla_my.webp",
    "size": [
     640,
@@ -2117,6 +2239,7 @@
    "cn": "Model Y L",
    "brand": "tesla",
    "origin": "us",
+   "price": 9290000,
    "img": "img/p/tesla_myl.webp",
    "size": [
     640,
@@ -2134,6 +2257,7 @@
    "cn": "理想L6",
    "brand": "liauto",
    "origin": "cn",
+   "price": 7190000,
    "img": "img/p/li_l6.webp",
    "size": [
     640,
@@ -2151,6 +2275,7 @@
    "cn": "理想L8",
    "brand": "liauto",
    "origin": "cn",
+   "price": 9840000,
    "img": "img/p/li_l8.webp",
    "size": [
     640,
@@ -2168,6 +2293,7 @@
    "cn": "理想L9",
    "brand": "liauto",
    "origin": "cn",
+   "price": 12470000,
    "img": "img/p/li_l9.webp",
    "size": [
     640,
@@ -2185,6 +2311,7 @@
    "cn": "理想i6",
    "brand": "liauto",
    "origin": "cn",
+   "price": 6880000,
    "img": "img/p/li_i6.webp",
    "size": [
     640,
@@ -2202,6 +2329,7 @@
    "cn": "理想i8",
    "brand": "liauto",
    "origin": "cn",
+   "price": 9750000,
    "img": "img/p/li_i8.webp",
    "size": [
     640,
@@ -2219,6 +2347,7 @@
    "cn": "理想MEGA",
    "brand": "liauto",
    "origin": "cn",
+   "price": 12890000,
    "img": "img/p/li_mega.webp",
    "size": [
     640,
@@ -2236,6 +2365,7 @@
    "cn": "小米SU7",
    "brand": "xiaomi",
    "origin": "cn",
+   "price": 6230000,
    "img": "img/p/xiaomi_su7.webp",
    "size": [
     640,
@@ -2253,6 +2383,7 @@
    "cn": "小米YU7",
    "brand": "xiaomi",
    "origin": "cn",
+   "price": 6470000,
    "img": "img/p/xiaomi_yu7.webp",
    "size": [
     640,
@@ -2270,6 +2401,7 @@
    "cn": "ZEEKR 007",
    "brand": "zeekr",
    "origin": "cn",
+   "price": 6830000,
    "img": "img/p/zeekr_007.webp",
    "size": [
     640,
@@ -2287,6 +2419,7 @@
    "cn": "ZEEKR 007GT",
    "brand": "zeekr",
    "origin": "cn",
+   "price": 6330000,
    "img": "img/p/zeekr_007gt.webp",
    "size": [
     640,
@@ -2304,6 +2437,7 @@
    "cn": "ZEEKR 001",
    "brand": "zeekr",
    "origin": "cn",
+   "price": 10120000,
    "img": "img/p/zeekr_001.webp",
    "size": [
     640,
@@ -2321,6 +2455,7 @@
    "cn": "ZEEKR X",
    "brand": "zeekr",
    "origin": "cn",
+   "price": 5150000,
    "img": "img/p/zeekr_x.webp",
    "size": [
     640,
@@ -2338,6 +2473,7 @@
    "cn": "ZEEKR 7X",
    "brand": "zeekr",
    "origin": "cn",
+   "price": 7710000,
    "img": "img/p/zeekr_7x.webp",
    "size": [
     640,
@@ -2355,6 +2491,7 @@
    "cn": "ZEEKR 8X",
    "brand": "zeekr",
    "origin": "cn",
+   "price": 8650000,
    "img": "img/p/zeekr_8x.webp",
    "size": [
     640,
@@ -2372,6 +2509,7 @@
    "cn": "ZEEKR 9X",
    "brand": "zeekr",
    "origin": "cn",
+   "price": 10790000,
    "img": "img/p/zeekr_9x.webp",
    "size": [
     640,
@@ -2389,6 +2527,7 @@
    "cn": "ZEEKR MIX",
    "brand": "zeekr",
    "origin": "cn",
+   "price": 7740000,
    "img": "img/p/zeekr_mix.webp",
    "size": [
     640,
@@ -2406,6 +2545,7 @@
    "cn": "ZEEKR 009",
    "brand": "zeekr",
    "origin": "cn",
+   "price": 10690000,
    "img": "img/p/zeekr_009.webp",
    "size": [
     640,
@@ -2423,6 +2563,7 @@
    "cn": "蔚来ET5",
    "brand": "nio",
    "origin": "cn",
+   "price": 8950000,
    "img": "img/p/nio_et5.webp",
    "size": [
     640,
@@ -2440,6 +2581,7 @@
    "cn": "蔚来ET5T",
    "brand": "nio",
    "origin": "cn",
+   "price": 8950000,
    "img": "img/p/nio_et5t.webp",
    "size": [
     640,
@@ -2457,6 +2599,7 @@
    "cn": "蔚来ET7",
    "brand": "nio",
    "origin": "cn",
+   "price": 12470000,
    "img": "img/p/nio_et7.webp",
    "size": [
     640,
@@ -2478,6 +2621,7 @@
    "cn": "蔚来ET9",
    "brand": "nio",
    "origin": "cn",
+   "price": 19030000,
    "img": "img/p/nio_et9.webp",
    "size": [
     640,
@@ -2495,6 +2639,7 @@
    "cn": "蔚来ES6",
    "brand": "nio",
    "origin": "cn",
+   "price": 9690000,
    "img": "img/p/nio_es6.webp",
    "size": [
     640,
@@ -2512,6 +2657,7 @@
    "cn": "蔚来EC6",
    "brand": "nio",
    "origin": "cn",
+   "price": 10050000,
    "img": "img/p/nio_ec6.webp",
    "size": [
     640,
@@ -2529,6 +2675,7 @@
    "cn": "蔚来ES8",
    "brand": "nio",
    "origin": "cn",
+   "price": 11950000,
    "img": "img/p/nio_es8.webp",
    "size": [
     640,
@@ -2546,6 +2693,7 @@
    "cn": "蔚来EC7",
    "brand": "nio",
    "origin": "cn",
+   "price": 13050000,
    "img": "img/p/nio_ec7.webp",
    "size": [
     640,
@@ -2563,6 +2711,7 @@
    "cn": "蔚来ES9",
    "brand": "nio",
    "origin": "cn",
+   "price": 14090000,
    "img": "img/p/nio_es9.webp",
    "size": [
     640,
@@ -2580,6 +2729,7 @@
    "cn": "阿维塔 06",
    "brand": "avatr",
    "origin": "cn",
+   "price": 6040000,
    "img": "img/p/avatr_06.webp",
    "size": [
     640,
@@ -2597,6 +2747,7 @@
    "cn": "阿维塔 06T",
    "brand": "avatr",
    "origin": "cn",
+   "price": 8070000,
    "img": "img/p/avatr_06t.webp",
    "size": [
     640,
@@ -2614,6 +2765,7 @@
    "cn": "阿维塔 12",
    "brand": "avatr",
    "origin": "cn",
+   "price": 7140000,
    "img": "img/p/avatr_12.webp",
    "size": [
     640,
@@ -2631,6 +2783,7 @@
    "cn": "阿维塔 07",
    "brand": "avatr",
    "origin": "cn",
+   "price": 6230000,
    "img": "img/p/avatr_07.webp",
    "size": [
     640,
@@ -2648,6 +2801,7 @@
    "cn": "阿维塔 07L",
    "brand": "avatr",
    "origin": "cn",
+   "price": 6830000,
    "img": "img/p/avatr_07l.webp",
    "size": [
     640,
@@ -2665,6 +2819,7 @@
    "cn": "阿维塔 11",
    "brand": "avatr",
    "origin": "cn",
+   "price": 7510000,
    "img": "img/p/avatr_11.webp",
    "size": [
     640,
@@ -2682,6 +2837,7 @@
    "cn": "岚图追光 PHEV",
    "brand": "voyah",
    "origin": "cn",
+   "price": 8710000,
    "img": "img/p/voyah_passion.webp",
    "size": [
     640,
@@ -2699,6 +2855,7 @@
    "cn": "岚图追光L",
    "brand": "voyah",
    "origin": "cn",
+   "price": 9230000,
    "img": "img/p/voyah_passion_l.webp",
    "size": [
     640,
@@ -2716,6 +2873,7 @@
    "cn": "岚图知音",
    "brand": "voyah",
    "origin": "cn",
+   "price": 5800000,
    "img": "img/p/voyah_courage.webp",
    "size": [
     640,
@@ -2733,6 +2891,7 @@
    "cn": "岚图FREE+",
    "brand": "voyah",
    "origin": "cn",
+   "price": 6220000,
    "img": "img/p/voyah_free.webp",
    "size": [
     640,
@@ -2750,6 +2909,7 @@
    "cn": "岚图泰山 PHEV",
    "brand": "voyah",
    "origin": "cn",
+   "price": 7960000,
    "img": "img/p/voyah_taishan.webp",
    "size": [
     640,
@@ -2767,6 +2927,7 @@
    "cn": "岚图梦想家 PHEV",
    "brand": "voyah",
    "origin": "cn",
+   "price": 10190000,
    "img": "img/p/voyah_dream.webp",
    "size": [
     640,
@@ -2784,6 +2945,7 @@
    "cn": "问界M5",
    "brand": "aito",
    "origin": "cn",
+   "price": 6160000,
    "img": "img/p/aito_m5.webp",
    "size": [
     640,
@@ -2801,6 +2963,7 @@
    "cn": "问界M6",
    "brand": "aito",
    "origin": "cn",
+   "price": 6410000,
    "img": "img/p/aito_m6.webp",
    "size": [
     640,
@@ -2818,6 +2981,7 @@
    "cn": "问界M7",
    "brand": "aito",
    "origin": "cn",
+   "price": 8420000,
    "img": "img/p/aito_m7.webp",
    "size": [
     640,
@@ -2835,6 +2999,7 @@
    "cn": "问界M8",
    "brand": "aito",
    "origin": "cn",
+   "price": 10110000,
    "img": "img/p/aito_m8.webp",
    "size": [
     640,
@@ -2852,6 +3017,7 @@
    "cn": "问界M9",
    "brand": "aito",
    "origin": "cn",
+   "price": 13730000,
    "img": "img/p/aito_m9.webp",
    "size": [
     640,
@@ -2869,6 +3035,7 @@
    "cn": "腾势Z9GT DM",
    "brand": "denza",
    "origin": "cn",
+   "price": 8440000,
    "img": "img/p/denza_z9gt.webp",
    "size": [
     640,
@@ -2886,6 +3053,7 @@
    "cn": "腾势N7",
    "brand": "denza",
    "origin": "cn",
+   "price": 6960000,
    "img": "img/p/denza_n7.webp",
    "size": [
     640,
@@ -2903,6 +3071,7 @@
    "cn": "腾势N8L DM",
    "brand": "denza",
    "origin": "cn",
+   "price": 7360000,
    "img": "img/p/denza_n8l.webp",
    "size": [
     640,
@@ -2920,6 +3089,7 @@
    "cn": "腾势N9 DM",
    "brand": "denza",
    "origin": "cn",
+   "price": 9100000,
    "img": "img/p/denza_n9.webp",
    "size": [
     640,
@@ -2937,6 +3107,7 @@
    "cn": "腾势D9 DM",
    "brand": "denza",
    "origin": "cn",
+   "price": 6610000,
    "img": "img/p/denza_d9.webp",
    "size": [
     640,
@@ -2954,6 +3125,7 @@
    "cn": "仰望U7 EV",
    "brand": "yangwang",
    "origin": "cn",
+   "price": 17660000,
    "img": "img/p/yangwang_u7.webp",
    "size": [
     640,
@@ -2971,6 +3143,7 @@
    "cn": "仰望U8",
    "brand": "yangwang",
    "origin": "cn",
+   "price": 23990000,
    "img": "img/p/yangwang_u8.webp",
    "size": [
     640,
@@ -2988,6 +3161,7 @@
    "cn": "红旗H9",
    "brand": "hongqi",
    "origin": "cn",
+   "price": 8130000,
    "img": "img/p/hongqi_h9.webp",
    "size": [
     640,
@@ -3005,6 +3179,7 @@
    "cn": "红旗金葵花国雅",
    "brand": "hongqi",
    "origin": "cn",
+   "price": 31130000,
    "img": "img/p/hongqi_guoya.webp",
    "size": [
     640,
@@ -3022,6 +3197,7 @@
    "cn": "红旗金葵花国耀",
    "brand": "hongqi",
    "origin": "cn",
+   "price": 35350000,
    "img": "img/p/hongqi_guoyao.webp",
    "size": [
     640,
@@ -3039,6 +3215,7 @@
    "cn": "红旗HQ9",
    "brand": "hongqi",
    "origin": "cn",
+   "price": 9970000,
    "img": "img/p/hongqi_hq9.webp",
    "size": [
     640,
@@ -3056,6 +3233,7 @@
    "cn": "红旗E-HS9",
    "brand": "hongqi",
    "origin": "cn",
+   "price": 13800000,
    "img": "img/p/hongqi_ehs9.webp",
    "size": [
     640,
@@ -3077,6 +3255,7 @@
    "cn": "智己L6",
    "brand": "im",
    "origin": "cn",
+   "price": 6040000,
    "img": "img/p/im_l6.webp",
    "size": [
     640,
@@ -3094,6 +3273,7 @@
    "cn": "智己L7",
    "brand": "im",
    "origin": "cn",
+   "price": 7790000,
    "img": "img/p/im_l7.webp",
    "size": [
     640,
@@ -3111,6 +3291,7 @@
    "cn": "智己LS6",
    "brand": "im",
    "origin": "cn",
+   "price": 6410000,
    "img": "img/p/im_ls6.webp",
    "size": [
     640,
@@ -3128,6 +3309,7 @@
    "cn": "智己LS7",
    "brand": "im",
    "origin": "cn",
+   "price": 11240000,
    "img": "img/p/im_ls7.webp",
    "size": [
     640,
@@ -3145,6 +3327,7 @@
    "cn": "智己LS8",
    "brand": "im",
    "origin": "cn",
+   "price": 6990000,
    "img": "img/p/im_ls8.webp",
    "size": [
     572,
@@ -3163,5 +3346,6 @@
  ],
  "nophoto": [
   "Lotus For Me"
- ]
+ ],
+ "noprice": []
 }

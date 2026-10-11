@@ -741,22 +741,24 @@ def car_page(c, kp, models, rates):
 
 
 def premium_page(prem):
-    """Новые премиальные автомобили из Китая (Юрий 11.10.2026): карточки без цен, фильтр по стране марки, авторы фото.
+    """Новые премиальные автомобили из Китая (Юрий 11.10.2026): карточки с ценой «от» из PDF премиум-каталога, фильтр по стране марки,
+    авторы фото.
     Данные и фото готовит new/premium.py."""
     cards = prem["cards"]
     origins = [(k, t) for k, t in prem["origins"]]
-    n_brands = len({c["brand"] for c in cards})
     chips = "".join(f'<button class="chip" type="button" data-v="{k}">{t} <i>{sum(c["origin"] == k for c in cards)}</i></button>' for k, t in origins)
     grid = "".join(f'<div class="card pc" data-origin="{c["origin"]}"><div class="im{" ct" if c.get("bg") else ""}"'
                    + (f' style="background:linear-gradient({c["bg"][0]},{c["bg"][1]} 50%,{c["bg"][2]} 50%)"' if c.get("bg") else "")
                    + f'><img src="{u(c["img"])}" alt="{E(c["name"])}" loading="lazy" width="{c["size"][0]}" height="{c["size"][1]}"></div>'
-                   f'<div class="t"><h3>{E(c["name"])}</h3></div></div>' for c in cards)
+                   f'<div class="t"><h3>{E(c["name"])}</h3>'
+                   + (f'<div class="pr">от&nbsp;{rub(c["price"])}<small>под ключ до&nbsp;СПб</small></div>' if c.get("price") else "")
+                   + '</div></div>' for c in cards)
     credits = "".join(f'<li>{E(c["name"])}&nbsp;— {E(c["author"])}, <a href="{E(c["license_url"])}" rel="license noopener" target="_blank">{E(c["license"])}</a>, '
                       f'<a href="{E(c["page"])}" rel="noopener" target="_blank">Wikimedia Commons</a></li>' for c in cards)
     body = f"""
 <section class="phead"><div class="wrap">{crumbs((None, "Премиум"))}
 <h1 class="rv in">Новые премиальные автомобили <em>из&nbsp;Китая</em></h1>
-<p class="lead">{len(cards)} {plural(len(cards), "модель", "модели", "моделей")} {n_brands} {plural(n_brands, "марки", "марок", "марок")}: новые машины для&nbsp;рынка Китая. Подберём комплектацию, привезём и&nbsp;растаможим под&nbsp;ключ. Цену под&nbsp;ключ на&nbsp;нужную комплектацию посчитает специалист.</p>
+<p class="lead">Цены ориентировочные, под&nbsp;ключ до&nbsp;Санкт-Петербурга, на&nbsp;{prem["price_date"]}</p>
 </div></section>
 <section class="sec tight prem"><div class="wrap">
 <div class="pfl"><div class="chips" data-f="origin" data-one><button class="chip all" type="button" data-reset>Все <i>{len(cards)}</i></button>{chips}</div>
