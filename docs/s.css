@@ -176,6 +176,17 @@ h1,h2,h3{font-family:var(--disp);font-weight:400;letter-spacing:-.03em;line-heig
 .card .sp{color:var(--muted);font-size:14.5px;margin-top:8px;line-height:1.45}
 .card .pr{margin-top:auto;padding-top:18px;font-family:var(--disp);font-size:24px;font-weight:400;letter-spacing:-.02em;color:var(--navy2)}
 .card .pr small{display:block;font-family:var(--ui);font-size:13px;color:var(--muted);letter-spacing:0;margin-top:2px}
+/* электро: две цены, сначала б/у, потом новый («Авто» 15.10.2026) */
+.pl{display:block}
+.pl+.pl{margin-top:10px}
+.pl i{display:table;margin-bottom:5px;font-style:normal;font-family:var(--ui);font-size:11.5px;font-weight:700;letter-spacing:.04em;line-height:1.5;text-transform:uppercase;border-radius:6px;padding:2px 8px;background:#eef1f5;color:#3b4452}
+.pl+.pl i{background:#e3f6ee;color:#0e7a55}
+.pl em{font-style:normal;font-family:var(--ui);font-size:16px;color:var(--muted);letter-spacing:0}
+.card .pr.pr2{font-size:22px}
+.big.pr2{font-size:clamp(28px,2.8vw,42px)}
+.big .pl i{font-size:12.5px;background:rgba(255,255,255,.14);color:#fff}
+.big .pl+.pl i{background:rgba(52,211,153,.24);color:#c9f5e2}
+.big .pl em{font-size:20px;color:rgba(255,255,255,.75)}
 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
 
 /* страницы: шапка раздела */

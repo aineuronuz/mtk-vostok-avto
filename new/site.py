@@ -73,6 +73,26 @@ def price_range(a, b):
     return f"от {mln(a)}" + (f" до {mln(b)}" if b else "") + "&nbsp;млн&nbsp;₽"
 
 
+def lo_price(m):
+    """Самая низкая цена модели: у электро с двумя ценами — б/у («Авто» 15.10.2026)."""
+    return min(x for x in (m.get("bu_from"), m["from"]) if x)
+
+
+def price_lines(m):
+    """[(подпись, цена)]: у электро сначала б/у, потом новый («Авто» 15.10.2026), б/у нет — «цена по запросу»; у остальных одна цена."""
+    if "bu_label" not in m:
+        return [(None, price_range(m["from"], m["to"]))]
+    return [(m["bu_label"], price_range(m["bu_from"], None) if m.get("bu_from") else None), ("Новый", price_range(m["from"], m["to"]))]
+
+
+def price_html(m):
+    return "".join(f'<span class="pl"><i>{E(t)}</i>{v or "<em>цена по&nbsp;запросу</em>"}</span>' if t else v for t, v in price_lines(m))
+
+
+def price_text(m):
+    return ", ".join(f"{t.lower()} {v or 'цена по запросу'}" if t else v for t, v in ((t, v and html.unescape(v)) for t, v in price_lines(m)))
+
+
 def ddmm(d):
     return d.strftime("%d.%m.%Y")
 
@@ -315,7 +335,7 @@ SVG_R = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width
 # направление каталога: ключ, подпись, категория cars_data, фото раздела, топливо
 DIRS = [("ev", "Электро", "ЭЛЕКТРО", 0, "ev"), ("hyb", "Гибриды", "ГИБРИДЫ", 1, "hybrid"),
         ("fwd", "Бензин", "МОНОПРИВОД", 2, "petrol"), ("awd", "Полный привод", "ПОЛНЫЙ ПРИВОД", 3, "petrol")]
-DIR_TEXT = {"ev": "Новые электромобили, которые проходят по&nbsp;льготному утильсбору: 30-минутная мощность мотора до&nbsp;58,84&nbsp;кВт.",
+DIR_TEXT = {"ev": "У&nbsp;каждой модели две цены: б/у и&nbsp;новый. Все проходят по&nbsp;льготному утильсбору: 30-минутная мощность мотора до&nbsp;58,84&nbsp;кВт.",
             "hyb": "Гибриды Toyota с&nbsp;пробегом 3–5 лет: мощность системы до&nbsp;160&nbsp;л.с., утильсбор льготный.",
             "fwd": "Бензиновые машины 3–5 лет до&nbsp;160&nbsp;л.с.: Volkswagen, Toyota, Honda, Mazda, BMW, Audi и&nbsp;другие.",
             "awd": "Полный привод до&nbsp;160&nbsp;л.с. с&nbsp;пробегом 3–5 лет: Subaru и&nbsp;Mitsubishi под&nbsp;льготный утильсбор."}
@@ -324,9 +344,10 @@ FUEL_RU = {"ev": "Электро", "erev": "Гибрид EREV", "hybrid": "Ги�
 
 def catalog_recalc(rates):
     """Пересчёт цен «Каталога» на курсы дня (задача «Авто» 11.10.2026) тем же методом, каким «Авто» пересчитывает каталог
-    (~/auto-china/catalog/update_2026_10_01_1275.py, функции total и reverse из recalc_catalog.py): известные юани — прямой
-    расчёт, остальные — обратным методом от цены каталога; цены «от» с Drom не пересчитываются. База — курсы, по которым
-    посчитан cars_data.py (NEW в том же файле). Возвращает f(имя, "from"|"to", цена, электро) -> цена на сегодня."""
+    (~/auto-china/catalog/update_2026_10_15_bu.py, функции total и reverse из recalc_catalog.py): известные юани — прямой
+    расчёт, остальные — обратным методом от цены каталога; цены «от» с Drom не пересчитываются. Электро — по юаням рынка
+    из EV и ev_total того же файла: б/у и новый («Авто» 15.10.2026). База — курсы, по которым посчитан cars_data.py (NEW
+    в том же файле). Возвращает f(имя, "from"|"to"|"bu_from", цена, электро) -> цена на сегодня."""
     import ast
     cat = AC / "catalog"
     src = (cat / "recalc_catalog.py").read_text()
@@ -334,24 +355,39 @@ def catalog_recalc(rates):
     exec(src[:src.index("# --- ТОЧНО ПО КП")], ns)   # noqa: S102 — R, total, reverse, floor10 без остального скрипта
     vol = next(ast.literal_eval(n.value) for n in ast.parse(src).body
                if isinstance(n, ast.Assign) and getattr(n.targets[0], "id", "") == "VOL")
-    up = ast.parse((cat / "update_2026_10_01_1275.py").read_text()).body
+    up = ast.parse((cat / "update_2026_10_15_bu.py").read_text()).body
     lit = {n.targets[0].id: n.value for n in up if isinstance(n, ast.Assign) and isinstance(n.targets[0], ast.Name)}
     vol.update(next(ast.literal_eval(n.value.args[0]) for n in up if isinstance(n, ast.Expr) and isinstance(n.value, ast.Call) and ast.unparse(n.value.func) == "VOL.update"))
     drom, yuan = ast.literal_eval(lit["DROM"]), ast.literal_eval(lit["YUAN"])
     R, total, reverse, floor10 = ns["R"], ns["total"], ns["reverse"], ns["floor10"]
     base = R(*[ast.literal_eval(a) for a in lit["NEW"].args])
     day = R(rates["vtb"], rates["cny"], rates["eur"])
+    evs = ast.literal_eval(lit["EV"])                   # имя -> (новый от, до, б/у, подпись б/у, б/у старше 3 лет)
+    ev_fn = next(n for n in up if isinstance(n, ast.FunctionDef) and n.name == "ev_total")
+
+    def ev_total(r):                                    # ev_total «Авто» (надбавка UP, утиль б/у старше 3 лет) на курсах r
+        ns = {"total": total, "UP": ast.literal_eval(lit["UP"]), "NEW": r}
+        exec(compile(ast.Module([ev_fn], []), "update_2026_10_15_bu.py", "exec"), ns)  # noqa: S102
+        return ns["ev_total"]
+    ev_base, ev_day = ev_total(base), ev_total(day)
 
     def f(name, k, v, ev):
         if v is None or (k == "from" and drom.get(name) == v):
             return v
+        if ev and name in evs:
+            nf, nt, bu, _, old3 = evs[name]
+            y = {"from": nf, "to": nt, "bu_from": bu}[k]
+            a = (y, old3) if k == "bu_from" else (y,)
+            if y and floor10(ev_base(*a)) == v:
+                return floor10(ev_day(*a))
         i = 0 if k == "from" else 1
         kind, vl = ("ev", 0) if ev else ("ice", vol[name][i])
         y = yuan.get(name, (None, None))[i]
-        if y and floor10(total(y, kind, vl, base)) == v:
+        if y and not ev and floor10(total(y, kind, vl, base)) == v:
             return floor10(total(y, kind, vl, day))
         y = reverse(v + 5_000, kind, vl, base)          # разница дня к цене каталога: на ступенях пошлины обратный метод
         return floor10(v + 5_000 + total(y, kind, vl, day) - total(y, kind, vl, base))   # иначе сдвигает цену и при тех же курсах
+    f.evs = evs
     return f
 
 
@@ -361,7 +397,8 @@ def load_models(rates=None):
     rc = catalog_recalc(rates) if rates else None
     for key, label, cat, _, fuel in DIRS:
         c = next(x for x in cars_data.CATEGORIES if x["cat"] == cat)
-        cond = "Новые" if "НОВ" in c.get("cond", "") else "С пробегом 3–5 лет"
+        cond = c.get("cond", "")
+        cond = "Б/у и новые" if "Б/У" in cond and "НОВ" in cond else "Новые" if "НОВ" in cond else "С пробегом 3–5 лет"
         for p in c["pages"]:
             for m in p["cars"]:
                 x = extra.get(m["name"], {})
@@ -376,9 +413,10 @@ def load_models(rates=None):
                 brand_ = x.get("brand") or m["name"].split()[0]
                 if rc:
                     try:
-                        m = dict(m, **{k: rc(m["name"], k, m[k], cat == "ЭЛЕКТРО") for k in ("from", "to")})
+                        m = dict(m, **{k: rc(m["name"], k, m[k], cat == "ЭЛЕКТРО") for k in ("from", "to", "bu_from") if k in m})
                     except Exception as e:  # noqa: BLE001
                         print("Каталог: цена не пересчитана, оставлена из каталога —", m["name"], e)
+                    m["bu_old"] = rc.evs.get(m["name"], (None,) * 5)[4]
                 out.append(dict(m, slug=slug, dir=key, dir_label=label, fuel=f, cond=cond, awd=key == "awd", brand=brand_,
                                 body=x.get("body"), size=x.get("size"), seats=x.get("seats"), china=x.get("china_name"),
                                 desc=x.get("desc"), points=x.get("points") or [], src=photo, stem=Path(m["photo"]).stem))
@@ -394,10 +432,10 @@ def model_card(m, vt=True):
     sp = " · ".join(x for x in (m["engine"], m["power"]) if x)
     tag = m["dir_label"] if m["dir"] != "fwd" else (m.get("body") or "Бензин").capitalize()
     return (f'<a class="card" href="{u("katalog/" + m["slug"] + "/")}"{" data-vt" if vt else ""} data-cat="{m["dir"]}" data-fuel="{m["fuel"]}" data-body="{E(m.get("body") or "")}"'
-            f' data-brand="{E(m["brand"])}" data-price="{m["from"]}" data-name="{E(m["name"])}" data-q="{E((m["name"] + " " + (m.get("china") or "") + " " + m["plant"]).lower())}">'
+            f' data-brand="{E(m["brand"])}" data-price="{lo_price(m)}" data-name="{E(m["name"])}" data-q="{E((m["name"] + " " + (m.get("china") or "") + " " + m["plant"]).lower())}">'
             f'<div class="im"><img src="{u("img/m/" + m["stem"] + "_c.webp")}" alt="{E(m["name"])}" loading="lazy" width="720" height="424"><span class="tag">{E(tag)}</span></div>'
             f'<div class="t"><h3>{E(m["name"])}</h3><div class="sp">{E(sp)}</div>'
-            f'<div class="pr">{price_range(m["from"], m["to"])}<small>ориентир под ключ</small></div></div></a>')
+            f'<div class="pr{" pr2" if "bu_label" in m else ""}">{price_html(m)}<small>ориентир под ключ</small></div></div></a>')
 
 
 # ---------- данные: машины из КП ----------
@@ -558,9 +596,9 @@ def home(models, kp, rates, faq):
         webp(CARS / f"hero_sec{sec}.jpg", IMG / f"sec{sec}.webp", 2200, 74)
         webp(CARS / f"hero_sec{sec}.jpg", IMG / f"sec{sec}_m.webp", 1100, 74)
         names = "".join(f"<span>{E(m['name'])}</span>" for m in ms[:6])
-        lo = min(m["from"] for m in ms)
+        lo = min(lo_price(m) for m in ms)
         decks.append(f'<section class="deck"><picture><source media="(max-width:760px)" srcset="{u(f"img/sec{sec}_m.webp")}"><img src="{u(f"img/sec{sec}.webp")}" alt="{label}" loading="lazy"></picture>'
-                     f'<div class="wrap"><div class="n">{i + 1:02d} / 04 · {len(ms)} {plural(len(ms), "модель", "модели", "моделей")}</div><h2>{label}</h2><p>{DIR_TEXT[key]}</p>'
+                     f'<div class="wrap"><div class="n">{i + 1:02d} / 04 · {len(ms)} {plural(len(ms), "модель", "модели", "моделей")}{" · б/у и новые" if any("bu_label" in m for m in ms) else ""}</div><h2>{label}</h2><p>{DIR_TEXT[key]}</p>'
                      f'<div class="ms">{names}</div><div class="row"><a class="btn w" href="{u("katalog/?cat=" + key)}">Смотреть {len(ms)} {plural(len(ms), "модель", "модели", "моделей")} <span class="ar">→</span></a>'
                      f'<div class="pr">от {mln(lo)} млн ₽<small>ориентир под ключ</small></div></div></div></section>')
     reel = ""
@@ -669,16 +707,18 @@ def catalog_page(models):
 def model_page(m, models, kp):
     found = [c for c in kp if c.get("catalog_name") == m["name"]]
     same = [x for x in models if x["dir"] == m["dir"] and x["slug"] != m["slug"]]
-    same.sort(key=lambda x: abs(x["from"] - m["from"]))
+    same.sort(key=lambda x: abs(lo_price(x) - lo_price(m)))
     tags = [m["dir_label"] if m["dir"] != "fwd" else "Бензин", (m.get("body") or "").capitalize(), m["cond"], "Полный привод" if m["awd"] else None]
     if "erev" in m["fuel"]:
         tags[0] = "Электро и EREV"
     util = ("3&nbsp;400&nbsp;₽ — льготный: 30-минутная мощность мотора до&nbsp;58,84&nbsp;кВт" if m["dir"] == "ev"
             else "5&nbsp;200&nbsp;₽ — льготный: возраст 3–5 лет, до&nbsp;160&nbsp;л.с.")
+    if m.get("bu_old"):
+        util += ", у&nbsp;б/у старше 3&nbsp;лет&nbsp;— 5&nbsp;200&nbsp;₽"
     rows = [("Двигатель", E(m["engine"])), ("Мощность" + (" и запас хода" if m["dir"] == "ev" else ""), E(m["power"])),
             ("Производитель", E(m["plant"])), ("Кузов", E((m.get("body") or "").capitalize()) or None),
             ("Мест", str(m["seats"]) if m.get("seats") else None), ("Состояние", m["cond"]), ("Утильсбор", util),
-            ("Срок", "50–65 дней от&nbsp;оплаты до&nbsp;выдачи"), ("Цена под ключ", price_range(m["from"], m["to"]))]
+            ("Срок", "50–65 дней от&nbsp;оплаты до&nbsp;выдачи"), ("Цена под ключ", "<br>".join(f"{t}: {v or 'по&nbsp;запросу'}" if t else v for t, v in price_lines(m)))]
     spec = "".join(f"<tr><th>{k}</th><td>{v}</td></tr>" for k, v in rows if v)
     desc = (f'<p class="desc">{E(m["desc"])}</p>' if m.get("desc") else
             f'<p class="desc">{E(m["name"])} — {m["dir_label"].lower()} из&nbsp;Китая под&nbsp;льготный утильсбор. Подберём конкретную машину, проверим и&nbsp;привезём под&nbsp;ключ.</p>')
@@ -694,7 +734,7 @@ def model_page(m, models, kp):
 <div class="mgrid"><div>
 <h1>{E(m["name"])}</h1>{f'<p class="cn">{E(m["china"])}</p>' if m.get("china") else f'<p class="cn">{E(m["plant"])}</p>'}
 <div class="tags">{"".join(f"<span>{E(t)}</span>" for t in tags if t)}</div>
-<div class="big">{price_range(m["from"], m["to"])}<small>ориентир под&nbsp;ключ в&nbsp;Санкт-Петербурге</small></div>
+<div class="big{" pr2" if "bu_label" in m else ""}">{price_html(m)}<small>ориентир под&nbsp;ключ в&nbsp;Санкт-Петербурге</small></div>
 <div class="btns"><a class="btn w" href="{u("kontakty/")}">Подобрать такую машину <span class="ar">→</span></a>{f'<a class="btn o" href="#found">Найденные машины · {len(found)}</a>' if found else ""}</div>
 </div><div class="mpic"><img src="{u("img/m/" + m["stem"] + ".webp")}" alt="{E(m["name"])}" width="1400" height="824"></div></div>
 </div></section>
@@ -712,10 +752,10 @@ def model_page(m, models, kp):
           {"@context": "https://schema.org", "@type": "Product", "name": m["name"] + " из Китая под ключ", "brand": {"@type": "Brand", "name": m["brand"]},
            "image": SITE + u("img/m/" + m["stem"] + ".webp"), "description": html.unescape(re.sub("<[^>]+>", "", m.get("desc") or DIR_TEXT[m["dir"]])),
            "category": m["dir_label"],
-           "offers": {"@type": "AggregateOffer", "priceCurrency": "RUB", "lowPrice": m["from"], "highPrice": m["to"] or m["from"],
+           "offers": {"@type": "AggregateOffer", "priceCurrency": "RUB", "lowPrice": lo_price(m), "highPrice": m["to"] or m["from"],
                       "offerCount": max(1, len(found)), "availability": "https://schema.org/PreOrder", "seller": {"@type": "Organization", "name": "МТК Восток-Авто"}}}]
-    page(f'katalog/{m["slug"]}/', f'{m["name"]} из Китая под ключ — {html.unescape(price_range(m["from"], m["to"]))} | МТК Восток-Авто',
-         f'{m["name"]} из Китая под льготный утильсбор: {m["engine"]}, {m["power"]}. Цена под ключ {html.unescape(price_range(m["from"], m["to"]))}, подбор, проверка, доставка и растаможка.',
+    page(f'katalog/{m["slug"]}/', f'{m["name"]} из Китая под ключ — {price_text(m)} | МТК Восток-Авто',
+         f'{m["name"]} из Китая под льготный утильсбор: {m["engine"]}, {m["power"]}. Цена под ключ {price_text(m)}, подбор, проверка, доставка и растаможка.',
          body, active="katalog/", jsonld=ld, og="img/m/" + m["stem"] + ".webp", prio="0.8")
 
 
@@ -961,7 +1001,7 @@ def extras(models, kp, rates):
              f"Курс юаня для расчёта на {ddmm(TODAY)}: {rates['vtb']:.2f} ₽.", "", "## Разделы", ""]
     lines += [f"- [{t}]({SITE}{u(p)})" for p, t in MENU]
     lines += ["", f"## Каталог ({len(models)} моделей, цена под ключ — ориентир)", ""]
-    lines += [f"- [{m['name']}]({SITE}{u('katalog/' + m['slug'] + '/')}): {m['engine']}, {m['power']}; {html.unescape(price_range(m['from'], m['to']))}" for m in models]
+    lines += [f"- [{m['name']}]({SITE}{u('katalog/' + m['slug'] + '/')}): {m['engine']}, {m['power']}; {price_text(m)}" for m in models]
     if kp:
         lines += ["", f"## Авто в Китае ({len(kp)} машин, цена под ключ на {ddmm(TODAY)})", ""]
         lines += [f"- [{c['title']} {c.get('year') or ''}]({SITE}{u('avto/' + c['slug'] + '/')}): {kp_line(c)}; {c['total']:,} ₽ под ключ, {c.get('city') or ''}".replace(",", " ") for c in kp]
