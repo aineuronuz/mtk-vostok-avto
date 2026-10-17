@@ -265,7 +265,7 @@ def page(path, title, desc, body, active=None, jsonld=None, og=None, prio="0.6")
     canon = SITE + u(path)
     menu = "".join(f'<a href="{u(p)}"{" class=\"on\"" if p == active else ""}>{t}</a>' for p, t in MENU)
     ld = "".join(f'<script type="application/ld+json">{json.dumps(j, ensure_ascii=False)}</script>' for j in (jsonld or []))
-    og_img = SITE + u(og or "img/og.jpg")
+    og_img = SITE + u(og or "img/og_yu7.jpg")
     cat_links = "".join(f'<a href="{u("katalog/?cat=" + k)}">{t}</a>' for k, t, *_ in DIRS)
     team_links = "".join(f'<a href="tel:+{re.sub(r"[^0-9]", "", p["tel"])}">{p["name"].split()[0]}: {nb(p["tel"])}</a>' for p in TEAM)
     s = f"""<!doctype html>
@@ -1022,7 +1022,7 @@ def main():
     road = MTK / "kp" / "fon_a4_polnyy.jpg"
     webp(road, IMG / "road.webp", 1600, 74, crop=(0, 700, 1400, 1700))
     webp(road, IMG / "road_m.webp", 900, 74)
-    Image.open(CARS / "hero_sec2.jpg").convert("RGB").resize((1200, 670), Image.LANCZOS).save(IMG / "og.jpg", quality=82)
+    shutil.copyfile(NEW / "src" / "og_yu7.jpg", IMG / "og_yu7.jpg")   # превью ссылки: кадр из видео первого экрана (Юрий 17.10)
     for n in ("d_xrv_1", "d_xrv_2", "d_q05_1", "d_q05_2", "d_yaris_1", "d_yaris_2", "d_coolray_1", "d_coolray_2", "yura", "gleb", "ivan"):
         shutil.copy2(MAIN_IMG / f"{n}.webp", IMG / f"{n}.webp")
     kicks = ROOT.parent / "foto-inbox-mtk" / "kicks-xv-2022"
