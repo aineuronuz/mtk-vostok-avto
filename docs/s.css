@@ -68,14 +68,9 @@ h1,h2,h3{font-family:var(--disp);font-weight:400;letter-spacing:-.03em;line-heig
 .open .hdr .logo .nm .b{opacity:0!important}.open .hdr .logo .nm .w{opacity:1!important}
 
 /* первый экран главной */
-.hero{position:relative;height:100vh;height:100svh;min-height:640px;background:radial-gradient(70% 90% at 68% 52%,#24509c,#0f2a63 55%,#0b1f45);color:#fff;overflow:hidden}
-.slides{position:absolute;right:-3vw;top:52%;width:min(70vw,176vh);aspect-ratio:2200/1228;transform:translateY(-47%);-webkit-mask-image:radial-gradient(closest-side,#000 64%,transparent);mask-image:radial-gradient(closest-side,#000 64%,transparent)}
-.slides picture{position:absolute;inset:0;opacity:0;transition:opacity 1.6s ease}
-.slides picture.on{opacity:1}
-.slides img{width:100%;height:100%;object-fit:cover;transform:scale(1.02)}
-.slides .on img{animation:kb 9s linear forwards}
-@keyframes kb{from{transform:scale(1.02)}to{transform:scale(1.1)}}
-.hero .shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(6,18,44,.4) 0,rgba(6,18,44,0) 24%,rgba(6,18,44,0) 70%,rgba(6,18,44,.45) 100%)}
+.hero{position:relative;height:100vh;height:100svh;min-height:640px;background:#0b1f45;color:#fff;overflow:hidden}
+.hv{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 60%;pointer-events:none}
+.hero .shade{position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(6,18,44,.6) 0,rgba(6,18,44,0) 26%,rgba(6,18,44,0) 62%,rgba(6,18,44,.75) 100%),linear-gradient(90deg,rgba(6,18,44,.78) 0,rgba(6,18,44,.45) 38%,rgba(6,18,44,0) 66%)}
 .hc{position:absolute;left:0;right:0;top:52%;transform:translateY(-42%);will-change:transform,opacity}
 .hc>*{max-width:min(46vw,660px)}
 .hero h1{font-size:clamp(44px,5.6vw,96px);margin-top:18px}
@@ -86,10 +81,6 @@ h1,h2,h3{font-family:var(--disp);font-weight:400;letter-spacing:-.03em;line-heig
 .rate i{width:8px;height:8px;border-radius:50%;background:#5ee39a;box-shadow:0 0 0 0 rgba(94,227,154,.6);animation:pulse 2s infinite}
 .rate b{color:#fff;font-weight:600}
 @keyframes pulse{70%{box-shadow:0 0 0 9px rgba(94,227,154,0)}100%{box-shadow:0 0 0 0 rgba(94,227,154,0)}}
-.dots{position:absolute;right:clamp(20px,4vw,56px);bottom:clamp(60px,11vh,124px);display:flex;gap:8px}
-.dots i{width:34px;height:2px;background:rgba(255,255,255,.3);overflow:hidden;position:relative}
-.dots i.on:after{content:"";position:absolute;inset:0;background:#fff;animation:bar 6s linear forwards;transform-origin:left}
-@keyframes bar{from{transform:scaleX(0)}to{transform:scaleX(1)}}
 .hint{position:absolute;left:50%;bottom:22px;transform:translateX(-50%);width:1px;height:46px;background:rgba(255,255,255,.25);overflow:hidden}
 .hint:after{content:"";position:absolute;left:0;top:-46px;width:1px;height:46px;background:#fff;animation:drop 2.2s ease-in-out infinite}
 @keyframes drop{to{top:46px}}
@@ -428,12 +419,12 @@ footer .fabout{margin-top:20px;max-width:340px;font-size:14.5px;line-height:1.6}
 body{font-size:16px}
 .logo{gap:10px}.logo .lg{width:44px;height:44px}.logo .nm{width:196px}
 .hero{height:auto;min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding:calc(var(--hh) + 4px) 0 56px;background:radial-gradient(120% 70% at 50% 30%,#1a4596,#0b1f45 70%)}
-.slides{position:relative;right:auto;left:50%;top:auto;width:150%;transform:translateX(-50%);margin:-2% 0 -9%;flex-shrink:0;-webkit-mask-image:radial-gradient(closest-side,#000 72%,transparent);mask-image:radial-gradient(closest-side,#000 72%,transparent)}
+.hv{position:relative;inset:auto;height:auto;aspect-ratio:16/10;flex-shrink:0;margin:0 0 -6%;-webkit-mask-image:linear-gradient(180deg,#000 72%,transparent);mask-image:linear-gradient(180deg,#000 72%,transparent)}
 .hc{position:relative;top:auto;transform:none}.hc>*{max-width:none}
 .hero h1{font-size:40px;margin-top:12px}.hero .sub{margin-top:16px;max-width:none}.hero .btns{margin-top:26px}
-.hero .shade{background:linear-gradient(180deg,rgba(6,18,44,0) 40%,rgba(6,18,44,.6))}
-.dots{display:none}
+.hero .shade{background:linear-gradient(180deg,rgba(6,18,44,.45) 0,rgba(6,18,44,0) 18%,rgba(6,18,44,0) 40%,rgba(6,18,44,.6))}
 .hero .btns .btn{flex:1 1 auto}
+.hero .hint{display:none}
 .deck{height:auto;position:relative;display:block}
 .deck>picture{position:relative;display:block;inset:auto;aspect-ratio:2200/1228;-webkit-mask-image:linear-gradient(0deg,transparent,#000 30%);mask-image:linear-gradient(0deg,transparent,#000 30%)}
 .deck:before{display:none}

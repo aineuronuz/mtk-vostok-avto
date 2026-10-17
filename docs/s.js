@@ -22,10 +22,14 @@ const co=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return
   const st=t=>{const p=clamp((t-t0)/1600),v=Math.round(f+(n-f)*(1-Math.pow(1-p,3)));b.textContent=v;if(p<1)requestAnimationFrame(st)};if(!RM)requestAnimationFrame(st)}),{threshold:.6});
 $$('[data-n]').forEach(e=>co.observe(e));
 
-// первый экран: смена фото
-const sl=$$('.slides picture'),dt=$$('.dots i');
-if(sl.length){let si=0;const show=i=>{sl.forEach((e,k)=>e.classList.toggle('on',k==i));dt.forEach((e,k)=>{e.classList.remove('on');if(k==i){void e.offsetWidth;e.classList.add('on')}})};
-  show(0);if(!RM)setInterval(()=>{si=(si+1)%sl.length;show(si)},6000)}
+// первый экран: видео идёт без остановки
+const hv=$('#hv');
+if(hv){hv.muted=true;
+  if(RM)hv.pause();
+  else{const go=()=>{const p=hv.play();if(p&&p.catch)p.catch(()=>{})};
+    ['pause','ended','loadedmetadata','canplay'].forEach(e=>hv.addEventListener(e,go));
+    document.addEventListener('visibilitychange',()=>{if(!document.hidden)go()});
+    setInterval(()=>{if(hv.paused)go()},1000);go()}}
 
 // слова подсвечиваются
 const W=$('#words');let ws=[];
