@@ -583,13 +583,6 @@ ORG = {"@context": "https://schema.org", "@type": "AutoDealer", "name": "МТК 
 
 # ---------- страницы ----------
 def home(models, kp, rates, faq):
-    slides, dots = [], []
-    for i, k in enumerate((2, 1, 3)):
-        webp(CARS / f"hero_sec{k}.jpg", IMG / f"hero{k}.webp", 2200, 74)
-        webp(CARS / f"hero_sec{k}.jpg", IMG / f"hero{k}_m.webp", 1400, 74)
-        slides.append(f'<picture><source media="(max-width:760px)" srcset="{u(f"img/hero{k}_m.webp")}"><img src="{u(f"img/hero{k}.webp")}" alt="" '
-                      f'{"fetchpriority=\"high\"" if i == 0 else "loading=\"lazy\""} width="2200" height="1228"></picture>')
-        dots.append("<i></i>")
     decks = []
     for i, (key, label, cat, sec, _) in enumerate(DIRS):
         ms = [m for m in models if m["dir"] == key]
@@ -612,7 +605,8 @@ def home(models, kp, rates, faq):
     faq5 = [q for q in faq if not q.get("confirm")][:6]
     body = f"""
 <section class="hero" id="top">
-  <div class="slides">{"".join(slides)}</div><div class="shade"></div>
+  <video class="hv" id="hv" autoplay muted loop playsinline preload="auto" poster="{u("assets/video/yu7_hero.webp")}" aria-hidden="true">
+    <source media="(max-width:760px)" src="{u("assets/video/yu7_hero_m.mp4")}" type="video/mp4"><source src="{u("assets/video/yu7_hero.mp4")}" type="video/mp4"></video><div class="shade"></div>
   <div class="wrap hc" id="hc">
     <p class="kick l">МТК Восток-Авто · с 2016 года</p>
     <h1>Автомобили из&nbsp;Китая.<br><span>Под ключ.</span></h1>
@@ -620,7 +614,7 @@ def home(models, kp, rates, faq):
     <div class="btns"><a class="btn w" href="{u("katalog/")}">Смотреть каталог <span class="ar">→</span></a><a class="btn o" href="{u("avto/")}">Авто в Китае</a></div>
     <a class="rate" href="{u("stoimost/")}"><i></i>Курс юаня для расчёта на&nbsp;{ddmm(TODAY)}: <b>{f"{rates['vtb']:.2f}".replace(".", ",")}&nbsp;₽</b></a>
   </div>
-  <div class="dots">{"".join(dots)}</div><div class="hint" aria-hidden="true"></div>
+  <div class="hint" aria-hidden="true"></div>
 </section>
 <section class="intro"><div class="wrap">
   <p class="words" id="words">Автомобиль из&nbsp;Китая&nbsp;— это не&nbsp;только цена в&nbsp;объявлении. Это *проверка,* *договор,* *доставка,* *таможня* и&nbsp;*документы.* Всё это&nbsp;— наша работа: от&nbsp;выбора модели до&nbsp;выдачи ключей.</p>
