@@ -24,12 +24,12 @@ $$('[data-n]').forEach(e=>co.observe(e));
 
 // первый экран: видео идёт без остановки
 const hv=$('#hv');
-if(hv){hv.muted=true;
-  if(RM)hv.pause();
-  else{const go=()=>{const p=hv.play();if(p&&p.catch)p.catch(()=>{})};
-    ['pause','ended','loadedmetadata','canplay'].forEach(e=>hv.addEventListener(e,go));
-    document.addEventListener('visibilitychange',()=>{if(!document.hidden)go()});
-    setInterval(()=>{if(hv.paused)go()},1000);go()}}
+if(hv){hv.muted=hv.defaultMuted=true;
+  const go=()=>{const p=hv.play();if(p&&p.catch)p.catch(()=>{})};
+  ['pause','ended','loadedmetadata','canplay'].forEach(e=>hv.addEventListener(e,go));
+  document.addEventListener('visibilitychange',()=>{if(!document.hidden)go()});
+  ['pointerdown','touchstart','keydown'].forEach(e=>addEventListener(e,go,{passive:true}));
+  setInterval(()=>{if(hv.paused)go()},1000);go()}
 
 // слова подсвечиваются
 const W=$('#words');let ws=[];
