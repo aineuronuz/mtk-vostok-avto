@@ -596,7 +596,8 @@ def home(models, kp, rates, faq):
         webp(deck_src(sec), IMG / f"sec{sec}_m.webp", 1100, 74)
         vid = ""
         if (OUT / "assets" / "video" / f"deck{sec}.mp4").exists():   # живой блок: ролик из syntx.ai поверх фото (Юрий 18.10)
-            vid = f'<video class="dv" muted loop playsinline preload="none" aria-hidden="true" data-src="{u(f"assets/video/deck{sec}.mp4")}" data-src-m="{u(f"assets/video/deck{sec}_m.mp4")}"></video>'
+            vv = lambda n: u(f"assets/video/{n}") + "?v=" + hashlib.md5((OUT / "assets" / "video" / n).read_bytes()).hexdigest()[:8]   # новый ролик — новый адрес, мимо кэша
+            vid = f'<video class="dv" muted loop playsinline preload="none" aria-hidden="true" data-src="{vv(f"deck{sec}.mp4")}" data-src-m="{vv(f"deck{sec}_m.mp4")}"></video>'
         names = "".join(f"<span>{E(m['name'])}</span>" for m in ms[:6])
         lo = min(lo_price(m) for m in ms)
         decks.append(f'<section class="deck"><picture><source media="(max-width:760px)" srcset="{u(f"img/sec{sec}_m.webp")}"><img src="{u(f"img/sec{sec}.webp")}" alt="{label}" loading="lazy"></picture>{vid}'
