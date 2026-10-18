@@ -31,6 +31,8 @@ IMG = OUT / "img"
 BASE = "/"
 SITE = "https://mtk-vostok-avto.ru"
 PREVIEW = False                                         # True — noindex, для пробной версии
+SEARCH = json.loads((DATA / "search.json").read_text()) if (DATA / "search.json").exists() else {}   # ключ IndexNow и коды подтверждения Яндекс Вебмастера, Google и Bing
+VERIFY = "".join(f'<meta name="{n}" content="{SEARCH[k]}">' for k, n in (("google", "google-site-verification"), ("yandex", "yandex-verification"), ("bing", "msvalidate.01")) if SEARCH.get(k))
 AC = Path.home() / "auto-china"
 CARS = AC / "catalog" / "cars"
 CARS_MTK = AC / "catalog" / "cars_plate_mtk"           # те же фото с номером «ВОСТОК-АВТО», как в каталоге МТК
@@ -281,7 +283,7 @@ def page(path, title, desc, body, active=None, jsonld=None, og=None, prio="0.6")
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>{E(title)}</title>
 <meta name="description" content="{E(desc)}">
-{'<meta name="robots" content="noindex,nofollow">' if PREVIEW else ''}
+{'<meta name="robots" content="noindex,nofollow">' if PREVIEW else ''}{VERIFY if path == "" else ''}
 <link rel="canonical" href="{canon}">
 <meta property="og:type" content="website"><meta property="og:locale" content="ru_RU"><meta property="og:site_name" content="МТК Восток-Авто">
 <meta property="og:title" content="{E(title)}"><meta property="og:description" content="{E(desc)}"><meta property="og:url" content="{canon}"><meta property="og:image" content="{og_img}">
@@ -1016,6 +1018,8 @@ def extras(models, kp, rates):
 <script>var p=location.pathname;if(p.indexOf("/new/")===0)location.replace(p.slice(4)+location.search+location.hash)</script></head>
 <body style="font-family:sans-serif;text-align:center;padding:80px 20px"><h1>Страница не найдена</h1><p><a href="{u()}">На главную МТК Восток-Авто</a></p></body></html>
 """)
+    if SEARCH.get("indexnow"):                           # ключ IndexNow: Яндекс и Bing узнают о новых и изменённых страницах сразу
+        (OUT / f"{SEARCH['indexnow']}.txt").write_text(SEARCH["indexnow"])
     (OUT / "robots.txt").write_text("User-agent: *\nDisallow: /\n" if PREVIEW else f"User-agent: *\nAllow: /\nSitemap: {SITE}{u('sitemap.xml')}\n")
 
 
