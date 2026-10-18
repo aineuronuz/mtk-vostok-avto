@@ -95,12 +95,10 @@ if(G){const ims=$$('img',G),th=$$('.gth img'),gn=$('.gn',G),lb=$('.lbox'),li=lb&
 
 // прокрутка
 const hdr=$('#hdr'),top0=$('.hero,.phead,.mhero'),hc=$('#hc'),fr=$('#fr'),grow=$('#grow'),how=$('#how'),track=$('#track'),prog=$('#prog'),pays=$('#pays'),fin=$('#finbg'),tl=$('.tl');
-let lastY=scrollY,ticking=false;
+let ticking=false;
 function frame(){
   ticking=false;const y=scrollY,vh=innerHeight,vw=innerWidth;
   const past=y>(top0?top0.offsetHeight-90:0);hdr.classList.toggle('solid',past);
-  hdr.classList.toggle('hide',past&&y>lastY+4&&y>vh*1.5&&!document.body.classList.contains('open'));
-  if(y<lastY-4)hdr.classList.remove('hide');lastY=y;
   if(RM)return;
   if(hc&&y<vh*1.2){const p=clamp(y/vh);hc.style.transform=mob()?`translateY(${p*-50}px)`:`translateY(calc(-42% - ${p*80}px))`;hc.style.opacity=mob()?1-p*.9:1-p*1.3}
   if(ws.length){const r=W.getBoundingClientRect(),wp=clamp((vh*.86-r.top)/(r.height+vh*.36)),nOn=Math.round(wp*ws.length*1.08);ws.forEach((w,i)=>w.classList.toggle('on',i<nOn))}

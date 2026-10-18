@@ -39,7 +39,6 @@ h1,h2,h3{font-family:var(--disp);font-weight:400;letter-spacing:-.03em;line-heig
 /* шапка */
 .hdr{position:fixed;inset:0 0 auto 0;z-index:60;height:var(--hh);transition:background .4s,box-shadow .4s,transform .4s,height .4s;color:#fff}
 .hdr.solid,.light .hdr{background:rgba(255,255,255,.9);-webkit-backdrop-filter:saturate(1.6) blur(18px);backdrop-filter:saturate(1.6) blur(18px);box-shadow:0 1px 0 var(--line);color:var(--ink)}
-.hdr.hide{transform:translateY(-100%)}
 .hrow{display:flex;align-items:center;gap:30px;height:100%;max-width:1480px;margin:0 auto;padding:0 clamp(20px,3vw,44px)}
 .logo{display:flex;align-items:center;gap:14px;flex-shrink:0}
 .logo .lg{width:64px;height:64px;flex-shrink:0}
