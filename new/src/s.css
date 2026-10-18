@@ -107,6 +107,9 @@ h1,h2,h3{font-family:var(--disp);font-weight:400;letter-spacing:-.03em;line-heig
 .deck>picture img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .deck>picture img{transform:scale(1.12);transition:transform 1.6s cubic-bezier(.2,.7,.2,1)}
 .deck.in>picture img{transform:scale(1)}
+/* живой блок: ролик поверх фото, проявляется, когда пошёл (Юрий 18.10) */
+.deck>.dv{position:absolute;top:0;left:28%;width:72%;height:100%;object-fit:cover;-webkit-mask-image:linear-gradient(90deg,transparent,#000 20%);mask-image:linear-gradient(90deg,transparent,#000 20%);opacity:0;transform:scale(1.12);transition:transform 1.6s cubic-bezier(.2,.7,.2,1),opacity .5s}
+.deck.in>.dv{transform:scale(1)}.deck>.dv.on{opacity:1}
 .deck:before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,rgba(6,18,44,.7) 0,rgba(6,18,44,.25) 40%,rgba(6,18,44,0) 60%),linear-gradient(0deg,rgba(6,18,44,.55),rgba(6,18,44,0) 45%)}
 .deck .wrap{position:relative;z-index:2;width:100%;padding-bottom:clamp(60px,11vh,120px)}
 .deck .n{font-family:var(--disp);font-size:clamp(15px,1.1vw,17px);color:rgba(255,255,255,.7);letter-spacing:.12em;text-transform:uppercase}
@@ -432,6 +435,7 @@ body{font-size:16px}
 .hero .hint{display:none}
 .deck{height:auto;position:relative;display:block}
 .deck>picture{position:relative;display:block;inset:auto;aspect-ratio:2200/1228;-webkit-mask-image:linear-gradient(0deg,transparent,#000 30%);mask-image:linear-gradient(0deg,transparent,#000 30%)}
+.deck>.dv{left:0;width:100%;height:auto;aspect-ratio:2200/1228;-webkit-mask-image:linear-gradient(0deg,transparent,#000 30%);mask-image:linear-gradient(0deg,transparent,#000 30%)}
 .deck:before{display:none}
 .deck .wrap{padding:0 20px 64px;margin-top:-16px}
 .deck h2{font-size:52px}

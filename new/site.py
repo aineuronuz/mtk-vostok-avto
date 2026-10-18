@@ -111,6 +111,12 @@ def slugify(s):
     return re.sub(r"[^a-z0-9]+", "-", s).strip("-")
 
 
+def deck_src(k):
+    """Фото блока на главной: первый кадр его ролика (new/src/deck<k>.jpg), если ролик есть, иначе фото из каталога."""
+    p = NEW / "src" / f"deck{k}.jpg"
+    return p if p.exists() else CARS / f"hero_sec{k}.jpg"
+
+
 def webp(src, dst, w, q=74, crop=None):
     """Картинка в webp не шире w; пересобирается, только если исходник новее."""
     dst = Path(dst)
@@ -586,11 +592,14 @@ def home(models, kp, rates, faq):
     decks = []
     for i, (key, label, cat, sec, _) in enumerate(DIRS):
         ms = [m for m in models if m["dir"] == key]
-        webp(CARS / f"hero_sec{sec}.jpg", IMG / f"sec{sec}.webp", 2200, 74)
-        webp(CARS / f"hero_sec{sec}.jpg", IMG / f"sec{sec}_m.webp", 1100, 74)
+        webp(deck_src(sec), IMG / f"sec{sec}.webp", 2200, 74)
+        webp(deck_src(sec), IMG / f"sec{sec}_m.webp", 1100, 74)
+        vid = ""
+        if (OUT / "assets" / "video" / f"deck{sec}.mp4").exists():   # живой блок: ролик из syntx.ai поверх фото (Юрий 18.10)
+            vid = f'<video class="dv" muted loop playsinline preload="none" aria-hidden="true" data-src="{u(f"assets/video/deck{sec}.mp4")}" data-src-m="{u(f"assets/video/deck{sec}_m.mp4")}"></video>'
         names = "".join(f"<span>{E(m['name'])}</span>" for m in ms[:6])
         lo = min(lo_price(m) for m in ms)
-        decks.append(f'<section class="deck"><picture><source media="(max-width:760px)" srcset="{u(f"img/sec{sec}_m.webp")}"><img src="{u(f"img/sec{sec}.webp")}" alt="{label}" loading="lazy"></picture>'
+        decks.append(f'<section class="deck"><picture><source media="(max-width:760px)" srcset="{u(f"img/sec{sec}_m.webp")}"><img src="{u(f"img/sec{sec}.webp")}" alt="{label}" loading="lazy"></picture>{vid}'
                      f'<div class="wrap"><div class="n">{i + 1:02d} / 04 · {len(ms)} {plural(len(ms), "модель", "модели", "моделей")}{" · б/у и новые" if any("bu_label" in m for m in ms) else ""}</div><h2>{label}</h2><p>{DIR_TEXT[key]}</p>'
                      f'<div class="ms">{names}</div><div class="row"><a class="btn w" href="{u("katalog/?cat=" + key)}">Смотреть {len(ms)} {plural(len(ms), "модель", "модели", "моделей")} <span class="ar">→</span></a>'
                      f'<div class="pr">от {mln(lo)} млн ₽<small>ориентир под ключ</small></div></div></div></section>')
@@ -1028,8 +1037,8 @@ def main():
     kicks = ROOT.parent / "foto-inbox-mtk" / "kicks-xv-2022"
     webp(kicks / "1.jpg", IMG / "k_1.webp", 1280, 74)
     for k in range(4):
-        webp(CARS / f"hero_sec{k}.jpg", IMG / f"sec{k}.webp", 2200, 74)
-        webp(CARS / f"hero_sec{k}.jpg", IMG / f"sec{k}_m.webp", 1100, 74)
+        webp(deck_src(k), IMG / f"sec{k}.webp", 2200, 74)
+        webp(deck_src(k), IMG / f"sec{k}_m.webp", 1100, 74)
 
     cbr = cbr_rates(offline)
     vtb, src = day_rate(cbr, offline)

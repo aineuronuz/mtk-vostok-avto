@@ -31,6 +31,14 @@ if(hv){hv.muted=hv.defaultMuted=true;
   ['pointerdown','touchstart','keydown'].forEach(e=>addEventListener(e,go,{passive:true}));
   setInterval(()=>{if(hv.paused)go()},1000);go()}
 
+// блоки на главной: ролик грузится, когда блок близко, и играет, пока его видно
+const dvs=$$('.dv');
+if(dvs.length){const run=v=>{const p=v.play();if(p&&p.catch)p.catch(()=>{})};
+  const dvo=new IntersectionObserver(es=>es.forEach(e=>{const v=e.target;v._in=e.isIntersecting;
+    if(v._in){if(!v.src){v.src=mob()?v.dataset.srcM:v.dataset.src;v.addEventListener('playing',()=>v.classList.add('on'),{once:true})}run(v)}else if(v.src)v.pause()}),{rootMargin:'300px 0px'});
+  dvs.forEach(v=>{v.muted=v.defaultMuted=true;dvo.observe(v)});
+  ['pointerdown','touchstart','keydown'].forEach(e=>addEventListener(e,()=>dvs.forEach(v=>{if(v._in&&v.src&&v.paused)run(v)}),{passive:true}))}
+
 // слова подсвечиваются
 const W=$('#words');let ws=[];
 if(W){W.innerHTML=W.innerHTML.split(/(\s+)/).map(t=>{if(/^\s+$/.test(t)||!t)return t;const k=t.includes('*');return `<span class="w${k?' k':''}">${t.replace(/\*/g,'')}</span>`}).join('');ws=$$('#words .w')}
