@@ -47,6 +47,12 @@ h1,h2,h3{font-family:var(--disp);font-weight:400;letter-spacing:-.03em;line-heig
 .logo .nm img{width:100%;height:auto;transition:opacity .4s}
 .logo .nm .b{position:absolute;inset:0;opacity:0}
 .hdr.solid .logo .nm .b,.light .hdr .logo .nm .b{opacity:1}.hdr.solid .logo .nm .w,.light .hdr .logo .nm .w{opacity:0}
+/* логотип в шапке: каждые 15 с эмблема делает оборот и втягивает надпись в себя, потом выпускает (Юрий 18.10); --k — от края надписи до 7/8 эмблемы */
+.hdr .logo{--k:22px}
+.hdr .logo .lg{position:relative;z-index:2;animation:lgreel 15s 2s infinite!important}
+.hdr .logo .nm{z-index:1;animation:nmreel 15s 2s infinite!important}
+@keyframes lgreel{0%{transform:none;animation-timing-function:cubic-bezier(.65,0,.35,1)}9.33%,14.67%{transform:rotate(-360deg);animation-timing-function:cubic-bezier(.65,0,.35,1)}24%,100%{transform:none}}
+@keyframes nmreel{0%{transform:none;clip-path:inset(-10px -10px -10px calc(-1*var(--k)));animation-timing-function:cubic-bezier(.65,0,.35,1)}9.33%,14.67%{transform:translateX(calc(-100% - var(--k)));clip-path:inset(-10px -10px -10px 100%);animation-timing-function:cubic-bezier(.65,0,.35,1)}24%,100%{transform:none;clip-path:inset(-10px -10px -10px calc(-1*var(--k)))}}
 .menu{display:flex;gap:26px;margin-left:auto;font-size:16.5px;font-weight:500}
 .menu a{position:relative;opacity:.9;transition:opacity .3s,color .3s;white-space:nowrap}
 .menu a:after{content:"";position:absolute;left:0;right:0;bottom:-7px;height:2px;border-radius:2px;background:currentColor;transform:scaleX(0);transform-origin:left;transition:transform .35s}
@@ -393,7 +399,7 @@ footer .fabout{margin-top:20px;max-width:340px;font-size:14.5px;line-height:1.6}
 .rv.in{opacity:1;transform:none}
 .rv.d1{transition-delay:.1s}.rv.d2{transition-delay:.2s}.rv.d3{transition-delay:.3s}
 
-@media (max-width:1400px){.menu{gap:20px;font-size:16px}.logo .nm{width:240px}.logo .lg{width:58px;height:58px}}
+@media (max-width:1400px){.menu{gap:20px;font-size:16px}.logo .nm{width:240px}.logo .lg{width:58px;height:58px}.hdr .logo{--k:21px}}
 @media (max-width:1279px){
 .menu,.hdr .cta{display:none}.burger{display:block}
 .list{grid-template-columns:repeat(2,1fr)}
@@ -417,7 +423,7 @@ footer .fabout{margin-top:20px;max-width:340px;font-size:14.5px;line-height:1.6}
 @media (max-width:760px){
 :root{--hh:68px}
 body{font-size:16px}
-.logo{gap:10px}.logo .lg{width:44px;height:44px}.logo .nm{width:196px}
+.logo{gap:10px}.logo .lg{width:44px;height:44px}.logo .nm{width:196px}.hdr .logo{--k:16px}
 .hero{height:auto;min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding:calc(var(--hh) + 4px) 0 56px;background:radial-gradient(120% 70% at 50% 30%,#1a4596,#0b1f45 70%)}
 .hv{position:relative;inset:auto;height:auto;aspect-ratio:16/10;flex-shrink:0;margin:0 0 -6%;-webkit-mask-image:linear-gradient(180deg,#000 72%,transparent);mask-image:linear-gradient(180deg,#000 72%,transparent)}
 .hc{position:relative;top:auto;transform:none}.hc>*{max-width:none}
