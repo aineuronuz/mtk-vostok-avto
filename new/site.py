@@ -655,7 +655,7 @@ def home(models, kp, rates, faq):
   <p class="note rv"><a class="more" href="{u("stoimost/")}">Из&nbsp;чего складывается цена и&nbsp;курс на&nbsp;сегодня <span class="ar">→</span></a></p>
 </div></section>
 <section class="sec bg" id="delivered"><div class="wrap">
-  <div class="shead"><div><p class="kick rv">Наша работа</p><h2 class="h2 rv d1">Выданные <em>автомобили</em></h2></div><a class="more rv" href="{u("vydannye/")}">Все выданные <span class="ar">→</span></a></div>
+  <div class="shead"><div><p class="kick rv">Наша работа</p><h2 class="h2 rv d1">Примеры выданных <em>автомобилей</em></h2></div><a class="more rv" href="{u("vydannye/")}">Больше выдач <span class="ar">→</span></a></div>
   <div class="dgrid">{deliv_cards()}</div>
 </div></section>
 <section class="sec"><div class="wrap">
@@ -958,13 +958,13 @@ def price_page(kp, rates):
 def deliv_page():
     body = f"""
 <section class="phead"><div class="wrap">{crumbs((None, "Выданные"))}
-<h1 class="rv in">Выданные <em>автомобили</em></h1>
-<p class="lead">Машины, которые мы привезли и&nbsp;передали владельцам. Цены&nbsp;— итог под&nbsp;ключ по&nbsp;договору.</p></div></section>
+<h1 class="rv in">Примеры выданных <em>автомобилей</em></h1>
+<p class="lead">Несколько машин из&nbsp;тех, что мы привезли и&nbsp;передали владельцам. Цены&nbsp;— итог под&nbsp;ключ по&nbsp;договору.</p></div></section>
 <section class="sec tight"><div class="wrap"><div class="dgrid" style="margin-top:0">{deliv_cards()}</div>
 <p class="note">Новые выдачи&nbsp;— в&nbsp;нашем <a class="more" href="{CHANNEL}">Telegram-канале <span class="ar">→</span></a></p></div></section>
 {fin_block()}"""
-    page("vydannye/", "Выданные автомобили из Китая — наши клиенты | МТК Восток-Авто",
-         "Автомобили из Китая, которые мы привезли и передали владельцам: модель, год, пробег, город выдачи и итог под ключ по договору.",
+    page("vydannye/", "Примеры выданных автомобилей из Китая — наши клиенты | МТК Восток-Авто",
+         "Примеры автомобилей из Китая, которые мы привезли и передали владельцам: модель, год, пробег, город выдачи и итог под ключ по договору.",
          body, active="vydannye/", jsonld=[bc_ld(("vydannye/", "Выданные"))], prio="0.6")
 
 
