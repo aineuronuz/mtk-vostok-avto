@@ -2,7 +2,7 @@
 каталог с фильтрами, машины из КП с ценой на сегодня, частые вопросы).
 
 Собирает docs/ — основной адрес mtk-vostok-avto.ru (Юрий одобрил 06.10.2026; до того был /new/, закрыт от поиска) из:
-  ~/auto-china/catalog/cars_data.py — модели каталога (цены «Авто», 108 на 20.10.2026);
+  ~/auto-china/catalog/cars_data.py — модели каталога (цены «Авто», 109 на 20.10.2026);
   new/data/models.json — описания моделей; new/data/kp_cars.json + new/price.py — машины из КП и расчёт под ключ;
   new/data/faq.json — частые вопросы; new/src/s.css, s.js — оформление.
 Курс: ЦБ — cbr-xml-daily.ru; курс юаня для расчёта — ВТБ на сегодня (day_rate(), «Авто» 11.10.2026), записывается
@@ -351,6 +351,10 @@ FUEL_RU = {"ev": "Электро", "erev": "Гибрид EREV", "hybrid": "Ги�
 
 
 UPDATE = "update_2026_10_20_160.py"                   # файл «Авто», от курсов которого посчитан cars_data.py (задача «Авто» 20.10.2026)
+# модели моложе 3 лет (в cars_data "cond": "НОВЫЙ"): юани «от» и «до», объём, утильсбор. Расчёт как в КП 18.10 — один инвойс
+# «машина + доставка 20 000 ¥», пошлина 48% от него по ЦБ, не меньше 3,5 €/см³; формула и проверка — docstring
+# ~/auto-china/catalog/update_2026_10_20_pravki.py («Авто» 20.10.2026)
+NEW3 = {"Volkswagen Tharu XR": ((90_000, 97_000), 1498, 3_400)}
 
 
 def catalog_recalc(rates):
@@ -382,9 +386,19 @@ def catalog_recalc(rates):
         return ns["ev_total"]
     ev_base, ev_day = ev_total(base), ev_total(day)
 
+    def new3_total(y, vl, rec, r):                      # под ключ в СПб для машины моложе 3 лет, как в КП (kp_v3/gen_kp_v3.py)
+        car, dl, load = round(y * r.vtb), round(20_000 * r.vtb), round(1_300 * r.vtb)
+        cv = round((y + 20_000) * r.cny)
+        duty = max(round(cv * 0.48), round(vl * 3.5 * r.eur))
+        return car + dl + load + round((car + dl) * 0.02) + duty + ns["C"].custom_fee(cv) + rec + 80_000 + 90_000 + 20_500
+
     def f(name, k, v, ev):
         if v is None or (k == "from" and drom.get(name) == v):
             return v
+        if name in NEW3:                                # моложе 3 лет — своя формула; цена не из неё — оставляем каталожную
+            ys, vl, rec = NEW3[name]
+            y = ys[0 if k == "from" else 1]
+            return floor10(new3_total(y, vl, rec, day)) if floor10(new3_total(y, vl, rec, base)) == v else v
         if ev and name in evs:
             nf, nt, bu, _, old3 = evs[name]
             y = {"from": nf, "to": nt, "bu_from": bu}[k]
@@ -420,6 +434,7 @@ def load_models(rates=None):
                 f = fuel
                 if "EREV" in m["engine"]:
                     f = "ev erev"
+                cond_m = "Новый" if "НОВ" in m.get("cond", "") else cond   # плашка модели в cars_data: Tharu XR — «НОВЫЙ» («Авто» 20.10.2026)
                 photo = CARS_MTK / m["photo"] if (CARS_MTK / m["photo"]).exists() else CARS / m["photo"]
                 brand_ = x.get("brand") or m["name"].split()[0]
                 if rc:
@@ -428,7 +443,7 @@ def load_models(rates=None):
                     except Exception as e:  # noqa: BLE001
                         print("Каталог: цена не пересчитана, оставлена из каталога —", m["name"], e)
                     m["bu_old"] = rc.evs.get(m["name"], (None,) * 5)[4]
-                out.append(dict(m, slug=slug, dir=key, dir_label=label, fuel=f, cond=cond, awd=key == "awd", brand=brand_,
+                out.append(dict(m, slug=slug, dir=key, dir_label=label, fuel=f, cond=cond_m, awd=key == "awd", brand=brand_,
                                 body=x.get("body"), size=x.get("size"), seats=x.get("seats"), china=x.get("china_name"),
                                 desc=x.get("desc"), points=x.get("points") or [], src=photo, stem=Path(m["photo"]).stem))
     return out
@@ -722,6 +737,8 @@ def model_page(m, models, kp):
         tags[0] = "Электро и EREV"
     util = ("3&nbsp;400&nbsp;₽ — льготный: 30-минутная мощность мотора до&nbsp;58,84&nbsp;кВт" if m["dir"] == "ev"
             else "5&nbsp;200&nbsp;₽ — льготный: возраст 3–5 лет, до&nbsp;160&nbsp;л.с.")
+    if m["dir"] != "ev" and m["cond"] == "Новый":
+        util = "3&nbsp;400&nbsp;₽ — льготный: моложе 3&nbsp;лет, до&nbsp;160&nbsp;л.с."
     if m.get("bu_old"):
         util += ", у&nbsp;б/у старше 3&nbsp;лет&nbsp;— 5&nbsp;200&nbsp;₽"
     rows = [("Двигатель", E(m["engine"])), ("Мощность" + (" и запас хода" if m["dir"] == "ev" else ""), E(m["power"])),
