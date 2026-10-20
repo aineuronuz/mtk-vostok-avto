@@ -2,7 +2,7 @@
 каталог с фильтрами, машины из КП с ценой на сегодня, частые вопросы).
 
 Собирает docs/ — основной адрес mtk-vostok-avto.ru (Юрий одобрил 06.10.2026; до того был /new/, закрыт от поиска) из:
-  ~/auto-china/catalog/cars_data.py — 92 модели каталога (цены «Авто»);
+  ~/auto-china/catalog/cars_data.py — модели каталога (цены «Авто», 107 на 20.10.2026);
   new/data/models.json — описания моделей; new/data/kp_cars.json + new/price.py — машины из КП и расчёт под ключ;
   new/data/faq.json — частые вопросы; new/src/s.css, s.js — оформление.
 Курс: ЦБ — cbr-xml-daily.ru; курс юаня для расчёта — ВТБ на сегодня (day_rate(), «Авто» 11.10.2026), записывается
@@ -344,15 +344,18 @@ SVG_R = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width
 DIRS = [("ev", "Электро", "ЭЛЕКТРО", 0, "ev"), ("hyb", "Гибриды", "ГИБРИДЫ", 1, "hybrid"),
         ("fwd", "Бензин", "МОНОПРИВОД", 2, "petrol"), ("awd", "Полный привод", "ПОЛНЫЙ ПРИВОД", 3, "petrol")]
 DIR_TEXT = {"ev": "У&nbsp;каждой модели две цены: б/у и&nbsp;новый. Все проходят по&nbsp;льготному утильсбору: 30-минутная мощность мотора до&nbsp;58,84&nbsp;кВт.",
-            "hyb": "Гибриды Toyota с&nbsp;пробегом 3–5 лет: мощность системы до&nbsp;160&nbsp;л.с., утильсбор льготный.",
-            "fwd": "Бензиновые машины 3–5 лет до&nbsp;160&nbsp;л.с.: Volkswagen, Toyota, Honda, Mazda, BMW, Audi и&nbsp;другие.",
+            "hyb": "Toyota Corolla / Levin Hybrid с&nbsp;пробегом 3–5 лет: мощность системы до&nbsp;160&nbsp;л.с., утильсбор льготный.",
+            "fwd": "Бензиновые машины 3–5 лет до&nbsp;160&nbsp;л.с.: Volkswagen, Toyota, Honda, Mazda, BMW, Audi, китайские Chery, Geely, Haval, Jetour и&nbsp;другие.",
             "awd": "Полный привод до&nbsp;160&nbsp;л.с. с&nbsp;пробегом 3–5 лет: Subaru и&nbsp;Mitsubishi под&nbsp;льготный утильсбор."}
 FUEL_RU = {"ev": "Электро", "erev": "Гибрид EREV", "hybrid": "Гибрид", "petrol": "Бензин", "ice": "Бензин"}
 
 
+UPDATE = "update_2026_10_20_160.py"                   # файл «Авто», от курсов которого посчитан cars_data.py (задача «Авто» 20.10.2026)
+
+
 def catalog_recalc(rates):
     """Пересчёт цен «Каталога» на курсы дня (задача «Авто» 11.10.2026) тем же методом, каким «Авто» пересчитывает каталог
-    (~/auto-china/catalog/update_2026_10_15_bu.py, функции total и reverse из recalc_catalog.py): известные юани — прямой
+    (~/auto-china/catalog/update_2026_10_20_160.py — с 20.10.2026, до того update_2026_10_15_bu.py; функции total и reverse из recalc_catalog.py): известные юани — прямой
     расчёт, остальные — обратным методом от цены каталога; цены «от» с Drom не пересчитываются. Электро — по юаням рынка
     из EV и ev_total того же файла: б/у и новый («Авто» 15.10.2026). База — курсы, по которым посчитан cars_data.py (NEW
     в том же файле). Возвращает f(имя, "from"|"to"|"bu_from", цена, электро) -> цена на сегодня."""
@@ -363,7 +366,7 @@ def catalog_recalc(rates):
     exec(src[:src.index("# --- ТОЧНО ПО КП")], ns)   # noqa: S102 — R, total, reverse, floor10 без остального скрипта
     vol = next(ast.literal_eval(n.value) for n in ast.parse(src).body
                if isinstance(n, ast.Assign) and getattr(n.targets[0], "id", "") == "VOL")
-    up = ast.parse((cat / "update_2026_10_15_bu.py").read_text()).body
+    up = ast.parse((cat / UPDATE).read_text()).body
     lit = {n.targets[0].id: n.value for n in up if isinstance(n, ast.Assign) and isinstance(n.targets[0], ast.Name)}
     vol.update(next(ast.literal_eval(n.value.args[0]) for n in up if isinstance(n, ast.Expr) and isinstance(n.value, ast.Call) and ast.unparse(n.value.func) == "VOL.update"))
     drom, yuan = ast.literal_eval(lit["DROM"]), ast.literal_eval(lit["YUAN"])
@@ -375,7 +378,7 @@ def catalog_recalc(rates):
 
     def ev_total(r):                                    # ev_total «Авто» (надбавка UP, утиль б/у старше 3 лет) на курсах r
         ns = {"total": total, "UP": ast.literal_eval(lit["UP"]), "NEW": r}
-        exec(compile(ast.Module([ev_fn], []), "update_2026_10_15_bu.py", "exec"), ns)  # noqa: S102
+        exec(compile(ast.Module([ev_fn], []), UPDATE, "exec"), ns)  # noqa: S102
         return ns["ev_total"]
     ev_base, ev_day = ev_total(base), ev_total(day)
 
@@ -1052,6 +1055,15 @@ def main():
     models = load_models(rates)
     for m in models:
         model_imgs(m)
+    live_m = {m["slug"] for m in models}                 # страницы и фото моделей, убранных из каталога («Авто» 20.10.2026);
+    for x in (OUT / "katalog").glob("*/index.html"):     # их старые адреса nginx сервера сайта отправляет на каталог (301)
+        if x.parent.name not in live_m:
+            x.unlink()
+            x.parent.rmdir()
+    live_i = {f'{m["stem"]}{t}.webp' for m in models for t in ("", "_c")}
+    for x in (IMG / "m").glob("*.webp"):
+        if x.name not in live_i:
+            x.unlink()
     kp = load_kp(rates)
     for c in kp:
         kp_imgs(c)
