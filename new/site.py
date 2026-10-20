@@ -2,7 +2,7 @@
 каталог с фильтрами, машины из КП с ценой на сегодня, частые вопросы).
 
 Собирает docs/ — основной адрес mtk-vostok-avto.ru (Юрий одобрил 06.10.2026; до того был /new/, закрыт от поиска) из:
-  ~/auto-china/catalog/cars_data.py — модели каталога (цены «Авто», 107 на 20.10.2026);
+  ~/auto-china/catalog/cars_data.py — модели каталога (цены «Авто», 108 на 20.10.2026);
   new/data/models.json — описания моделей; new/data/kp_cars.json + new/price.py — машины из КП и расчёт под ключ;
   new/data/faq.json — частые вопросы; new/src/s.css, s.js — оформление.
 Курс: ЦБ — cbr-xml-daily.ru; курс юаня для расчёта — ВТБ на сегодня (day_rate(), «Авто» 11.10.2026), записывается
@@ -344,7 +344,7 @@ SVG_R = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width
 DIRS = [("ev", "Электро", "ЭЛЕКТРО", 0, "ev"), ("hyb", "Гибриды", "ГИБРИДЫ", 1, "hybrid"),
         ("fwd", "Бензин", "МОНОПРИВОД", 2, "petrol"), ("awd", "Полный привод", "ПОЛНЫЙ ПРИВОД", 3, "petrol")]
 DIR_TEXT = {"ev": "У&nbsp;каждой модели две цены: б/у и&nbsp;новый. Все проходят по&nbsp;льготному утильсбору: 30-минутная мощность мотора до&nbsp;58,84&nbsp;кВт.",
-            "hyb": "Toyota Corolla / Levin Hybrid с&nbsp;пробегом 3–5 лет: мощность системы до&nbsp;160&nbsp;л.с., утильсбор льготный.",
+            "hyb": "Toyota Corolla / Levin Hybrid и&nbsp;Honda Envix e:HEV с&nbsp;пробегом 3–5 лет: мощность системы до&nbsp;160&nbsp;л.с., утильсбор льготный.",
             "fwd": "Бензиновые машины 3–5 лет до&nbsp;160&nbsp;л.с.: Volkswagen, Toyota, Honda, Mazda, BMW, Audi, китайские Chery, Geely, Haval, Jetour и&nbsp;другие.",
             "awd": "Полный привод до&nbsp;160&nbsp;л.с. с&nbsp;пробегом 3–5 лет: Subaru и&nbsp;Mitsubishi под&nbsp;льготный утильсбор."}
 FUEL_RU = {"ev": "Электро", "erev": "Гибрид EREV", "hybrid": "Гибрид", "petrol": "Бензин", "ice": "Бензин"}
