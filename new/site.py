@@ -764,7 +764,7 @@ def model_page(m, models, kp):
            "offers": {"@type": "AggregateOffer", "priceCurrency": "RUB", "lowPrice": lo_price(m), "highPrice": m["to"] or m["from"],
                       "offerCount": max(1, len(found)), "availability": "https://schema.org/PreOrder", "seller": {"@type": "Organization", "name": "МТК Восток-Авто"}}}]
     page(f'katalog/{m["slug"]}/', f'{m["name"]} из Китая под ключ — {price_text(m)} | МТК Восток-Авто',
-         f'{m["name"]} из Китая под льготный утильсбор: {m["engine"]}, {m["power"]}. Цена под ключ {price_text(m)}, подбор, проверка, доставка и растаможка.',
+         f'{m["name"]} из Китая под льготный утильсбор: {m["engine"]}, {m["power"].rstrip(".")}. Цена под ключ {price_text(m)}, подбор, проверка, доставка и растаможка.',
          body, active="katalog/", jsonld=ld, og="img/m/" + m["stem"] + ".webp", prio="0.8")
 
 
