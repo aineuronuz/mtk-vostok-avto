@@ -6,9 +6,10 @@ GROUPS, ORDER и SKIP из gen_catalog_prem_mtk.py (одна карточка н
 Фото — ~/auto-china/catalog/site_photos/final/<модель>.jpg (Wikimedia Commons, авторы и лицензии — sources.json):
 окно 17:10 вокруг машины (рамка rembg, кэш data/premium_bbox.json), только обрезка и уменьшение, номера не трогаются.
 Цена «от» (Юрий 11.10.2026) — младшая строка карточки каталога, посчитанная prem26_calc.py по курсам дня (day_prices,
-вызывает site.py каждое утро). Цена ставится, только если тот же расчёт по курсам каталога совпадает со строками PDF
-премиум-каталога на PRICE_DATE (catalog/out/Katalog-MTK-Premium-*-SPB-telefon-<дата>.pdf); нет в PDF или расходится —
-карточка без цены.
+вызывает site.py каждое утро). Над ней строка б/у, как в каталоге (Юрий 24.10.2026): bu_row генератора каталога, цена
+по курсам дня тем же prem26_calc.price(v, age) («Авто» 25.10.2026). Цены ставятся, только если тот же расчёт по курсам
+каталога совпадает со всеми строками карточки (б/у и версии) PDF премиум-каталога на FILE_DATE, без неё — на PRICE_DATE
+(catalog/out/Katalog-MTK-Premium-*-SPB-telefon-<дата>.pdf); нет в PDF или расходится — карточка без цены.
 Запуск: python3 new/premium.py (после — python3 new/site.py --offline)
 """
 import ast
@@ -38,19 +39,37 @@ ORIGIN = {"mercedes": "eu", "bmw": "eu", "audi": "eu", "porsche": "eu", "volvo":
           "denza": "cn", "yangwang": "cn", "hongqi": "cn", "im": "cn"}
 
 
-def catalog_rules():
-    """GROUPS (первое присваивание), ORDER и SKIP из генератора премиум-каталога — без его запуска."""
+def _gen():
+    """Генератор премиум-каталога: константы (первое присваивание) и узел функции bu_row — без его запуска."""
     tree = ast.parse((CAT / "gen_catalog_prem_mtk.py").read_text())
     got = {}
     for node in tree.body:
         if isinstance(node, ast.Assign) and len(node.targets) == 1 and isinstance(node.targets[0], ast.Name):
             name = node.targets[0].id
-            if name in ("GROUPS", "ORDER", "SKIP", "PRICE_DATE") and name not in got:
+            if name in ("GROUPS", "ORDER", "SKIP", "PRICE_DATE", "FILE_DATE", "DRIVE") and name not in got:
                 try:
                     got[name] = ast.literal_eval(node.value)
                 except ValueError:
                     pass
-    return got["GROUPS"], got["ORDER"], got["SKIP"], got["PRICE_DATE"]
+        elif isinstance(node, ast.FunctionDef) and node.name == "bu_row":
+            got["bu_row"] = node
+    return got
+
+
+def catalog_rules():
+    """GROUPS, ORDER, SKIP и дата в имени PDF (FILE_DATE, без неё — PRICE_DATE) из генератора премиум-каталога."""
+    got = _gen()
+    return got["GROUPS"], got["ORDER"], got["SKIP"], got.get("FILE_DATE") or got["PRICE_DATE"]
+
+
+def bu_rows():
+    """bu_row генератора каталога — тот же код, считает через prem26_calc (курсы дня — set_rates):
+    fam → {label, spec, price} (price None — «цена по запросу»), None — у модели нет строки б/у."""
+    got = _gen()
+    f = PREM / "bu.json"
+    ns = {"P": _calc(), "DRIVE": got["DRIVE"], "BU": json.loads(f.read_text()) if f.exists() else {}}
+    exec(compile(ast.Module([got["bu_row"]], []), "gen_catalog_prem_mtk.py", "exec"), ns)
+    return ns["bu_row"]
 
 
 def models():
@@ -91,8 +110,14 @@ def calc_rows(mdls):
     return sorted(C.up10k(C.price(v)["total"]) for v in vs)
 
 
+def card_rows(m, bu_row):
+    """Строки карточки каталога, как в PDF: б/у (метка, цена или None) и версии ("", цена)."""
+    b = bu_row(m["key"])
+    return ([(b["label"].upper(), b["price"])] if b else []) + [("", p) for p in calc_rows(m["mdls"])]
+
+
 def pdf_prices(names, date):
-    """Цены строк каждой модели из телефонных PDF премиум-каталога на дату: {модель: [цены по порядку]}."""
+    """Строки каждой модели из телефонных PDF премиум-каталога на дату: {модель: [(метка б/у или "", цена или None)]}."""
     pdfs = sorted((CAT / "out").glob(f"Katalog-MTK-Premium-*-SPB-telefon-{date}.pdf"))
     out, cur = {}, None
     for f in pdfs:
@@ -105,20 +130,23 @@ def pdf_prices(names, date):
                 continue
             m = re.match(r"^(БАЗОВАЯ|СРЕДНЯЯ|МАКСИМАЛЬНАЯ|ВЕРСИЯ)\s+([\d\s]+)₽", s)
             if m and cur:
-                out[cur].append(int(re.sub(r"\D", "", m.group(2))))
+                out[cur].append(("", int(re.sub(r"\D", "", m.group(2)))))
+            m = re.match(r"^(Б/У(?: \S+)*)\s{2,}(?:([\d\s]+)₽|цена по запросу)$", s)   # строка б/у (с 25.10)
+            if m and cur:
+                out[cur].append((m.group(1), int(re.sub(r"\D", "", m.group(2))) if m.group(2) else None))
     return out, [f.name for f in pdfs]
 
 
 def day_prices(vtb, cny, eur):
-    """{модель: цена «от»} по курсам дня — для моделей, у которых расчёт по курсам каталога совпал с PDF; и список
-    моделей без цены."""
-    C = _calc()
+    """{модель: {"from": цена «от» новых, "bu": строка б/у или None}} по курсам дня — для моделей, у которых расчёт
+    по курсам каталога совпал с PDF; и список моделей без цены."""
+    C, bu_row = _calc(), bu_rows()
     ms = models()
     pdf, _ = pdf_prices({m["name"] for m in ms}, catalog_rules()[3])
-    ok = [m for m in ms if pdf.get(m["name"]) == calc_rows(m["mdls"])]
+    ok = [m for m in ms if pdf.get(m["name"]) == card_rows(m, bu_row)]
     old = C.set_rates(vtb, cny, eur)
     try:
-        out = {m["key"]: calc_rows(m["mdls"])[0] for m in ok}
+        out = {m["key"]: {"from": calc_rows(m["mdls"])[0], "bu": bu_row(m["key"])} for m in ok}
     finally:
         C.set_rates(*old)
     return out, [m["name"] for m in ms if m["key"] not in out]
@@ -183,9 +211,11 @@ def main():
     ms = models()
     date = catalog_rules()[3]
     pdf, pdfs = pdf_prices({m["name"] for m in ms}, date)
+    bu_row = bu_rows()
     for m in ms:
-        rows = calc_rows(m.pop("mdls"))
-        m["price"] = rows[0] if pdf.get(m["name"]) == rows else None   # для проверки; на сайте — day_prices
+        rows = card_rows(m, bu_row)
+        m.pop("mdls")
+        m["price"] = next(v for lab, v in rows if not lab) if pdf.get(m["name"]) == rows else None   # для проверки; на сайте — day_prices
         p = PHOTOS / f"{m['key']}.jpg"
         s = src.get(m["key"])
         if not p.exists() or not s:

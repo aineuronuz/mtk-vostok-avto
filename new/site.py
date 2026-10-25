@@ -879,22 +879,33 @@ def car_page(c, kp, models, rates):
          body, active="avto/", jsonld=ld, og=f'img/kp/{c["slug"]}/1.webp', prio="0.7")
 
 
+def bu_row(b):
+    """Строка б/у над новыми, как в премиум-каталоге (макет L8, Юрий 24.10.2026): метка, цена под ключ, подпись; ниже плашка «Новый 2026»."""
+    if not b:
+        return ""
+    pr = f'<b>{rub(b["price"])}</b>' if b["price"] else '<b class="pq">цена по&nbsp;запросу</b>'
+    sp = f'<p>{E(b["spec"])}</p>' if b["spec"] else ""
+    return f'<div class="bu"><div class="bh"><span class="bl">{E(b["label"])}</span>{pr}</div>{sp}</div><span class="nw">Новый 2026 · цена производителя</span>'
+
+
 def premium_page(prem, rates):
     """Новые премиальные автомобили из Китая (Юрий 11.10.2026): карточки с ценой «от» по курсу дня (как строки PDF премиум-каталога),
-    авторы фото.
+    над ней строка б/у и плашка «Новый 2026», как в каталоге (Юрий 24.10.2026), авторы фото.
     Данные и фото готовит new/premium.py."""
     import premium as P
     day, noprice = P.day_prices(rates["vtb"], rates["cny"], rates["eur"])
     if noprice:
         print("Премиум без цены (нет в PDF каталога или расходится с ним):", ", ".join(noprice))
-    cards = [dict(c, price=day.get(c["key"])) for c in prem["cards"]]
+    cards = [dict(c, price=day[c["key"]]["from"], bu=day[c["key"]]["bu"]) if c["key"] in day else dict(c, price=None, bu=None)
+             for c in prem["cards"]]
     origins = [(k, t) for k, t in prem["origins"]]
     chips = "".join(f'<button class="chip" type="button" data-v="{k}">{t} <i>{sum(c["origin"] == k for c in cards)}</i></button>' for k, t in origins)
     grid = "".join(f'<div class="card pc" data-origin="{c["origin"]}"><div class="im{" ct" if c.get("bg") else ""}"'
                    + (f' style="background:linear-gradient({c["bg"][0]},{c["bg"][1]} 50%,{c["bg"][2]} 50%)"' if c.get("bg") else "")
                    + f'><img src="{u(c["img"])}" alt="{E(c["name"])}" loading="lazy" width="{c["size"][0]}" height="{c["size"][1]}"></div>'
                    f'<div class="t"><h3>{E(c["name"])}</h3>'
-                   + (f'<div class="pr">от&nbsp;{rub(c["price"])}<small>под ключ до&nbsp;СПб</small></div>' if c.get("price") else "")
+                   + (f'<div class="pz">{bu_row(c["bu"])}<div class="pr">от&nbsp;{rub(c["price"])}<small>под ключ до&nbsp;СПб</small></div></div>'
+                      if c.get("price") else "")
                    + '</div></div>' for c in cards)
     credits = "".join(f'<li>{E(c["name"])}&nbsp;— {E(c["author"])}, <a href="{E(c["license_url"])}" rel="license noopener" target="_blank">{E(c["license"])}</a>, '
                       f'<a href="{E(c["page"])}" rel="noopener" target="_blank">Wikimedia Commons</a></li>' for c in cards)

@@ -487,6 +487,17 @@ body{font-size:16px}
 .pc h3{font-size:17px}
 .pc .pr{font-size:21px;padding-top:12px;white-space:nowrap}
 .pc .pr small{font-size:12.5px;white-space:normal}
+/* б/у над новыми, как в премиум-каталоге (макет L8, Юрий 24.10.2026) */
+.pc .pz{margin-top:auto;padding-top:12px}
+.pc .bu{background:#e6f5fd;border-radius:10px;padding:9px 10px 10px}
+.pc .bh{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:6px 10px}
+.pc .bl,.pc .nw{font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.03em;border-radius:6px;padding:3px 8px;white-space:nowrap}
+.pc .bl{background:#0b9be0;color:#fff}
+.pc .bh b{font-family:var(--disp);font-size:19px;font-weight:400;letter-spacing:-.02em;color:var(--navy2);white-space:nowrap}
+.pc .bh b.pq{font-family:var(--ui);font-size:14px;font-weight:700;letter-spacing:0;color:#075985}
+.pc .bu p{font-size:12.5px;line-height:1.35;color:#075985;margin-top:6px}
+.pc .nw{display:inline-block;margin-top:12px;background:#dff5ea;color:#0a7a52}
+.pc .pz .pr{margin-top:0;padding-top:8px}
 .pcta{margin-top:44px;display:flex;flex-wrap:wrap;gap:20px;align-items:center;justify-content:space-between}
 .pcta p{color:var(--muted);margin-top:6px;max-width:680px}
 .credits{margin-top:60px;color:var(--muted);font-size:13px;line-height:1.5}
@@ -503,6 +514,12 @@ body{font-size:16px}
 .pc .t{padding:10px 12px 12px}
 .pc h3{font-size:14.5px}
 .pc .pr{font-size:16px;padding-top:8px}
+.pc .bu{padding:7px 8px 8px}
+.pc .bl,.pc .nw{font-size:10px;padding:2px 6px;white-space:normal}
+.pc .bh b{font-size:16px}
+.pc .bh b.pq{font-size:12.5px}
+.pc .bu p{font-size:11.5px;margin-top:4px}
+.pc .nw{margin-top:8px}
 .pc .pr small{font-size:11.5px}
 .prem .chip{height:36px;padding:0 13px;font-size:14.5px}
 .pcta .btn{width:100%;justify-content:center}
