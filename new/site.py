@@ -889,7 +889,7 @@ def bu_row(b):
 
 
 def premium_page(prem, rates):
-    """Новые премиальные автомобили из Китая (Юрий 11.10.2026): карточки с ценой «от» по курсу дня (как строки PDF премиум-каталога),
+    """Премиальные автомобили из Китая: б/у и новые (Юрий 11.10.2026, заголовок — как в каталогах, «Авто» 25.10.2026): карточки с ценой «от» по курсу дня (как строки PDF премиум-каталога),
     над ней строка б/у и плашка «Новый 2026», как в каталоге (Юрий 24.10.2026), авторы фото.
     Данные и фото готовит new/premium.py."""
     import premium as P
@@ -911,7 +911,7 @@ def premium_page(prem, rates):
                       f'<a href="{E(c["page"])}" rel="noopener" target="_blank">Wikimedia Commons</a></li>' for c in cards)
     body = f"""
 <section class="phead"><div class="wrap">{crumbs((None, "Премиум"))}
-<h1 class="rv in">Новые премиальные автомобили <em>из&nbsp;Китая</em></h1>
+<h1 class="rv in">Премиальные автомобили <em>из&nbsp;Китая</em>: б/у и&nbsp;новые</h1>
 <p class="lead">Цены ориентировочные, под&nbsp;ключ до&nbsp;Санкт-Петербурга, на&nbsp;{ddmm(TODAY)}</p>
 </div></section>
 <section class="sec tight prem"><div class="wrap">
@@ -924,10 +924,10 @@ def premium_page(prem, rates):
 <div class="credits"><h2>Авторы фото</h2><p>Фото моделей&nbsp;— с&nbsp;Wikimedia Commons по&nbsp;свободным лицензиям. Снимки обрезаны и&nbsp;уменьшены под&nbsp;карточки.</p><ul>{credits}</ul></div>
 </div></section>"""
     ld = [bc_ld(("premium/", "Премиум")),
-          {"@context": "https://schema.org", "@type": "ItemList", "name": "Новые премиальные автомобили из Китая",
+          {"@context": "https://schema.org", "@type": "ItemList", "name": "Премиальные автомобили из Китая: б/у и новые",
            "itemListElement": [{"@type": "ListItem", "position": i, "name": c["name"]} for i, c in enumerate(cards, 1)]}]
-    page("premium/", "Новые премиальные автомобили из Китая под ключ | МТК Восток-Авто",
-         f"{len(cards)} моделей новых премиальных автомобилей из Китая: европейские, японские, корейские, американские и китайские марки. Подбор, доставка и растаможка под ключ.",
+    page("premium/", "Премиальные автомобили из Китая: б/у и новые под ключ | МТК Восток-Авто",
+         f"{len(cards)} моделей премиальных автомобилей из Китая, б/у и новые: европейские, японские, корейские, американские и китайские марки. Подбор, доставка и растаможка под ключ.",
          body, active="premium/", jsonld=ld, og=cards[0]["img"], prio="0.8")
 
 
