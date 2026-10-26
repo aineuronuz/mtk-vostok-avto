@@ -128,7 +128,7 @@ def pdf_prices(names, date):
                 cur = s
                 out.setdefault(cur, [])
                 continue
-            m = re.match(r"^(БАЗОВАЯ|СРЕДНЯЯ|МАКСИМАЛЬНАЯ|ВЕРСИЯ)\s+([\d\s]+)₽", s)
+            m = re.match(r"^(БАЗОВАЯ|СРЕДНЯЯ|МАКСИМАЛЬНАЯ|ВЕРСИЯ)(?: · [^\d₽]+?)?\s+([\d\s]+)₽", s)   # «МАКСИМАЛЬНАЯ · СПОРТ» (26.10)
             if m and cur:
                 out[cur].append(("", int(re.sub(r"\D", "", m.group(2)))))
             m = re.match(r"^(Б/У(?: \S+)*)\s{2,}(?:([\d\s]+)₽|цена по запросу)$", s)   # строка б/у (с 25.10)
