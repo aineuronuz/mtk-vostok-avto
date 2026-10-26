@@ -614,6 +614,55 @@ PAYS = f"""<div class="pays" id="pays">
 </div>"""
 
 
+# ---------- шапки разделов: справа видео, фото или небольшой интерактив по теме (Юрий 26.10.2026) ----------
+PH_VIS = {"katalog": ("video", "ph_katalog"), "premium": ("video", "ph_premium"),          # ролики syntx.ai от Юрия 26.10, вперёд-назад
+          "avto": ("img", "kp/xiaomi-yu7-pro-2025-16000km/1.webp"), "vydannye": ("img", "d_yaris_1.webp"),
+          "mopedy": ("cut", "moto/og.jpg"), "voprosy": ("img", "road.webp"), "kontakty": ("img", "d_q05_1.webp")}
+
+
+def phv(key):
+    kind, src = PH_VIS[key]
+    if kind == "video":
+        vd = OUT / "assets" / "video"
+        if not (vd / f"{src}.mp4").exists():
+            return ""
+        vv = lambda n: u(f"assets/video/{n}") + "?v=" + hashlib.md5((vd / n).read_bytes()).hexdigest()[:8]
+        return (f'<div class="phv" aria-hidden="true"><video muted loop playsinline preload="none" poster="{vv(src + ".webp")}"'
+                f' data-src="{vv(src + ".mp4")}" data-src-m="{vv(src + "_m.mp4")}"></video></div>')
+    if not (IMG / src).exists():
+        return ""
+    return f'<div class="phv{" cut" if kind == "cut" else ""}" aria-hidden="true"><img src="{u("img/" + src)}" alt="" decoding="async"></div>'
+
+
+def ph_route():
+    """«Как купить»: маршрут Китай → граница → ваш город, 50–65 дней — машина едет по линии."""
+    path = "M40 230 C 170 120, 300 270, 430 170 S 640 60, 720 110"
+    return f"""<div class="phroute" aria-hidden="true"><svg viewBox="0 0 760 300" fill="none">
+<path d="{path}" class="rt0"/><path d="{path}" class="rt1"/>
+<g class="nd"><circle cx="40" cy="230" r="9"/><circle cx="430" cy="170" r="9"/><circle cx="720" cy="110" r="11"/></g>
+<text x="40" y="272" text-anchor="middle">Китай</text><text x="430" y="212" text-anchor="middle">Граница</text><text x="720" y="70" text-anchor="middle">Ваш город</text>
+<g class="car"><circle r="15"/><path d="M-8 3h16l-2-6h-12zM-6 5a2 2 0 1 0 .01 0M6 5a2 2 0 1 0 .01 0" stroke="#0b1f45" stroke-width="1.6" fill="#fff"/>
+<animateMotion dur="7s" repeatCount="indefinite" rotate="0" keyPoints="0;1;1" keyTimes="0;.85;1" calcMode="linear" path="{path}"/></g>
+</svg><div class="rtd"><b>50–65</b> дней от&nbsp;оплаты до&nbsp;выдачи</div></div>"""
+
+
+def ph_calc(rates):
+    """«Стоимость»: мини-калькулятор — цена в Китае в юанях → ориентир под ключ (как КП: один инвойс машина + доставка,
+    пошлина 3–5 лет по объёму или электро 15% + НДС 22%, льготный утильсбор, СВХ, оформление, услуги)."""
+    spec = importlib.util.spec_from_file_location("auto_china_calc_t", AC / "calc.py")   # таблицы сбора и пошлины «Авто»
+    AC_CALC = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(AC_CALC)
+    d = {"vtb": rates["vtb"], "cny": rates["cny"], "eur": rates["eur"], "deliv": 20000, "load": 1300, "fee": sorted([k, v] for k, v in AC_CALC.CUSTOM_FEE_TABLE.items() if k != "above"),
+         "feeTop": AC_CALC.CUSTOM_FEE_TABLE["above"], "cc": sorted([k, v[0]] for k, v in AC_CALC.PHYS_MORE_THAN_3.items() if k != "above"),
+         "ccTop": AC_CALC.PHYS_MORE_THAN_3["above"][0], "fix": 20500 + 80000 + 90000}
+    return f"""<form class="phcalc" data-calc='{json.dumps(d)}' onsubmit="return false"><h3>Калькулятор</h3>
+<label>Цена в&nbsp;Китае, ¥<input type="number" name="y" value="80000" min="10000" step="1000" inputmode="numeric"></label>
+<div class="two"><label>Двигатель<select name="t"><option value="ice">Бензин, 3–5 лет</option><option value="ev">Электро, до 3 лет</option></select></label>
+<label class="cc">Объём, см³<input type="number" name="cc" value="1500" min="600" step="1" inputmode="numeric"></label></div>
+<div class="out"><small>Ориентир под&nbsp;ключ</small><b data-total>—</b></div>
+<p>Льготный утильсбор: до&nbsp;160&nbsp;л.с., у&nbsp;электро до&nbsp;80&nbsp;л.с. по&nbsp;30-минутной мощности. По&nbsp;курсу на&nbsp;{ddmm(TODAY)}, точную сумму посчитаем при&nbsp;подборе.</p></form>"""
+
+
 def faq_items(items):
     return "".join(f'<details class="qa"><summary>{E(q["q"])}</summary><div class="a">{"".join("<p>" + E(x) + "</p>" for x in q["a"].split(chr(10)) if x.strip())}</div></details>' for q in items)
 
@@ -727,7 +776,7 @@ def catalog_page(models):
     brands = sorted({m["brand"] for m in models})
     pmax = math.ceil(max(m["from"] for m in models) / 1e5) * 1e5
     body = f"""
-<section class="phead"><div class="wrap">{crumbs((None, "Каталог"))}
+<section class="phead">{phv("katalog")}<div class="wrap">{crumbs((None, "Каталог"))}
 <h1 class="rv in">{len(models)} моделей<br>под <em>льготный утильсбор</em></h1>
 <p class="lead">Цена в&nbsp;карточке&nbsp;— ориентир под&nbsp;ключ. Точную сумму на&nbsp;конкретный автомобиль считаем по&nbsp;курсу дня. Не&nbsp;нашли свою модель&nbsp;— привезём любую под&nbsp;заказ.</p>
 <div class="tiles" data-f="cat">{tiles}</div></div></section>
@@ -819,7 +868,7 @@ def avto_page(kp, rates):
     pmax = math.ceil(max(c["total"] for c in kp) / 1e5) * 1e5
     fuels = [(k, t) for k, t in (("petrol", "Бензин"), ("hybrid", "Гибрид"), ("ev", "Электро"), ("erev", "Гибрид EREV")) if any(c["fuel_key"] == k for c in kp)]
     body = f"""
-<section class="phead"><div class="wrap">{crumbs((None, "Авто в Китае"))}
+<section class="phead">{phv("avto")}<div class="wrap">{crumbs((None, "Авто в Китае"))}
 <h1 class="rv in">Авто в&nbsp;Китае<br><em>с&nbsp;ценой на&nbsp;сегодня</em></h1>
 <p class="lead">Реальные машины, которые мы нашли и&nbsp;посчитали для&nbsp;клиентов летом и&nbsp;осенью. Цена под&nbsp;ключ пересчитана {ddmm(TODAY)} по&nbsp;курсу юаня {f"{rates['vtb']:.2f}".replace(".", ",")}&nbsp;₽. Если машину уже продали&nbsp;— найдём такую&nbsp;же.</p>
 </div></section>
@@ -935,7 +984,7 @@ def premium_page(prem, rates):
     credits = "".join(f'<li>{E(c["name"])}&nbsp;— {E(c["author"])}, <a href="{E(c["license_url"])}" rel="license noopener" target="_blank">{E(c["license"])}</a>, '
                       f'<a href="{E(c["page"])}" rel="noopener" target="_blank">Wikimedia Commons</a></li>' for c in cards)
     body = f"""
-<section class="phead"><div class="wrap">{crumbs((None, "Премиум-авто"))}
+<section class="phead">{phv("premium")}<div class="wrap">{crumbs((None, "Премиум-авто"))}
 <h1 class="rv in">Премиальные автомобили <em>из&nbsp;Китая</em>: б/у и&nbsp;новые</h1>
 <p class="lead">Ориентировочные цены под&nbsp;ключ на&nbsp;{ddmm(TODAY)}. Доставим в&nbsp;любой город России.</p>
 </div></section>
@@ -1031,7 +1080,7 @@ def moto_page(d):
     lo = min(m["price_from_rub"] for m in ms)
     facts = "".join(f"<li>{t}</li>" for t in MOTO_FACTS) + '<li class="w">Шлем обязателен</li>'
     body = f"""
-<section class="phead"><div class="wrap">{crumbs((None, "Электромопеды"))}
+<section class="phead">{phv("mopedy")}<div class="wrap">{crumbs((None, "Электромопеды"))}
 <div class="mhd"><img class="mlogo" src="{u("img/moto/logo.webp")}" alt="Восток-Мото" width="120" height="120">
 <h1 class="rv in">Электромопеды <em>из&nbsp;Китая</em></h1></div>
 <p class="lead">Помимо автомобилей, привозим из&nbsp;Китая электромопеды. «Восток-Мото»: {len(ms)} {plural(len(ms), "модель", "модели", "моделей")} до&nbsp;50&nbsp;км/ч и&nbsp;до&nbsp;4&nbsp;кВт под&nbsp;права категории M. Цены по&nbsp;курсу на&nbsp;{date_}: цена зависит от&nbsp;курса&nbsp;— актуальную цену уточняйте.</p>
@@ -1064,7 +1113,7 @@ def how_page(faq):
             "СБКТС и&nbsp;электронный ПТС", "Ключи и&nbsp;всё, что положено к&nbsp;машине"]
     qs = [q for q in faq if q.get("group") in ("О компании и договоре", "Сроки и доставка") and not q.get("confirm")][:5]
     body = f"""
-<section class="phead"><div class="wrap">{crumbs((None, "Как купить"))}
+<section class="phead phx"><div class="wrap">{ph_route()}{crumbs((None, "Как купить"))}
 <h1 class="rv in">Как купить автомобиль<br><em>из&nbsp;Китая под&nbsp;ключ</em></h1>
 <p class="lead">Семь шагов от&nbsp;выбора до&nbsp;ключей. Срок от&nbsp;оплаты до&nbsp;выдачи&nbsp;— обычно 50–65&nbsp;дней. На&nbsp;каждом шаге Вы знаете, что уже сделано и&nbsp;что дальше.</p></div></section>
 <section class="sec tight"><div class="wrap"><div class="tl">{"".join(tl)}</div></div></section>
@@ -1091,7 +1140,7 @@ def price_page(kp, rates):
     svc = [("Проверка машины", 1300, "Осмотр на&nbsp;месте с&nbsp;отчётом, фото и&nbsp;видео"), ("Оклейка элементов", 2500, "Капот, стойки, фары, зеркала"),
            ("Полная оклейка", 3500, "Плёнка среднего класса"), ("Полная оклейка премиум", 5500, "Премиальная плёнка")]
     body = f"""
-<section class="phead"><div class="wrap">{crumbs((None, "Стоимость"))}
+<section class="phead phx"><div class="wrap">{ph_calc(rates)}{crumbs((None, "Стоимость"))}
 <h1 class="rv in">Стоимость&nbsp;— <em>под&nbsp;ключ</em></h1>
 <p class="lead">Автомобиль, доставка, растаможка, документы и&nbsp;наши услуги. Оплата в&nbsp;четыре этапа по&nbsp;договору, без&nbsp;скрытых платежей.</p>
 <div class="rates"><div style="border-color:rgba(255,255,255,.2)"><small style="color:rgba(255,255,255,.65)">Курс юаня для расчёта на {ddmm(TODAY)}</small><b style="color:#fff">{f"{v:.2f}".replace(".", ",")}&nbsp;₽</b></div>
@@ -1111,7 +1160,7 @@ def price_page(kp, rates):
 
 def deliv_page():
     body = f"""
-<section class="phead"><div class="wrap">{crumbs((None, "Выданные"))}
+<section class="phead">{phv("vydannye")}<div class="wrap">{crumbs((None, "Выданные"))}
 <h1 class="rv in">Примеры выданных <em>автомобилей</em></h1>
 <p class="lead">Некоторые из&nbsp;автомобилей, которые мы уже привезли и&nbsp;передали владельцам. Цены&nbsp;— итог под&nbsp;ключ по&nbsp;договору.</p></div></section>
 <section class="sec tight"><div class="wrap"><div class="dgrid" style="margin-top:0">{deliv_cards()}</div>
@@ -1128,7 +1177,7 @@ def faq_page(faq):
         items = [q for q in faq if q["group"] == g]
         groups.append(f'<div class="fgroup"><h2 class="rv">{E(g)}</h2><div class="faq" style="margin-top:20px">{faq_items(items)}</div></div>')
     body = f"""
-<section class="phead"><div class="wrap">{crumbs((None, "Вопросы"))}
+<section class="phead">{phv("voprosy")}<div class="wrap">{crumbs((None, "Вопросы"))}
 <h1 class="rv in">Частые <em>вопросы</em></h1>
 <p class="lead">Оплата, сроки, таможня, утильсбор, проверка машины и&nbsp;документы. Не&nbsp;нашли ответ&nbsp;— напишите специалисту.</p></div></section>
 <section class="sec tight"><div class="wrap" style="max-width:1100px">{"".join(groups)}
@@ -1141,7 +1190,7 @@ def faq_page(faq):
 
 def contacts_page():
     body = f"""
-<section class="phead"><div class="wrap">{crumbs((None, "Контакты"))}
+<section class="phead">{phv("kontakty")}<div class="wrap">{crumbs((None, "Контакты"))}
 <h1 class="rv in">Напишите <em>специалисту</em></h1>
 <p class="lead">Расскажите, какую машину и&nbsp;в&nbsp;какой город хотите,&nbsp;— подберём варианты и&nbsp;посчитаем стоимость под&nbsp;ключ.</p></div></section>
 <section class="sec tight"><div class="wrap"><div class="tgrid" style="margin-top:0">{team_cards()}</div>

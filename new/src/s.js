@@ -39,6 +39,19 @@ if(dvs.length){const run=v=>{const p=v.play();if(p&&p.catch)p.catch(()=>{})};
   dvs.forEach(v=>{v.muted=v.defaultMuted=true;dvo.observe(v)});
   ['pointerdown','touchstart','keydown'].forEach(e=>addEventListener(e,()=>dvs.forEach(v=>{if(v._in&&v.src&&v.paused)run(v)}),{passive:true}))}
 
+// шапки разделов: ролик справа (Каталог, Премиум) и калькулятор «Стоимости» (Юрий 26.10.2026)
+$$('.phv video').forEach(v=>{if(RM)return;v.muted=v.defaultMuted=true;v.src=mob()?v.dataset.srcM:v.dataset.src;
+  const go=()=>{const p=v.play();if(p&&p.catch)p.catch(()=>{})};v.addEventListener('canplay',go,{once:true});go();
+  ['pointerdown','touchstart'].forEach(e=>addEventListener(e,go,{once:true,passive:true}))});
+const CF=$('.phcalc');
+if(CF){const d=JSON.parse(CF.dataset.calc),el=CF.elements,out=$('[data-total]',CF),ccl=$('.cc',CF);
+  const fee=v=>{for(const[k,x]of d.fee)if(v<=k)return x;return d.feeTop},per=c=>{for(const[k,x]of d.cc)if(c<=k)return x;return d.ccTop};
+  const run=()=>{const y=+el.y.value||0,ev=el.t.value=='ev',c=+el.cc.value||0;ccl.style.display=ev?'none':'';
+    const car=Math.round(y*d.vtb),del=Math.round(d.deliv*d.vtb),ld=Math.round(d.load*d.vtb),bank=Math.round((car+del)*.02),cv=Math.round((y+d.deliv)*d.cny);
+    let duty,vat=0,rec;if(ev){duty=Math.round(cv*.15);vat=Math.round((cv+duty)*.22);rec=3400}else{duty=Math.round(c*per(c)*d.eur);rec=5200}
+    out.textContent=y>=1000&&(ev||c>=600)?nf(car+del+ld+bank+duty+vat+fee(cv)+rec+d.fix)+' ₽':'—'};
+  CF.addEventListener('input',run);run()}
+
 // слова подсвечиваются
 const W=$('#words');let ws=[];
 if(W){W.innerHTML=W.innerHTML.split(/(\s+)/).map(t=>{if(/^\s+$/.test(t)||!t)return t;const k=t.includes('*');return `<span class="w${k?' k':''}">${t.replace(/\*/g,'')}</span>`}).join('');ws=$$('#words .w')}

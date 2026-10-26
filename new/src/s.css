@@ -600,3 +600,49 @@ body{font-size:16px}
 .totop:hover{background:var(--blue);box-shadow:0 0 30px -4px rgba(120,170,255,.9),0 10px 30px -8px rgba(11,31,69,.55)}
 .totop svg{width:24px;height:24px}
 .fopen .totop,.open .totop{display:none}
+
+/* 26.10.2026 (Юрий): шапки разделов — справа видео, фото или небольшой интерактив по теме */
+.phead .wrap{position:relative;z-index:1}
+.phv{position:absolute;top:0;right:0;bottom:0;width:min(60vw,980px);z-index:0;pointer-events:none;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0,rgba(0,0,0,.55) 22%,#000 48%);mask-image:linear-gradient(90deg,transparent 0,rgba(0,0,0,.55) 22%,#000 48%)}
+.phv img,.phv video{width:100%;height:100%;object-fit:cover;display:block}
+.phv:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,31,69,.78),rgba(11,31,69,.18) 26%,rgba(11,31,69,0) 60%,rgba(11,31,69,.5)),linear-gradient(90deg,rgba(11,31,69,.3),rgba(11,31,69,0) 55%)}
+.phv.cut{top:auto;height:50%;width:min(30vw,440px);right:clamp(20px,4vw,56px);display:grid;place-items:end center;-webkit-mask-image:none;mask-image:none}
+.phv.cut img{width:auto;height:92%;max-width:100%;object-fit:contain;margin-bottom:4%;
+  -webkit-mask-image:radial-gradient(closest-side,#000 72%,transparent);mask-image:radial-gradient(closest-side,#000 72%,transparent);filter:drop-shadow(0 26px 34px rgba(0,0,0,.35))}
+.phv.cut:before{content:"";position:absolute;width:86%;aspect-ratio:1;border-radius:50%;background:radial-gradient(closest-side,rgba(255,255,255,.7),rgba(255,255,255,.28) 55%,transparent);bottom:-4%;width:74%}
+.phv.cut:after{display:none}
+.phx .wrap{position:relative}
+.phroute{position:absolute;right:clamp(20px,4vw,56px);top:50%;transform:translateY(-30%);width:min(37vw,540px);z-index:0;pointer-events:none}
+.phroute svg{width:100%;height:auto;overflow:visible}
+.phroute .rt0{stroke:rgba(255,255,255,.18);stroke-width:3}
+.phroute .rt1{stroke:#9cc0ff;stroke-width:3;stroke-dasharray:10 12;animation:rtdash 1.6s linear infinite}
+@keyframes rtdash{to{stroke-dashoffset:-44}}
+.phroute .nd circle{fill:#0b1f45;stroke:#9cc0ff;stroke-width:3}
+.phroute .nd circle:last-child{fill:#9cc0ff;stroke:#fff}
+.phroute text{fill:rgba(255,255,255,.85);font:600 19px var(--ui)}
+.phroute .car circle{fill:#fff;filter:drop-shadow(0 0 12px rgba(156,192,255,.95))}
+.phroute .rtd{margin:6px 0 0 auto;width:max-content;color:rgba(255,255,255,.8);font-size:16px}
+.phroute .rtd b{font-family:var(--disp);font-weight:300;font-size:42px;color:#fff;letter-spacing:-.03em;margin-right:6px}
+.phcalc{position:absolute;right:clamp(20px,4vw,56px);top:-6px;width:min(36vw,420px);z-index:2;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);
+  border-radius:24px;padding:24px 24px 20px;-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);box-shadow:0 30px 60px -30px rgba(0,0,0,.5)}
+.phcalc h3{font-family:var(--ui);font-size:20px;font-weight:600;letter-spacing:-.01em}
+.phcalc label{display:block;margin-top:14px;font-size:13px;letter-spacing:.04em;color:rgba(255,255,255,.7)}
+.phcalc input,.phcalc select{display:block;width:100%;margin-top:6px;height:46px;border-radius:12px;border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.1);color:#fff;padding:0 14px;font-size:17px}
+.phcalc select option{color:#0b1730}
+.phcalc .two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.phcalc .out{margin-top:18px;padding-top:14px;border-top:1px solid rgba(255,255,255,.16)}
+.phcalc .out small{display:block;font-size:13px;color:rgba(255,255,255,.65)}
+.phcalc .out b{display:block;font-family:var(--disp);font-weight:300;font-size:clamp(32px,3vw,44px);letter-spacing:-.03em;color:#fff;line-height:1.1;margin-top:4px}
+.phcalc p{margin-top:10px;font-size:12.5px;line-height:1.45;color:rgba(255,255,255,.6)}
+.phx h1,.phx .lead{max-width:min(56vw,760px)}
+.phx .rates{max-width:calc(100% - min(36vw,420px) - 36px)}
+@media (max-width:1140px){
+.phv{width:100%;opacity:.4;-webkit-mask-image:linear-gradient(180deg,#000 40%,transparent);mask-image:linear-gradient(180deg,#000 40%,transparent)}
+.phv.cut{opacity:.55;height:52%;width:60%;right:0}
+.phroute{position:relative;right:auto;top:auto;transform:none;width:100%;max-width:560px;margin:10px 0 24px}
+.phcalc{position:relative;right:auto;top:auto;width:100%;max-width:520px;margin:28px 0 0;order:9}
+.phx h1,.phx .lead,.phx .rates{max-width:none}
+.phx .wrap{display:flex;flex-direction:column}
+.phx .wrap>.phroute{order:9}
+}
