@@ -1129,8 +1129,8 @@ def extras(models, kp, rates, moto=None):
         lines += ["", f"## Авто в Китае ({len(kp)} машин, цена под ключ на {ddmm(TODAY)})", ""]
         lines += [f"- [{c['title']} {c.get('year') or ''}]({SITE}{u('avto/' + c['slug'] + '/')}): {kp_line(c)}; {c['total']:,} ₽ под ключ, {c.get('city') or ''}".replace(",", " ") for c in kp]
     if moto and moto["mopeds"]:
-        lines += ["", f"## Мопеды: электромопеды «Восток-Мото» ({len(moto['mopeds'])} моделей, права категории M, цены по курсу на {moto['date']})", ""]
-        lines += [f"- [{m['name']}]({SITE}{u('mopedy/')}): {', '.join(m['specs'])}; {html.unescape(re.sub('<[^>]+>', '', moto_price(m)))}" for m in moto["mopeds"]]
+        lines += ["", f"## Мопеды: электромопеды «Восток-Мото» ({len(moto['mopeds'])} {plural(len(moto['mopeds']), 'модель', 'модели', 'моделей')}, права категории M, цены по курсу на {moto['date']})", ""]
+        lines += [f"- [{m['name']}]({SITE}{u('mopedy/')}): {' · '.join(m['specs'])}; {html.unescape(re.sub('<[^>]+>', '', moto_price(m)))}" for m in moto["mopeds"]]
     lines += ["", "## Контакты", ""] + [f"- {p['name']} — {p['note']}: {p['tel']}, Telegram @{p['tg']}" for p in TEAM] + [f"- Telegram-канал: {CHANNEL}", ""]
     (OUT / "llms.txt").write_text("\n".join(lines))
     (OUT / "404.html").write_text(f"""<!doctype html><html lang="ru"><head><meta charset="utf-8"><title>Страница не найдена — МТК Восток-Авто</title>
