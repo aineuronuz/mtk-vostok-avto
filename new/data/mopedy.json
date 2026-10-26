@@ -1,0 +1,532 @@
+{
+ "date": "26.10.2026",
+ "markup_rub": 20000,
+ "count": 31,
+ "mopeds": [
+  {
+   "id": "yadea_modern1",
+   "brand": "Yadea",
+   "name": "Yadea Modern Shine 70-M",
+   "class": "мопед · права M",
+   "specs": [
+    "мотор 600 Вт, пиковая 800 Вт",
+    "до 43 км/ч",
+    "60 В 23 А·ч, графеновая свинцовая",
+    "запас хода 80 км",
+    "масса 87 кг (сертификат КНР)"
+   ],
+   "note": null,
+   "price_from_rub": 138800,
+   "price_to_rub": 142700,
+   "photo": "foto/yadea_modern1.jpg"
+  },
+  {
+   "id": "yadea_modern2",
+   "brand": "Yadea",
+   "name": "Yadea Modern Shine II 60-M",
+   "class": "мопед · права M",
+   "specs": [
+    "мотор 600 Вт, пиковая 1 200 Вт",
+    "до 42 км/ч",
+    "60 В 23 А·ч, графеновая свинцовая",
+    "запас хода 50 км",
+    "масса 93 кг (сертификат КНР)"
+   ],
+   "note": "Второе поколение, с мая 2026: экран 4,3 дюйма и антипробуксовка TCS",
+   "price_from_rub": 144300,
+   "price_to_rub": 153500,
+   "photo": "foto/yadea_modern2.jpg"
+  },
+  {
+   "id": "yadea_maimang_pro",
+   "brand": "Yadea",
+   "name": "Yadea Modern Maimang Pro",
+   "class": "мопед · права M",
+   "specs": [
+    "мотор 500 Вт, пиковая 1 000 Вт",
+    "до 37 км/ч",
+    "60 В 21 А·ч, графеновая свинцовая",
+    "запас хода 45 км",
+    "масса 83 кг (сертификат КНР)"
+   ],
+   "note": "Новинка мая 2026",
+   "price_from_rub": 126800,
+   "price_to_rub": 134600,
+   "photo": "foto/yadea_maimang_pro.jpg"
+  },
+  {
+   "id": "yadea_maimang",
+   "brand": "Yadea",
+   "name": "Yadea Modern Maimang",
+   "class": "мопед · права M",
+   "specs": [
+    "мотор 500 Вт",
+    "до 47 км/ч",
+    "60 В 21 А·ч, графеновая свинцовая",
+    "запас хода 45 км",
+    "масса 83 кг (сертификат КНР)"
+   ],
+   "note": "Самая доступная модель линейки «Модерн», в продаже с мая 2025",
+   "price_from_rub": 121800,
+   "price_to_rub": 128300,
+   "photo": "foto/yadea_maimang.jpg"
+  },
+  {
+   "id": "yadea_b30m",
+   "brand": "Yadea",
+   "name": "Yadea B30-M",
+   "class": "мопед · права M",
+   "specs": [
+    "мотор 600 Вт",
+    "до 47 км/ч",
+    "60 В 21 А·ч, свинцовая",
+    "запас хода 45 км",
+    "масса 82 кг"
+   ],
+   "note": "Новинка июня 2026: датчик боковой подножки и приложение",
+   "price_from_rub": 125300,
+   "price_to_rub": 131800,
+   "photo": "foto/yadea_b30m.jpg"
+  },
+  {
+   "id": "yadea_m6",
+   "brand": "Yadea",
+   "name": "Yadea M6",
+   "class": "мопед · права M",
+   "specs": [
+    "мотор 600 Вт",
+    "до 39 км/ч",
+    "60 В 23 А·ч, графеновая свинцовая",
+    "масса 93 кг"
+   ],
+   "note": null,
+   "price_from_rub": 142500,
+   "price_to_rub": 155500,
+   "photo": "foto/yadea_m6.jpg"
+  },
+  {
+   "id": "yadea_gfx6",
+   "brand": "Yadea",
+   "name": "Yadea GFX6 (FX6)",
+   "class": "мопед · права M",
+   "specs": [
+    "мотор 400 Вт",
+    "до 25 км/ч",
+    "48 В 24 А·ч, литиевая",
+    "масса 75 кг"
+   ],
+   "note": null,
+   "price_from_rub": 141700,
+   "price_to_rub": 153500,
+   "photo": "foto/yadea_gfx6.jpg"
+  },
+  {
+   "id": "aima_luna",
+   "brand": "Aima",
+   "name": "Aima Luna",
+   "class": "мопед · права M",
+   "specs": [
+    "мотор 800 Вт, пиковая 1 000 Вт",
+    "до 48 км/ч",
+    "60 В 20 А·ч",
+    "запас хода 70 км",
+    "масса 86 кг (сертификат КНР)"
+   ],
+   "note": null,
+   "price_from_rub": 133600,
+   "price_to_rub": 137600,
+   "photo": "foto/aima_luna.jpg"
+  },
+  {
+   "id": "aima_dundun",
+   "brand": "Aima",
+   "name": "Aima Dundun",
+   "class": "мопед · права M",
+   "specs": [
+    "мотор 500 Вт, пиковая 800 Вт",
+    "до 45 км/ч",
+    "60 В 21,8 А·ч, свинцовая",
+    "запас хода 45 км",
+    "масса 89 кг"
+   ],
+   "note": "Совместная серия с медвежонком Butterbear, корзина спереди",
+   "price_from_rub": 132500,
+   "price_to_rub": 143000,
+   "photo": "foto/aima_dundun.jpg"
+  },
+  {
+   "id": "aima_spacel",
+   "brand": "Aima",
+   "name": "Aima SpaceL",
+   "class": "мопед · права M",
+   "specs": [
+    "мотор 500 Вт, пиковая 800 Вт",
+    "до 42 км/ч",
+    "60 В 22 А·ч, графеновая свинцовая",
+    "запас хода 40 км",
+    "масса 115 кг"
+   ],
+   "note": "Новинка мая 2026 с экраном-«смайликом»",
+   "price_from_rub": 153500,
+   "price_to_rub": 158700,
+   "photo": "foto/aima_spacel.jpg"
+  },
+  {
+   "id": "tailg_yadian",
+   "brand": "Tailg",
+   "name": "Tailg Athens",
+   "class": "мопед · права M",
+   "specs": [
+    "мотор 400 Вт, пиковая 600 Вт",
+    "до 45 км/ч",
+    "48 В 26 А·ч, графеновая свинцовая",
+    "запас хода 80 км",
+    "масса 98 кг"
+   ],
+   "note": "Ретро в стиле Vespa, мотор 400 Вт и запас хода 80 км",
+   "price_from_rub": 133700,
+   "price_to_rub": 137600,
+   "photo": "foto/tailg_yadian.jpg"
+  },
+  {
+   "id": "ninebot_q70c",
+   "brand": "Ninebot",
+   "name": "Ninebot Q70c",
+   "class": "мопед · права M",
+   "specs": [
+    "мотор 800 Вт, пиковая 1 800 Вт",
+    "до 45 км/ч",
+    "60 В 20 А·ч, свинцовая",
+    "запас хода 60 км",
+    "масса 89 кг"
+   ],
+   "note": "Ретро-скутер с антипробуксовкой TCS и управлением с телефона",
+   "price_from_rub": 127600,
+   "price_to_rub": 135500,
+   "photo": "foto/ninebot_q70c.jpg"
+  },
+  {
+   "id": "ninebot_n1_70",
+   "brand": "Ninebot",
+   "name": "Ninebot N1 70",
+   "class": "мопед · права M",
+   "specs": [
+    "мотор 800 Вт, пиковая 1 900 Вт",
+    "до 47 км/ч",
+    "60 В 20 А·ч, свинцовая",
+    "запас хода 40 км",
+    "масса 102 кг"
+   ],
+   "note": "Новинка мая 2026, короткая база",
+   "price_from_rub": 145400,
+   "price_to_rub": 153200,
+   "photo": "foto/ninebot_n1_70.jpg"
+  },
+  {
+   "id": "ninebot_q3_70",
+   "brand": "Ninebot",
+   "name": "Ninebot Q3 70",
+   "class": "мопед · права M",
+   "specs": [
+    "мотор 800 Вт, пиковая 1 900 Вт",
+    "до 45 км/ч",
+    "60 В 20 А·ч, свинцовая",
+    "запас хода 35 км",
+    "масса 93 кг"
+   ],
+   "note": "Новинка 2026 года, пиковая мощность 1900 Вт",
+   "price_from_rub": 138900,
+   "price_to_rub": 146700,
+   "photo": "foto/ninebot_q3_70.jpg"
+  },
+  {
+   "id": "ninebot_q90",
+   "brand": "Ninebot",
+   "name": "Segway-Ninebot Q90",
+   "class": "мопед · права M",
+   "specs": [
+    "мотор 400 Вт",
+    "до 25 км/ч",
+    "48 В 25 А·ч, литиевая",
+    "запас хода 95 км",
+    "масса 55 кг"
+   ],
+   "note": null,
+   "price_from_rub": 131700,
+   "price_to_rub": 140900,
+   "photo": "foto/ninebot_q90.jpg"
+  },
+  {
+   "id": "niu_none",
+   "brand": "NIU",
+   "name": "NIU N One",
+   "class": "мопед · права M",
+   "specs": [
+    "мотор 800 Вт, пиковая 1 800 Вт",
+    "до 47 км/ч",
+    "60 В 20 А·ч, свинцовая",
+    "запас хода 44 км",
+    "масса 101 кг"
+   ],
+   "note": "Самый доступный мопед NIU",
+   "price_from_rub": 135600,
+   "price_to_rub": 139500,
+   "photo": "foto/niu_none.jpg"
+  },
+  {
+   "id": "niu_o2_citi",
+   "brand": "NIU",
+   "name": "NIU O2 Citi",
+   "class": "мопед · права M",
+   "specs": [
+    "мотор 1 000 Вт",
+    "до 45 км/ч",
+    "60 В 20 А·ч, свинцовая",
+    "запас хода 31 км",
+    "масса 87 кг"
+   ],
+   "note": "Новинка июля 2026, мотор 1000 Вт",
+   "price_from_rub": 134500,
+   "price_to_rub": 138500,
+   "photo": "foto/niu_o2_citi.jpg"
+  },
+  {
+   "id": "luyuan_moda50q",
+   "brand": "Luyuan",
+   "name": "Luyuan Moda50-Q",
+   "class": "мопед · права M",
+   "specs": [
+    "мотор 600 Вт, пиковая 800 Вт",
+    "до 45 км/ч",
+    "60 В 21 А·ч, графеновая свинцовая",
+    "запас хода 65 км",
+    "масса 56 кг"
+   ],
+   "note": "Лёгкий — 56 кг; мотор с жидкостным охлаждением",
+   "price_from_rub": 114100,
+   "price_to_rub": 120700,
+   "photo": "foto/luyuan_moda50q.jpg"
+  },
+  {
+   "id": "luyuan_moda8y",
+   "brand": "Luyuan",
+   "name": "Luyuan Moda8Y",
+   "class": "мопед · права M",
+   "specs": [
+    "мотор 800 Вт, пиковая 1 200 Вт",
+    "до 41 км/ч",
+    "60 В 20 А·ч, графеновая свинцовая",
+    "запас хода 60 км",
+    "масса 63 кг"
+   ],
+   "note": null,
+   "price_from_rub": 120300,
+   "price_to_rub": 126000,
+   "photo": "foto/luyuan_moda8y.jpg"
+  },
+  {
+   "id": "xinri_anna",
+   "brand": "Xinri",
+   "name": "Xinri Anna",
+   "class": "мопед · права M",
+   "specs": [
+    "мотор 800 Вт",
+    "до 45 км/ч",
+    "60 В 20 А·ч, свинцовая",
+    "запас хода 45 км",
+    "масса 79 кг"
+   ],
+   "note": "Новинка апреля 2026, самый доступный мопед Xinri",
+   "price_from_rub": 118500,
+   "price_to_rub": 123700,
+   "photo": "foto/xinri_anna.jpg"
+  },
+  {
+   "id": "xinri_babi",
+   "brand": "Xinri",
+   "name": "Xinri Barbie",
+   "class": "мопед · права M",
+   "specs": [
+    "мотор 600 Вт",
+    "до 42 км/ч",
+    "60 В 20 А·ч, свинцовая",
+    "запас хода 45 км",
+    "масса 79 кг"
+   ],
+   "note": "Низкая посадка, TCS, 4G-модуль и приложение",
+   "price_from_rub": 131000,
+   "price_to_rub": 137500,
+   "photo": "foto/xinri_babi.jpg"
+  },
+  {
+   "id": "xiaodao_redian",
+   "brand": "Xiaodao",
+   "name": "Xiaodao Redian",
+   "class": "мопед · права M",
+   "specs": [
+    "мотор 1 000 Вт, пиковая 1 500 Вт",
+    "до 47 км/ч",
+    "60 или 72 В, 20 или 32 А·ч",
+    "запас хода 50–90 км",
+    "масса 95 кг"
+   ],
+   "note": "Цена зависит от батареи: от простой свинцовой до графеновой на 90 км",
+   "price_from_rub": 132500,
+   "price_to_rub": 150800,
+   "photo": "foto/xiaodao_redian.jpg"
+  },
+  {
+   "id": "xiaodao_lexiang",
+   "brand": "Xiaodao",
+   "name": "Xiaodao Lexiang",
+   "class": "мопед · права M",
+   "specs": [
+    "мотор 1 000 Вт",
+    "до 47 км/ч",
+    "60 В 20 или 32 А·ч — три версии",
+    "запас хода 50–70 км",
+    "масса 86 кг (сертификат КНР)"
+   ],
+   "note": null,
+   "price_from_rub": 131000,
+   "price_to_rub": 145300,
+   "photo": "foto/xiaodao_lexiang.jpg"
+  },
+  {
+   "id": "wuyang_honda_uq3_em",
+   "brand": "Wuyang-Honda",
+   "name": "Wuyang-Honda UQ3 EM",
+   "class": "мопед · права M",
+   "specs": [
+    "мотор 1 000 Вт, пиковая 2 200 Вт",
+    "до 48 км/ч",
+    "72 В 23 А·ч, свинцовая",
+    "запас хода 42 км",
+    "масса 114 кг"
+   ],
+   "note": "Совместное предприятие Honda; новинка августа 2026",
+   "price_from_rub": 154500,
+   "price_to_rub": 166200,
+   "photo": "foto/wuyang_honda_uq3_em.jpg"
+  },
+  {
+   "id": "zeeho_ae3_pro",
+   "brand": "ZEEHO",
+   "name": "ZEEHO AE3 Pro",
+   "class": "мопед · права M",
+   "specs": [
+    "мотор 1 100 Вт, пиковая 1 750 Вт",
+    "до 47 км/ч",
+    "60 В 20 А·ч, свинцовая",
+    "запас хода 45 км",
+    "масса 105 кг"
+   ],
+   "note": "Электробренд CFMOTO, версия 2026 года",
+   "price_from_rub": 145300,
+   "price_to_rub": 154500,
+   "photo": "foto/zeeho_ae3_pro.jpg"
+  },
+  {
+   "id": "jinjian_kuyou_dq",
+   "brand": "Jinjian",
+   "name": "Jinjian Kuyou DQ",
+   "class": "мопед · права M",
+   "specs": [
+    "мотор 600 Вт, пиковая 1 000 Вт",
+    "до 45 км/ч",
+    "72 В 20 А·ч, графеновая свинцовая",
+    "запас хода 52 км",
+    "масса 90 кг"
+   ],
+   "note": "Недорогой городской мопед из Тяньцзиня, батарея 72 В",
+   "price_from_rub": 123100,
+   "price_to_rub": 129300,
+   "photo": "foto/jinjian_kuyou_dq.jpg"
+  },
+  {
+   "id": "phoenix_luna",
+   "brand": "Phoenix",
+   "name": "Phoenix Luna",
+   "class": "мопед · права M",
+   "specs": [
+    "мотор 1 200 Вт, пиковая 1 500 Вт",
+    "до 47 км/ч",
+    "60 В 28 А·ч, графеновая свинцовая",
+    "запас хода 55 км",
+    "масса 92 кг"
+   ],
+   "note": "Старейшая велосипедная марка Китая; большая батарея 60 В 28 А·ч",
+   "price_from_rub": 122200,
+   "price_to_rub": 130100,
+   "photo": "foto/phoenix_luna.jpg"
+  },
+  {
+   "id": "saige_ruili",
+   "brand": "Saige",
+   "name": "Saige Ruili",
+   "class": "мопед · права M",
+   "specs": [
+    "мотор 800 Вт, пиковая 1 200 Вт",
+    "до 47 км/ч",
+    "72 В 32 А·ч, свинцовая",
+    "запас хода 80 км",
+    "масса 92 кг"
+   ],
+   "note": "Ёмкая батарея 72 В 32 А·ч — 80 км на одной зарядке",
+   "price_from_rub": 131900,
+   "price_to_rub": 139600,
+   "photo": "foto/saige_ruili.jpg"
+  },
+  {
+   "id": "beite_n9l",
+   "brand": "Beite",
+   "name": "Beite N9L",
+   "class": "мопед · права M",
+   "specs": [
+    "мотор 1 200 Вт",
+    "до 38 км/ч",
+    "72 В 32 А·ч, свинцовая",
+    "запас хода 90 км",
+    "масса 99 кг (сертификат КНР)"
+   ],
+   "note": "Один из самых дальнобойных: 90 км на одной зарядке",
+   "price_from_rub": 150500,
+   "price_to_rub": 156000,
+   "photo": "foto/beite_n9l.jpg"
+  },
+  {
+   "id": "shouqu_y3_70c_new",
+   "brand": "Shouqu",
+   "name": "Shouqu Y3 70C New",
+   "class": "мопед · права M",
+   "specs": [
+    "мотор 800 Вт, пиковая 2 100 Вт",
+    "до 47 км/ч",
+    "60 В 20 А·ч, свинцовая",
+    "запас хода 48 км",
+    "масса 109 кг"
+   ],
+   "note": "Спортивный вид, пиковая мощность 2100 Вт, зарядка за 3 часа",
+   "price_from_rub": 144900,
+   "price_to_rub": 159300,
+   "photo": "foto/shouqu_y3_70c_new.jpg"
+  },
+  {
+   "id": "naxeon_cc3",
+   "brand": "NAXEON",
+   "name": "NAXEON CC3",
+   "class": "мопед · права M",
+   "specs": [
+    "мотор 1 200 Вт, пиковая 1 700 Вт",
+    "до 45 км/ч",
+    "60 В 20 А·ч, свинцовая",
+    "запас хода 50 км",
+    "масса 95 кг"
+   ],
+   "note": "Молодёжный мини-скутер: крупный протектор, сиденье 750 мм",
+   "price_from_rub": 141200,
+   "price_to_rub": 145100,
+   "photo": "foto/naxeon_cc3.jpg"
+  }
+ ]
+}

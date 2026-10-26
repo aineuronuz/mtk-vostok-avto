@@ -7,6 +7,7 @@
   new/data/faq.json — частые вопросы; new/src/s.css, s.js — оформление.
 Курс: ЦБ — cbr-xml-daily.ru; курс юаня для расчёта — ВТБ на сегодня (day_rate(), «Авто» 11.10.2026), записывается
 в new/data/kurs_dnya.json — оттуда его берут КП. Цены всех трёх разделов (Каталог, Авто в Китае, Премиум) — по нему.
+«Мопеды» — электромопеды «Восток-Мото» из выгрузки проекта «Мото» (moto_page), цены в ней уже в рублях.
 Запуск: python3 new/site.py [--offline]
 """
 import hashlib
@@ -37,6 +38,7 @@ AC = Path.home() / "auto-china"
 CARS = AC / "catalog" / "cars"
 CARS_MTK = AC / "catalog" / "cars_plate_mtk"           # те же фото с номером «ВОСТОК-АВТО», как в каталоге МТК
 MTK = AC / "mtk"
+MOTO = Path.home() / "KATE" / "мото" / "catalog"          # выгрузка «Мото» для сайта: out/site/mopedy.json и out/site/foto/, логотип «Восток-Мото»
 MAIN_IMG = ROOT / "docs" / "assets" / "img"            # фото основного сайта (выданные, специалисты)
 BOOKMAN = "/usr/share/fonts/opentype/urw-base35/URWBookman-Demi.otf"
 TODAY = date.today()
@@ -52,7 +54,7 @@ TEAM = _mb.TEAM
 MAX_HREF = "https://max.ru/u/f9LHodD0cOLQzwPoUyWBoejqc5iq940FAYmSIsMAm8Hr1FcNu85zWG126zY"
 CHANNEL = "https://t.me/mtk_vostok_avto"
 
-MENU = [("katalog/", "Каталог"), ("premium/", "Премиум"), ("avto/", "Авто в Китае"),("kak-kupit/", "Как купить"), ("stoimost/", "Стоимость"),
+MENU = [("katalog/", "Каталог"), ("premium/", "Премиум"), ("mopedy/", "Мопеды"), ("avto/", "Авто в Китае"),("kak-kupit/", "Как купить"), ("stoimost/", "Стоимость"),
         ("vydannye/", "Выданные"), ("voprosy/", "Вопросы"), ("kontakty/", "Контакты")]
 PAGES = []                                              # (путь, приоритет) — для sitemap.xml
 MIN_YEAR = 2022                                         # машины 2021 года не показывать (Юрий 06.10.2026)
@@ -931,6 +933,90 @@ def premium_page(prem, rates):
          body, active="premium/", jsonld=ld, og=cards[0]["img"], prio="0.8")
 
 
+def load_moto():
+    """Электромопеды «Восток-Мото» (Юрий 24.10 и 26.10.2026, задача «Авто» 26.10.2026): данные и фото — выгрузка «Мото»
+    (MOTO/out/site), их не правим; копия json — new/data/mopedy.json (сборка без выгрузки идёт по ней и уже сделанным фото)."""
+    src, f = MOTO / "out" / "site" / "mopedy.json", DATA / "mopedy.json"
+    if src.exists():
+        shutil.copyfile(src, f)
+    if not f.exists():
+        return None
+    d = json.loads(f.read_text())
+    out = IMG / "moto"
+    out.mkdir(parents=True, exist_ok=True)
+    for m in d["mopeds"]:
+        ph, dst = MOTO / "out" / "site" / m["photo"], out / f'{m["id"]}.webp'
+        if ph.exists():
+            m["size"] = webp(ph, dst, 750, 80)
+        elif dst.exists():
+            with Image.open(dst) as im:
+                m["size"] = im.size
+    for x in out.glob("*.webp"):                       # фото мопедов, которых больше нет в выгрузке
+        if x.stem not in {m["id"] for m in d["mopeds"]} | {"logo"}:
+            x.unlink()
+    lg = MOTO / "logo" / "family" / "Vostok-Moto-logo-izumrud-4.png"
+    if lg.exists() and (not (out / "logo.webp").exists() or (out / "logo.webp").stat().st_mtime < lg.stat().st_mtime):
+        im = Image.open(lg).convert("RGBA")
+        im = im.crop(im.getchannel("A").getbbox()).resize((240, 240), Image.LANCZOS)
+        im.save(out / "logo.webp", quality=90, method=6)
+    first = next((m for m in d["mopeds"] if m.get("size")), None)
+    if first and (MOTO / "out" / "site" / first["photo"]).exists():   # превью ссылки
+        im = Image.open(MOTO / "out" / "site" / first["photo"]).convert("RGB")
+        im.resize((1200, round(im.height * 1200 / im.width)), Image.LANCZOS).save(out / "og.jpg", quality=82)
+    lost = [m["name"] for m in d["mopeds"] if not m.get("size")]
+    if lost:
+        print("Мопеды без фото (на сайт не идут):", ", ".join(lost))
+    d["mopeds"] = [m for m in d["mopeds"] if m.get("size")]
+    return d
+
+
+MOTO_FACTS = ["Ставить на&nbsp;учёт в&nbsp;ГИБДД не&nbsp;нужно", "Номера не&nbsp;нужны", "ПТС не&nbsp;нужен", "ОСАГО не&nbsp;нужно",
+              "Права категории M или любой другой: A,&nbsp;B,&nbsp;C", "Ездить можно с&nbsp;16&nbsp;лет"]   # как на обложке каталога «Восток-Мото»
+
+
+def moto_price(m):
+    a, b = m["price_from_rub"], m.get("price_to_rub")
+    return f'<i>цена от</i> {rub(a)}' + (f' <i>до</i> {rub(b)}' if b and b != a else "")
+
+
+def moto_page(d):
+    """Электромопеды из Китая «Восток-Мото» (Юрий 26.10.2026: раздел с мопедами, фото и ценами): карточки как в клиентском каталоге
+    «Восток-Мото» — фото, класс, характеристики, заметка, «цена от … до …» (себестоимость до Ижевска + 20 000 ₽, решение Юрия 26.10;
+    считает «Мото» по курсу на дату выгрузки, сайт не пересчитывает). Шлемы не берём."""
+    ms, date_ = d["mopeds"], d["date"]
+    brands = list(dict.fromkeys(m["brand"] for m in ms))
+    chips = "".join(f'<button class="chip" type="button" data-v="{slugify(b)}">{E(b)} <i>{sum(m["brand"] == b for m in ms)}</i></button>' for b in brands)
+    grid = "".join(f'<div class="card pc mc" data-brand="{slugify(m["brand"])}"><div class="im ct"><img src="{u("img/moto/" + m["id"] + ".webp")}" alt="{E(m["name"])}, электромопед" loading="lazy" width="{m["size"][0]}" height="{m["size"][1]}"></div>'
+                   f'<div class="t"><h3>{E(m["name"])}</h3><span class="cl">{E(m["class"])}</span>'
+                   f'<ul class="ms">{"".join(f"<li>{E(x)}</li>" for x in m["specs"])}</ul>'
+                   + (f'<p class="mn">{E(m["note"])}</p>' if m.get("note") else "")
+                   + f'<div class="pr">{moto_price(m)}</div></div></div>' for m in ms)
+    lo = min(m["price_from_rub"] for m in ms)
+    facts = "".join(f"<li>{t}</li>" for t in MOTO_FACTS) + '<li class="w">Шлем обязателен</li>'
+    body = f"""
+<section class="phead"><div class="wrap">{crumbs((None, "Мопеды"))}
+<div class="mhd"><img class="mlogo" src="{u("img/moto/logo.webp")}" alt="Восток-Мото" width="120" height="120">
+<h1 class="rv in">Электромопеды <em>из&nbsp;Китая</em></h1></div>
+<p class="lead">«Восток-Мото»: {len(ms)} {plural(len(ms), "модель", "модели", "моделей")} до&nbsp;50&nbsp;км/ч и&nbsp;до&nbsp;4&nbsp;кВт под&nbsp;права категории M. Цены по&nbsp;курсу на&nbsp;{date_}: цена зависит от&nbsp;курса&nbsp;— актуальную цену уточняйте.</p>
+</div></section>
+<section class="sec tight prem moto"><div class="wrap">
+<ul class="mfacts">{facts}</ul>
+<div class="pfl"><div class="chips" data-f="brand" data-one><button class="chip all" type="button" data-reset>Все <i>{len(ms)}</i></button>{chips}</div>
+<span class="cnt">Найдено: <b id="cnt">{len(ms)}</b></span></div>
+<div class="list" data-list>{grid}</div>
+<p class="empty" id="empty">Моделей нет. <a class="more" href="#" data-reset>Показать все</a></p>
+<div class="box pcta"><div><h3>Узнать актуальную цену</h3><p>Цена зависит от&nbsp;курса юаня. Напишите&nbsp;— подберём модель и&nbsp;цвет и&nbsp;назовём цену на&nbsp;сегодня.</p></div>
+<a class="btn b" href="{u("kontakty/")}">Написать специалисту <span class="ar">→</span></a></div>
+</div></section>"""
+    ld = [bc_ld(("mopedy/", "Мопеды")),
+          {"@context": "https://schema.org", "@type": "ItemList", "name": "Электромопеды из Китая «Восток-Мото»",
+           "itemListElement": [{"@type": "ListItem", "position": i, "name": m["name"]} for i, m in enumerate(ms, 1)]}]
+    page("mopedy/", "Электромопеды из Китая «Восток-Мото»: цены и характеристики | МТК Восток-Авто",
+         f"{len(ms)} {plural(len(ms), 'модель', 'модели', 'моделей')} электромопедов из Китая: {', '.join(brands[:4])} и другие. До 50 км/ч, права категории M, "
+         f"учёт в ГИБДД не нужен. Цена от {html.unescape(rub(lo))}.",
+         body, active="mopedy/", jsonld=ld, og="img/moto/og.jpg", prio="0.8")
+
+
 def how_page(faq):
     tl = []
     for n, h, p, pay, ph in STEPS:
@@ -1030,7 +1116,7 @@ def contacts_page():
          body, active="kontakty/", jsonld=[bc_ld(("kontakty/", "Контакты")), ORG], prio="0.7")
 
 
-def extras(models, kp, rates):
+def extras(models, kp, rates, moto=None):
     (OUT / "sitemap.xml").write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + "".join(
         f"<url><loc>{SITE}{u(p)}</loc><lastmod>{TODAY.isoformat()}</lastmod><priority>{pr}</priority></url>\n" for p, pr in PAGES) + "</urlset>\n")
     lines = [f"# МТК Восток-Авто", "", "> Международная транспортная компания «Восток-Авто»: новые и б/у автомобили из Китая под ключ для частных покупателей в России — "
@@ -1042,6 +1128,9 @@ def extras(models, kp, rates):
     if kp:
         lines += ["", f"## Авто в Китае ({len(kp)} машин, цена под ключ на {ddmm(TODAY)})", ""]
         lines += [f"- [{c['title']} {c.get('year') or ''}]({SITE}{u('avto/' + c['slug'] + '/')}): {kp_line(c)}; {c['total']:,} ₽ под ключ, {c.get('city') or ''}".replace(",", " ") for c in kp]
+    if moto and moto["mopeds"]:
+        lines += ["", f"## Мопеды: электромопеды «Восток-Мото» ({len(moto['mopeds'])} моделей, права категории M, цены по курсу на {moto['date']})", ""]
+        lines += [f"- [{m['name']}]({SITE}{u('mopedy/')}): {', '.join(m['specs'])}; {html.unescape(re.sub('<[^>]+>', '', moto_price(m)))}" for m in moto["mopeds"]]
     lines += ["", "## Контакты", ""] + [f"- {p['name']} — {p['note']}: {p['tel']}, Telegram @{p['tg']}" for p in TEAM] + [f"- Telegram-канал: {CHANNEL}", ""]
     (OUT / "llms.txt").write_text("\n".join(lines))
     (OUT / "404.html").write_text(f"""<!doctype html><html lang="ru"><head><meta charset="utf-8"><title>Страница не найдена — МТК Восток-Авто</title>
@@ -1114,13 +1203,16 @@ def main():
         avto_page(kp, rates)
         for c in kp:
             car_page(c, kp, models, rates)
+    moto = load_moto()
+    if moto and moto["mopeds"]:
+        moto_page(moto)
     how_page(faq)
     price_page(kp, rates)
     deliv_page()
     if faq:
         faq_page(faq)
     contacts_page()
-    extras(models, kp, rates)
+    extras(models, kp, rates, moto)
     (DATA / "last_build.json").write_text(json.dumps({"date": TODAY.isoformat(), "rates": rates, "models": len(models), "kp": len(kp), "pages": len(PAGES)}, ensure_ascii=False, indent=1))
     size = sum(f.stat().st_size for f in OUT.rglob("*") if f.is_file())
     print(f"страниц {len(PAGES)}, моделей {len(models)}, машин {len(kp)}, курс {vtb} ({src}), ЦБ {cbr['cny']:.4f}/{cbr['eur']:.2f}, всего {size / 1e6:.1f} МБ")
