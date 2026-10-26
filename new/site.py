@@ -473,7 +473,8 @@ def model_card(m, vt=True):
 
 def load_kp(rates):
     """Машины из КП: июнь–сентябрь — new/data/kp_cars.json, с 06.10.2026 — сделки kp_v3 «Авто» (kp_deals.py, каждое утро
-    и при каждой сборке берутся все, новые — сразу; Юрий 26.10.2026). Одна машина в обоих списках — по сделке."""
+    и при каждой сборке берутся все, новые — сразу; Юрий 26.10.2026). Одна машина в обоих списках — по сделке.
+    И объявления che168, по 5 в день (che_feed.py, data/che_cars.json; Юрий 26.10.2026)."""
     p = DATA / "kp_cars.json"
     spec = importlib.util.spec_from_file_location("mtk_price", NEW / "price.py")
     pm = importlib.util.module_from_spec(spec)
@@ -494,7 +495,8 @@ def load_kp(rates):
             c["slug"] += "-2"
         slugs.add(c["slug"])
         c["body"] = (extra.get(c.get("catalog_name") or "") or {}).get("body")
-    cars = [c for c in old + deals if not c.get("year") or c["year"] >= MIN_YEAR]
+    che = json.loads((DATA / "che_cars.json").read_text()) if (DATA / "che_cars.json").exists() else []   # объявления che168 (che_feed.py)
+    cars = [c for c in old + deals + che if not c.get("year") or c["year"] >= MIN_YEAR]
     for c in cars:
         r = (pm.calc_deal if c.get("deal") else pm.calc)(c, rates["vtb"], rates["cny"], rates["eur"], TODAY)
         c["price"] = r
@@ -514,6 +516,9 @@ def kp_imgs(c):
         c["imgs"].append(i)
     if ph:
         webp(ph[0], d / "c.webp", 720, 72)
+    if not ph and d.exists():                                    # исходники пропали — страница остаётся с уже сделанными фото
+        c["imgs"] = sorted(int(x.stem) for x in d.glob("*.webp") if x.stem.isdigit())
+        return
     for x in (d.glob("*.webp") if d.exists() else []):          # фото сверх нынешних (в сделке их стало меньше)
         n = x.stem.lstrip("t")
         if n.isdigit() and int(n) > len(ph):
@@ -540,12 +545,17 @@ def kp_line(c):
     return ", ".join(b for b in bits if b)
 
 
+def che_date(c):
+    return ddmm(date.fromisoformat(c["che"]["added"]))
+
+
 def kp_card(c, vt=True):
     """Карточка машины из КП: без города выдачи (Юрий 26.10.2026 — доставляем в любой город России)."""
     return (f'<a class="card" href="{u("avto/" + c["slug"] + "/")}"{" data-vt" if vt else ""} data-fuel="{c["fuel_key"]}" data-feat="{"awd" if c.get("awd") else ""}"'
             f' data-brand="{E(c.get("brand") or "")}" data-price="{c["total"]}" data-year="{c.get("year") or 0}" data-km="{c.get("mileage_km") or 0}"'
             f' data-name="{E(c["title"])}" data-q="{E((c["title"] + " " + (c.get("brand") or "")).lower())}">'
-            f'<div class="im"><img src="{u("img/kp/" + c["slug"] + "/c.webp")}" alt="{E(c["title"])}" loading="lazy" width="720" height="540"></div>'
+            f'<div class="im"><img src="{u("img/kp/" + c["slug"] + "/c.webp")}" alt="{E(c["title"])}" loading="lazy" width="720" height="540">'
+            + (f'<span class="tag">Объявление в&nbsp;Китае от&nbsp;{che_date(c)}</span>' if c.get("source") == "che168" else "") + '</div>'
             f'<div class="t"><h3>{E(c["title"])} <span class="yr">{c.get("year") or ""}</span></h3><div class="sp">{E(kp_line(c))}</div>'
             f'<div class="pr">{rub(c["total"])}<small>под ключ на&nbsp;{ddmm(TODAY)}</small></div></div></a>')
 
@@ -870,7 +880,7 @@ def avto_page(kp, rates):
     body = f"""
 <section class="phead">{phv("avto")}<div class="wrap">{crumbs((None, "Авто в Китае"))}
 <h1 class="rv in">Авто в&nbsp;Китае<br><em>с&nbsp;ценой на&nbsp;сегодня</em></h1>
-<p class="lead">Реальные машины, которые мы нашли и&nbsp;посчитали для&nbsp;клиентов летом и&nbsp;осенью. Цена под&nbsp;ключ пересчитана {ddmm(TODAY)} по&nbsp;курсу юаня {f"{rates['vtb']:.2f}".replace(".", ",")}&nbsp;₽. Если машину уже продали&nbsp;— найдём такую&nbsp;же.</p>
+<p class="lead">Реальные машины из&nbsp;наших расчётов для&nbsp;клиентов и&nbsp;свежие объявления в&nbsp;Китае&nbsp;— каждый день новые. Цена под&nbsp;ключ пересчитана {ddmm(TODAY)} по&nbsp;курсу юаня {f"{rates['vtb']:.2f}".replace(".", ",")}&nbsp;₽. Если машину уже продали&nbsp;— найдём такую&nbsp;же.</p>
 </div></section>
 <section class="sec tight"><div class="wrap lay">
 <aside class="flt" aria-label="Фильтры">
@@ -909,7 +919,8 @@ def car_page(c, kp, models, rates):
     kv = [("Год", c.get("year")), ("Пробег", f'{c["mileage_km"]:,} км'.replace(",", " ") if c.get("mileage_km") is not None else None),
           ("Двигатель", (f'{c["volume_cc"] / 1000:.1f} л'.replace(".", ",") if c.get("volume_cc") else c.get("fuel_label"))),
           ("Мощность", f'{c["power_hp"]} л.с.' if c.get("power_hp") else None)]
-    rows = [("Год выпуска", f'{c["year"]}' + (f', {c["month"]:02d} месяц' if c.get("month") else "") if c.get("year") else None),
+    rows = [("Первая регистрация" if c.get("source") == "che168" else "Год выпуска",
+             f'{c["year"]}' + (f', {c["month"]:02d} месяц' if c.get("month") else "") if c.get("year") else None),
             ("Пробег", kv[1][1]), ("Топливо", c.get("fuel_label")), ("Объём двигателя", f'{c["volume_cc"]} см³' if c.get("volume_cc") else None),
             ("Мощность", f'{c["power_hp"]} л.с.' + (f' ({c["power_kw"]} кВт)' if c.get("power_kw") else "") if c.get("power_hp") else None),
             ("Батарея", f'{c["battery_kwh"]:g} кВт·ч'.replace(".", ",") if c.get("battery_kwh") else None), ("Запас хода", f'{c["range_km"]} км' if c.get("range_km") else None),
@@ -933,6 +944,7 @@ def car_page(c, kp, models, rates):
 <div><div class="box pbox"><p class="kick">Итого под ключ</p><div class="tot">{rub(p["total"])}</div>
 <p class="rt">По&nbsp;курсу юаня {f"{rates['vtb']:.2f}".replace(".", ",")}&nbsp;₽ на&nbsp;{ddmm(TODAY)}. Цена пересчитывается каждый день.</p>
 <p class="rt">Доставим в&nbsp;любой город России, доставку посчитаем отдельно.</p>
+{f'<p class="rt">Объявление в&nbsp;Китае от&nbsp;{che_date(c)}.</p>' if c.get("source") == "che168" else ""}
 <details><summary>Из чего складывается цена</summary><table class="brk">{brk}</table></details>
 <div class="btns"><a class="btn b" href="{u("kontakty/")}">Заказать этот автомобиль</a><a class="btn ob" href="{u("kontakty/")}">Подобрать похожий</a></div>
 <p class="sold">Объявления в&nbsp;Китае живут недолго. Если эту машину уже продали, найдём такую&nbsp;же: год, пробег и&nbsp;цена будут близки.</p></div></div>
