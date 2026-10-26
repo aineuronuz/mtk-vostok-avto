@@ -43,6 +43,9 @@ if(dvs.length){const run=v=>{const p=v.play();if(p&&p.catch)p.catch(()=>{})};
 const W=$('#words');let ws=[];
 if(W){W.innerHTML=W.innerHTML.split(/(\s+)/).map(t=>{if(/^\s+$/.test(t)||!t)return t;const k=t.includes('*');return `<span class="w${k?' k':''}">${t.replace(/\*/g,'')}</span>`}).join('');ws=$$('#words .w')}
 
+// лента машин на главной: при каждом открытии в новом порядке (Юрий 26.10.2026; набор на день выбирает сборка)
+$$('[data-shuffle]').forEach(r=>{const a=[...r.children];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}a.forEach(c=>r.appendChild(c))});
+
 // ленты со стрелками
 $$('[data-reel]').forEach(b=>{const r=document.getElementById(b.dataset.reel);b.onclick=()=>r.scrollBy({left:+b.dataset.d*r.clientWidth*.8,behavior:'smooth'})});
 
@@ -76,8 +79,10 @@ if(L){
     if(cnt)cnt.textContent=n;if(emp)emp.classList.toggle('on',n==0);
     if(push){const p=new URLSearchParams();for(const k in s)p.set(k,Array.isArray(s[k])?s[k].join(','):s[k]);if(sortSel&&sortSel.selectedIndex>0)p.set('sort',sortSel.value);
       history.replaceState(null,'',location.pathname+(p.toString()?'?'+p:''))}};
+  // плитки каталога (Электро, Гибриды, Бензин, Полный привод): после выбора страница плавно уходит к списку моделей (Юрий 26.10.2026)
+  const toList=()=>{const t=L.closest('.lay')||L,h=$('#hdr'),hh=(h?h.offsetHeight:90)+16;scrollTo({top:t.getBoundingClientRect().top+scrollY-hh,behavior:RM?'auto':'smooth'})};
   groups.forEach(g=>{if(g.matches('.chips,.tiles'))g.addEventListener('click',e=>{const c=e.target.closest('[data-v]');if(!c)return;
-      if(g.dataset.one!=null)$$('[data-v]',g).forEach(x=>{if(x!=c)x.classList.remove('on')});c.classList.toggle('on');apply()});
+      if(g.dataset.one!=null)$$('[data-v]',g).forEach(x=>{if(x!=c)x.classList.remove('on')});c.classList.toggle('on');apply();if(g.matches('.tiles'))setTimeout(toList,60)});
     else g.addEventListener('input',()=>apply())});
   if(sortSel)sortSel.addEventListener('change',()=>apply());
   $$('[data-reset]').forEach(b=>b.onclick=()=>{groups.forEach(g=>{if(g.matches('.chips,.tiles'))$$('.on',g).forEach(c=>c.classList.remove('on'));else if(g.type=='range')g.value=g.max;else g.value=''});apply()});
@@ -103,10 +108,12 @@ if(G){const ims=$$('img',G),th=$$('.gth img'),gn=$('.gn',G),lb=$('.lbox'),li=lb&
 
 // прокрутка
 const hdr=$('#hdr'),top0=$('.hero,.phead,.mhero'),hc=$('#hc'),fr=$('#fr'),grow=$('#grow'),how=$('#how'),track=$('#track'),prog=$('#prog'),pays=$('#pays'),fin=$('#finbg'),tl=$('.tl');
+const tt=$('.totop');if(tt)tt.addEventListener('click',e=>{e.preventDefault();scrollTo({top:0,behavior:RM?'auto':'smooth'})});
 let ticking=false;
 function frame(){
   ticking=false;const y=scrollY,vh=innerHeight,vw=innerWidth;
   const past=y>(top0?top0.offsetHeight-90:0);hdr.classList.toggle('solid',past);
+  if(tt)tt.classList.toggle('on',y>vh*1.5);
   if(RM)return;
   if(hc&&y<vh*1.2){const p=clamp(y/vh);hc.style.transform=mob()?`translateY(${p*-50}px)`:`translateY(calc(-42% - ${p*80}px))`;hc.style.opacity=mob()?1-p*.9:1-p*1.3}
   if(ws.length){const r=W.getBoundingClientRect(),wp=clamp((vh*.86-r.top)/(r.height+vh*.36)),nOn=Math.round(wp*ws.length*1.08);ws.forEach((w,i)=>w.classList.toggle('on',i<nOn))}
@@ -114,7 +121,7 @@ function frame(){
     fr.style.width=`${60+40*e}vw`;fr.style.height=`${62+38*e}vh`;fr.style.borderRadius=`${28*(1-e)}px`;fr.style.setProperty('--o',clamp((gp-.45)/.3))}
   if(how&&track){if(!mob()){const h=how.getBoundingClientRect(),dist=track.scrollWidth-vw;how.style.height=`${dist+vh}px`;
     const hp=clamp(-h.top/(how.offsetHeight-vh));track.style.transform=`translateX(${-hp*dist}px)`;if(prog)prog.style.setProperty('--p',hp)}else how.style.height=''}
-  if(pays){const pr=pays.getBoundingClientRect(),pp=clamp((vh*.8-pr.top)/(vh*.55));pays.style.setProperty('--p',pp);$$('.pay4',pays).forEach((e,i)=>e.classList.toggle('on',pp>=i/3-.01&&pp>0))}
+  if(pays){const pr=pays.getBoundingClientRect(),pp=clamp((vh*.8-pr.top)/(vh*.55));pays.style.setProperty('--p',pp);const p4=$$('.pay4',pays);p4.forEach((e,i)=>e.classList.toggle('on',pp>=i/(p4.length-1)-.01&&pp>0))}
   if(tl){const r=tl.getBoundingClientRect(),h=clamp(vh*.6-r.top,0,r.height-40);tl.style.setProperty('--h',h+'px');$$('.ts',tl).forEach(s=>s.classList.toggle('on',s.getBoundingClientRect().top+40<vh*.6))}
   $$('.dc').forEach(d=>{const b=d.getBoundingClientRect();if(b.bottom<0||b.top>vh)return;const q=(b.top+b.height/2-vh/2)/vh;$$('img',d).forEach(im=>im.style.transform=`translateY(${q*-6}%)`)});
   if(fin){const fb=fin.getBoundingClientRect();if(fb.top<vh&&fb.bottom>0)fin.style.transform=`translateY(${(fb.top/vh)*-8}%)`}

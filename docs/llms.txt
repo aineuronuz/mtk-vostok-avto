@@ -130,151 +130,151 @@
 
 ## Авто в Китае (111 машин, цена под ключ на 26.10.2026)
 
-- [Kia KX1 1.4 2022](https://mtk-vostok-avto.ru/avto/kia-kx1-1-4-2022-120000km/): 120 000 км  1368 см³  100 л.с.  Бензин  передний привод; 1 238 965 ₽ под ключ  Санкт-Петербург
-- [Kia KX1 1.4 2022](https://mtk-vostok-avto.ru/avto/kia-kx1-1-4-2022-42000km/): 42 000 км  1368 см³  100 л.с.  Бензин  передний привод; 1 292 716 ₽ под ключ  Екатеринбург
-- [Geely Coolray 1.4T Platinum 2022](https://mtk-vostok-avto.ru/avto/geely-coolray-1-4t-platinum-2022-55000km/): 55 000 км  1398 см³  141 л.с.  Бензин  передний привод; 1 331 071 ₽ под ключ  Санкт-Петербург
-- [Toyota Yaris L 1.5 2022](https://mtk-vostok-avto.ru/avto/toyota-yaris-l-1-5-2022-30000km/): 30 000 км  1496 см³  107 л.с.  Бензин  передний привод; 1 362 355 ₽ под ключ  Екатеринбург
-- [Kia K3 1.5 2022](https://mtk-vostok-avto.ru/avto/kia-k3-1-5-2022-90000km/): 90 000 км  1499 см³  115 л.с.  Бензин  передний привод; 1 371 567 ₽ под ключ  Санкт-Петербург
-- [Geely Coolray 1.4T 2022](https://mtk-vostok-avto.ru/avto/geely-coolray-1-4t-2022-48000km/): 48 000 км  1398 см³  141 л.с.  Бензин  передний привод; 1 381 073 ₽ под ключ  Санкт-Петербург
-- [Toyota Yaris L 1.5 2022](https://mtk-vostok-avto.ru/avto/toyota-yaris-l-1-5-2022-49000km/): 49 000 км  1496 см³  107 л.с.  Бензин  передний привод; 1 387 357 ₽ под ключ  Екатеринбург
-- [Toyota Yaris L 1.5 CVT Luxury PLUS 2022](https://mtk-vostok-avto.ru/avto/toyota-yaris-l-1-5-cvt-luxury-plus-2022-66000km/): 66 000 км  1496 см³  107 л.с.  Бензин  передний привод; 1 399 858 ₽ под ключ  Екатеринбург
-- [Kia KX1 1.4 2022](https://mtk-vostok-avto.ru/avto/kia-kx1-1-4-2022-35000km/): 35 000 км  1368 см³  100 л.с.  Бензин  передний привод; 1 405 222 ₽ под ключ  Екатеринбург
-- [Kia KX1 1.4 2022](https://mtk-vostok-avto.ru/avto/kia-kx1-1-4-2022-15000km/): 15 000 км  1368 см³  100 л.с.  Бензин  передний привод; 1 455 224 ₽ под ключ  Екатеринбург
-- [Kia KX1 1.4 CVT 2022](https://mtk-vostok-avto.ru/avto/kia-kx1-1-4-cvt-2022-16500km/): 16 500 км  1368 см³  100 л.с.  Бензин  передний привод; 1 492 726 ₽ под ключ  Екатеринбург
-- [Nissan Kicks 1.5 XL 2023](https://mtk-vostok-avto.ru/avto/nissan-kicks-1-5-xl-2023-30000km/): 30 000 км  1498 см³  122 л.с.  Бензин  передний привод; 1 500 169 ₽ под ключ  Екатеринбург
-- [Kia KX1 1.4 CVT 2022](https://mtk-vostok-avto.ru/avto/kia-kx1-1-4-cvt-2022-46000km/): 46 000 км  1368 см³  100 л.с.  Бензин  передний привод; 1 505 227 ₽ под ключ  Екатеринбург
-- [Volkswagen Tharu 1.4TSI 280TSI 2022](https://mtk-vostok-avto.ru/avto/volkswagen-tharu-1-4tsi-280tsi-2022-74000km/): 74 000 км  1395 см³  150 л.с.  Бензин  передний привод; 1 521 870 ₽ под ключ  Екатеринбург
-- [Kia KX1 1.4 2022](https://mtk-vostok-avto.ru/avto/kia-kx1-1-4-2022-39000km/): 39 000 км  1368 см³  100 л.с.  Бензин  передний привод; 1 542 728 ₽ под ключ  Екатеринбург
-- [Volkswagen Tharu 1.4TSI 2022](https://mtk-vostok-avto.ru/avto/volkswagen-tharu-1-4tsi-2022-80000km/): 80 000 км  1395 см³  150 л.с.  Бензин  передний привод; 1 543 122 ₽ под ключ  Санкт-Петербург
-- [Geely Coolray 1.4T Platinum 2022](https://mtk-vostok-avto.ru/avto/geely-coolray-1-4t-platinum-2022-45000km/): 45 000 км  1398 см³  141 л.с.  Бензин  передний привод; 1 543 582 ₽ под ключ  Санкт-Петербург
-- [Geely Coolray 1.4T Diamond 2022](https://mtk-vostok-avto.ru/avto/geely-coolray-1-4t-diamond-2022-55000km/): 55 000 км  1398 см³  141 л.с.  Бензин  передний привод; 1 568 582 ₽ под ключ  Санкт-Петербург
-- [Volkswagen Tharu 280TSI 2WD Flagship 2022](https://mtk-vostok-avto.ru/avto/volkswagen-tharu-280tsi-2wd-flagship-2022-40000km/): 40 000 км  1395 см³  150 л.с.  Бензин  передний привод; 1 580 623 ₽ под ключ  Санкт-Петербург
-- [Hyundai ix35 1.4 TGDi 240TGDi GLS 2023](https://mtk-vostok-avto.ru/avto/hyundai-ix35-1-4-tgdi-240tgdi-gls-2023-63000km/): 63 000 км  1353 см³  140 л.с.  Бензин  передний привод; 1 590 429 ₽ под ключ  Екатеринбург
-- [Volkswagen Tharu 280TSI 2WD Comfort 2022](https://mtk-vostok-avto.ru/avto/volkswagen-tharu-280tsi-2wd-comfort-2022-74000km/): 74 000 км  1395 см³  150 л.с.  Бензин  передний привод; 1 593 124 ₽ под ключ  Санкт-Петербург
-- [Skoda Kamiq 1.5 Comfort 2022](https://mtk-vostok-avto.ru/avto/skoda-kamiq-1-5-comfort-2022-42000km/): 42 000 км  1498 см³  112 л.с.  Бензин  передний привод; 1 596 425 ₽ под ключ  Санкт-Петербург
-- [Volkswagen Tharu 280TSI 2WD Comfort 2022](https://mtk-vostok-avto.ru/avto/volkswagen-tharu-280tsi-2wd-comfort-2022-68000km/): 68 000 км  1395 см³  150 л.с.  Бензин  передний привод; 1 630 626 ₽ под ключ  Санкт-Петербург
-- [Volkswagen Golf 8 Pro 1.4TSI 2022](https://mtk-vostok-avto.ru/avto/volkswagen-golf-8-pro-1-4tsi-2022-45000km/): 45 000 км  1395 см³  150 л.с.  Бензин  передний привод; 1 630 626 ₽ под ключ  Санкт-Петербург
-- [GAC Aion Y Plus 70 2022](https://mtk-vostok-avto.ru/avto/gac-aion-y-plus-70-2022-50000km/): 50 000 км  63 л.с.  510 км хода  Электро  передний привод; 1 646 984 ₽ под ключ  Санкт-Петербург
-- [Honda XR-V 1.5 Comfort 2022](https://mtk-vostok-avto.ru/avto/honda-xr-v-1-5-comfort-2022-70000km/): 70 000 км  1498 см³  131 л.с.  Бензин  передний привод; 1 658 929 ₽ под ключ  Санкт-Петербург
-- [Nissan Kicks 1.5 XV Deluxe 2022](https://mtk-vostok-avto.ru/avto/nissan-kicks-1-5-xv-deluxe-2022-29300km/): 29 300 км  1498 см³  122 л.с.  Бензин  передний привод; 1 662 677 ₽ под ключ  Екатеринбург
-- [Honda XR-V 1.5 CVT Hot 2023](https://mtk-vostok-avto.ru/avto/honda-xr-v-1-5-cvt-hot-2023-58000km/): 58 000 км  1498 см³  124 л.с.  Бензин  передний привод; 1 671 429 ₽ под ключ  Санкт-Петербург
-- [Volkswagen Tharu 280TSI 2WD Comfort 2022](https://mtk-vostok-avto.ru/avto/volkswagen-tharu-280tsi-2wd-comfort-2022-30000km/): 30 000 км  1395 см³  150 л.с.  Бензин  передний привод; 1 674 377 ₽ под ключ  Санкт-Петербург
-- [GAC Aion Y Plus 70 2023](https://mtk-vostok-avto.ru/avto/gac-aion-y-plus-70-2023-60000km/): 60 000 км  63 л.с.  510 км хода  Электро  передний привод; 1 716 421 ₽ под ключ  Санкт-Петербург
-- [Geely Coolray 1.4T 2022](https://mtk-vostok-avto.ru/avto/geely-coolray-1-4t-2022-53000km/): 53 000 км  1398 см³  141 л.с.  Бензин  передний привод; 1 718 589 ₽ под ключ  Санкт-Петербург
-- [Kia KX1 1.4 CVT 2024](https://mtk-vostok-avto.ru/avto/kia-kx1-1-4-cvt-2024-28000km/): 28 000 км  1368 см³  100 л.с.  Бензин  передний привод; 1 725 641 ₽ под ключ  Екатеринбург
-- [Geely Coolray 1.4T 2023](https://mtk-vostok-avto.ru/avto/geely-coolray-1-4t-2023-45000km/): 45 000 км  1398 см³  141 л.с.  Бензин  передний привод; 1 743 868 ₽ под ключ  Санкт-Петербург
-- [Nissan Qashqai 2.0 CVT XV 2022](https://mtk-vostok-avto.ru/avto/nissan-qashqai-2-0-cvt-xv-2022-80000km/): 80 000 км  1997 см³  150 л.с.  Бензин  передний привод; 1 744 437 ₽ под ключ  Екатеринбург
-- [BYD Yuan UP 301 км 2026](https://mtk-vostok-avto.ru/avto/byd-yuan-up-301-km-2026-10000km/): 10 000 км  95 л.с.  301 км хода  Электро  передний привод; 1 745 445 ₽ под ключ  Екатеринбург
-- [Nissan Qashqai 2.0 CVT XV 2022](https://mtk-vostok-avto.ru/avto/nissan-qashqai-2-0-cvt-xv-2022-58000km/): 58 000 км  1997 см³  150 л.с.  Бензин  передний привод; 1 756 937 ₽ под ключ  Екатеринбург
-- [GAC Aion Y Plus 70 2022](https://mtk-vostok-avto.ru/avto/gac-aion-y-plus-70-2022-58000km/): 58 000 км  63 л.с.  510 км хода  Электро  передний привод; 1 768 497 ₽ под ключ  Санкт-Петербург
-- [Honda XR-V 1.5 CVT Obsidian 2022](https://mtk-vostok-avto.ru/avto/honda-xr-v-1-5-cvt-obsidian-2022-39000km/): 39 000 км  1498 см³  131 л.с.  Бензин  передний привод; 1 771 434 ₽ под ключ  Санкт-Петербург
-- [BYD Yuan UP 301 км 2026](https://mtk-vostok-avto.ru/avto/byd-yuan-up-301-km-2026-9000km/): 9 000 км  95 л.с.  301 км хода  Электро  передний привод; 1 780 164 ₽ под ключ  Екатеринбург
-- [Volkswagen Tharu 1.4TSI 2022](https://mtk-vostok-avto.ru/avto/volkswagen-tharu-1-4tsi-2022-65000km/): 65 000 км  1395 см³  150 л.с.  Бензин  передний привод; 1 780 633 ₽ под ключ  Санкт-Петербург
-- [Mazda CX-5 2.0 2WD Comfort 2022](https://mtk-vostok-avto.ru/avto/mazda-cx-5-2-0-2wd-comfort-2022-55000km/): 55 000 км  1998 см³  155 л.с.  Бензин  передний привод; 1 790 933 ₽ под ключ  Санкт-Петербург
-- [Nissan Qashqai 2.0 2022](https://mtk-vostok-avto.ru/avto/nissan-qashqai-2-0-2022-108000km/): 108 000 км  1997 см³  150 л.с.  Бензин  передний привод; 1 803 191 ₽ под ключ  Санкт-Петербург
-- [BYD Yuan UP 301 км 2026](https://mtk-vostok-avto.ru/avto/byd-yuan-up-301-km-2026-300km/): 300 км  95 л.с.  301 км хода  Электро  передний привод; 1 814 881 ₽ под ключ  Екатеринбург
-- [Volkswagen Tharu 280TSI 2WD Fashion 2022](https://mtk-vostok-avto.ru/avto/volkswagen-tharu-280tsi-2wd-fashion-2022-26547km/): 26 547 км  1395 см³  150 л.с.  Бензин  передний привод; 1 818 134 ₽ под ключ  Санкт-Петербург
-- [Changan Qiyuan Q05 405Air 2026](https://mtk-vostok-avto.ru/avto/changan-qiyuan-q05-405air-2026-10000km/): 10 000 км  163 л.с.  405 км хода  Электро  передний привод; 1 818 775 ₽ под ключ  Санкт-Петербург
-- [Honda XR-V 1.5 Comfort 2022](https://mtk-vostok-avto.ru/avto/honda-xr-v-1-5-comfort-2022-33000km/): 33 000 км  1498 см³  131 л.с.  Бензин  передний привод; 1 821 436 ₽ под ключ  Санкт-Петербург
-- [Nissan Kicks 1.5 XV TOP 2023](https://mtk-vostok-avto.ru/avto/nissan-kicks-1-5-xv-top-2023-28000km/): 28 000 км  1498 см³  122 л.с.  Бензин  передний привод; 1 841 705 ₽ под ключ  Екатеринбург
-- [Audi A3 Sportback 35TFSI 2022](https://mtk-vostok-avto.ru/avto/audi-a3-sportback-35tfsi-2022-59000km/): 59 000 км  1395 см³  150 л.с.  Бензин  передний привод; 1 843 136 ₽ под ключ  Санкт-Петербург
-- [Changan Qiyuan Q05 405 Air 2026](https://mtk-vostok-avto.ru/avto/changan-qiyuan-q05-405-air-2026-new/): 0 км  163 л.с.  405 км хода  Электро  передний привод; 1 851 756 ₽ под ключ  Санкт-Петербург
-- [Changan Qiyuan Q05 405Air 2026](https://mtk-vostok-avto.ru/avto/changan-qiyuan-q05-405air-2026-10000km-2/): 10 000 км  163 л.с.  405 км хода  Электро  передний привод; 1 853 492 ₽ под ключ  Санкт-Петербург
-- [Audi A3 Sportback 35TFSI 2022](https://mtk-vostok-avto.ru/avto/audi-a3-sportback-35tfsi-2022-57000km/): 57 000 км  1395 см³  150 л.с.  Бензин  передний привод; 1 855 637 ₽ под ключ  Санкт-Петербург
-- [Nissan Kicks 1.5 XL 2024](https://mtk-vostok-avto.ru/avto/nissan-kicks-1-5-xl-2024-2200km/): 2 200 км  1498 см³  122 л.с.  Бензин  передний привод; 1 866 707 ₽ под ключ  Екатеринбург
-- [Volkswagen Tayron 280TSI 2WD Luxury 2022](https://mtk-vostok-avto.ru/avto/volkswagen-tayron-280tsi-2wd-luxury-2022-48000km/): 48 000 км  1395 см³  150 л.с.  Бензин  передний привод; 1 893 139 ₽ под ключ  Санкт-Петербург
-- [Skoda Superb 1.4TSI TSI280 Premium 2022](https://mtk-vostok-avto.ru/avto/skoda-superb-1-4tsi-tsi280-premium-2022-54741km/): 54 741 км  1395 см³  150 л.с.  Бензин  передний привод; 1 918 139 ₽ под ключ  Санкт-Петербург
-- [Skoda Karoq 1.4TSI TSI280 Luxury 2022](https://mtk-vostok-avto.ru/avto/skoda-karoq-1-4tsi-tsi280-luxury-2022-42000km/): 42 000 км  1395 см³  150 л.с.  Бензин  передний привод; 1 918 139 ₽ под ключ  Санкт-Петербург
-- [Honda XR-V 1.5 CVT Obsidian 2022](https://mtk-vostok-avto.ru/avto/honda-xr-v-1-5-cvt-obsidian-2022-48000km/): 48 000 км  1498 см³  131 л.с.  Бензин  передний привод; 1 921 441 ₽ под ключ  Санкт-Петербург
-- [Volkswagen Tayron 280TSI 2WD Luxury 2022](https://mtk-vostok-avto.ru/avto/volkswagen-tayron-280tsi-2wd-luxury-2022-110000km/): 110 000 км  1395 см³  150 л.с.  Бензин  передний привод; 1 939 257 ₽ под ключ  Санкт-Петербург
-- [Kia Sonet 1.5 CVT 2024](https://mtk-vostok-avto.ru/avto/kia-sonet-1-5-cvt-2024-19000km/): 19 000 км  1497 см³  115 л.с.  Бензин  передний привод; 1 964 330 ₽ под ключ  Санкт-Петербург
-- [Volkswagen Tharu 280TSI 2WD Luxury PLUS 2022](https://mtk-vostok-avto.ru/avto/volkswagen-tharu-280tsi-2wd-luxury-plus-2022-59264km/): 59 264 км  1395 см³  150 л.с.  Бензин  передний привод; 1 976 759 ₽ под ключ  Санкт-Петербург
-- [Honda XR-V 1.5 CVT Obsidian 2022](https://mtk-vostok-avto.ru/avto/honda-xr-v-1-5-cvt-obsidian-2022-5000km/): 5 000 км  1498 см³  131 л.с.  Бензин  передний привод; 2 017 563 ₽ под ключ  Санкт-Петербург
-- [Changan Qiyuan Q05 405 Laser Ultra 2026](https://mtk-vostok-avto.ru/avto/changan-qiyuan-q05-405-laser-ultra-2026-new/): 0 км  163 л.с.  405 км хода  Электро  передний привод; 2 025 347 ₽ под ключ  Санкт-Петербург
-- [Skoda Karoq 1.4TSI TSI280 2022](https://mtk-vostok-avto.ru/avto/skoda-karoq-1-4tsi-tsi280-2022-58000km/): 58 000 км  1395 см³  150 л.с.  Бензин  передний привод; 2 039 262 ₽ под ключ  Санкт-Петербург
-- [Mazda CX-30 2.0 2022](https://mtk-vostok-avto.ru/avto/mazda-cx-30-2-0-2022-58500km/): 58 500 км  1998 см³  158 л.с.  Бензин  передний привод; 2 040 945 ₽ под ключ  Санкт-Петербург
-- [Mazda CX-5 2.0 2WD 2022](https://mtk-vostok-avto.ru/avto/mazda-cx-5-2-0-2wd-2022-65000km/): 65 000 км  1998 см³  158 л.с.  Бензин  передний привод; 2 065 947 ₽ под ключ  Санкт-Петербург
-- [Audi Q3 35TFSI 2022](https://mtk-vostok-avto.ru/avto/audi-q3-35tfsi-2022-70000km/): 70 000 км  1395 см³  150 л.с.  Бензин  передний привод; 2 126 766 ₽ под ключ  Санкт-Петербург
-- [Skoda Karoq 1.4TSI TSI280 Luxury 2022](https://mtk-vostok-avto.ru/avto/skoda-karoq-1-4tsi-tsi280-luxury-2022-21000km/): 21 000 км  1395 см³  150 л.с.  Бензин  передний привод; 2 126 766 ₽ под ключ  Санкт-Петербург
-- [BMW X1 sDrive20Li 1.5T 2022](https://mtk-vostok-avto.ru/avto/bmw-x1-sdrive20li-1-5t-2022-54000km/): 54 000 км  1499 см³  136 л.с.  Бензин  передний привод; 2 167 723 ₽ под ключ  Санкт-Петербург
-- [Nissan X-Trail 2.0 2023](https://mtk-vostok-avto.ru/avto/nissan-x-trail-2-0-2023-55000km/): 55 000 км  1997 см³  150 л.с.  Бензин  передний привод; 2 178 209 ₽ под ключ  Санкт-Петербург
-- [Changan Qiyuan Q05 506Max 2025](https://mtk-vostok-avto.ru/avto/changan-qiyuan-q05-506max-2025-7000km-2/): 7 000 км  163 л.с.  506 км хода  Электро  передний привод; 2 183 314 ₽ под ключ  Санкт-Петербург
-- [Mazda CX-30 2.0 Obsidian 2022](https://mtk-vostok-avto.ru/avto/mazda-cx-30-2-0-obsidian-2022-65000km/): 65 000 км  1998 см³  158 л.с.  Бензин  передний привод; 2 212 070 ₽ под ключ  Санкт-Петербург
-- [Changan Qiyuan Q05 506Max 2025](https://mtk-vostok-avto.ru/avto/changan-qiyuan-q05-506max-2025-6000km/): 6 000 км  163 л.с.  506 км хода  Электро  передний привод; 2 222 756 ₽ под ключ  Екатеринбург
-- [Changan Qiyuan Q05 506Max 2025](https://mtk-vostok-avto.ru/avto/changan-qiyuan-q05-506max-2025-7000km/): 7 000 км  163 л.с.  506 км хода  Электро  передний привод; 2 240 117 ₽ под ключ  Екатеринбург
-- [Changan Qiyuan Q05 506 MAX+ 2026](https://mtk-vostok-avto.ru/avto/changan-qiyuan-q05-506-maxplus-2026-new/): 0 км  163 л.с.  506 км хода  Электро  передний привод; 2 242 272 ₽ под ключ  Санкт-Петербург
-- [Changan Qiyuan Q05 506Max 2025](https://mtk-vostok-avto.ru/avto/changan-qiyuan-q05-506max-2025-4000km/): 4 000 км  163 л.с.  506 км хода  Электро  передний привод; 2 244 008 ₽ под ключ  Санкт-Петербург
-- [Changan Qiyuan Q05 506 Ultra+ 2026](https://mtk-vostok-avto.ru/avto/changan-qiyuan-q05-506-ultraplus-2026-new/): 0 км  163 л.с.  506 км хода  Электро  передний привод; 2 244 008 ₽ под ключ  Санкт-Петербург
-- [Honda XR-V 1.5 Passion 2024](https://mtk-vostok-avto.ru/avto/honda-xr-v-1-5-passion-2024-6000km/): 6 000 км  1498 см³  131 л.с.  Бензин  передний привод; 2 256 928 ₽ под ключ  Санкт-Петербург
-- [Changan Qiyuan Q05 506Max+ 2025](https://mtk-vostok-avto.ru/avto/changan-qiyuan-q05-506maxplus-2025-100km/): 100 км  163 л.с.  506 км хода  Электро  передний привод; 2 313 446 ₽ под ключ  Санкт-Петербург
-- [Changan Qiyuan A06 240Max 2026](https://mtk-vostok-avto.ru/avto/changan-qiyuan-a06-240max-2026-10000km/): 10 000 км  163 л.с.  Гибрид EREV  задний привод; 2 348 163 ₽ под ключ  Санкт-Петербург
-- [Toyota bZ3X 520 Pro 2025](https://mtk-vostok-avto.ru/avto/toyota-bz3x-520-pro-2025-29000km/): 29 000 км  204 л.с.  520 км хода  Электро  передний привод; 2 348 163 ₽ под ключ  Санкт-Петербург
-- [Changan Qiyuan Q05 506 Laser Ultra+ 2026](https://mtk-vostok-avto.ru/avto/changan-qiyuan-q05-506-laser-ultraplus-2026-new/): 0 км  163 л.с.  506 км хода  Электро  передний привод; 2 381 145 ₽ под ключ  Санкт-Петербург
-- [Changan Qiyuan Q05 506 Laser Ultra+ 2026](https://mtk-vostok-avto.ru/avto/changan-qiyuan-q05-506-laser-ultraplus-2026-new-2/): 0 км  163 л.с.  506 км хода  Электро  передний привод; 2 389 673 ₽ под ключ  Санкт-Петербург
-- [Skoda Karoq 1.4TSI TSI280 Flagship 2022](https://mtk-vostok-avto.ru/avto/skoda-karoq-1-4tsi-tsi280-flagship-2022-27000km/): 27 000 км  1395 см³  150 л.с.  Бензин  передний привод; 2 414 280 ₽ под ключ  Санкт-Петербург
-- [Changan Qiyuan A06 510Pro+ 2026](https://mtk-vostok-avto.ru/avto/changan-qiyuan-a06-510proplus-2026-4000km/): 4 000 км  163 л.с.  510 км хода  Электро  задний привод; 2 434 959 ₽ под ключ  Санкт-Петербург
-- [Nissan X-Trail 2.0 2025](https://mtk-vostok-avto.ru/avto/nissan-x-trail-2-0-2025-700km/): 700 км  1997 см³  151 л.с.  Бензин  передний привод; 2 441 703 ₽ под ключ  Санкт-Петербург
-- [Toyota bZ3X 520 Pro 2025](https://mtk-vostok-avto.ru/avto/toyota-bz3x-520-pro-2025-21000km/): 21 000 км  204 л.с.  520 км хода  Электро  передний привод; 2 469 677 ₽ под ключ  Санкт-Петербург
-- [BMW X1 sDrive20Li 1.5T 2023](https://mtk-vostok-avto.ru/avto/bmw-x1-sdrive20li-1-5t-2023-106000km/): 106 000 км  1499 см³  156 л.с.  Бензин  передний привод; 2 471 486 ₽ под ключ  Екатеринбург
-- [Mazda CX-5 2.0 2WD 2023](https://mtk-vostok-avto.ru/avto/mazda-cx-5-2-0-2wd-2023-61000km/): 61 000 км  1998 см³  155 л.с.  Бензин  передний привод; 2 512 085 ₽ под ключ  Санкт-Петербург
-- [Toyota bZ3X 520 Pro 2025](https://mtk-vostok-avto.ru/avto/toyota-bz3x-520-pro-2025-18000km/): 18 000 км  204 л.с.  520 км хода  Электро  передний привод; 2 539 112 ₽ под ключ  Санкт-Петербург
-- [Mazda CX-5 2.0 2WD 2022](https://mtk-vostok-avto.ru/avto/mazda-cx-5-2-0-2wd-2022-57000km/): 57 000 км  1998 см³  155 л.с.  Бензин  передний привод; 2 562 087 ₽ под ключ  Санкт-Петербург
-- [Toyota bZ3X 520 Pro 2025](https://mtk-vostok-avto.ru/avto/toyota-bz3x-520-pro-2025-17000km/): 17 000 км  204 л.с.  520 км хода  Электро  передний привод; 2 573 832 ₽ под ключ  Санкт-Петербург
-- [Toyota bZ3X 520 Pro 2025](https://mtk-vostok-avto.ru/avto/toyota-bz3x-520-pro-2025-37000km/): 37 000 км  204 л.с.  520 км хода  Электро  передний привод; 2 587 297 ₽ под ключ  Екатеринбург
-- [Mazda CX-5 2.0 2025](https://mtk-vostok-avto.ru/avto/mazda-cx-5-2-0-2025-3500km/): 3 500 км  1998 см³  158 л.с.  Бензин  передний привод; 3 215 150 ₽ под ключ  Санкт-Петербург
-- [Subaru Forester 2.0i 2022](https://mtk-vostok-avto.ru/avto/subaru-forester-2-0i-2022-40000km/): 40 000 км  1995 см³  154 л.с.  Бензин  полный привод; 3 286 392 ₽ под ключ  Санкт-Петербург
-- [BMW X1 sDrive20Li 1.5T 2024](https://mtk-vostok-avto.ru/avto/bmw-x1-sdrive20li-1-5t-2024-56000km/): 56 000 км  1499 см³  156 л.с.  Бензин  передний привод; 3 286 671 ₽ под ключ  Екатеринбург
-- [Subaru Forester 2.0i EyeSight 2022](https://mtk-vostok-avto.ru/avto/subaru-forester-2-0i-eyesight-2022-49000km/): 49 000 км  1995 см³  154 л.с.  Бензин  полный привод; 3 448 899 ₽ под ключ  Санкт-Петербург
-- [Volkswagen ID.3 Pure 2022](https://mtk-vostok-avto.ru/avto/volkswagen-id-3-pure-2022-44000km/): 44 000 км  170 л.с.  430 км хода  Электро  задний привод; 3 481 751 ₽ под ключ  Санкт-Петербург
-- [Lexus UX260h 2.0 Hybrid 2023](https://mtk-vostok-avto.ru/avto/lexus-ux260h-2-0-hybrid-2023-70000km/): 70 000 км  1987 см³  184 л.с.  Гибрид (HEV)  передний привод; 3 859 499 ₽ под ключ  Санкт-Петербург
-- [Kia Sportage 2.0 HEV Flagship 2022](https://mtk-vostok-avto.ru/avto/kia-sportage-2-0-hev-flagship-2022-55000km/): 55 000 км  1999 см³  200 л.с.  Гибрид (HEV)  передний привод; 3 869 867 ₽ под ключ  Екатеринбург
-- [Volkswagen ID.4 CROZZ Long Range PURE+ 2022](https://mtk-vostok-avto.ru/avto/volkswagen-id-4-crozz-long-range-pureplus-2022-25000km/): 25 000 км  204 л.с.  600 км хода  Электро  задний привод; 3 906 986 ₽ под ключ  Санкт-Петербург
-- [Hyundai Santa Fe 2.0T 2022](https://mtk-vostok-avto.ru/avto/hyundai-santa-fe-2-0t-2022-22000km/): 22 000 км  1998 см³  230 л.с.  Бензин  полный привод; 3 934 473 ₽ под ключ  Санкт-Петербург
-- [Toyota RAV4 2.0 2024](https://mtk-vostok-avto.ru/avto/toyota-rav4-2-0-2024-21000km/): 21 000 км  1986 см³  171 л.с.  Бензин  полный привод; 4 080 792 ₽ под ключ  Санкт-Петербург
-- [Lexus UX260h 2.0 Hybrid 2022](https://mtk-vostok-avto.ru/avto/lexus-ux260h-2-0-hybrid-2022-30000km/): 30 000 км  1987 см³  184 л.с.  Гибрид (HEV)  передний привод; 4 159 513 ₽ под ключ  Санкт-Петербург
-- [Nissan X-Trail e-POWER 2024](https://mtk-vostok-avto.ru/avto/nissan-x-trail-e-power-2024-12000km/): 12 000 км  156 л.с.  Гибрид e-POWER  полный привод; 4 438 047 ₽ под ключ  Санкт-Петербург
-- [Hyundai Santa Fe 2.0T 2024](https://mtk-vostok-avto.ru/avto/hyundai-santa-fe-2-0t-2024-20000km/): 20 000 км  1998 см³  248 л.с.  Бензин  полный привод; 4 484 663 ₽ под ключ  Санкт-Петербург
-- [Nissan X-Trail e-POWER 2023](https://mtk-vostok-avto.ru/avto/nissan-x-trail-e-power-2023-31000km/): 31 000 км  156 л.с.  Гибрид e-POWER  полный привод; 4 636 553 ₽ под ключ  Санкт-Петербург
-- [Voyah Free FREE+ RWD Qiankun 2025](https://mtk-vostok-avto.ru/avto/voyah-free-freeplus-rwd-qiankun-2025-6500km/): 6 500 км  292 л.с.  318 км хода  Гибрид EREV  задний привод; 5 078 438 ₽ под ключ  Санкт-Петербург
-- [Xiaomi YU7 Max Range 2025](https://mtk-vostok-avto.ru/avto/xiaomi-yu7-max-range-2025-24000km/): 24 000 км  320 л.с.  835 км хода  Электро  задний привод; 5 866 197 ₽ под ключ  Екатеринбург
-- [Voyah Free FREE+ 4WD Qiankun 2025](https://mtk-vostok-avto.ru/avto/voyah-free-freeplus-4wd-qiankun-2025-5500km/): 5 500 км  476 л.с.  259 км хода  Гибрид EREV  полный привод; 6 018 601 ₽ под ключ  Санкт-Петербург
-- [Voyah Free FREE+ 4WD Qiankun 2025](https://mtk-vostok-avto.ru/avto/voyah-free-freeplus-4wd-qiankun-2025-2000km/): 2 000 км  476 л.с.  259 км хода  Гибрид EREV  полный привод; 6 140 113 ₽ под ключ  Санкт-Петербург
-- [Xiaomi YU7 Max Range 2025](https://mtk-vostok-avto.ru/avto/xiaomi-yu7-max-range-2025-26000km/): 26 000 км  320 л.с.  835 км хода  Электро  задний привод; 6 230 737 ₽ под ключ  Екатеринбург
-- [Lixiang L7 Pro 2025](https://mtk-vostok-avto.ru/avto/lixiang-l7-pro-2025-15000km/): 15 000 км  449 л.с.  Гибрид EREV  полный привод; 6 990 621 ₽ под ключ  Екатеринбург
+- [Kia KX1 1.4 2022](https://mtk-vostok-avto.ru/avto/kia-kx1-1-4-2022-120000km/): 120 000 км  1368 см³  100 л.с.  Бензин  передний привод; 1 238 965 ₽ под ключ
+- [Kia KX1 1.4 2022](https://mtk-vostok-avto.ru/avto/kia-kx1-1-4-2022-42000km/): 42 000 км  1368 см³  100 л.с.  Бензин  передний привод; 1 313 968 ₽ под ключ
+- [Geely Coolray 1.4T Platinum 2022](https://mtk-vostok-avto.ru/avto/geely-coolray-1-4t-platinum-2022-55000km/): 55 000 км  1398 см³  141 л.с.  Бензин  передний привод; 1 331 071 ₽ под ключ
+- [Kia K3 1.5 2022](https://mtk-vostok-avto.ru/avto/kia-k3-1-5-2022-90000km/): 90 000 км  1499 см³  115 л.с.  Бензин  передний привод; 1 371 567 ₽ под ключ
+- [Geely Coolray 1.4T 2022](https://mtk-vostok-avto.ru/avto/geely-coolray-1-4t-2022-48000km/): 48 000 км  1398 см³  141 л.с.  Бензин  передний привод; 1 381 073 ₽ под ключ
+- [Toyota Yaris L 1.5 2022](https://mtk-vostok-avto.ru/avto/toyota-yaris-l-1-5-2022-30000km/): 30 000 км  1496 см³  107 л.с.  Бензин  передний привод; 1 383 607 ₽ под ключ
+- [Toyota Yaris L 1.5 2022](https://mtk-vostok-avto.ru/avto/toyota-yaris-l-1-5-2022-49000km/): 49 000 км  1496 см³  107 л.с.  Бензин  передний привод; 1 408 609 ₽ под ключ
+- [Toyota Yaris L 1.5 CVT Luxury PLUS 2022](https://mtk-vostok-avto.ru/avto/toyota-yaris-l-1-5-cvt-luxury-plus-2022-66000km/): 66 000 км  1496 см³  107 л.с.  Бензин  передний привод; 1 421 110 ₽ под ключ
+- [Kia KX1 1.4 2022](https://mtk-vostok-avto.ru/avto/kia-kx1-1-4-2022-35000km/): 35 000 км  1368 см³  100 л.с.  Бензин  передний привод; 1 426 474 ₽ под ключ
+- [Kia KX1 1.4 2022](https://mtk-vostok-avto.ru/avto/kia-kx1-1-4-2022-15000km/): 15 000 км  1368 см³  100 л.с.  Бензин  передний привод; 1 476 476 ₽ под ключ
+- [Kia KX1 1.4 CVT 2022](https://mtk-vostok-avto.ru/avto/kia-kx1-1-4-cvt-2022-16500km/): 16 500 км  1368 см³  100 л.с.  Бензин  передний привод; 1 513 978 ₽ под ключ
+- [Nissan Kicks 1.5 XL 2023](https://mtk-vostok-avto.ru/avto/nissan-kicks-1-5-xl-2023-30000km/): 30 000 км  1498 см³  122 л.с.  Бензин  передний привод; 1 521 421 ₽ под ключ
+- [Kia KX1 1.4 CVT 2022](https://mtk-vostok-avto.ru/avto/kia-kx1-1-4-cvt-2022-46000km/): 46 000 км  1368 см³  100 л.с.  Бензин  передний привод; 1 526 479 ₽ под ключ
+- [Volkswagen Tharu 1.4TSI 280TSI 2022](https://mtk-vostok-avto.ru/avto/volkswagen-tharu-1-4tsi-280tsi-2022-74000km/): 74 000 км  1395 см³  150 л.с.  Бензин  передний привод; 1 543 122 ₽ под ключ
+- [Volkswagen Tharu 1.4TSI 2022](https://mtk-vostok-avto.ru/avto/volkswagen-tharu-1-4tsi-2022-80000km/): 80 000 км  1395 см³  150 л.с.  Бензин  передний привод; 1 543 122 ₽ под ключ
+- [Geely Coolray 1.4T Platinum 2022](https://mtk-vostok-avto.ru/avto/geely-coolray-1-4t-platinum-2022-45000km/): 45 000 км  1398 см³  141 л.с.  Бензин  передний привод; 1 543 582 ₽ под ключ
+- [Kia KX1 1.4 2022](https://mtk-vostok-avto.ru/avto/kia-kx1-1-4-2022-39000km/): 39 000 км  1368 см³  100 л.с.  Бензин  передний привод; 1 563 980 ₽ под ключ
+- [Geely Coolray 1.4T Diamond 2022](https://mtk-vostok-avto.ru/avto/geely-coolray-1-4t-diamond-2022-55000km/): 55 000 км  1398 см³  141 л.с.  Бензин  передний привод; 1 568 582 ₽ под ключ
+- [Volkswagen Tharu 280TSI 2WD Flagship 2022](https://mtk-vostok-avto.ru/avto/volkswagen-tharu-280tsi-2wd-flagship-2022-40000km/): 40 000 км  1395 см³  150 л.с.  Бензин  передний привод; 1 580 623 ₽ под ключ
+- [Volkswagen Tharu 280TSI 2WD Comfort 2022](https://mtk-vostok-avto.ru/avto/volkswagen-tharu-280tsi-2wd-comfort-2022-74000km/): 74 000 км  1395 см³  150 л.с.  Бензин  передний привод; 1 593 124 ₽ под ключ
+- [Skoda Kamiq 1.5 Comfort 2022](https://mtk-vostok-avto.ru/avto/skoda-kamiq-1-5-comfort-2022-42000km/): 42 000 км  1498 см³  112 л.с.  Бензин  передний привод; 1 596 425 ₽ под ключ
+- [Hyundai ix35 1.4 TGDi 240TGDi GLS 2023](https://mtk-vostok-avto.ru/avto/hyundai-ix35-1-4-tgdi-240tgdi-gls-2023-63000km/): 63 000 км  1353 см³  140 л.с.  Бензин  передний привод; 1 611 681 ₽ под ключ
+- [Volkswagen Tharu 280TSI 2WD Comfort 2022](https://mtk-vostok-avto.ru/avto/volkswagen-tharu-280tsi-2wd-comfort-2022-68000km/): 68 000 км  1395 см³  150 л.с.  Бензин  передний привод; 1 630 626 ₽ под ключ
+- [Volkswagen Golf 8 Pro 1.4TSI 2022](https://mtk-vostok-avto.ru/avto/volkswagen-golf-8-pro-1-4tsi-2022-45000km/): 45 000 км  1395 см³  150 л.с.  Бензин  передний привод; 1 630 626 ₽ под ключ
+- [GAC Aion Y Plus 70 2022](https://mtk-vostok-avto.ru/avto/gac-aion-y-plus-70-2022-50000km/): 50 000 км  63 л.с.  510 км хода  Электро  передний привод; 1 646 984 ₽ под ключ
+- [Honda XR-V 1.5 Comfort 2022](https://mtk-vostok-avto.ru/avto/honda-xr-v-1-5-comfort-2022-70000km/): 70 000 км  1498 см³  131 л.с.  Бензин  передний привод; 1 658 929 ₽ под ключ
+- [Honda XR-V 1.5 CVT Hot 2023](https://mtk-vostok-avto.ru/avto/honda-xr-v-1-5-cvt-hot-2023-58000km/): 58 000 км  1498 см³  124 л.с.  Бензин  передний привод; 1 671 429 ₽ под ключ
+- [Volkswagen Tharu 280TSI 2WD Comfort 2022](https://mtk-vostok-avto.ru/avto/volkswagen-tharu-280tsi-2wd-comfort-2022-30000km/): 30 000 км  1395 см³  150 л.с.  Бензин  передний привод; 1 674 377 ₽ под ключ
+- [Nissan Kicks 1.5 XV Deluxe 2022](https://mtk-vostok-avto.ru/avto/nissan-kicks-1-5-xv-deluxe-2022-29300km/): 29 300 км  1498 см³  122 л.с.  Бензин  передний привод; 1 683 929 ₽ под ключ
+- [GAC Aion Y Plus 70 2023](https://mtk-vostok-avto.ru/avto/gac-aion-y-plus-70-2023-60000km/): 60 000 км  63 л.с.  510 км хода  Электро  передний привод; 1 716 421 ₽ под ключ
+- [Geely Coolray 1.4T 2022](https://mtk-vostok-avto.ru/avto/geely-coolray-1-4t-2022-53000km/): 53 000 км  1398 см³  141 л.с.  Бензин  передний привод; 1 718 589 ₽ под ключ
+- [Geely Coolray 1.4T 2023](https://mtk-vostok-avto.ru/avto/geely-coolray-1-4t-2023-45000km/): 45 000 км  1398 см³  141 л.с.  Бензин  передний привод; 1 743 868 ₽ под ключ
+- [Kia KX1 1.4 CVT 2024](https://mtk-vostok-avto.ru/avto/kia-kx1-1-4-cvt-2024-28000km/): 28 000 км  1368 см³  100 л.с.  Бензин  передний привод; 1 746 893 ₽ под ключ
+- [Nissan Qashqai 2.0 CVT XV 2022](https://mtk-vostok-avto.ru/avto/nissan-qashqai-2-0-cvt-xv-2022-80000km/): 80 000 км  1997 см³  150 л.с.  Бензин  передний привод; 1 765 689 ₽ под ключ
+- [BYD Yuan UP 301 км 2026](https://mtk-vostok-avto.ru/avto/byd-yuan-up-301-km-2026-10000km/): 10 000 км  95 л.с.  301 км хода  Электро  передний привод; 1 766 697 ₽ под ключ
+- [GAC Aion Y Plus 70 2022](https://mtk-vostok-avto.ru/avto/gac-aion-y-plus-70-2022-58000km/): 58 000 км  63 л.с.  510 км хода  Электро  передний привод; 1 768 497 ₽ под ключ
+- [Honda XR-V 1.5 CVT Obsidian 2022](https://mtk-vostok-avto.ru/avto/honda-xr-v-1-5-cvt-obsidian-2022-39000km/): 39 000 км  1498 см³  131 л.с.  Бензин  передний привод; 1 771 434 ₽ под ключ
+- [Nissan Qashqai 2.0 CVT XV 2022](https://mtk-vostok-avto.ru/avto/nissan-qashqai-2-0-cvt-xv-2022-58000km/): 58 000 км  1997 см³  150 л.с.  Бензин  передний привод; 1 778 189 ₽ под ключ
+- [Volkswagen Tharu 1.4TSI 2022](https://mtk-vostok-avto.ru/avto/volkswagen-tharu-1-4tsi-2022-65000km/): 65 000 км  1395 см³  150 л.с.  Бензин  передний привод; 1 780 633 ₽ под ключ
+- [Mazda CX-5 2.0 2WD Comfort 2022](https://mtk-vostok-avto.ru/avto/mazda-cx-5-2-0-2wd-comfort-2022-55000km/): 55 000 км  1998 см³  155 л.с.  Бензин  передний привод; 1 790 933 ₽ под ключ
+- [BYD Yuan UP 301 км 2026](https://mtk-vostok-avto.ru/avto/byd-yuan-up-301-km-2026-9000km/): 9 000 км  95 л.с.  301 км хода  Электро  передний привод; 1 801 416 ₽ под ключ
+- [Nissan Qashqai 2.0 2022](https://mtk-vostok-avto.ru/avto/nissan-qashqai-2-0-2022-108000km/): 108 000 км  1997 см³  150 л.с.  Бензин  передний привод; 1 803 191 ₽ под ключ
+- [Volkswagen Tharu 280TSI 2WD Fashion 2022](https://mtk-vostok-avto.ru/avto/volkswagen-tharu-280tsi-2wd-fashion-2022-26547km/): 26 547 км  1395 см³  150 л.с.  Бензин  передний привод; 1 818 134 ₽ под ключ
+- [Changan Qiyuan Q05 405Air 2026](https://mtk-vostok-avto.ru/avto/changan-qiyuan-q05-405air-2026-10000km/): 10 000 км  163 л.с.  405 км хода  Электро  передний привод; 1 818 775 ₽ под ключ
+- [Honda XR-V 1.5 Comfort 2022](https://mtk-vostok-avto.ru/avto/honda-xr-v-1-5-comfort-2022-33000km/): 33 000 км  1498 см³  131 л.с.  Бензин  передний привод; 1 821 436 ₽ под ключ
+- [BYD Yuan UP 301 км 2026](https://mtk-vostok-avto.ru/avto/byd-yuan-up-301-km-2026-300km/): 300 км  95 л.с.  301 км хода  Электро  передний привод; 1 836 133 ₽ под ключ
+- [Audi A3 Sportback 35TFSI 2022](https://mtk-vostok-avto.ru/avto/audi-a3-sportback-35tfsi-2022-59000km/): 59 000 км  1395 см³  150 л.с.  Бензин  передний привод; 1 843 136 ₽ под ключ
+- [Changan Qiyuan Q05 405 Air 2026](https://mtk-vostok-avto.ru/avto/changan-qiyuan-q05-405-air-2026-new/): 0 км  163 л.с.  405 км хода  Электро  передний привод; 1 851 756 ₽ под ключ
+- [Changan Qiyuan Q05 405Air 2026](https://mtk-vostok-avto.ru/avto/changan-qiyuan-q05-405air-2026-10000km-2/): 10 000 км  163 л.с.  405 км хода  Электро  передний привод; 1 853 492 ₽ под ключ
+- [Audi A3 Sportback 35TFSI 2022](https://mtk-vostok-avto.ru/avto/audi-a3-sportback-35tfsi-2022-57000km/): 57 000 км  1395 см³  150 л.с.  Бензин  передний привод; 1 855 637 ₽ под ключ
+- [Nissan Kicks 1.5 XV TOP 2023](https://mtk-vostok-avto.ru/avto/nissan-kicks-1-5-xv-top-2023-28000km/): 28 000 км  1498 см³  122 л.с.  Бензин  передний привод; 1 862 957 ₽ под ключ
+- [Nissan Kicks 1.5 XL 2024](https://mtk-vostok-avto.ru/avto/nissan-kicks-1-5-xl-2024-2200km/): 2 200 км  1498 см³  122 л.с.  Бензин  передний привод; 1 887 959 ₽ под ключ
+- [Volkswagen Tayron 280TSI 2WD Luxury 2022](https://mtk-vostok-avto.ru/avto/volkswagen-tayron-280tsi-2wd-luxury-2022-48000km/): 48 000 км  1395 см³  150 л.с.  Бензин  передний привод; 1 893 139 ₽ под ключ
+- [Skoda Superb 1.4TSI TSI280 Premium 2022](https://mtk-vostok-avto.ru/avto/skoda-superb-1-4tsi-tsi280-premium-2022-54741km/): 54 741 км  1395 см³  150 л.с.  Бензин  передний привод; 1 918 139 ₽ под ключ
+- [Skoda Karoq 1.4TSI TSI280 Luxury 2022](https://mtk-vostok-avto.ru/avto/skoda-karoq-1-4tsi-tsi280-luxury-2022-42000km/): 42 000 км  1395 см³  150 л.с.  Бензин  передний привод; 1 918 139 ₽ под ключ
+- [Honda XR-V 1.5 CVT Obsidian 2022](https://mtk-vostok-avto.ru/avto/honda-xr-v-1-5-cvt-obsidian-2022-48000km/): 48 000 км  1498 см³  131 л.с.  Бензин  передний привод; 1 921 441 ₽ под ключ
+- [Volkswagen Tayron 280TSI 2WD Luxury 2022](https://mtk-vostok-avto.ru/avto/volkswagen-tayron-280tsi-2wd-luxury-2022-110000km/): 110 000 км  1395 см³  150 л.с.  Бензин  передний привод; 1 939 257 ₽ под ключ
+- [Kia Sonet 1.5 CVT 2024](https://mtk-vostok-avto.ru/avto/kia-sonet-1-5-cvt-2024-19000km/): 19 000 км  1497 см³  115 л.с.  Бензин  передний привод; 1 964 330 ₽ под ключ
+- [Volkswagen Tharu 280TSI 2WD Luxury PLUS 2022](https://mtk-vostok-avto.ru/avto/volkswagen-tharu-280tsi-2wd-luxury-plus-2022-59264km/): 59 264 км  1395 см³  150 л.с.  Бензин  передний привод; 1 976 759 ₽ под ключ
+- [Honda XR-V 1.5 CVT Obsidian 2022](https://mtk-vostok-avto.ru/avto/honda-xr-v-1-5-cvt-obsidian-2022-5000km/): 5 000 км  1498 см³  131 л.с.  Бензин  передний привод; 2 017 563 ₽ под ключ
+- [Changan Qiyuan Q05 405 Laser Ultra 2026](https://mtk-vostok-avto.ru/avto/changan-qiyuan-q05-405-laser-ultra-2026-new/): 0 км  163 л.с.  405 км хода  Электро  передний привод; 2 025 347 ₽ под ключ
+- [Skoda Karoq 1.4TSI TSI280 2022](https://mtk-vostok-avto.ru/avto/skoda-karoq-1-4tsi-tsi280-2022-58000km/): 58 000 км  1395 см³  150 л.с.  Бензин  передний привод; 2 039 262 ₽ под ключ
+- [Mazda CX-30 2.0 2022](https://mtk-vostok-avto.ru/avto/mazda-cx-30-2-0-2022-58500km/): 58 500 км  1998 см³  158 л.с.  Бензин  передний привод; 2 040 945 ₽ под ключ
+- [Mazda CX-5 2.0 2WD 2022](https://mtk-vostok-avto.ru/avto/mazda-cx-5-2-0-2wd-2022-65000km/): 65 000 км  1998 см³  158 л.с.  Бензин  передний привод; 2 065 947 ₽ под ключ
+- [Audi Q3 35TFSI 2022](https://mtk-vostok-avto.ru/avto/audi-q3-35tfsi-2022-70000km/): 70 000 км  1395 см³  150 л.с.  Бензин  передний привод; 2 126 766 ₽ под ключ
+- [Skoda Karoq 1.4TSI TSI280 Luxury 2022](https://mtk-vostok-avto.ru/avto/skoda-karoq-1-4tsi-tsi280-luxury-2022-21000km/): 21 000 км  1395 см³  150 л.с.  Бензин  передний привод; 2 126 766 ₽ под ключ
+- [BMW X1 sDrive20Li 1.5T 2022](https://mtk-vostok-avto.ru/avto/bmw-x1-sdrive20li-1-5t-2022-54000km/): 54 000 км  1499 см³  136 л.с.  Бензин  передний привод; 2 167 723 ₽ под ключ
+- [Nissan X-Trail 2.0 2023](https://mtk-vostok-avto.ru/avto/nissan-x-trail-2-0-2023-55000km/): 55 000 км  1997 см³  150 л.с.  Бензин  передний привод; 2 178 209 ₽ под ключ
+- [Changan Qiyuan Q05 506Max 2025](https://mtk-vostok-avto.ru/avto/changan-qiyuan-q05-506max-2025-7000km-2/): 7 000 км  163 л.с.  506 км хода  Электро  передний привод; 2 183 314 ₽ под ключ
+- [Mazda CX-30 2.0 Obsidian 2022](https://mtk-vostok-avto.ru/avto/mazda-cx-30-2-0-obsidian-2022-65000km/): 65 000 км  1998 см³  158 л.с.  Бензин  передний привод; 2 212 070 ₽ под ключ
+- [Changan Qiyuan Q05 506 MAX+ 2026](https://mtk-vostok-avto.ru/avto/changan-qiyuan-q05-506-maxplus-2026-new/): 0 км  163 л.с.  506 км хода  Электро  передний привод; 2 242 272 ₽ под ключ
+- [Changan Qiyuan Q05 506Max 2025](https://mtk-vostok-avto.ru/avto/changan-qiyuan-q05-506max-2025-6000km/): 6 000 км  163 л.с.  506 км хода  Электро  передний привод; 2 244 008 ₽ под ключ
+- [Changan Qiyuan Q05 506Max 2025](https://mtk-vostok-avto.ru/avto/changan-qiyuan-q05-506max-2025-4000km/): 4 000 км  163 л.с.  506 км хода  Электро  передний привод; 2 244 008 ₽ под ключ
+- [Changan Qiyuan Q05 506 Ultra+ 2026](https://mtk-vostok-avto.ru/avto/changan-qiyuan-q05-506-ultraplus-2026-new/): 0 км  163 л.с.  506 км хода  Электро  передний привод; 2 244 008 ₽ под ключ
+- [Honda XR-V 1.5 Passion 2024](https://mtk-vostok-avto.ru/avto/honda-xr-v-1-5-passion-2024-6000km/): 6 000 км  1498 см³  131 л.с.  Бензин  передний привод; 2 256 928 ₽ под ключ
+- [Changan Qiyuan Q05 506Max 2025](https://mtk-vostok-avto.ru/avto/changan-qiyuan-q05-506max-2025-7000km/): 7 000 км  163 л.с.  506 км хода  Электро  передний привод; 2 261 369 ₽ под ключ
+- [Changan Qiyuan Q05 506Max+ 2025](https://mtk-vostok-avto.ru/avto/changan-qiyuan-q05-506maxplus-2025-100km/): 100 км  163 л.с.  506 км хода  Электро  передний привод; 2 313 446 ₽ под ключ
+- [Changan Qiyuan A06 240Max 2026](https://mtk-vostok-avto.ru/avto/changan-qiyuan-a06-240max-2026-10000km/): 10 000 км  163 л.с.  Гибрид EREV  задний привод; 2 348 163 ₽ под ключ
+- [Toyota bZ3X 520 Pro 2025](https://mtk-vostok-avto.ru/avto/toyota-bz3x-520-pro-2025-29000km/): 29 000 км  204 л.с.  520 км хода  Электро  передний привод; 2 348 163 ₽ под ключ
+- [Changan Qiyuan Q05 506 Laser Ultra+ 2026](https://mtk-vostok-avto.ru/avto/changan-qiyuan-q05-506-laser-ultraplus-2026-new/): 0 км  163 л.с.  506 км хода  Электро  передний привод; 2 381 145 ₽ под ключ
+- [Changan Qiyuan Q05 506 Laser Ultra+ 2026](https://mtk-vostok-avto.ru/avto/changan-qiyuan-q05-506-laser-ultraplus-2026-new-2/): 0 км  163 л.с.  506 км хода  Электро  передний привод; 2 389 673 ₽ под ключ
+- [Skoda Karoq 1.4TSI TSI280 Flagship 2022](https://mtk-vostok-avto.ru/avto/skoda-karoq-1-4tsi-tsi280-flagship-2022-27000km/): 27 000 км  1395 см³  150 л.с.  Бензин  передний привод; 2 414 280 ₽ под ключ
+- [Changan Qiyuan A06 510Pro+ 2026](https://mtk-vostok-avto.ru/avto/changan-qiyuan-a06-510proplus-2026-4000km/): 4 000 км  163 л.с.  510 км хода  Электро  задний привод; 2 434 959 ₽ под ключ
+- [Nissan X-Trail 2.0 2025](https://mtk-vostok-avto.ru/avto/nissan-x-trail-2-0-2025-700km/): 700 км  1997 см³  151 л.с.  Бензин  передний привод; 2 441 703 ₽ под ключ
+- [Toyota bZ3X 520 Pro 2025](https://mtk-vostok-avto.ru/avto/toyota-bz3x-520-pro-2025-21000km/): 21 000 км  204 л.с.  520 км хода  Электро  передний привод; 2 469 677 ₽ под ключ
+- [BMW X1 sDrive20Li 1.5T 2023](https://mtk-vostok-avto.ru/avto/bmw-x1-sdrive20li-1-5t-2023-106000km/): 106 000 км  1499 см³  156 л.с.  Бензин  передний привод; 2 492 738 ₽ под ключ
+- [Mazda CX-5 2.0 2WD 2023](https://mtk-vostok-avto.ru/avto/mazda-cx-5-2-0-2wd-2023-61000km/): 61 000 км  1998 см³  155 л.с.  Бензин  передний привод; 2 512 085 ₽ под ключ
+- [Toyota bZ3X 520 Pro 2025](https://mtk-vostok-avto.ru/avto/toyota-bz3x-520-pro-2025-18000km/): 18 000 км  204 л.с.  520 км хода  Электро  передний привод; 2 539 112 ₽ под ключ
+- [Mazda CX-5 2.0 2WD 2022](https://mtk-vostok-avto.ru/avto/mazda-cx-5-2-0-2wd-2022-57000km/): 57 000 км  1998 см³  155 л.с.  Бензин  передний привод; 2 562 087 ₽ под ключ
+- [Toyota bZ3X 520 Pro 2025](https://mtk-vostok-avto.ru/avto/toyota-bz3x-520-pro-2025-17000km/): 17 000 км  204 л.с.  520 км хода  Электро  передний привод; 2 573 832 ₽ под ключ
+- [Toyota bZ3X 520 Pro 2025](https://mtk-vostok-avto.ru/avto/toyota-bz3x-520-pro-2025-37000km/): 37 000 км  204 л.с.  520 км хода  Электро  передний привод; 2 608 549 ₽ под ключ
+- [Mazda CX-5 2.0 2025](https://mtk-vostok-avto.ru/avto/mazda-cx-5-2-0-2025-3500km/): 3 500 км  1998 см³  158 л.с.  Бензин  передний привод; 3 215 150 ₽ под ключ
+- [Subaru Forester 2.0i 2022](https://mtk-vostok-avto.ru/avto/subaru-forester-2-0i-2022-40000km/): 40 000 км  1995 см³  154 л.с.  Бензин  полный привод; 3 286 392 ₽ под ключ
+- [BMW X1 sDrive20Li 1.5T 2024](https://mtk-vostok-avto.ru/avto/bmw-x1-sdrive20li-1-5t-2024-56000km/): 56 000 км  1499 см³  156 л.с.  Бензин  передний привод; 3 307 923 ₽ под ключ
+- [Subaru Forester 2.0i EyeSight 2022](https://mtk-vostok-avto.ru/avto/subaru-forester-2-0i-eyesight-2022-49000km/): 49 000 км  1995 см³  154 л.с.  Бензин  полный привод; 3 448 899 ₽ под ключ
+- [Volkswagen ID.3 Pure 2022](https://mtk-vostok-avto.ru/avto/volkswagen-id-3-pure-2022-44000km/): 44 000 км  170 л.с.  430 км хода  Электро  задний привод; 3 481 751 ₽ под ключ
+- [Lexus UX260h 2.0 Hybrid 2023](https://mtk-vostok-avto.ru/avto/lexus-ux260h-2-0-hybrid-2023-70000km/): 70 000 км  1987 см³  184 л.с.  Гибрид (HEV)  передний привод; 3 859 499 ₽ под ключ
+- [Kia Sportage 2.0 HEV Flagship 2022](https://mtk-vostok-avto.ru/avto/kia-sportage-2-0-hev-flagship-2022-55000km/): 55 000 км  1999 см³  200 л.с.  Гибрид (HEV)  передний привод; 3 891 119 ₽ под ключ
+- [Volkswagen ID.4 CROZZ Long Range PURE+ 2022](https://mtk-vostok-avto.ru/avto/volkswagen-id-4-crozz-long-range-pureplus-2022-25000km/): 25 000 км  204 л.с.  600 км хода  Электро  задний привод; 3 906 986 ₽ под ключ
+- [Hyundai Santa Fe 2.0T 2022](https://mtk-vostok-avto.ru/avto/hyundai-santa-fe-2-0t-2022-22000km/): 22 000 км  1998 см³  230 л.с.  Бензин  полный привод; 3 934 473 ₽ под ключ
+- [Toyota RAV4 2.0 2024](https://mtk-vostok-avto.ru/avto/toyota-rav4-2-0-2024-21000km/): 21 000 км  1986 см³  171 л.с.  Бензин  полный привод; 4 080 792 ₽ под ключ
+- [Lexus UX260h 2.0 Hybrid 2022](https://mtk-vostok-avto.ru/avto/lexus-ux260h-2-0-hybrid-2022-30000km/): 30 000 км  1987 см³  184 л.с.  Гибрид (HEV)  передний привод; 4 159 513 ₽ под ключ
+- [Nissan X-Trail e-POWER 2024](https://mtk-vostok-avto.ru/avto/nissan-x-trail-e-power-2024-12000km/): 12 000 км  156 л.с.  Гибрид e-POWER  полный привод; 4 438 047 ₽ под ключ
+- [Hyundai Santa Fe 2.0T 2024](https://mtk-vostok-avto.ru/avto/hyundai-santa-fe-2-0t-2024-20000km/): 20 000 км  1998 см³  248 л.с.  Бензин  полный привод; 4 484 663 ₽ под ключ
+- [Nissan X-Trail e-POWER 2023](https://mtk-vostok-avto.ru/avto/nissan-x-trail-e-power-2023-31000km/): 31 000 км  156 л.с.  Гибрид e-POWER  полный привод; 4 636 553 ₽ под ключ
+- [Voyah Free FREE+ RWD Qiankun 2025](https://mtk-vostok-avto.ru/avto/voyah-free-freeplus-rwd-qiankun-2025-6500km/): 6 500 км  292 л.с.  318 км хода  Гибрид EREV  задний привод; 5 078 438 ₽ под ключ
+- [Xiaomi YU7 Max Range 2025](https://mtk-vostok-avto.ru/avto/xiaomi-yu7-max-range-2025-24000km/): 24 000 км  320 л.с.  835 км хода  Электро  задний привод; 5 887 449 ₽ под ключ
+- [Voyah Free FREE+ 4WD Qiankun 2025](https://mtk-vostok-avto.ru/avto/voyah-free-freeplus-4wd-qiankun-2025-5500km/): 5 500 км  476 л.с.  259 км хода  Гибрид EREV  полный привод; 6 018 601 ₽ под ключ
+- [Voyah Free FREE+ 4WD Qiankun 2025](https://mtk-vostok-avto.ru/avto/voyah-free-freeplus-4wd-qiankun-2025-2000km/): 2 000 км  476 л.с.  259 км хода  Гибрид EREV  полный привод; 6 140 113 ₽ под ключ
+- [Xiaomi YU7 Max Range 2025](https://mtk-vostok-avto.ru/avto/xiaomi-yu7-max-range-2025-26000km/): 26 000 км  320 л.с.  835 км хода  Электро  задний привод; 6 251 989 ₽ под ключ
+- [Lixiang L7 Pro 2025](https://mtk-vostok-avto.ru/avto/lixiang-l7-pro-2025-15000km/): 15 000 км  449 л.с.  Гибрид EREV  полный привод; 7 011 873 ₽ под ключ
 
 ## Электромопеды «Восток-Мото» (31 модель, права категории M, цены по курсу на 26.10.2026)
 
-- [Yadea Modern Shine 70-M](https://mtk-vostok-avto.ru/mopedy/): мотор 600 Вт, пиковая 800 Вт · до 43 км/ч · 60 В 23 А·ч, графеновая свинцовая · запас хода 80 км · масса 87 кг (сертификат КНР); цена от 139 800 ₽ до 143 800 ₽
-- [Yadea Modern Shine II 60-M](https://mtk-vostok-avto.ru/mopedy/): мотор 600 Вт, пиковая 1 200 Вт · до 42 км/ч · 60 В 23 А·ч, графеновая свинцовая · запас хода 50 км · масса 93 кг (сертификат КНР); цена от 145 400 ₽ до 154 700 ₽
-- [Yadea Modern Maimang Pro](https://mtk-vostok-avto.ru/mopedy/): мотор 500 Вт, пиковая 1 000 Вт · до 37 км/ч · 60 В 21 А·ч, графеновая свинцовая · запас хода 45 км · масса 83 кг (сертификат КНР); цена от 127 600 ₽ до 135 600 ₽
-- [Yadea Modern Maimang](https://mtk-vostok-avto.ru/mopedy/): мотор 500 Вт · до 47 км/ч · 60 В 21 А·ч, графеновая свинцовая · запас хода 45 км · масса 83 кг (сертификат КНР); цена от 122 600 ₽ до 129 200 ₽
-- [Yadea B30-M](https://mtk-vostok-avto.ru/mopedy/): мотор 600 Вт · до 47 км/ч · 60 В 21 А·ч, свинцовая · запас хода 45 км · масса 82 кг; цена от 126 100 ₽ до 132 700 ₽
-- [Yadea M6](https://mtk-vostok-avto.ru/mopedy/): мотор 600 Вт · до 39 км/ч · 60 В 23 А·ч, графеновая свинцовая · масса 93 кг; цена от 143 500 ₽ до 156 800 ₽
-- [Yadea GFX6 (FX6)](https://mtk-vostok-avto.ru/mopedy/): мотор 400 Вт · до 25 км/ч · 48 В 24 А·ч, литиевая · масса 75 кг; цена от 142 900 ₽ до 154 900 ₽
-- [Aima Luna](https://mtk-vostok-avto.ru/mopedy/): мотор 800 Вт, пиковая 1 000 Вт · до 48 км/ч · 60 В 20 А·ч · запас хода 70 км · масса 86 кг (сертификат КНР); цена от 134 600 ₽ до 138 600 ₽
-- [Aima Dundun](https://mtk-vostok-avto.ru/mopedy/): мотор 500 Вт, пиковая 800 Вт · до 45 км/ч · 60 В 21,8 А·ч, свинцовая · запас хода 45 км · масса 89 кг; цена от 133 500 ₽ до 144 100 ₽
-- [Aima SpaceL](https://mtk-vostok-avto.ru/mopedy/): мотор 500 Вт, пиковая 800 Вт · до 42 км/ч · 60 В 22 А·ч, графеновая свинцовая · запас хода 40 км · масса 115 кг; цена от 154 600 ₽ до 159 900 ₽
-- [Tailg Athens](https://mtk-vostok-avto.ru/mopedy/): мотор 400 Вт, пиковая 600 Вт · до 45 км/ч · 48 В 26 А·ч, графеновая свинцовая · запас хода 80 км · масса 98 кг; цена от 134 400 ₽ до 138 400 ₽
-- [Ninebot Q70c](https://mtk-vostok-avto.ru/mopedy/): мотор 800 Вт, пиковая 1 800 Вт · до 45 км/ч · 60 В 20 А·ч, свинцовая · запас хода 60 км · масса 89 кг; цена от 128 400 ₽ до 136 400 ₽
-- [Ninebot N1 70](https://mtk-vostok-avto.ru/mopedy/): мотор 800 Вт, пиковая 1 900 Вт · до 47 км/ч · 60 В 20 А·ч, свинцовая · запас хода 40 км · масса 102 кг; цена от 146 300 ₽ до 154 300 ₽
-- [Ninebot Q3 70](https://mtk-vostok-avto.ru/mopedy/): мотор 800 Вт, пиковая 1 900 Вт · до 45 км/ч · 60 В 20 А·ч, свинцовая · запас хода 35 км · масса 93 кг; цена от 139 900 ₽ до 147 900 ₽
-- [Segway-Ninebot Q90](https://mtk-vostok-avto.ru/mopedy/): мотор 400 Вт · до 25 км/ч · 48 В 25 А·ч, литиевая · запас хода 95 км · масса 55 кг; цена от 132 900 ₽ до 142 200 ₽
-- [NIU N One](https://mtk-vostok-avto.ru/mopedy/): мотор 800 Вт, пиковая 1 800 Вт · до 47 км/ч · 60 В 20 А·ч, свинцовая · запас хода 44 км · масса 101 кг; цена от 136 400 ₽ до 140 400 ₽
-- [NIU O2 Citi](https://mtk-vostok-avto.ru/mopedy/): мотор 1 000 Вт · до 45 км/ч · 60 В 20 А·ч, свинцовая · запас хода 31 км · масса 87 кг; цена от 135 500 ₽ до 139 500 ₽
-- [Luyuan Moda50-Q](https://mtk-vostok-avto.ru/mopedy/): мотор 600 Вт, пиковая 800 Вт · до 45 км/ч · 60 В 21 А·ч, графеновая свинцовая · запас хода 65 км · масса 56 кг; цена от 115 000 ₽ до 121 600 ₽
-- [Luyuan Moda8Y](https://mtk-vostok-avto.ru/mopedy/): мотор 800 Вт, пиковая 1 200 Вт · до 41 км/ч · 60 В 20 А·ч, графеновая свинцовая · запас хода 60 км · масса 63 кг; цена от 121 200 ₽ до 126 900 ₽
-- [Xinri Anna](https://mtk-vostok-avto.ru/mopedy/): мотор 800 Вт · до 45 км/ч · 60 В 20 А·ч, свинцовая · запас хода 45 км · масса 79 кг; цена от 119 200 ₽ до 124 500 ₽
-- [Xinri Barbie](https://mtk-vostok-avto.ru/mopedy/): мотор 600 Вт · до 42 км/ч · 60 В 20 А·ч, свинцовая · запас хода 45 км · масса 79 кг; цена от 131 900 ₽ до 138 600 ₽
-- [Xiaodao Redian](https://mtk-vostok-avto.ru/mopedy/): мотор 1 000 Вт, пиковая 1 500 Вт · до 47 км/ч · 60 или 72 В, 20 или 32 А·ч · запас хода 50–90 км · масса 95 кг; цена от 133 300 ₽ до 152 000 ₽
-- [Xiaodao Lexiang](https://mtk-vostok-avto.ru/mopedy/): мотор 1 000 Вт · до 47 км/ч · 60 В 20 или 32 А·ч — три версии · запас хода 50–70 км · масса 86 кг (сертификат КНР); цена от 131 800 ₽ до 146 400 ₽
-- [Wuyang-Honda UQ3 EM](https://mtk-vostok-avto.ru/mopedy/): мотор 1 000 Вт, пиковая 2 200 Вт · до 48 км/ч · 72 В 23 А·ч, свинцовая · запас хода 42 км · масса 114 кг; цена от 155 500 ₽ до 167 500 ₽
-- [ZEEHO AE3 Pro](https://mtk-vostok-avto.ru/mopedy/): мотор 1 100 Вт, пиковая 1 750 Вт · до 47 км/ч · 60 В 20 А·ч, свинцовая · запас хода 45 км · масса 105 кг; цена от 146 300 ₽ до 155 600 ₽
-- [Jinjian Kuyou DQ](https://mtk-vostok-avto.ru/mopedy/): мотор 600 Вт, пиковая 1 000 Вт · до 45 км/ч · 72 В 20 А·ч, графеновая свинцовая · запас хода 52 км · масса 90 кг; цена от 123 800 ₽ до 130 100 ₽
-- [Phoenix Luna](https://mtk-vostok-avto.ru/mopedy/): мотор 1 200 Вт, пиковая 1 500 Вт · до 47 км/ч · 60 В 28 А·ч, графеновая свинцовая · запас хода 55 км · масса 92 кг; цена от 122 800 ₽ до 131 000 ₽
-- [Saige Ruili](https://mtk-vostok-avto.ru/mopedy/): мотор 800 Вт, пиковая 1 200 Вт · до 47 км/ч · 72 В 32 А·ч, свинцовая · запас хода 80 км · масса 92 кг; цена от 132 700 ₽ до 140 600 ₽
-- [Beite N9L](https://mtk-vostok-avto.ru/mopedy/): мотор 1 200 Вт · до 38 км/ч · 72 В 32 А·ч, свинцовая · запас хода 90 км · масса 99 кг (сертификат КНР); цена от 151 700 ₽ до 157 200 ₽
-- [Shouqu Y3 70C New](https://mtk-vostok-avto.ru/mopedy/): мотор 800 Вт, пиковая 2 100 Вт · до 47 км/ч · 60 В 20 А·ч, свинцовая · запас хода 48 км · масса 109 кг; цена от 145 800 ₽ до 160 400 ₽
-- [NAXEON CC3](https://mtk-vostok-avto.ru/mopedy/): мотор 1 200 Вт, пиковая 1 700 Вт · до 45 км/ч · 60 В 20 А·ч, свинцовая · запас хода 50 км · масса 95 кг; цена от 142 200 ₽ до 146 100 ₽
+- [Yadea Modern Shine 70-M](https://mtk-vostok-avto.ru/mopedy/): мотор 600 Вт, пиковая 800 Вт · до 43 км/ч · 60 В 23 А·ч, графеновая свинцовая · запас хода 80 км · масса 87 кг (сертификат КНР); цена от 143 800 ₽ до 147 800 ₽
+- [Yadea Modern Shine II 60-M](https://mtk-vostok-avto.ru/mopedy/): мотор 600 Вт, пиковая 1 200 Вт · до 42 км/ч · 60 В 23 А·ч, графеновая свинцовая · запас хода 50 км · масса 93 кг (сертификат КНР); цена от 149 400 ₽ до 158 700 ₽
+- [Yadea Modern Maimang Pro](https://mtk-vostok-avto.ru/mopedy/): мотор 500 Вт, пиковая 1 000 Вт · до 37 км/ч · 60 В 21 А·ч, графеновая свинцовая · запас хода 45 км · масса 83 кг (сертификат КНР); цена от 131 600 ₽ до 139 600 ₽
+- [Yadea Modern Maimang](https://mtk-vostok-avto.ru/mopedy/): мотор 500 Вт · до 47 км/ч · 60 В 21 А·ч, графеновая свинцовая · запас хода 45 км · масса 83 кг (сертификат КНР); цена от 126 600 ₽ до 133 200 ₽
+- [Yadea B30-M](https://mtk-vostok-avto.ru/mopedy/): мотор 600 Вт · до 47 км/ч · 60 В 21 А·ч, свинцовая · запас хода 45 км · масса 82 кг; цена от 130 100 ₽ до 136 700 ₽
+- [Yadea M6](https://mtk-vostok-avto.ru/mopedy/): мотор 600 Вт · до 39 км/ч · 60 В 23 А·ч, графеновая свинцовая · масса 93 кг; цена от 147 500 ₽ до 160 800 ₽
+- [Yadea GFX6 (FX6)](https://mtk-vostok-avto.ru/mopedy/): мотор 400 Вт · до 25 км/ч · 48 В 24 А·ч, литиевая · масса 75 кг; цена от 146 900 ₽ до 158 900 ₽
+- [Aima Luna](https://mtk-vostok-avto.ru/mopedy/): мотор 800 Вт, пиковая 1 000 Вт · до 48 км/ч · 60 В 20 А·ч · запас хода 70 км · масса 86 кг (сертификат КНР); цена от 138 600 ₽ до 142 600 ₽
+- [Aima Dundun](https://mtk-vostok-avto.ru/mopedy/): мотор 500 Вт, пиковая 800 Вт · до 45 км/ч · 60 В 21,8 А·ч, свинцовая · запас хода 45 км · масса 89 кг; цена от 137 500 ₽ до 148 100 ₽
+- [Aima SpaceL](https://mtk-vostok-avto.ru/mopedy/): мотор 500 Вт, пиковая 800 Вт · до 42 км/ч · 60 В 22 А·ч, графеновая свинцовая · запас хода 40 км · масса 115 кг; цена от 158 600 ₽ до 163 900 ₽
+- [Tailg Athens](https://mtk-vostok-avto.ru/mopedy/): мотор 400 Вт, пиковая 600 Вт · до 45 км/ч · 48 В 26 А·ч, графеновая свинцовая · запас хода 80 км · масса 98 кг; цена от 138 400 ₽ до 142 400 ₽
+- [Ninebot Q70c](https://mtk-vostok-avto.ru/mopedy/): мотор 800 Вт, пиковая 1 800 Вт · до 45 км/ч · 60 В 20 А·ч, свинцовая · запас хода 60 км · масса 89 кг; цена от 132 400 ₽ до 140 400 ₽
+- [Ninebot N1 70](https://mtk-vostok-avto.ru/mopedy/): мотор 800 Вт, пиковая 1 900 Вт · до 47 км/ч · 60 В 20 А·ч, свинцовая · запас хода 40 км · масса 102 кг; цена от 150 300 ₽ до 158 300 ₽
+- [Ninebot Q3 70](https://mtk-vostok-avto.ru/mopedy/): мотор 800 Вт, пиковая 1 900 Вт · до 45 км/ч · 60 В 20 А·ч, свинцовая · запас хода 35 км · масса 93 кг; цена от 143 900 ₽ до 151 900 ₽
+- [Segway-Ninebot Q90](https://mtk-vostok-avto.ru/mopedy/): мотор 400 Вт · до 25 км/ч · 48 В 25 А·ч, литиевая · запас хода 95 км · масса 55 кг; цена от 136 900 ₽ до 146 200 ₽
+- [NIU N One](https://mtk-vostok-avto.ru/mopedy/): мотор 800 Вт, пиковая 1 800 Вт · до 47 км/ч · 60 В 20 А·ч, свинцовая · запас хода 44 км · масса 101 кг; цена от 140 400 ₽ до 144 400 ₽
+- [NIU O2 Citi](https://mtk-vostok-avto.ru/mopedy/): мотор 1 000 Вт · до 45 км/ч · 60 В 20 А·ч, свинцовая · запас хода 31 км · масса 87 кг; цена от 139 500 ₽ до 143 500 ₽
+- [Luyuan Moda50-Q](https://mtk-vostok-avto.ru/mopedy/): мотор 600 Вт, пиковая 800 Вт · до 45 км/ч · 60 В 21 А·ч, графеновая свинцовая · запас хода 65 км · масса 56 кг; цена от 119 000 ₽ до 125 600 ₽
+- [Luyuan Moda8Y](https://mtk-vostok-avto.ru/mopedy/): мотор 800 Вт, пиковая 1 200 Вт · до 41 км/ч · 60 В 20 А·ч, графеновая свинцовая · запас хода 60 км · масса 63 кг; цена от 125 200 ₽ до 130 900 ₽
+- [Xinri Anna](https://mtk-vostok-avto.ru/mopedy/): мотор 800 Вт · до 45 км/ч · 60 В 20 А·ч, свинцовая · запас хода 45 км · масса 79 кг; цена от 123 200 ₽ до 128 500 ₽
+- [Xinri Barbie](https://mtk-vostok-avto.ru/mopedy/): мотор 600 Вт · до 42 км/ч · 60 В 20 А·ч, свинцовая · запас хода 45 км · масса 79 кг; цена от 135 900 ₽ до 142 600 ₽
+- [Xiaodao Redian](https://mtk-vostok-avto.ru/mopedy/): мотор 1 000 Вт, пиковая 1 500 Вт · до 47 км/ч · 60 или 72 В, 20 или 32 А·ч · запас хода 50–90 км · масса 95 кг; цена от 137 300 ₽ до 156 000 ₽
+- [Xiaodao Lexiang](https://mtk-vostok-avto.ru/mopedy/): мотор 1 000 Вт · до 47 км/ч · 60 В 20 или 32 А·ч — три версии · запас хода 50–70 км · масса 86 кг (сертификат КНР); цена от 135 800 ₽ до 150 400 ₽
+- [Wuyang-Honda UQ3 EM](https://mtk-vostok-avto.ru/mopedy/): мотор 1 000 Вт, пиковая 2 200 Вт · до 48 км/ч · 72 В 23 А·ч, свинцовая · запас хода 42 км · масса 114 кг; цена от 159 500 ₽ до 171 500 ₽
+- [ZEEHO AE3 Pro](https://mtk-vostok-avto.ru/mopedy/): мотор 1 100 Вт, пиковая 1 750 Вт · до 47 км/ч · 60 В 20 А·ч, свинцовая · запас хода 45 км · масса 105 кг; цена от 150 300 ₽ до 159 600 ₽
+- [Jinjian Kuyou DQ](https://mtk-vostok-avto.ru/mopedy/): мотор 600 Вт, пиковая 1 000 Вт · до 45 км/ч · 72 В 20 А·ч, графеновая свинцовая · запас хода 52 км · масса 90 кг; цена от 127 800 ₽ до 134 100 ₽
+- [Phoenix Luna](https://mtk-vostok-avto.ru/mopedy/): мотор 1 200 Вт, пиковая 1 500 Вт · до 47 км/ч · 60 В 28 А·ч, графеновая свинцовая · запас хода 55 км · масса 92 кг; цена от 126 800 ₽ до 135 000 ₽
+- [Saige Ruili](https://mtk-vostok-avto.ru/mopedy/): мотор 800 Вт, пиковая 1 200 Вт · до 47 км/ч · 72 В 32 А·ч, свинцовая · запас хода 80 км · масса 92 кг; цена от 136 700 ₽ до 144 600 ₽
+- [Beite N9L](https://mtk-vostok-avto.ru/mopedy/): мотор 1 200 Вт · до 38 км/ч · 72 В 32 А·ч, свинцовая · запас хода 90 км · масса 99 кг (сертификат КНР); цена от 155 700 ₽ до 161 200 ₽
+- [Shouqu Y3 70C New](https://mtk-vostok-avto.ru/mopedy/): мотор 800 Вт, пиковая 2 100 Вт · до 47 км/ч · 60 В 20 А·ч, свинцовая · запас хода 48 км · масса 109 кг; цена от 149 800 ₽ до 164 400 ₽
+- [NAXEON CC3](https://mtk-vostok-avto.ru/mopedy/): мотор 1 200 Вт, пиковая 1 700 Вт · до 45 км/ч · 60 В 20 А·ч, свинцовая · запас хода 50 км · масса 95 кг; цена от 146 200 ₽ до 150 100 ₽
 
 ## Контакты
 

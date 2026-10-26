@@ -23,12 +23,9 @@ _spec = importlib.util.spec_from_file_location("auto_china_calc", _AC / "calc.py
 C = importlib.util.module_from_spec(_spec)
 _spec.loader.exec_module(C)
 
-# тарифы на сегодня (CONTEXT.md: услуги Глеб/СПб 90 000, Иван/Екб 80 000 с 25.09.2026; СВХ СПб 20 500, Екб — 5 суток 9 248 с 24.09.2026)
-CITY = {
-    "Санкт-Петербург": {"services": 90_000, "svh": 20_500, "svh_label": "Склад временного хранения", "to": "Санкт-Петербург"},
-    "Екатеринбург": {"services": 80_000, "svh": 9_248, "svh_label": "Склад временного хранения, 5 суток", "to": "Екатеринбург"},
-}
-DEFAULT_CITY = "Санкт-Петербург"
+# тарифы — одни для всех городов (Юрий 26.10.2026: на сайте без городов, подбор и сопровождение 90 000 ₽, СВХ 20 500 ₽ везде;
+# до того по городу выдачи: Глеб/СПб 90 000 и 20 500, Иван/Екб 80 000 и 9 248 за 5 суток)
+TARIFF = {"services": 90_000, "svh": 20_500, "svh_label": "Склад временного хранения"}
 CLEARANCE = 80_000            # оформление: растаможка, СБКТС, ЭПТС
 DELIVERY_CNY = 20_000         # доставка автовозом из Китая
 LOADING_CNY = 1_300           # погрузка и доставка по Китаю
@@ -93,7 +90,7 @@ def _one(c, vtb, cny, eur, age, t):
     cost_rub = C.cny_to_rub(car_cny, rates)             # таможенная стоимость: цена машины по курсу ЦБ, без доставки
     fee = C.custom_fee(cost_rub)
     lines = [(f"Автомобиль в Китае ({_n(car_cny)} ¥ × {vtb:.2f})".replace(".", ","), car_rub),
-             (f"Доставка автовозом в {t['to']} ({_n(dcny)} ¥)", deliv_rub),
+             (f"Доставка автовозом ({_n(dcny)} ¥)", deliv_rub),
              (f"Погрузка и доставка по Китаю ({_n(lcny)} ¥)", load_rub),
              ("Комиссия банка ВТБ 2%", bank)]
     if c.get("tax") == "ev":
@@ -131,14 +128,13 @@ def _one(c, vtb, cny, eur, age, t):
 
 def calc(c, vtb, cny, eur, today):
     """Цена под ключ машины c на дату today: vtb — курс юаня ВТБ, cny/eur — курсы ЦБ (₽ за 1 ¥ / 1 €)."""
-    city = c.get("city") if c.get("city") in CITY else DEFAULT_CITY
-    t = CITY[city]
+    t = TARIFF
     best = None
     for age in age_categories(c, today):
         r = _one(c, vtb, cny, eur, age, t)
         if best is None or r["total"] > best["total"]:
             best = r
-    best.update(vtb=vtb, cny=cny, eur=eur, date=today.isoformat(), city=city)
+    best.update(vtb=vtb, cny=cny, eur=eur, date=today.isoformat())
     return best
 
 

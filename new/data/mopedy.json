@@ -1,6 +1,11 @@
 {
  "date": "26.10.2026",
  "markup_rub": 20000,
+ "rates_cbr": {
+  "date": "2026-10-24",
+  "cny": 12.0557,
+  "usd": 80.5381
+ },
  "count": 31,
  "mopeds": [
   {
@@ -16,8 +21,14 @@
     "масса 87 кг (сертификат КНР)"
    ],
    "note": null,
-   "price_from_rub": 139800,
-   "price_to_rub": 143800,
+   "price_from_rub": 143800,
+   "price_to_rub": 147800,
+   "price_from_cny": 3999,
+   "price_to_cny": 4299,
+   "cn_fee": 0.02,
+   "cargo_usd": 585,
+   "fixed_rub": 19961,
+   "markup_rub": 20000,
    "photo": "foto/yadea_modern1.jpg"
   },
   {
@@ -33,8 +44,14 @@
     "масса 93 кг (сертификат КНР)"
    ],
    "note": "Второе поколение, с мая 2026: экран 4,3 дюйма и антипробуксовка TCS",
-   "price_from_rub": 145400,
-   "price_to_rub": 154700,
+   "price_from_rub": 149400,
+   "price_to_rub": 158700,
+   "price_from_cny": 3999,
+   "price_to_cny": 4699,
+   "cn_fee": 0.02,
+   "cargo_usd": 630,
+   "fixed_rub": 21615,
+   "markup_rub": 20000,
    "photo": "foto/yadea_modern2.jpg"
   },
   {
@@ -50,8 +67,14 @@
     "масса 83 кг (сертификат КНР)"
    ],
    "note": "Новинка мая 2026",
-   "price_from_rub": 127600,
-   "price_to_rub": 135600,
+   "price_from_rub": 131600,
+   "price_to_rub": 139600,
+   "price_from_cny": 3299,
+   "price_to_cny": 3899,
+   "cn_fee": 0.02,
+   "cargo_usd": 560,
+   "fixed_rub": 19251,
+   "markup_rub": 20000,
    "photo": "foto/yadea_maimang_pro.jpg"
   },
   {
@@ -67,8 +90,14 @@
     "масса 83 кг (сертификат КНР)"
    ],
    "note": "Самая доступная модель линейки «Модерн», в продаже с мая 2025",
-   "price_from_rub": 122600,
-   "price_to_rub": 129200,
+   "price_from_rub": 126600,
+   "price_to_rub": 133200,
+   "price_from_cny": 2899,
+   "price_to_cny": 3399,
+   "cn_fee": 0.02,
+   "cargo_usd": 560,
+   "fixed_rub": 19486,
+   "markup_rub": 20000,
    "photo": "foto/yadea_maimang.jpg"
   },
   {
@@ -84,8 +113,14 @@
     "масса 82 кг"
    ],
    "note": "Новинка июня 2026: датчик боковой подножки и приложение",
-   "price_from_rub": 126100,
-   "price_to_rub": 132700,
+   "price_from_rub": 130100,
+   "price_to_rub": 136700,
+   "price_from_cny": 2899,
+   "price_to_cny": 3399,
+   "cn_fee": 0.02,
+   "cargo_usd": 575,
+   "fixed_rub": 21691,
+   "markup_rub": 20000,
    "photo": "foto/yadea_b30m.jpg"
   },
   {
@@ -100,8 +135,14 @@
     "масса 93 кг"
    ],
    "note": null,
-   "price_from_rub": 143500,
-   "price_to_rub": 156800,
+   "price_from_rub": 147500,
+   "price_to_rub": 160800,
+   "price_from_cny": 3799,
+   "price_to_cny": 4799,
+   "cn_fee": 0.02,
+   "cargo_usd": 635,
+   "fixed_rub": 21932,
+   "markup_rub": 20000,
    "photo": "foto/yadea_m6.jpg"
   },
   {
@@ -116,8 +157,14 @@
     "масса 75 кг"
    ],
    "note": null,
-   "price_from_rub": 142900,
-   "price_to_rub": 154900,
+   "price_from_rub": 146900,
+   "price_to_rub": 158900,
+   "price_from_cny": 4490,
+   "price_to_cny": 5390,
+   "cn_fee": 0.02,
+   "cargo_usd": 535,
+   "fixed_rub": 20822,
+   "markup_rub": 20000,
    "photo": "foto/yadea_gfx6.jpg"
   },
   {
@@ -133,8 +180,14 @@
     "масса 86 кг (сертификат КНР)"
    ],
    "note": null,
-   "price_from_rub": 134600,
-   "price_to_rub": 138600,
+   "price_from_rub": 138600,
+   "price_to_rub": 142600,
+   "price_from_cny": 3699,
+   "price_to_cny": 3999,
+   "cn_fee": 0.02,
+   "cargo_usd": 575,
+   "fixed_rub": 19591,
+   "markup_rub": 20000,
    "photo": "foto/aima_luna.jpg"
   },
   {
@@ -150,8 +203,14 @@
     "масса 89 кг"
    ],
    "note": "Совместная серия с медвежонком Butterbear, корзина спереди",
-   "price_from_rub": 133500,
-   "price_to_rub": 144100,
+   "price_from_rub": 137500,
+   "price_to_rub": 148100,
+   "price_from_cny": 3699,
+   "price_to_cny": 4499,
+   "cn_fee": 0.02,
+   "cargo_usd": 580,
+   "fixed_rub": 18043,
+   "markup_rub": 20000,
    "photo": "foto/aima_dundun.jpg"
   },
   {
@@ -167,8 +226,14 @@
     "масса 115 кг"
    ],
    "note": "Новинка мая 2026 с экраном-«смайликом»",
-   "price_from_rub": 154600,
-   "price_to_rub": 159900,
+   "price_from_rub": 158600,
+   "price_to_rub": 163900,
+   "price_from_cny": 4199,
+   "price_to_cny": 4599,
+   "cn_fee": 0.02,
+   "cargo_usd": 725,
+   "fixed_rub": 19908,
+   "markup_rub": 20000,
    "photo": "foto/aima_spacel.jpg"
   },
   {
@@ -184,8 +249,14 @@
     "масса 98 кг"
    ],
    "note": "Ретро в стиле Vespa, мотор 400 Вт и запас хода 80 км",
-   "price_from_rub": 134400,
-   "price_to_rub": 138400,
+   "price_from_rub": 138400,
+   "price_to_rub": 142400,
+   "price_from_cny": 2999,
+   "price_to_cny": 3299,
+   "cn_fee": 0.02,
+   "cargo_usd": 655,
+   "fixed_rub": 21827,
+   "markup_rub": 20000,
    "photo": "foto/tailg_yadian.jpg"
   },
   {
@@ -201,8 +272,14 @@
     "масса 89 кг"
    ],
    "note": "Ретро-скутер с антипробуксовкой TCS и управлением с телефона",
-   "price_from_rub": 128400,
-   "price_to_rub": 136400,
+   "price_from_rub": 132400,
+   "price_to_rub": 140400,
+   "price_from_cny": 2999,
+   "price_to_cny": 3599,
+   "cn_fee": 0.02,
+   "cargo_usd": 600,
+   "fixed_rub": 20550,
+   "markup_rub": 20000,
    "photo": "foto/ninebot_q70c.jpg"
   },
   {
@@ -218,8 +295,14 @@
     "масса 102 кг"
    ],
    "note": "Новинка мая 2026, короткая база",
-   "price_from_rub": 146300,
-   "price_to_rub": 154300,
+   "price_from_rub": 150300,
+   "price_to_rub": 158300,
+   "price_from_cny": 3599,
+   "price_to_cny": 4199,
+   "cn_fee": 0.02,
+   "cargo_usd": 685,
+   "fixed_rub": 23111,
+   "markup_rub": 20000,
    "photo": "foto/ninebot_n1_70.jpg"
   },
   {
@@ -235,8 +318,14 @@
     "масса 93 кг"
    ],
    "note": "Новинка 2026 года, пиковая мощность 1900 Вт",
-   "price_from_rub": 139900,
-   "price_to_rub": 147900,
+   "price_from_rub": 143900,
+   "price_to_rub": 151900,
+   "price_from_cny": 3799,
+   "price_to_cny": 4399,
+   "cn_fee": 0.02,
+   "cargo_usd": 615,
+   "fixed_rub": 20082,
+   "markup_rub": 20000,
    "photo": "foto/ninebot_q3_70.jpg"
   },
   {
@@ -252,8 +341,14 @@
     "масса 55 кг"
    ],
    "note": null,
-   "price_from_rub": 132900,
-   "price_to_rub": 142200,
+   "price_from_rub": 136900,
+   "price_to_rub": 146200,
+   "price_from_cny": 4499,
+   "price_to_cny": 5199,
+   "cn_fee": 0.02,
+   "cargo_usd": 425,
+   "fixed_rub": 20226,
+   "markup_rub": 20000,
    "photo": "foto/ninebot_q90.jpg"
   },
   {
@@ -269,8 +364,14 @@
     "масса 101 кг"
    ],
    "note": "Самый доступный мопед NIU",
-   "price_from_rub": 136400,
-   "price_to_rub": 140400,
+   "price_from_rub": 140400,
+   "price_to_rub": 144400,
+   "price_from_cny": 2999,
+   "price_to_cny": 3299,
+   "cn_fee": 0.02,
+   "cargo_usd": 675,
+   "fixed_rub": 22053,
+   "markup_rub": 20000,
    "photo": "foto/niu_none.jpg"
   },
   {
@@ -286,8 +387,14 @@
     "масса 87 кг"
    ],
    "note": "Новинка июля 2026, мотор 1000 Вт",
-   "price_from_rub": 135500,
-   "price_to_rub": 139500,
+   "price_from_rub": 139500,
+   "price_to_rub": 143500,
+   "price_from_cny": 3499,
+   "price_to_cny": 3799,
+   "cn_fee": 0.02,
+   "cargo_usd": 595,
+   "fixed_rub": 21374,
+   "markup_rub": 20000,
    "photo": "foto/niu_o2_citi.jpg"
   },
   {
@@ -303,8 +410,14 @@
     "масса 56 кг"
    ],
    "note": "Лёгкий — 56 кг; мотор с жидкостным охлаждением",
-   "price_from_rub": 115000,
-   "price_to_rub": 121600,
+   "price_from_rub": 119000,
+   "price_to_rub": 125600,
+   "price_from_cny": 3199,
+   "price_to_cny": 3699,
+   "cn_fee": 0.02,
+   "cargo_usd": 425,
+   "fixed_rub": 19591,
+   "markup_rub": 20000,
    "photo": "foto/luyuan_moda50q.jpg"
   },
   {
@@ -320,8 +433,14 @@
     "масса 63 кг"
    ],
    "note": null,
-   "price_from_rub": 121200,
-   "price_to_rub": 126900,
+   "price_from_rub": 125200,
+   "price_to_rub": 130900,
+   "price_from_cny": 3069,
+   "price_to_cny": 3499,
+   "cn_fee": 0.02,
+   "cargo_usd": 485,
+   "fixed_rub": 22310,
+   "markup_rub": 20000,
    "photo": "foto/luyuan_moda8y.jpg"
   },
   {
@@ -337,8 +456,14 @@
     "масса 79 кг"
    ],
    "note": "Новинка апреля 2026, самый доступный мопед Xinri",
-   "price_from_rub": 119200,
-   "price_to_rub": 124500,
+   "price_from_rub": 123200,
+   "price_to_rub": 128500,
+   "price_from_cny": 2699,
+   "price_to_cny": 3099,
+   "cn_fee": 0.02,
+   "cargo_usd": 545,
+   "fixed_rub": 20082,
+   "markup_rub": 20000,
    "photo": "foto/xinri_anna.jpg"
   },
   {
@@ -354,8 +479,14 @@
     "масса 79 кг"
    ],
    "note": "Низкая посадка, TCS, 4G-модуль и приложение",
-   "price_from_rub": 131900,
-   "price_to_rub": 138600,
+   "price_from_rub": 135900,
+   "price_to_rub": 142600,
+   "price_from_cny": 3599,
+   "price_to_cny": 4099,
+   "cn_fee": 0.02,
+   "cargo_usd": 550,
+   "fixed_rub": 20369,
+   "markup_rub": 20000,
    "photo": "foto/xinri_babi.jpg"
   },
   {
@@ -371,8 +502,14 @@
     "масса 95 кг"
    ],
    "note": "Цена зависит от батареи: от простой свинцовой до графеновой на 90 км",
-   "price_from_rub": 133300,
-   "price_to_rub": 152000,
+   "price_from_rub": 137300,
+   "price_to_rub": 156000,
+   "price_from_cny": 3199,
+   "price_to_cny": 4599,
+   "cn_fee": 0.02,
+   "cargo_usd": 630,
+   "fixed_rub": 20218,
+   "markup_rub": 20000,
    "photo": "foto/xiaodao_redian.jpg"
   },
   {
@@ -388,8 +525,14 @@
     "масса 86 кг (сертификат КНР)"
    ],
    "note": null,
-   "price_from_rub": 131800,
-   "price_to_rub": 146400,
+   "price_from_rub": 135800,
+   "price_to_rub": 150400,
+   "price_from_cny": 3199,
+   "price_to_cny": 4299,
+   "cn_fee": 0.02,
+   "cargo_usd": 595,
+   "fixed_rub": 21698,
+   "markup_rub": 20000,
    "photo": "foto/xiaodao_lexiang.jpg"
   },
   {
@@ -405,8 +548,14 @@
     "масса 114 кг"
    ],
    "note": "Совместное предприятие Honda; новинка августа 2026",
-   "price_from_rub": 155500,
-   "price_to_rub": 167500,
+   "price_from_rub": 159500,
+   "price_to_rub": 171500,
+   "price_from_cny": 3999,
+   "price_to_cny": 4899,
+   "cn_fee": 0.02,
+   "cargo_usd": 740,
+   "fixed_rub": 22250,
+   "markup_rub": 20000,
    "photo": "foto/wuyang_honda_uq3_em.jpg"
   },
   {
@@ -422,8 +571,14 @@
     "масса 105 кг"
    ],
    "note": "Электробренд CFMOTO, версия 2026 года",
-   "price_from_rub": 146300,
-   "price_to_rub": 155600,
+   "price_from_rub": 150300,
+   "price_to_rub": 159600,
+   "price_from_cny": 3599,
+   "price_to_cny": 4299,
+   "cn_fee": 0.02,
+   "cargo_usd": 695,
+   "fixed_rub": 22204,
+   "markup_rub": 20000,
    "photo": "foto/zeeho_ae3_pro.jpg"
   },
   {
@@ -439,8 +594,14 @@
     "масса 90 кг"
    ],
    "note": "Недорогой городской мопед из Тяньцзиня, батарея 72 В",
-   "price_from_rub": 123800,
-   "price_to_rub": 130100,
+   "price_from_rub": 127800,
+   "price_to_rub": 134100,
+   "price_from_cny": 2698,
+   "price_to_cny": 3175,
+   "cn_fee": 0.02,
+   "cargo_usd": 600,
+   "fixed_rub": 19924,
+   "markup_rub": 20000,
    "photo": "foto/jinjian_kuyou_dq.jpg"
   },
   {
@@ -456,8 +617,14 @@
     "масса 92 кг"
    ],
    "note": "Старейшая велосипедная марка Китая; большая батарея 60 В 28 А·ч",
-   "price_from_rub": 122800,
-   "price_to_rub": 131000,
+   "price_from_rub": 126800,
+   "price_to_rub": 135000,
+   "price_from_cny": 2488,
+   "price_to_cny": 3098,
+   "cn_fee": 0.02,
+   "cargo_usd": 615,
+   "fixed_rub": 20482,
+   "markup_rub": 20000,
    "photo": "foto/phoenix_luna.jpg"
   },
   {
@@ -473,8 +640,14 @@
     "масса 92 кг"
    ],
    "note": "Ёмкая батарея 72 В 32 А·ч — 80 км на одной зарядке",
-   "price_from_rub": 132700,
-   "price_to_rub": 140600,
+   "price_from_rub": 136700,
+   "price_to_rub": 144600,
+   "price_from_cny": 3006,
+   "price_to_cny": 3599,
+   "cn_fee": 0.02,
+   "cargo_usd": 630,
+   "fixed_rub": 22129,
+   "markup_rub": 20000,
    "photo": "foto/saige_ruili.jpg"
   },
   {
@@ -490,8 +663,14 @@
     "масса 99 кг (сертификат КНР)"
    ],
    "note": "Один из самых дальнобойных: 90 км на одной зарядке",
-   "price_from_rub": 151700,
-   "price_to_rub": 157200,
+   "price_from_rub": 155700,
+   "price_to_rub": 161200,
+   "price_from_cny": 4280,
+   "price_to_cny": 4699,
+   "cn_fee": 0.02,
+   "cargo_usd": 660,
+   "fixed_rub": 21540,
+   "markup_rub": 20000,
    "photo": "foto/beite_n9l.jpg"
   },
   {
@@ -507,8 +686,14 @@
     "масса 109 кг"
    ],
    "note": "Спортивный вид, пиковая мощность 2100 Вт, зарядка за 3 часа",
-   "price_from_rub": 145800,
-   "price_to_rub": 160400,
+   "price_from_rub": 149800,
+   "price_to_rub": 164400,
+   "price_from_cny": 3299,
+   "price_to_cny": 4399,
+   "cn_fee": 0.02,
+   "cargo_usd": 725,
+   "fixed_rub": 23103,
+   "markup_rub": 20000,
    "photo": "foto/shouqu_y3_70c_new.jpg"
   },
   {
@@ -524,8 +709,14 @@
     "масса 95 кг"
    ],
    "note": "Молодёжный мини-скутер: крупный протектор, сиденье 750 мм",
-   "price_from_rub": 142200,
-   "price_to_rub": 146100,
+   "price_from_rub": 146200,
+   "price_to_rub": 150100,
+   "price_from_cny": 3699,
+   "price_to_cny": 3999,
+   "cn_fee": 0.02,
+   "cargo_usd": 640,
+   "fixed_rub": 21509,
+   "markup_rub": 20000,
    "photo": "foto/naxeon_cc3.jpg"
   }
  ]

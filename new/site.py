@@ -15,6 +15,7 @@ import html
 import importlib.util
 import json
 import math
+import random
 import re
 import shutil
 import sys
@@ -143,14 +144,14 @@ def u(path=""):
 
 # ---------- курс ----------
 def cbr_rates(offline=False):
-    """ЦБ: юань и евро на сегодня; при сбое — последние сохранённые."""
+    """ЦБ: юань, евро и доллар (для цен мопедов) на сегодня; при сбое — последние сохранённые."""
     keep = DATA / "rates.json"
     if not offline:
         try:
             with urllib.request.urlopen("https://www.cbr-xml-daily.ru/daily_json.js", timeout=20) as r:
                 d = json.load(r)
             res = {"date": d["Date"][:10], "cny": d["Valute"]["CNY"]["Value"] / d["Valute"]["CNY"]["Nominal"],
-                   "eur": d["Valute"]["EUR"]["Value"]}
+                   "eur": d["Valute"]["EUR"]["Value"], "usd": d["Valute"]["USD"]["Value"]}
             keep.write_text(json.dumps(res, ensure_ascii=False, indent=1))
             return res
         except Exception as e:  # noqa: BLE001
@@ -311,6 +312,7 @@ def page(path, title, desc, body, active=None, jsonld=None, og=None, prio="0.6")
 </div>
 <div class="fbot"><span>© {TODAY.year} МТК Восток-Авто · Международная транспортная компания</span><span>Цены под ключ пересчитаны {ddmm(TODAY)}</span></div>
 </div></footer>
+<a class="totop" href="#" aria-label="Наверх"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5.5 11.5L12 5l6.5 6.5"/></svg></a>
 <script src="{u("s.js")}?v={ASSET_V}" defer></script>
 </body>
 </html>
@@ -467,8 +469,6 @@ def model_card(m, vt=True):
 
 
 # ---------- данные: машины из КП ----------
-CITY_IN = {"Санкт-Петербург": "в Санкт-Петербурге", "Екатеринбург": "в Екатеринбурге", "Пермь": "в Перми", "Ижевск": "в Ижевске",
-           "Москва": "в Москве", "Казань": "в Казани"}
 
 
 def load_kp(rates):
@@ -521,24 +521,26 @@ def kp_line(c):
 
 
 def kp_card(c, vt=True):
-    city = c.get("city") or ""
+    """Карточка машины из КП: без города выдачи (Юрий 26.10.2026 — доставляем в любой город России)."""
     return (f'<a class="card" href="{u("avto/" + c["slug"] + "/")}"{" data-vt" if vt else ""} data-fuel="{c["fuel_key"]}" data-feat="{"awd" if c.get("awd") else ""}"'
-            f' data-brand="{E(c.get("brand") or "")}" data-city="{E(city)}" data-price="{c["total"]}" data-year="{c.get("year") or 0}" data-km="{c.get("mileage_km") or 0}"'
+            f' data-brand="{E(c.get("brand") or "")}" data-price="{c["total"]}" data-year="{c.get("year") or 0}" data-km="{c.get("mileage_km") or 0}"'
             f' data-name="{E(c["title"])}" data-q="{E((c["title"] + " " + (c.get("brand") or "")).lower())}">'
-            f'<div class="im"><img src="{u("img/kp/" + c["slug"] + "/c.webp")}" alt="{E(c["title"])}" loading="lazy" width="720" height="540"><span class="tag">{E(city)}</span></div>'
+            f'<div class="im"><img src="{u("img/kp/" + c["slug"] + "/c.webp")}" alt="{E(c["title"])}" loading="lazy" width="720" height="540"></div>'
             f'<div class="t"><h3>{E(c["title"])} <span class="yr">{c.get("year") or ""}</span></h3><div class="sp">{E(kp_line(c))}</div>'
-            f'<div class="pr">{rub(c["total"])}<small>под ключ {CITY_IN.get(city, "")} на&nbsp;{ddmm(TODAY)}</small></div></div></a>')
+            f'<div class="pr">{rub(c["total"])}<small>под ключ на&nbsp;{ddmm(TODAY)}</small></div></div></a>')
 
 
 # ---------- общие блоки ----------
+# шаги: номер, заголовок, текст, платёж, фото, бесплатный (зелёный). 01 и 02 — бесплатные подбор и видеоосмотр, как в КП (Юрий 26.10.2026)
 STEPS = [
-    ("01", "Выбор автомобиля", "Выбираете модель из каталога или предлагаете свою, называете бюджет — мы подбираем несколько подходящих вариантов.", None, None),
-    ("02", "Подбор и проверка", "Проверяем историю машины по базам Китая и по желанию её состояние на месте, присылаем отчёт, фото и видео.", None, "k_1"),
-    ("03", "Договор и оплата", "Высылаем договор, контракт и инвойс. Оплата через банк ВТБ.", "Оплата 1 — предоплата 50 000 ₽<br>Оплата 2 — автомобиль, доставка, погрузка и комиссия банка", None),
-    ("04", "Доставка", "Погрузка на автовоз, доставка до границы и дальше — в Ваш город.", None, "d_yaris_1"),
-    ("05", "Документы", "Оформляем СБКТС и электронный ПТС.", None, None),
-    ("06", "Таможня", "Растаможиваем автомобиль: помогаем оплатить пошлину и сборы, подсказываем суммы и реквизиты.", "Оплата 3 — пошлина, сборы, СВХ и оформление документов", "d_coolray_1"),
-    ("07", "Выдача", "Получаете ключи, ЭПТС и таможенные документы и ставите машину на учёт.", "Оплата 4 — остаток 40 000 ₽ за подбор и сопровождение", "d_xrv_1"),
+    ("01", "Бесплатный подбор автомобиля", "Выбираете модель из каталога или предлагаете свою, называете бюджет. Мы бесплатно ищем оптимальный вариант и присылаем несколько предложений на выбор.", None, None, True),
+    ("02", "Бесплатный видеоосмотр", "Когда Вы выбрали конкретную машину, бесплатно присылаем видео: замер толщиномером по всему кузову, салон и крупным планом всё, что требует внимания. "
+     "Проверяем историю машины по базам Китая. Дополнительно можно заказать независимый осмотр специалистом с отчётом за 1&nbsp;300&nbsp;¥.", None, "k_1", True),
+    ("03", "Договор и оплата", "Высылаем договор, контракт и инвойс. Оплата через банк ВТБ.", "Оплата 1 — предоплата 50 000 ₽<br>Оплата 2 — автомобиль, доставка, погрузка и комиссия банка", None, False),
+    ("04", "Доставка", "Погрузка на автовоз, доставка до границы и дальше — в Ваш город.", None, "d_yaris_1", False),
+    ("05", "Документы", "Оформляем СБКТС и электронный ПТС.", None, None, False),
+    ("06", "Таможня", "Растаможиваем автомобиль: помогаем оплатить пошлину и сборы, подсказываем суммы и реквизиты.", "Оплата 3 — пошлина, сборы, СВХ и оформление документов", "d_coolray_1", False),
+    ("07", "Выдача", "Получаете ключи, ЭПТС и таможенные документы и ставите машину на учёт.", "Оплата 4 — остаток 40 000 ₽ за подбор и сопровождение", "d_xrv_1", False),
 ]
 DELIV = [("xrv", "Honda XR-V 1.5 Comfort", "2022 · 33 889 км · бензин, 131 л.с.", "Санкт-Петербург", 1769998),
          ("q05", "Changan Qiyuan Q05 506Max", "2025 · 7 000 км · электро, 163 л.с.", "Ижевск", 2214339),
@@ -552,11 +554,12 @@ def nbs(s):
 
 def steps_track():
     out = []
-    for n, h, p, pay, ph in STEPS:
+    for n, h, p, pay, ph, free in STEPS:
+        fr = " free" if free else ""
         if ph:
-            out.append(f'<div class="step ph"><img src="{u("img/" + ph + ".webp")}" alt="" loading="lazy"><div><div class="n">{n}</div><h3>{h}</h3><p>{nbs(p)}</p></div></div>')
+            out.append(f'<div class="step ph{fr}"><img src="{u("img/" + ph + ".webp")}" alt="" loading="lazy"><div><div class="n">{n}</div><h3>{h}</h3><p>{nbs(p)}</p></div></div>')
         else:
-            out.append(f'<div class="step"><div class="n">{n}</div><h3>{h}</h3><p>{nbs(p)}</p>' + (f'<div class="pay">{nbs(pay)}</div>' if pay else "") + '</div>')
+            out.append(f'<div class="step{fr}"><div class="n">{n}</div><h3>{h}</h3><p>{nbs(p)}</p>' + (f'<div class="pay">{nbs(pay)}</div>' if pay else "") + '</div>')
     return "".join(out)
 
 
@@ -580,7 +583,10 @@ def team_cards():
     return "".join(out)
 
 
+CHECK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>'
+# этапы оплаты: перед ними зелёный шаг без цифры — бесплатные подбор и видеоосмотр, как в КП (Юрий 26.10.2026)
 PAYS = f"""<div class="pays" id="pays">
+<div class="pay4 free"><div class="c">{CHECK}</div><h3>Бесплатно</h3><ul><li><b>Подбор автомобиля</b>: поиск оптимального варианта, несколько предложений на&nbsp;выбор</li><li><b>Видеоосмотр</b> после выбора конкретного автомобиля</li></ul></div>
 <div class="pay4"><div class="c">1</div><h3>Предоплата</h3><div class="s">50&nbsp;000&nbsp;₽</div><p>При подписании договора&nbsp;— в&nbsp;счёт подбора и&nbsp;сопровождения сделки (всего 90&nbsp;000&nbsp;₽).</p></div>
 <div class="pay4"><div class="c">2</div><h3>Оплата автомобиля</h3><div class="s">По&nbsp;курсу ВТБ</div><p>Через ВТБ по&nbsp;контракту и&nbsp;инвойсу. С&nbsp;этой оплаты автомобиль Ваш.</p><ul><li><b>Автомобиль</b> в&nbsp;Китае</li><li><b>Доставка</b> автовозом в&nbsp;Россию</li><li><b>Погрузка</b> и&nbsp;доставка по&nbsp;Китаю</li><li><b>Комиссия банка</b> 2%</li></ul></div>
 <div class="pay4"><div class="c">3</div><h3>Таможня</h3><div class="s">По&nbsp;прибытии</div><p>Пошлина, сборы, склад временного хранения и&nbsp;оформление документов.</p><ul><li><b>Утильсбор</b> льготный: 3&nbsp;400&nbsp;₽ до&nbsp;3&nbsp;лет, 5&nbsp;200&nbsp;₽ от&nbsp;3 до&nbsp;5</li><li><b>СБКТС и ЭПТС</b>, растаможка&nbsp;— 80&nbsp;000&nbsp;₽</li></ul></div>
@@ -628,11 +634,11 @@ def home(models, kp, rates, faq):
                      f'<div class="pr">от {mln(lo)} млн ₽<small>ориентир под ключ</small></div></div></div></section>')
     reel = ""
     if kp:
-        pick = sorted(kp, key=lambda c: c.get("kp_date_iso", ""), reverse=True)[:12]
+        pick = random.Random(TODAY.isoformat()).sample(kp, min(12, len(kp)))   # каждый день свой набор и порядок, в браузере ещё перемешиваются (Юрий 26.10.2026)
         reel = f"""<section class="sec dark" id="avto">
 <div class="wrap shead"><div><p class="kick l rv">Авто в Китае</p><h2 class="h2 rv d1">Реальные машины<br><em>с&nbsp;ценой на&nbsp;сегодня</em></h2>
 <p class="lead rv d2">Конкретные автомобили, которые мы нашли и&nbsp;посчитали для&nbsp;клиентов. Цена под&nbsp;ключ пересчитывается каждый день по&nbsp;курсу юаня.</p></div>{ARROWS.format(id="reel1")}</div>
-<div class="reel" id="reel1">{"".join(kp_card(c) for c in pick)}</div>
+<div class="reel" id="reel1" data-shuffle>{"".join(kp_card(c) for c in pick)}</div>
 <div class="wrap"><a class="more" href="{u("avto/")}">Все {len(kp)} {plural(len(kp), "машина", "машины", "машин")} с&nbsp;ценой <span class="ar">→</span></a></div></section>"""
     faq5 = [q for q in faq if not q.get("confirm")][:6]
     body = f"""
@@ -661,7 +667,7 @@ def home(models, kp, rates, faq):
 {reel}
 <section class="grow" id="grow"><div class="st"><div class="fr" id="fr">
   <picture><source media="(max-width:760px)" srcset="{u("img/road_m.webp")}"><img src="{u("img/road.webp")}" alt="Дорога из Китая в Россию" loading="lazy"></picture>
-  <div class="gt wrap"><p class="kick l">Доставка</p><h2>Из&nbsp;Китая&nbsp;—<br>в&nbsp;ваш город</h2><p>Санкт-Петербург, Екатеринбург, Пермь, Ижевск и&nbsp;другие города. Автовозом до&nbsp;границы и&nbsp;дальше&nbsp;— к&nbsp;Вам.</p></div>
+  <div class="gt wrap"><p class="kick l">Доставка</p><h2>Из&nbsp;Китая&nbsp;—<br>в&nbsp;ваш город</h2><p>Доставим в&nbsp;любой город России.</p></div>
 </div></div></section>
 <section class="how" id="how"><div class="st">
   <div class="wrap hh"><div><p class="kick">Как проходит сделка</p><h2 class="h2">Семь шагов<br>от&nbsp;выбора <em>до&nbsp;ключей</em></h2></div>
@@ -670,7 +676,7 @@ def home(models, kp, rates, faq):
 </div></section>
 <section class="sec"><div class="wrap">
   <p class="kick rv">Стоимость</p><h2 class="h2 rv d1">Одна цена&nbsp;— <em>под&nbsp;ключ</em></h2>
-  <p class="lead rv d2">Автомобиль, доставка, растаможка, документы и&nbsp;наши услуги. Платите в&nbsp;четыре этапа по&nbsp;договору, без&nbsp;скрытых платежей.</p>
+  <p class="lead rv d2">Автомобиль, доставка, растаможка, документы и&nbsp;наши услуги. Оплата в&nbsp;четыре этапа по&nbsp;договору, без&nbsp;скрытых платежей.</p>
   {PAYS}
   <p class="note rv"><a class="more" href="{u("stoimost/")}">Из&nbsp;чего складывается цена и&nbsp;курс на&nbsp;сегодня <span class="ar">→</span></a></p>
 </div></section>
@@ -719,7 +725,7 @@ def catalog_page(models):
 <select data-sort aria-label="Сортировка"><option value="price-asc">Сначала дешевле</option><option value="price-desc">Сначала дороже</option><option value="name-asc">По названию</option></select></span></div>
 <div class="list" data-list>{"".join(model_card(m) for m in models)}</div>
 <p class="empty" id="empty">По&nbsp;таким условиям моделей нет. <a class="more" href="#" data-reset>Сбросить фильтры</a></p>
-<p class="note">Цены&nbsp;— ориентир под&nbsp;ключ в&nbsp;Санкт-Петербурге: автомобиль, доставка, растаможка, документы и&nbsp;наши услуги. Пересчитаны {ddmm(TODAY)} по&nbsp;курсу юаня на&nbsp;сегодня; точную цену конкретной машины считаем при&nbsp;подборе.</p>
+<p class="note">Цены&nbsp;— ориентир под&nbsp;ключ: автомобиль, доставка, растаможка, документы и&nbsp;наши услуги. Пересчитаны {ddmm(TODAY)} по&nbsp;курсу юаня на&nbsp;сегодня; точную цену конкретной машины считаем при&nbsp;подборе. Доставим в&nbsp;любой город России.</p>
 </div></div></section>
 {fin_block()}"""
     ld = [bc_ld(("katalog/", "Каталог")),
@@ -762,7 +768,7 @@ def model_page(m, models, kp):
 <div class="mgrid"><div>
 <h1>{E(m["name"])}</h1>{f'<p class="cn">{E(m["china"])}</p>' if m.get("china") else f'<p class="cn">{E(m["plant"])}</p>'}
 <div class="tags">{"".join(f"<span>{E(t)}</span>" for t in tags if t)}</div>
-<div class="big{" pr2" if "bu_label" in m else ""}">{price_html(m)}<small>ориентир под&nbsp;ключ в&nbsp;Санкт-Петербурге</small></div>
+<div class="big{" pr2" if "bu_label" in m else ""}">{price_html(m)}<small>ориентир под&nbsp;ключ</small></div>
 <div class="btns"><a class="btn w" href="{u("kontakty/")}">Подобрать такую машину <span class="ar">→</span></a>{f'<a class="btn o" href="#found">Найденные машины · {len(found)}</a>' if found else ""}</div>
 </div><div class="mpic"><img src="{u("img/m/" + m["stem"] + ".webp")}" alt="{E(m["name"])}" width="1400" height="824"></div></div>
 </div></section>
@@ -789,7 +795,6 @@ def model_page(m, models, kp):
 
 def avto_page(kp, rates):
     brands = sorted({c.get("brand") or "" for c in kp} - {""})
-    cities = sorted({c.get("city") or "" for c in kp} - {""})
     years = sorted({c.get("year") for c in kp if c.get("year")})
     pmax = math.ceil(max(c["total"] for c in kp) / 1e5) * 1e5
     fuels = [(k, t) for k, t in (("petrol", "Бензин"), ("hybrid", "Гибрид"), ("ev", "Электро"), ("erev", "Гибрид EREV")) if any(c["fuel_key"] == k for c in kp)]
@@ -807,7 +812,6 @@ def avto_page(kp, rates):
 <h4>Цена под ключ</h4><input type="range" data-f="price" min="1000000" max="{int(pmax)}" step="100000" value="{int(pmax)}"><div class="rng"><span>до</span><b data-out="price">любая</b></div>
 <h4>Год и пробег</h4><div class="two"><select data-f="ymin"><option value="">Год от</option>{"".join(f'<option value="{y}">{y}</option>' for y in years)}</select>
 <select data-f="kmmax"><option value="">Пробег до</option>{"".join(f'<option value="{k}">{k // 1000} тыс. км</option>' for k in (10000, 30000, 50000, 80000, 120000))}</select></div>
-<h4>Город выдачи</h4><select data-f="city"><option value="">Любой</option>{"".join(f"<option>{E(c)}</option>" for c in cities)}</select>
 <button class="btn ob sm reset" type="button" data-reset>Сбросить фильтры</button>
 <button class="btn b sm reset fbtn" type="button" data-fopen>Показать</button>
 </aside>
@@ -828,7 +832,6 @@ def avto_page(kp, rates):
 
 
 def car_page(c, kp, models, rates):
-    city = c.get("city") or ""
     imgs, sl = c["imgs"], c["slug"]
     main = "".join(f'<img {"src" if i == 1 else "data-src"}="{u(f"img/kp/{sl}/{i}.webp")}" alt="{E(c["title"])}, фото {i}"{"" if i == 1 else " loading=\"lazy\""}>' for i in imgs)
     th = "".join(f'<img src="{u(f"img/kp/{sl}/t{i}.webp")}" alt="" loading="lazy">' for i in imgs)
@@ -842,8 +845,7 @@ def car_page(c, kp, models, rates):
             ("Мощность", f'{c["power_hp"]} л.с.' + (f' ({c["power_kw"]} кВт)' if c.get("power_kw") else "") if c.get("power_hp") else None),
             ("Батарея", f'{c["battery_kwh"]} кВт·ч' if c.get("battery_kwh") else None), ("Запас хода", f'{c["range_km"]} км' if c.get("range_km") else None),
             ("Коробка", c.get("transmission")), ("Привод", c.get("drive")), ("Кузов", (c.get("body") or "").capitalize() or None), ("Цвет", c.get("color")),
-            ("Комплектация", c.get("trim")), ("Цена в Китае", f'{c["car_cny"]:,} ¥'.replace(",", " ") if c.get("car_cny") else None),
-            ("Город выдачи", city)]
+            ("Комплектация", c.get("trim")), ("Цена в Китае", f'{c["car_cny"]:,} ¥'.replace(",", " ") if c.get("car_cny") else None)]
     spec = "".join(f"<tr><th>{k}</th><td>{E(str(v))}</td></tr>" for k, v in rows if v)
     model = next((m for m in models if m["name"] == c.get("catalog_name")), None)
     sim = [x for x in kp if x["slug"] != c["slug"] and (x.get("catalog_name") == c.get("catalog_name") and c.get("catalog_name"))]
@@ -859,8 +861,9 @@ def car_page(c, kp, models, rates):
 <div class="gth">{th}</div></div>
 <h2 class="h2" style="font-size:clamp(28px,2.6vw,38px);margin-top:50px">Характеристики</h2><table class="spec" style="margin-top:20px">{spec}</table>
 {f'<p class="note"><a class="more" href="{u("katalog/" + model["slug"] + "/")}">О модели {E(model["name"])} в каталоге <span class="ar">→</span></a></p>' if model else ""}</div>
-<div><div class="box pbox"><p class="kick">Итого под ключ {CITY_IN.get(city, "")}</p><div class="tot">{rub(p["total"])}</div>
+<div><div class="box pbox"><p class="kick">Итого под ключ</p><div class="tot">{rub(p["total"])}</div>
 <p class="rt">По&nbsp;курсу юаня {f"{rates['vtb']:.2f}".replace(".", ",")}&nbsp;₽ на&nbsp;{ddmm(TODAY)}. Цена пересчитывается каждый день.</p>
+<p class="rt">Доставим в&nbsp;любой город России, доставку посчитаем отдельно.</p>
 <details><summary>Из чего складывается цена</summary><table class="brk">{brk}</table></details>
 <div class="btns"><a class="btn b" href="{u("kontakty/")}">Заказать этот автомобиль</a><a class="btn ob" href="{u("kontakty/")}">Подобрать похожий</a></div>
 <p class="sold">Объявления в&nbsp;Китае живут недолго. Если эту машину уже продали, найдём такую&nbsp;же: год, пробег и&nbsp;цена будут близки.</p></div></div>
@@ -877,7 +880,7 @@ def car_page(c, kp, models, rates):
            "offers": {"@type": "Offer", "priceCurrency": "RUB", "price": p["total"], "priceValidUntil": (TODAY + timedelta(days=1)).isoformat(),
                       "availability": "https://schema.org/PreOrder", "seller": {"@type": "Organization", "name": "МТК Восток-Авто"}}}]
     page(f'avto/{c["slug"]}/', f'{c["title"]} {c.get("year") or ""} из Китая — {html.unescape(rub(p["total"]))} под ключ | МТК Восток-Авто',
-         f'{c["title"]} {c.get("year") or ""}, {html.unescape(kp_line(c))}. Цена под ключ {CITY_IN.get(city, "")} на {ddmm(TODAY)}: {html.unescape(rub(p["total"]))}. Фото, характеристики и расчёт.',
+         f'{c["title"]} {c.get("year") or ""}, {html.unescape(kp_line(c))}. Цена под ключ на {ddmm(TODAY)}: {html.unescape(rub(p["total"]))}. Фото, характеристики и расчёт.',
          body, active="avto/", jsonld=ld, og=f'img/kp/{c["slug"]}/1.webp', prio="0.7")
 
 
@@ -906,7 +909,7 @@ def premium_page(prem, rates):
                    + (f' style="background:linear-gradient({c["bg"][0]},{c["bg"][1]} 50%,{c["bg"][2]} 50%)"' if c.get("bg") else "")
                    + f'><img src="{u(c["img"])}" alt="{E(c["name"])}" loading="lazy" width="{c["size"][0]}" height="{c["size"][1]}"></div>'
                    f'<div class="t"><h3>{E(c["name"])}</h3>'
-                   + (f'<div class="pz">{bu_row(c["bu"])}<div class="pr">от&nbsp;{rub(c["price"])}<small>под ключ до&nbsp;СПб</small></div></div>'
+                   + (f'<div class="pz">{bu_row(c["bu"])}<div class="pr">от&nbsp;{rub(c["price"])}<small>под ключ</small></div></div>'
                       if c.get("price") else "")
                    + '</div></div>' for c in cards)
     credits = "".join(f'<li>{E(c["name"])}&nbsp;— {E(c["author"])}, <a href="{E(c["license_url"])}" rel="license noopener" target="_blank">{E(c["license"])}</a>, '
@@ -914,7 +917,7 @@ def premium_page(prem, rates):
     body = f"""
 <section class="phead"><div class="wrap">{crumbs((None, "Премиум-авто"))}
 <h1 class="rv in">Премиальные автомобили <em>из&nbsp;Китая</em>: б/у и&nbsp;новые</h1>
-<p class="lead">Цены ориентировочные, под&nbsp;ключ до&nbsp;Санкт-Петербурга, на&nbsp;{ddmm(TODAY)}</p>
+<p class="lead">Ориентировочные цены под&nbsp;ключ на&nbsp;{ddmm(TODAY)}. Доставим в&nbsp;любой город России.</p>
 </div></section>
 <section class="sec tight prem"><div class="wrap">
 <div class="pfl"><div class="chips" data-f="origin" data-one><button class="chip all" type="button" data-reset>Все <i>{len(cards)}</i></button>{chips}</div>
@@ -933,9 +936,11 @@ def premium_page(prem, rates):
          body, active="premium/", jsonld=ld, og=cards[0]["img"], prio="0.8")
 
 
-def load_moto():
+def load_moto(rates=None):
     """Электромопеды «Восток-Мото» (Юрий 24.10 и 26.10.2026, задача «Авто» 26.10.2026): данные и фото — выгрузка «Мото»
-    (MOTO/out/site), их не правим; копия json — new/data/mopedy.json (сборка без выгрузки идёт по ней и уже сделанным фото)."""
+    (MOTO/out/site), их не правим; копия json — new/data/mopedy.json (сборка без выгрузки идёт по ней и уже сделанным фото).
+    Цены — по курсам ЦБ дня функцией «Мото» price_rub (moto_price.py: формула, наценки и курс ЦБ — её; Юрий 26.10.2026:
+    сайт пересчитывает каждое утро); нет курса доллара или юаней в записи — рубли выгрузки."""
     src, f = MOTO / "out" / "site" / "mopedy.json", DATA / "mopedy.json"
     if src.exists():
         shutil.copyfile(src, f)
@@ -967,6 +972,18 @@ def load_moto():
     if lost:
         print("Мопеды без фото (на сайт не идут):", ", ".join(lost))
     d["mopeds"] = [m for m in d["mopeds"] if m.get("size")]
+    if rates and rates.get("usd") and (MOTO / "moto_price.py").exists():
+        spec = importlib.util.spec_from_file_location("vostok_moto_price", MOTO / "moto_price.py")
+        mp = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mp)
+        n = 0
+        for m in d["mopeds"]:
+            if m.get("price_from_cny"):
+                m["price_from_rub"], m["price_to_rub"] = mp.price_rub(m, rates["cny"], rates["usd"])
+                n += 1
+        if n:
+            d["date"] = ddmm(TODAY)
+        print(f"Мопеды: цены по курсу ЦБ {rates['cbr_date']} (юань {rates['cny']:.4f}, доллар {rates['usd']:.4f}) — {n} из {len(d['mopeds'])}")
     return d
 
 
@@ -982,7 +999,7 @@ def moto_price(m):
 def moto_page(d):
     """Электромопеды из Китая «Восток-Мото» (Юрий 26.10.2026: раздел с мопедами, фото и ценами): карточки как в клиентском каталоге
     «Восток-Мото» — фото, класс, характеристики, заметка, «цена от … до …» (себестоимость до Ижевска + 20 000 ₽, решение Юрия 26.10;
-    считает «Мото» по курсу на дату выгрузки, сайт не пересчитывает). Шлемы не берём."""
+    формула «Мото», курс ЦБ дня — load_moto). Шлемы не берём."""
     ms, date_ = d["mopeds"], d["date"]
     brands = list(dict.fromkeys(m["brand"] for m in ms))
     chips = "".join(f'<button class="chip" type="button" data-v="{slugify(b)}">{E(b)} <i>{sum(m["brand"] == b for m in ms)}</i></button>' for b in brands)
@@ -997,7 +1014,7 @@ def moto_page(d):
 <section class="phead"><div class="wrap">{crumbs((None, "Электромопеды"))}
 <div class="mhd"><img class="mlogo" src="{u("img/moto/logo.webp")}" alt="Восток-Мото" width="120" height="120">
 <h1 class="rv in">Электромопеды <em>из&nbsp;Китая</em></h1></div>
-<p class="lead">«Восток-Мото»: {len(ms)} {plural(len(ms), "модель", "модели", "моделей")} до&nbsp;50&nbsp;км/ч и&nbsp;до&nbsp;4&nbsp;кВт под&nbsp;права категории M. Цены по&nbsp;курсу на&nbsp;{date_}: цена зависит от&nbsp;курса&nbsp;— актуальную цену уточняйте.</p>
+<p class="lead">Помимо автомобилей, привозим из&nbsp;Китая электромопеды. «Восток-Мото»: {len(ms)} {plural(len(ms), "модель", "модели", "моделей")} до&nbsp;50&nbsp;км/ч и&nbsp;до&nbsp;4&nbsp;кВт под&nbsp;права категории M. Цены по&nbsp;курсу на&nbsp;{date_}: цена зависит от&nbsp;курса&nbsp;— актуальную цену уточняйте.</p>
 </div></section>
 <section class="sec tight prem moto"><div class="wrap">
 <ul class="mfacts">{facts}</ul>
@@ -1019,9 +1036,9 @@ def moto_page(d):
 
 def how_page(faq):
     tl = []
-    for n, h, p, pay, ph in STEPS:
+    for n, h, p, pay, ph, free in STEPS:
         img = ph or {"01": "sec2", "03": "d_q05_2", "05": "d_xrv_2"}.get(n)
-        tl.append(f'<div class="ts rv"><div class="c">{n}</div><div><h3>{h}</h3><p>{nbs(p)}</p>{f"<span class=pay>{nbs(pay)}</span>" if pay else ""}</div>'
+        tl.append(f'<div class="ts rv{" free" if free else ""}"><div class="c">{n}</div><div><h3>{h}</h3><p>{nbs(p)}</p>{f"<span class=pay>{nbs(pay)}</span>" if pay else ""}</div>'
                   f'<div class="ph"><img src="{u("img/" + (img + "_m" if img.startswith("sec") else img) + ".webp")}" alt="" loading="lazy"></div></div>')
     docs = ["Договор на&nbsp;подбор и&nbsp;сопровождение", "Контракт и&nbsp;инвойс от&nbsp;продавца", "Чек об&nbsp;оплате через ВТБ", "Таможенные документы",
             "СБКТС и&nbsp;электронный ПТС", "Ключи и&nbsp;всё, что положено к&nbsp;машине"]
@@ -1056,7 +1073,7 @@ def price_page(kp, rates):
     body = f"""
 <section class="phead"><div class="wrap">{crumbs((None, "Стоимость"))}
 <h1 class="rv in">Стоимость&nbsp;— <em>под&nbsp;ключ</em></h1>
-<p class="lead">Автомобиль, доставка, растаможка, документы и&nbsp;наши услуги. Платите в&nbsp;четыре этапа по&nbsp;договору, без&nbsp;скрытых платежей.</p>
+<p class="lead">Автомобиль, доставка, растаможка, документы и&nbsp;наши услуги. Оплата в&nbsp;четыре этапа по&nbsp;договору, без&nbsp;скрытых платежей.</p>
 <div class="rates"><div style="border-color:rgba(255,255,255,.2)"><small style="color:rgba(255,255,255,.65)">Курс юаня для расчёта на {ddmm(TODAY)}</small><b style="color:#fff">{f"{v:.2f}".replace(".", ",")}&nbsp;₽</b></div>
 <div style="border-color:rgba(255,255,255,.2)"><small style="color:rgba(255,255,255,.65)">Юань по ЦБ — для пошлины</small><b style="color:#fff">{f"{rates['cny']:.4f}".replace(".", ",")}&nbsp;₽</b></div>
 <div style="border-color:rgba(255,255,255,.2)"><small style="color:rgba(255,255,255,.65)">Евро по ЦБ — для пошлины</small><b style="color:#fff">{f"{rates['eur']:.2f}".replace(".", ",")}&nbsp;₽</b></div></div>
@@ -1076,7 +1093,7 @@ def deliv_page():
     body = f"""
 <section class="phead"><div class="wrap">{crumbs((None, "Выданные"))}
 <h1 class="rv in">Примеры выданных <em>автомобилей</em></h1>
-<p class="lead">Несколько машин из&nbsp;тех, что мы привезли и&nbsp;передали владельцам. Цены&nbsp;— итог под&nbsp;ключ по&nbsp;договору.</p></div></section>
+<p class="lead">Некоторые из&nbsp;автомобилей, которые мы уже привезли и&nbsp;передали владельцам. Цены&nbsp;— итог под&nbsp;ключ по&nbsp;договору.</p></div></section>
 <section class="sec tight"><div class="wrap"><div class="dgrid" style="margin-top:0">{deliv_cards()}</div>
 <p class="note">Новые выдачи&nbsp;— в&nbsp;нашем <a class="more" href="{CHANNEL}">Telegram-канале <span class="ar">→</span></a></p></div></section>
 {fin_block()}"""
@@ -1127,7 +1144,7 @@ def extras(models, kp, rates, moto=None):
     lines += [f"- [{m['name']}]({SITE}{u('katalog/' + m['slug'] + '/')}): {m['engine']}, {m['power']}; {price_text(m)}" for m in models]
     if kp:
         lines += ["", f"## Авто в Китае ({len(kp)} машин, цена под ключ на {ddmm(TODAY)})", ""]
-        lines += [f"- [{c['title']} {c.get('year') or ''}]({SITE}{u('avto/' + c['slug'] + '/')}): {kp_line(c)}; {c['total']:,} ₽ под ключ, {c.get('city') or ''}".replace(",", " ") for c in kp]
+        lines += [f"- [{c['title']} {c.get('year') or ''}]({SITE}{u('avto/' + c['slug'] + '/')}): {kp_line(c)}; {c['total']:,} ₽ под ключ".replace(",", " ") for c in kp]
     if moto and moto["mopeds"]:
         lines += ["", f"## Электромопеды «Восток-Мото» ({len(moto['mopeds'])} {plural(len(moto['mopeds']), 'модель', 'модели', 'моделей')}, права категории M, цены по курсу на {moto['date']})", ""]
         lines += [f"- [{m['name']}]({SITE}{u('mopedy/')}): {' · '.join(m['specs'])}; {html.unescape(re.sub('<[^>]+>', '', moto_price(m)))}" for m in moto["mopeds"]]
@@ -1168,7 +1185,7 @@ def main():
     cbr = cbr_rates(offline)
     vtb, src = day_rate(cbr, offline)
     print(f"курс юаня на {ddmm(TODAY)}: {vtb} — {src}")
-    rates = {"vtb": vtb, "vtb_src": src, "cny": cbr["cny"], "eur": cbr["eur"], "cbr_date": cbr["date"]}
+    rates = {"vtb": vtb, "vtb_src": src, "cny": cbr["cny"], "eur": cbr["eur"], "usd": cbr.get("usd"), "cbr_date": cbr["date"]}
     models = load_models(rates)
     for m in models:
         model_imgs(m)
@@ -1203,7 +1220,7 @@ def main():
         avto_page(kp, rates)
         for c in kp:
             car_page(c, kp, models, rates)
-    moto = load_moto()
+    moto = load_moto(rates)
     if moto and moto["mopeds"]:
         moto_page(moto)
     how_page(faq)

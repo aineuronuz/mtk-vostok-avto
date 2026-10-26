@@ -55,7 +55,7 @@ h1,h2,h3{font-family:var(--disp);font-weight:400;letter-spacing:-.03em;line-heig
 .menu{display:flex;gap:26px;margin-left:auto;font-size:16.5px;font-weight:500}
 .menu a{position:relative;opacity:.9;transition:opacity .3s,color .3s;white-space:nowrap}
 .menu a:after{content:"";position:absolute;left:0;right:0;bottom:-7px;height:2px;border-radius:2px;background:currentColor;transform:scaleX(0);transform-origin:left;transition:transform .35s}
-.menu a:hover{opacity:1}.menu a:hover:after,.menu a.on:after{transform:scaleX(1)}
+.menu a:hover{opacity:1}.menu a.on:after{transform:scaleX(1)}
 .hdr.solid .menu a.on,.light .hdr .menu a.on{color:var(--blue)}
 .hdr .cta{height:46px;padding:0 22px;font-size:15.5px;font-weight:500;border:1px solid currentColor;border-radius:999px;display:inline-flex;align-items:center;transition:background .3s,color .3s,border-color .3s;white-space:nowrap}
 .hdr .cta:hover{background:#fff;color:var(--navy);border-color:#fff}
@@ -315,7 +315,7 @@ h1,h2,h3{font-family:var(--disp);font-weight:400;letter-spacing:-.03em;line-heig
 .ts .ph img{width:100%;height:100%;object-fit:cover}
 
 /* стоимость */
-.pays{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;margin-top:70px;position:relative}
+.pays{display:grid;grid-template-columns:repeat(5,1fr);gap:22px;margin-top:70px;position:relative}
 .pays:before{content:"";position:absolute;left:0;right:0;top:27px;height:1px;background:var(--line)}
 .pays:after{content:"";position:absolute;left:0;right:0;top:27px;height:1px;background:var(--blue);transform:scaleX(var(--p,0));transform-origin:left}
 .pay4{position:relative}
@@ -564,3 +564,39 @@ body{font-size:16px}
 .mc .pr{font-size:15px}
 .mc .pr i{font-size:11.5px}
 }
+
+/* 26.10.2026 (Юрий): пункт меню при наведении подсвечивается сзади синим свечением — как плашки vseti-site.ru */
+.menu a{isolation:isolate}
+.menu a:before{content:"";position:absolute;inset:-8px -12px;border-radius:999px;z-index:-1;pointer-events:none;opacity:0;transform:scale(.92);
+  background:linear-gradient(160deg,rgba(156,192,255,.34),rgba(61,111,196,.16));box-shadow:0 0 38px -4px rgba(120,170,255,.95),0 0 0 1.5px rgba(156,192,255,.85) inset;
+  transition:opacity .35s cubic-bezier(.2,.7,.2,1),transform .35s cubic-bezier(.2,.7,.2,1)}
+.menu a:hover:before{opacity:1;transform:none}
+.menu a:hover{text-shadow:0 0 12px rgba(156,192,255,.9)}
+.hdr.solid .menu a:before,.light .hdr .menu a:before{background:linear-gradient(160deg,rgba(61,111,196,.16),rgba(233,239,249,.7));box-shadow:0 0 30px -6px rgba(43,87,151,.8),0 0 0 1.5px rgba(43,87,151,.5) inset}
+.hdr.solid .menu a:hover,.light .hdr .menu a:hover{text-shadow:none;color:var(--blue)}
+
+/* 26.10.2026 (Юрий): бесплатные шаги — подбор и видеоосмотр — зелёным, как в КП и каталогах */
+:root{--green:#0f9d63;--green2:#0a7a52;--mint:#e3f6ec}
+.pay4.free .c{background:var(--green);border-color:var(--green);color:#fff}
+.pay4.free .c svg{width:26px;height:26px}
+.pay4.free h3{color:var(--green2)}
+.pay4.free ul{margin-top:14px}
+.pay4.free li b{color:var(--green2)}
+.step.free{background:var(--mint)}
+.step.free .n{color:var(--green)}
+.step.free h3{color:var(--green2)}
+.step.ph.free:after{background:linear-gradient(180deg,rgba(4,40,26,0) 30%,rgba(4,52,32,.9))}
+.step.ph.free .n{color:#8ff0bf}
+.step.ph.free h3{color:#fff}
+.ts.free .c{border-color:var(--green);color:var(--green)}
+.ts.free.on .c{background:var(--green);border-color:var(--green);color:#fff}
+.ts.free h3{color:var(--green2)}
+
+/* 26.10.2026 (Юрий): кнопка «наверх» на длинных страницах */
+.totop{position:fixed;right:clamp(16px,2.4vw,34px);bottom:clamp(16px,2.4vw,34px);z-index:55;width:54px;height:54px;border-radius:50%;display:grid;place-items:center;
+  background:var(--navy2);color:#fff;box-shadow:0 10px 30px -8px rgba(11,31,69,.55),0 0 0 1px rgba(255,255,255,.14) inset;opacity:0;transform:translateY(18px) scale(.9);pointer-events:none;
+  transition:opacity .35s,transform .35s cubic-bezier(.2,.7,.2,1),background .3s,box-shadow .3s}
+.totop.on{opacity:1;transform:none;pointer-events:auto}
+.totop:hover{background:var(--blue);box-shadow:0 0 30px -4px rgba(120,170,255,.9),0 10px 30px -8px rgba(11,31,69,.55)}
+.totop svg{width:24px;height:24px}
+.fopen .totop,.open .totop{display:none}
