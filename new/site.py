@@ -54,8 +54,8 @@ TEAM = _mb.TEAM
 MAX_HREF = "https://max.ru/u/f9LHodD0cOLQzwPoUyWBoejqc5iq940FAYmSIsMAm8Hr1FcNu85zWG126zY"
 CHANNEL = "https://t.me/mtk_vostok_avto"
 
-MENU = [("katalog/", "Каталог"), ("premium/", "Премиум"), ("mopedy/", "Мопеды"), ("avto/", "Авто в Китае"),("kak-kupit/", "Как купить"), ("stoimost/", "Стоимость"),
-        ("vydannye/", "Выданные"), ("voprosy/", "Вопросы"), ("kontakty/", "Контакты")]
+MENU = [("katalog/", "Каталог"), ("avto/", "Авто в Китае"), ("premium/", "Премиум-авто"), ("vydannye/", "Выданные"), ("mopedy/", "Электромопеды"),
+        ("stoimost/", "Стоимость"), ("kak-kupit/", "Как купить"), ("voprosy/", "Вопросы"), ("kontakty/", "Контакты")]   # порядок, «Премиум-авто» и «Электромопеды» — Юрий 26.10.2026 («Авто» 26.10)
 PAGES = []                                              # (путь, приоритет) — для sitemap.xml
 MIN_YEAR = 2022                                         # машины 2021 года не показывать (Юрий 06.10.2026)
 
@@ -912,7 +912,7 @@ def premium_page(prem, rates):
     credits = "".join(f'<li>{E(c["name"])}&nbsp;— {E(c["author"])}, <a href="{E(c["license_url"])}" rel="license noopener" target="_blank">{E(c["license"])}</a>, '
                       f'<a href="{E(c["page"])}" rel="noopener" target="_blank">Wikimedia Commons</a></li>' for c in cards)
     body = f"""
-<section class="phead"><div class="wrap">{crumbs((None, "Премиум"))}
+<section class="phead"><div class="wrap">{crumbs((None, "Премиум-авто"))}
 <h1 class="rv in">Премиальные автомобили <em>из&nbsp;Китая</em>: б/у и&nbsp;новые</h1>
 <p class="lead">Цены ориентировочные, под&nbsp;ключ до&nbsp;Санкт-Петербурга, на&nbsp;{ddmm(TODAY)}</p>
 </div></section>
@@ -925,7 +925,7 @@ def premium_page(prem, rates):
 <a class="btn b" href="{u("kontakty/")}">Написать специалисту <span class="ar">→</span></a></div>
 <div class="credits"><h2>Авторы фото</h2><p>Фото моделей&nbsp;— с&nbsp;Wikimedia Commons по&nbsp;свободным лицензиям. Снимки обрезаны и&nbsp;уменьшены под&nbsp;карточки.</p><ul>{credits}</ul></div>
 </div></section>"""
-    ld = [bc_ld(("premium/", "Премиум")),
+    ld = [bc_ld(("premium/", "Премиум-авто")),
           {"@context": "https://schema.org", "@type": "ItemList", "name": "Премиальные автомобили из Китая: б/у и новые",
            "itemListElement": [{"@type": "ListItem", "position": i, "name": c["name"]} for i, c in enumerate(cards, 1)]}]
     page("premium/", "Премиальные автомобили из Китая: б/у и новые под ключ | МТК Восток-Авто",
@@ -994,7 +994,7 @@ def moto_page(d):
     lo = min(m["price_from_rub"] for m in ms)
     facts = "".join(f"<li>{t}</li>" for t in MOTO_FACTS) + '<li class="w">Шлем обязателен</li>'
     body = f"""
-<section class="phead"><div class="wrap">{crumbs((None, "Мопеды"))}
+<section class="phead"><div class="wrap">{crumbs((None, "Электромопеды"))}
 <div class="mhd"><img class="mlogo" src="{u("img/moto/logo.webp")}" alt="Восток-Мото" width="120" height="120">
 <h1 class="rv in">Электромопеды <em>из&nbsp;Китая</em></h1></div>
 <p class="lead">«Восток-Мото»: {len(ms)} {plural(len(ms), "модель", "модели", "моделей")} до&nbsp;50&nbsp;км/ч и&nbsp;до&nbsp;4&nbsp;кВт под&nbsp;права категории M. Цены по&nbsp;курсу на&nbsp;{date_}: цена зависит от&nbsp;курса&nbsp;— актуальную цену уточняйте.</p>
@@ -1008,7 +1008,7 @@ def moto_page(d):
 <div class="box pcta"><div><h3>Узнать актуальную цену</h3><p>Цена зависит от&nbsp;курса юаня. Напишите&nbsp;— подберём модель и&nbsp;цвет и&nbsp;назовём цену на&nbsp;сегодня.</p></div>
 <a class="btn b" href="{u("kontakty/")}">Написать специалисту <span class="ar">→</span></a></div>
 </div></section>"""
-    ld = [bc_ld(("mopedy/", "Мопеды")),
+    ld = [bc_ld(("mopedy/", "Электромопеды")),
           {"@context": "https://schema.org", "@type": "ItemList", "name": "Электромопеды из Китая «Восток-Мото»",
            "itemListElement": [{"@type": "ListItem", "position": i, "name": m["name"]} for i, m in enumerate(ms, 1)]}]
     page("mopedy/", "Электромопеды из Китая «Восток-Мото»: цены и характеристики | МТК Восток-Авто",
@@ -1129,7 +1129,7 @@ def extras(models, kp, rates, moto=None):
         lines += ["", f"## Авто в Китае ({len(kp)} машин, цена под ключ на {ddmm(TODAY)})", ""]
         lines += [f"- [{c['title']} {c.get('year') or ''}]({SITE}{u('avto/' + c['slug'] + '/')}): {kp_line(c)}; {c['total']:,} ₽ под ключ, {c.get('city') or ''}".replace(",", " ") for c in kp]
     if moto and moto["mopeds"]:
-        lines += ["", f"## Мопеды: электромопеды «Восток-Мото» ({len(moto['mopeds'])} {plural(len(moto['mopeds']), 'модель', 'модели', 'моделей')}, права категории M, цены по курсу на {moto['date']})", ""]
+        lines += ["", f"## Электромопеды «Восток-Мото» ({len(moto['mopeds'])} {plural(len(moto['mopeds']), 'модель', 'модели', 'моделей')}, права категории M, цены по курсу на {moto['date']})", ""]
         lines += [f"- [{m['name']}]({SITE}{u('mopedy/')}): {' · '.join(m['specs'])}; {html.unescape(re.sub('<[^>]+>', '', moto_price(m)))}" for m in moto["mopeds"]]
     lines += ["", "## Контакты", ""] + [f"- {p['name']} — {p['note']}: {p['tel']}, Telegram @{p['tg']}" for p in TEAM] + [f"- Telegram-канал: {CHANNEL}", ""]
     (OUT / "llms.txt").write_text("\n".join(lines))

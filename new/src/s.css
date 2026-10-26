@@ -473,6 +473,16 @@ body{font-size:16px}
 /* восьмой пункт меню: шапка шире, кнопка «Написать специалисту» — только там, где влезает (раньше на 1280 px уже вылезала за край) */
 .hrow{max-width:1600px}
 @media (max-width:1599px){.hdr .cta{display:none}}
+/* девять пунктов, «Премиум-авто» и «Электромопеды» (Юрий 26.10.2026): шапка до 1760 px, кнопка — от 1760 px, меньше — плотнее и мельче */
+.hrow{max-width:1760px}
+@media (max-width:1759px){.hdr .cta{display:none}.menu{gap:18px;font-size:16px}}
+@media (max-width:1439px){.menu{gap:13px;font-size:14.5px}}
+/* мобильное меню из десяти строк: по центру, но без обрезки сверху (на низких экранах — прокрутка и шрифт мельче), у кнопки поля */
+.drawer{justify-content:flex-start}
+.drawer>:first-child{margin-top:auto}
+.drawer>:last-child{margin-bottom:auto}
+.drawer .btn{padding:0 30px}
+@media (max-height:760px){.drawer{padding-top:96px}.drawer a{font-size:23px;padding:3px 0}.drawer .btn{margin-top:16px}}
 .pfl{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:26px}
 .pfl .cnt{font-size:16px;color:var(--muted)}
 .pfl .cnt b{color:var(--ink);font-weight:600}

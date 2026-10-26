@@ -7,12 +7,12 @@
 ## Разделы
 
 - [Каталог](https://mtk-vostok-avto.ru/katalog/)
-- [Премиум](https://mtk-vostok-avto.ru/premium/)
-- [Мопеды](https://mtk-vostok-avto.ru/mopedy/)
 - [Авто в Китае](https://mtk-vostok-avto.ru/avto/)
-- [Как купить](https://mtk-vostok-avto.ru/kak-kupit/)
-- [Стоимость](https://mtk-vostok-avto.ru/stoimost/)
+- [Премиум-авто](https://mtk-vostok-avto.ru/premium/)
 - [Выданные](https://mtk-vostok-avto.ru/vydannye/)
+- [Электромопеды](https://mtk-vostok-avto.ru/mopedy/)
+- [Стоимость](https://mtk-vostok-avto.ru/stoimost/)
+- [Как купить](https://mtk-vostok-avto.ru/kak-kupit/)
 - [Вопросы](https://mtk-vostok-avto.ru/voprosy/)
 - [Контакты](https://mtk-vostok-avto.ru/kontakty/)
 
@@ -242,7 +242,7 @@
 - [Xiaomi YU7 Max Range 2025](https://mtk-vostok-avto.ru/avto/xiaomi-yu7-max-range-2025-26000km/): 26 000 км  320 л.с.  835 км хода  Электро  задний привод; 6 230 737 ₽ под ключ  Екатеринбург
 - [Lixiang L7 Pro 2025](https://mtk-vostok-avto.ru/avto/lixiang-l7-pro-2025-15000km/): 15 000 км  449 л.с.  Гибрид EREV  полный привод; 6 990 621 ₽ под ключ  Екатеринбург
 
-## Мопеды: электромопеды «Восток-Мото» (31 модель, права категории M, цены по курсу на 26.10.2026)
+## Электромопеды «Восток-Мото» (31 модель, права категории M, цены по курсу на 26.10.2026)
 
 - [Yadea Modern Shine 70-M](https://mtk-vostok-avto.ru/mopedy/): мотор 600 Вт, пиковая 800 Вт · до 43 км/ч · 60 В 23 А·ч, графеновая свинцовая · запас хода 80 км · масса 87 кг (сертификат КНР); цена от 138 800 ₽ до 142 700 ₽
 - [Yadea Modern Shine II 60-M](https://mtk-vostok-avto.ru/mopedy/): мотор 600 Вт, пиковая 1 200 Вт · до 42 км/ч · 60 В 23 А·ч, графеновая свинцовая · запас хода 50 км · масса 93 кг (сертификат КНР); цена от 144 300 ₽ до 153 500 ₽
