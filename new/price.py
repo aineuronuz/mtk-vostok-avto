@@ -147,3 +147,38 @@ if __name__ == "__main__":                              # проверка: pyth
     for c in cars[:5]:
         r = calc(c, vtb, k["cny"], k["eur"], date.today())
         print(c["slug"], r["total"], r["age_ru"])
+
+
+def calc_deal(c, vtb, cny, eur, today):
+    """Цена под ключ на сегодня машины из КП после 06.10.2026 (~/auto-china/kp_v3/deals/*.py, данные — c["deal"], kp_deals.py):
+    формула КП gen_kp_v3.py — один контракт и инвойс (Юрий 18.10: таможенная стоимость — машина + доставка; в старых сделках
+    ONE_INVOICE = False), пошлина (% или €/см³), акциз, НДС и утильсбор — как в сделке; курсы — дня; оформление, СВХ и услуги — TARIFF.
+    Возрастная категория — та, что в сделке на дату КП."""
+    d, t = c["deal"], TARIFF
+    car_rub, deliv_rub, load_rub = round(d["car_cny"] * vtb), round(d["delivery_cny"] * vtb), round(d["loading_cny"] * vtb)
+    bank = round((car_rub + deliv_rub) * BANK_FEE)
+    cv = round((d["car_cny"] + (d["delivery_cny"] if d["one_invoice"] else 0)) * cny)   # таможенная стоимость по курсу ЦБ
+    duty = round(cv * d["duty_pct"]) if d["duty_pct"] else round(d["engine_cc"] * d["duty_eur_cc"] * eur)
+    excise = d["excise"] or 0
+    vat = round((cv + duty + excise) * (d["vat_pct"] or 0))
+    fee = C.custom_fee(cv)
+    rec = d["recycle"]
+    r = f"{vtb:.2f}".replace(".", ",")
+    if d["one_invoice"]:
+        lines = [(f"Автомобиль с доставкой ({_n(d['car_cny'] + d['delivery_cny'])} ¥ × {r})", car_rub + deliv_rub)]
+    else:
+        lines = [(f"Автомобиль в Китае ({_n(d['car_cny'])} ¥ × {r})", car_rub), (f"Доставка автовозом ({_n(d['delivery_cny'])} ¥)", deliv_rub)]
+    lines += [(f"Погрузка и доставка по Китаю ({_n(d['loading_cny'])} ¥)", load_rub), ("Комиссия банка ВТБ 2%", bank)]
+    if d["duty_pct"]:
+        lines.append((f"Таможенная пошлина {d['duty_pct'] * 100:.0f}% от стоимости", duty))
+    else:
+        lines.append((f"Таможенная пошлина ({d['engine_cc']} см³ × {str(d['duty_eur_cc']).replace('.', ',')} €)", duty))
+    if excise:
+        lines.append(("Акциз", excise))
+    if vat:
+        lines.append((f"НДС {d['vat_pct'] * 100:.0f}%", vat))
+    lines += [("Таможенный сбор", fee), ("Утилизационный сбор" + (" — льготный" if rec <= 5_200 else ""), rec),
+              (t["svh_label"], t["svh"]), ("Оформление: растаможка, СБКТС, ЭПТС", CLEARANCE),
+              ("Подбор автомобиля и сопровождение сделки", t["services"])]
+    total = sum(v for _, v in lines)
+    return {"total": total, "lines": lines, "vtb": vtb, "cny": cny, "eur": eur, "date": today.isoformat()}

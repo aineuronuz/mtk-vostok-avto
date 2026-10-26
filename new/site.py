@@ -472,15 +472,31 @@ def model_card(m, vt=True):
 
 
 def load_kp(rates):
+    """Машины из КП: июнь–сентябрь — new/data/kp_cars.json, с 06.10.2026 — сделки kp_v3 «Авто» (kp_deals.py, каждое утро
+    и при каждой сборке берутся все, новые — сразу; Юрий 26.10.2026). Одна машина в обоих списках — по сделке."""
     p = DATA / "kp_cars.json"
-    if not p.exists():
-        return []
     spec = importlib.util.spec_from_file_location("mtk_price", NEW / "price.py")
     pm = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(pm)
-    cars = [c for c in json.loads(p.read_text()) if not c.get("year") or c["year"] >= MIN_YEAR]
+    import kp_deals
+    deals = kp_deals.load(slugify)
+    key = lambda c: (re.sub(r"[^a-z0-9]", "", c["title"].lower()), c.get("year"), c.get("mileage_km"))
+    seen = {key(c) for c in deals}
+    allold = json.loads(p.read_text()) if p.exists() else []
+    was = {key(c): c["slug"] for c in allold}                  # та же машина была в старом списке — адрес страницы прежний
+    old = [c for c in allold if key(c) not in seen]
+    slugs = {c["slug"] for c in old}
+    for c in deals:
+        c["slug"] = was.get(key(c), c["slug"])
+    extra = json.loads((DATA / "models.json").read_text()) if (DATA / "models.json").exists() else {}
+    for c in deals:
+        while c["slug"] in slugs:
+            c["slug"] += "-2"
+        slugs.add(c["slug"])
+        c["body"] = (extra.get(c.get("catalog_name") or "") or {}).get("body")
+    cars = [c for c in old + deals if not c.get("year") or c["year"] >= MIN_YEAR]
     for c in cars:
-        r = pm.calc(c, rates["vtb"], rates["cny"], rates["eur"], TODAY)
+        r = (pm.calc_deal if c.get("deal") else pm.calc)(c, rates["vtb"], rates["cny"], rates["eur"], TODAY)
         c["price"] = r
         c["total"] = r["total"]
         c["fuel_key"] = {"ice": "petrol", "hybrid": "hybrid", "ev": "ev", "erev": "erev"}.get(c.get("kind"), "petrol")
@@ -498,6 +514,10 @@ def kp_imgs(c):
         c["imgs"].append(i)
     if ph:
         webp(ph[0], d / "c.webp", 720, 72)
+    for x in (d.glob("*.webp") if d.exists() else []):          # фото сверх нынешних (в сделке их стало меньше)
+        n = x.stem.lstrip("t")
+        if n.isdigit() and int(n) > len(ph):
+            x.unlink()
 
 
 def kp_line(c):
@@ -843,7 +863,7 @@ def car_page(c, kp, models, rates):
     rows = [("Год выпуска", f'{c["year"]}' + (f', {c["month"]:02d} месяц' if c.get("month") else "") if c.get("year") else None),
             ("Пробег", kv[1][1]), ("Топливо", c.get("fuel_label")), ("Объём двигателя", f'{c["volume_cc"]} см³' if c.get("volume_cc") else None),
             ("Мощность", f'{c["power_hp"]} л.с.' + (f' ({c["power_kw"]} кВт)' if c.get("power_kw") else "") if c.get("power_hp") else None),
-            ("Батарея", f'{c["battery_kwh"]} кВт·ч' if c.get("battery_kwh") else None), ("Запас хода", f'{c["range_km"]} км' if c.get("range_km") else None),
+            ("Батарея", f'{c["battery_kwh"]:g} кВт·ч'.replace(".", ",") if c.get("battery_kwh") else None), ("Запас хода", f'{c["range_km"]} км' if c.get("range_km") else None),
             ("Коробка", c.get("transmission")), ("Привод", c.get("drive")), ("Кузов", (c.get("body") or "").capitalize() or None), ("Цвет", c.get("color")),
             ("Комплектация", c.get("trim")), ("Цена в Китае", f'{c["car_cny"]:,} ¥'.replace(",", " ") if c.get("car_cny") else None)]
     spec = "".join(f"<tr><th>{k}</th><td>{E(str(v))}</td></tr>" for k, v in rows if v)
