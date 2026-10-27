@@ -838,13 +838,12 @@ body:not(.light) .hdr.sc:not(.solid){background:rgba(11,31,69,.97);box-shadow:0 
 .pkat .phv.vid{position:absolute;inset:0;height:auto;aspect-ratio:auto;margin:0;opacity:.45;-webkit-mask-image:none;mask-image:none}
 }
 /* 27.10.2026 (Юрий, видео): машины, мопед и калькулятор в шапках меньше; вечером — шапки всех разделов одной высоты, на 1,5 см ниже,
-   плитки Каталога крупнее, витрина «Авто в Китае» крупнее и левее */
+   плитки Каталога крупнее, витрина «Авто в Китае» крупнее и левее; «Стоимость» — синяя на весь экран, калькулятор крупнее */
 @media (min-width:1141px){
-.phead:not(.pcalc),.pcalc{min-height:600px}
-.pkat{padding-bottom:28px}
-.pkat .tiles{margin-top:26px}
-.pkat .tile{aspect-ratio:1.75/1}
-.pkat .tile b{font-size:24px}
+.phead:not(.pcalc){min-height:600px}
+.pkat .tiles{margin-top:20px}
+.pkat .tile{aspect-ratio:auto;height:214px}
+.pkat .tile b{font-size:26px}
 .phv.studio img{max-width:min(66%,520px);max-height:66%;bottom:5%}
 .phshow{width:min(25vw,340px);right:clamp(80px,11vw,190px);transform:translateY(-44%)}
 .shstack{height:clamp(310px,23vw,345px)}
@@ -852,17 +851,23 @@ body:not(.light) .hdr.sc:not(.solid){background:rgba(11,31,69,.97);box-shadow:0 
 .shc h3{font-size:16px;margin-top:6px}.shc b{font-size:21px;margin-top:4px}
 .phroute{width:min(38vw,560px)}
 .phroute .rtd b{font-size:46px}
-.pcalc{padding-top:calc(var(--hh) + 6px);padding-bottom:9px}
+.pcalc{min-height:100vh;padding-top:calc(var(--hh) + 18px);padding-bottom:20px}
 .pcalc h1{font-size:clamp(36px,3.6vw,58px)}
-.pcalc .phcalc{padding:13px 18px 12px;border-radius:18px}
-.pcalc .phcalc h3{font-size:17px}
-.pcalc .phcalc label{margin-top:7px;font-size:12px}
-.pcalc .phcalc input,.pcalc .phcalc select{height:35px;margin-top:4px;font-size:15px;border-radius:10px;padding:0 11px}
-.pcalc .phcalc .chint,.pcalc .phcalc p{margin-top:5px;font-size:11.5px;line-height:1.35}
-.pcalc .phcalc .out{margin-top:9px;padding-top:8px}
-.pcalc .phcalc .out b{font-size:32px}
-.pcalc .phcalc .brkd{margin-top:4px}
-.pcalc .rates{margin-top:22px}
-.pcalc .rates div{padding:12px 16px 14px}
-.pcalc .rates b{font-size:30px}
+.pcalc .wrap{grid-template-columns:minmax(0,1fr) min(40vw,520px)}
+.pcalc .phcalc{padding:22px 26px 20px;border-radius:22px}
+.pcalc .phcalc h3{font-size:22px}
+.pcalc .phcalc label{margin-top:12px;font-size:13.5px}
+.pcalc .phcalc input,.pcalc .phcalc select{height:46px;margin-top:6px;font-size:17px}
+.pcalc .phcalc .chint,.pcalc .phcalc p{margin-top:7px;font-size:12.5px;line-height:1.4}
+.pcalc .phcalc .out{margin-top:16px;padding-top:12px}
+.pcalc .phcalc .out b{font-size:46px}
+.pcalc .rates{margin-top:26px}
+.pcalc .rates div{padding:14px 18px 16px}
+.pcalc .rates b{font-size:32px}
+.pkat{padding-top:calc(var(--hh) + 12px);padding-bottom:18px}
+.pkat h1{font-size:clamp(36px,3.4vw,49px)}
+.pkat .lead{max-width:800px;margin-top:10px}
+.phv.studio img[src*="kontakty"]{bottom:18%}
 }
+/* под шапкой списка — сразу поиск, «Найдено» и сортировка (Юрий 27.10.2026) */
+.phead+.sec.tight:has(.lay,.dgrid,.mfacts){padding-top:24px}
