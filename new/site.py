@@ -54,6 +54,19 @@ _spec.loader.exec_module(_mb)
 TEAM = _mb.TEAM
 MAX_HREF = "https://max.ru/u/f9LHodD0cOLQzwPoUyWBoejqc5iq940FAYmSIsMAm8Hr1FcNu85zWG126zY"
 CHANNEL = "https://t.me/mtk_vostok_avto"
+# марки по-русски в заголовках и описаниях страниц: так их ищут в Яндексе и Google — «Чанган Q05», «Джили из Китая» (Юрий 28.10.2026, индексация)
+BRAND_RU = {"Arcfox": "Аркфокс", "Audi": "Ауди", "BMW": "БМВ", "BYD": "БИД", "Changan": "Чанган", "Chery": "Чери", "Chevrolet": "Шевроле",
+            "Dongfeng": "Донгфенг", "Exeed": "Эксид", "Ford": "Форд", "GAC": "ГАК", "GWM": "Грейт Вол", "Geely": "Джили", "Haval": "Хавал",
+            "Honda": "Хонда", "Hyundai": "Хендай", "Jetour": "Джетур", "Jetta": "Джетта", "Jinbei": "Джинбей", "Kia": "Киа", "Leapmotor": "Липмотор",
+            "Lexus": "Лексус", "Livan": "Ливан", "Lixiang": "Лисян", "MG": "МГ", "Mazda": "Мазда", "Mercedes-Benz": "Мерседес", "Mitsubishi": "Мицубиси",
+            "NIO": "Нио", "Nissan": "Ниссан", "Roewe": "Роеве", "Skoda": "Шкода", "Subaru": "Субару", "Toyota": "Тойота", "Venucia": "Венусия",
+            "VW": "Фольксваген", "Volkswagen": "Фольксваген", "Voyah": "Воя", "Wuling": "Вулинг", "Xiaomi": "Сяоми"}
+
+
+def ru_brand(brand):
+    """« (Чанган)» — марка по-русски в скобках, пусто для марки без русского написания."""
+    return f" ({BRAND_RU[brand]})" if brand in BRAND_RU else ""
+
 
 MENU = [("katalog/", "Каталог"), ("avto/", "Авто в Китае"), ("premium/", "Премиум-авто"), ("vydannye/", "Выданные авто"), ("mopedy/", "Электромопеды"),
         ("stoimost/", "Стоимость"), ("kalkulyator/", "Калькулятор"), ("kak-kupit/", "Как купить"), ("voprosy/", "Вопросы"), ("kontakty/", "Контакты")]   # порядок, «Премиум-авто» и «Электромопеды» — Юрий 26.10.2026 («Авто» 26.10); «Калькулятор» отдельно от «Стоимости» — Юрий 27.10.2026
@@ -985,7 +998,7 @@ def model_page(m, models, kp):
     if m.get("bu_old"):
         util += ", у&nbsp;б/у старше 3&nbsp;лет&nbsp;— 5&nbsp;200&nbsp;₽"
     rows = [("Двигатель", E(m["engine"])), ("Мощность" + (" и запас хода" if m["dir"] == "ev" else ""), E(m["power"])),
-            ("Производитель", E(m["plant"])), ("Кузов", E((m.get("body") or "").capitalize()) or None),
+            ("Производитель", E(m["plant"]).replace(E(m["brand"]), E(m["brand"]) + ru_brand(m["brand"]), 1)), ("Кузов", E((m.get("body") or "").capitalize()) or None),
             ("Мест", str(m["seats"]) if m.get("seats") else None), ("Состояние", m["cond"]), ("Утильсбор", util),
             ("Срок", "45–65 дней от&nbsp;оплаты до&nbsp;выдачи"), ("Цена под ключ", "<br>".join(f"{t}: {v or 'по&nbsp;запросу'}" if t else v for t, v in price_lines(m)))]
     spec = "".join(f"<tr><th>{k}</th><td>{v}</td></tr>" for k, v in rows if v)
@@ -1023,8 +1036,8 @@ def model_page(m, models, kp):
            "category": m["dir_label"],
            "offers": {"@type": "AggregateOffer", "priceCurrency": "RUB", "lowPrice": lo_price(m), "highPrice": m["to"] or m["from"],
                       "offerCount": max(1, len(found)), "availability": "https://schema.org/PreOrder", "seller": {"@type": "Organization", "name": "МТК Восток-Авто"}}}]
-    page(f'katalog/{m["slug"]}/', f'{m["name"]} из Китая под ключ — {price_text(m)} | МТК Восток-Авто',
-         f'{m["name"]} из Китая под льготный утильсбор: {m["engine"]}, {m["power"].rstrip(".")}. Цена под ключ {price_text(m)}, подбор, проверка, доставка и растаможка.',
+    page(f'katalog/{m["slug"]}/', f'{m["name"]}{ru_brand(m["brand"])} из Китая под ключ — {price_text(m)} | МТК Восток-Авто',
+         f'{m["name"]}{ru_brand(m["brand"])} из Китая под льготный утильсбор: {m["engine"]}, {m["power"].rstrip(".")}. Цена под ключ {price_text(m)}, подбор, проверка, доставка и растаможка.',
          body, active="katalog/", jsonld=ld, og="img/m/" + m["stem"] + ".webp", prio="0.8")
 
 
@@ -1116,8 +1129,9 @@ def car_page(c, kp, models, rates):
            "fuelType": c.get("fuel_label"), "image": [SITE + u(f'img/kp/{c["slug"]}/{i}.webp') for i in imgs[:5]],
            "offers": {"@type": "Offer", "priceCurrency": "RUB", "price": p["total"], "priceValidUntil": (TODAY + timedelta(days=1)).isoformat(),
                       "availability": "https://schema.org/PreOrder", "seller": {"@type": "Organization", "name": "МТК Восток-Авто"}}}]
-    page(f'avto/{c["slug"]}/', f'{c["title"]} {c.get("year") or ""} из Китая — {html.unescape(rub(p["total"]))} под ключ | МТК Восток-Авто',
-         f'{c["title"]} {c.get("year") or ""}, {html.unescape(kp_line(c))}. Цена под ключ на {ddmm(TODAY)}: {html.unescape(rub(p["total"]))}. Фото, характеристики и расчёт.',
+    km = f', {kv[1][1]}' if c.get("mileage_km") else ""   # пробег в заголовке: у машин одной модели и года заголовки разные
+    page(f'avto/{c["slug"]}/', f'{c["title"]} {c.get("year") or ""}{ru_brand(c.get("brand"))}{km} из Китая — {html.unescape(rub(p["total"]))} под ключ | МТК Восток-Авто',
+         f'{c["title"]}{ru_brand(c.get("brand"))} {c.get("year") or ""}, {html.unescape(kp_line(c))}. Цена под ключ на {ddmm(TODAY)}: {html.unescape(rub(p["total"]))}. Фото, характеристики и расчёт.',
          body, active="avto/", jsonld=ld, og=f'img/kp/{c["slug"]}/1.webp', prio="0.7")
 
 
@@ -1493,7 +1507,7 @@ def extras(models, kp, rates, moto=None):
              f"Курс юаня для расчёта на {ddmm(TODAY)}: {rates['vtb']:.2f} ₽.", "", "## Разделы", ""]
     lines += [f"- [{t}]({SITE}{u(p)})" for p, t in MENU]
     lines += ["", f"## Каталог ({len(models)} моделей, цена под ключ — ориентир)", ""]
-    lines += [f"- [{m['name']}]({SITE}{u('katalog/' + m['slug'] + '/')}): {m['engine']}, {m['power']}; {price_text(m)}" for m in models]
+    lines += [f"- [{m['name']}{ru_brand(m['brand'])}]({SITE}{u('katalog/' + m['slug'] + '/')}): {m['engine']}, {m['power']}; {price_text(m)}" for m in models]
     if kp:
         lines += ["", f"## Авто в Китае ({len(kp)} машин, цена под ключ на {ddmm(TODAY)})", ""]
         lines += [f"- [{c['title']} {c.get('year') or ''}]({SITE}{u('avto/' + c['slug'] + '/')}): {kp_line(c)}; {c['total']:,} ₽ под ключ".replace(",", " ") for c in kp]
