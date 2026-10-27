@@ -6,7 +6,9 @@ const clamp=(v,a=0,b=1)=>Math.min(b,Math.max(a,v));
 const nf=n=>String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g,' ');
 
 // меню на телефоне
-const bg=$('.burger');if(bg)bg.onclick=()=>document.body.classList.toggle('open');
+// три чёрточки меню на телефоне шевелятся, пока меню ни разу не открывали (Юрий 27.10.2026)
+const bg=$('.burger');if(bg){try{if(localStorage.mbSeen)bg.classList.add('seen')}catch(e){}
+  bg.onclick=()=>{document.body.classList.toggle('open');bg.classList.add('seen');try{localStorage.mbSeen=1}catch(e){}}}
 $$('.drawer a').forEach(a=>a.addEventListener('click',()=>document.body.classList.remove('open')));
 
 // плавный переход: фото карточки «перелетает» на страницу модели или машины
@@ -76,7 +78,7 @@ if(CF){const d=JSON.parse(CF.dataset.calc),el=CF.elements,$c=s=>$(s,CF),out=$c('
 // «Авто в Китае»: витрина — карточки последних машин сменяют друг друга (Юрий 27.10.2026)
 const SH=$('[data-show]');
 if(SH){const cs=$$('.shc',SH);let k=0,tm;const set=()=>cs.forEach((c,i)=>{const q=(i-k+cs.length)%cs.length;c.dataset.d=q>3?4:q});
-  const go=()=>{clearInterval(tm);if(!RM&&cs.length>1)tm=setInterval(()=>{k=(k+1)%cs.length;set()},3600)};
+  const go=()=>{clearInterval(tm);if(!RM&&cs.length>1)tm=setInterval(()=>{k=(k+1)%cs.length;set()},2500)};
   set();go();SH.addEventListener('mouseenter',()=>clearInterval(tm));SH.addEventListener('mouseleave',go)}
 
 // слова подсвечиваются
@@ -120,15 +122,16 @@ if(L){
     if(push){const p=new URLSearchParams();for(const k in s)p.set(k,Array.isArray(s[k])?s[k].join(','):s[k]);if(sortSel&&sortSel.selectedIndex>0)p.set('sort',sortSel.value);
       history.replaceState(null,'',location.pathname+(p.toString()?'?'+p:''))}};
   // плитки каталога (Электро, Гибриды, Бензин, Полный привод): после выбора страница плавно уходит к списку моделей (Юрий 26.10.2026)
-  // плавно, около секунды, с разгоном и торможением — не рывком (Юрий 27.10.2026)
+  // трогается сразу и плавно тормозит у списка, без медленного разгона — он выглядел как задержка (Юрий 27.10.2026, вечер)
   const toList=()=>{const t=L.closest('.lay')||L,h=$('#hdr'),hh=(h?h.offsetHeight:90)+16,y0=scrollY,y1=t.getBoundingClientRect().top+scrollY-hh;
-    if(RM){scrollTo(0,y1);return}const t0=performance.now(),D=Math.min(1300,Math.max(700,Math.abs(y1-y0)*.9)),ez=p=>p<.5?4*p*p*p:1-Math.pow(-2*p+2,3)/2;
-    const st=n=>{const p=clamp((n-t0)/D);scrollTo(0,y0+(y1-y0)*ez(p));if(p<1)requestAnimationFrame(st)};requestAnimationFrame(st)};
+    if(RM){scrollTo(0,y1);return}const t0=performance.now(),D=Math.min(800,Math.max(450,Math.abs(y1-y0)*.6)),ez=p=>1-Math.pow(1-p,3);
+    const de=document.documentElement;de.style.scrollBehavior='auto';   // иначе scroll-behavior:smooth из CSS растягивает каждый шаг
+    const st=n=>{const p=clamp((n-t0)/D);scrollTo(0,y0+(y1-y0)*ez(p));if(p<1)requestAnimationFrame(st);else de.style.scrollBehavior=''};requestAnimationFrame(st)};
   // плитки Каталога — быстрый выбор того же, что в панели «Топливо» и «Привод» (Юрий 27.10.2026)
   const tiles=$$('.tiles [data-to]'),chip=b=>$(`[data-f="${b.dataset.to}"] [data-v="${b.dataset.v}"]`),sync=()=>tiles.forEach(b=>{const c=chip(b);b.classList.toggle('on',!!c&&c.classList.contains('on'))});
   const CAT={ev:'fuel:ev',hyb:'fuel:hybrid',fwd:'fuel:petrol',awd:'feat:awd'};
   (params.get('cat')||'').split(',').forEach(x=>{if(!CAT[x])return;const[f,v]=CAT[x].split(':'),c=$(`[data-f="${f}"] [data-v="${v}"]`);if(c)c.classList.add('on')});
-  tiles.forEach(b=>b.addEventListener('click',()=>{const c=chip(b);if(!c)return;c.classList.toggle('on');apply();setTimeout(toList,60)}));
+  tiles.forEach(b=>b.addEventListener('click',()=>{const c=chip(b);if(!c)return;c.classList.toggle('on');apply();requestAnimationFrame(toList)}));
   groups.forEach(g=>{if(g.matches('.chips,.tiles'))g.addEventListener('click',e=>{const c=e.target.closest('[data-v]');if(!c)return;
       if(g.dataset.one!=null)$$('[data-v]',g).forEach(x=>{if(x!=c)x.classList.remove('on')});c.classList.toggle('on');apply();if(g.matches('.tiles'))setTimeout(toList,60)});
     else g.addEventListener('input',()=>apply())});

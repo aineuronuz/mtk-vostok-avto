@@ -298,7 +298,7 @@ def page(path, title, desc, body, active=None, jsonld=None, og=None, prio="0.6")
 </head>
 <body>
 <header class="hdr" id="hdr"><div class="hrow">{logo_html()}<nav class="menu">{menu}</nav><a class="cta" href="{u("kontakty/")}">Написать специалисту</a>
-<button class="burger" type="button" aria-label="Меню"><i></i><i></i></button></div></header>
+<button class="burger" type="button" aria-label="Меню"><i></i><i></i><i></i></button></div></header>
 <nav class="drawer"><a href="{u()}">Главная</a>{menu}<a class="btn w" href="{u("kontakty/")}">Написать специалисту</a></nav>
 <main>
 {body}
@@ -470,6 +470,18 @@ def model_card(m, vt=True):
 
 # ---------- данные: машины из КП ----------
 
+# Электро и EREV с льготным утильсбором — только модели, у которых 30-мин мощность ниже порога подтверждена (Юрий 27.10.2026):
+# Q05 — 74 л.с. в ЭПТС ввезённых, Yuan UP 301 — экспертное заключение 35 кВт, A06 — мотор как у Q05, Aion Y Plus 70 — решение Юрия 23.09.
+# Toyota bZ3X не прошла: 额定 45 кВт, а по российской 30-мин ~65 кВт — утиль, вероятно, коммерческий. С коммерческим утилем идут все.
+UTIL_OK = ("changan qiyuan q05", "changan qiyuan a06", "gac aion y plus", "byd yuan up")
+
+
+def util_ok(c):
+    if c.get("kind") not in ("ev", "erev"):
+        return True
+    rec = next((v for k, v in c["price"]["lines"] if k.startswith("Утилизац")), 0)
+    return rec > 5_200 or c["title"].lower().startswith(UTIL_OK)
+
 
 def load_kp(rates):
     """Машины из КП: июнь–сентябрь — new/data/kp_cars.json, с 06.10.2026 — сделки kp_v3 «Авто» (kp_deals.py, каждое утро
@@ -502,6 +514,7 @@ def load_kp(rates):
         c["price"] = r
         c["total"] = r["total"]
         c["fuel_key"] = {"ice": "petrol", "hybrid": "hybrid", "ev": "ev", "erev": "erev"}.get(c.get("kind"), "petrol")
+    cars = [c for c in cars if util_ok(c)]
     cars.sort(key=lambda c: c["total"])
     return cars
 
@@ -658,7 +671,7 @@ DOCS = [("kontrakt", "Контракт купли-продажи с&nbsp;про�
 
 
 # ---------- шапки разделов: справа видео, фото или небольшой интерактив по теме (Юрий 26.10.2026) ----------
-PH_VIS = {"katalog": ("video", "ph_katalog", "fit"), "premium": ("video", "ph_premium"),   # ролики syntx.ai от Юрия; сборка — tools/ph_video.py (27.10)
+PH_VIS = {"katalog": ("video", "ph_katalog", "fit"), "premium": ("video", "ph_premium", "zoom"),   # ролики syntx.ai от Юрия; сборка — tools/ph_video.py (27.10)
           "vydannye": ("studio", "ph/vydannye.webp"), "mopedy": ("studio", "ph/mopedy.webp"),   # фото Юрия из Nano Banana на синем фоне (27.10)
           "voprosy": ("img", "road.webp"), "kontakty": ("studio", "ph/kontakty.webp")}            # «Авто в Китае» — витрина ph_show() (Юрий 27.10)
 
@@ -670,7 +683,7 @@ def phv(key):
         if not (vd / f"{src}.mp4").exists():
             return ""
         vv = lambda n: u(f"assets/video/{n}") + "?v=" + hashlib.md5((vd / n).read_bytes()).hexdigest()[:8]
-        return (f'<div class="{" ".join(["phv", *cls])}" aria-hidden="true"><video muted loop playsinline preload="none" poster="{vv(src + ".webp")}"'
+        return (f'<div class="{" ".join(["phv", "vid", *cls])}" aria-hidden="true"><video muted loop playsinline preload="none" poster="{vv(src + ".webp")}"'
                 f' data-src="{vv(src + ".mp4")}" data-src-m="{vv(src + "_m.mp4")}"></video></div>')
     if not (IMG / src).exists():
         return ""
@@ -698,29 +711,29 @@ def pop_rank(kp):
 
 
 def ph_show(kp):
-    """«Авто в Китае»: живая витрина справа — машины, добавленные последними, карточки сменяют друг друга, счётчик (Юрий 27.10.2026)."""
+    """«Авто в Китае»: живая витрина справа — машины, добавленные последними, карточки сменяют друг друга (Юрий 27.10.2026;
+    счётчик «N машин, +N сегодня» убран — Юрий 27.10.2026, вечер)."""
     today = TODAY.isoformat()
     fresh = sorted(kp, key=lambda c: (added(c), c["total"]), reverse=True)[:8]
-    n = sum(added(c) == today for c in kp)
-    cnt = (f'<b>{len(kp)}</b> {plural(len(kp), "машина", "машины", "машин")}'
-           + (f'<span>+{n} сегодня</span>' if n else '<span>новые каждый день</span>'))
     when = lambda c: "Новая сегодня" if added(c) == today else f'Добавлена {ddmm(date.fromisoformat(added(c)))}' if added(c) else "В&nbsp;продаже"
     cards = "".join(f'<a class="shc" href="{u("avto/" + c["slug"] + "/")}"><img src="{u("img/kp/" + c["slug"] + "/" + c.get("card", "k.webp"))}" alt="{E(c["title"])}" loading="lazy">'
                     f'<div class="t"><span class="nw">{when(c)}</span><h3>{E(c["title"])} <i>{c.get("year") or ""}</i></h3><b>{rub(c["total"])}</b><small>под ключ на&nbsp;{ddmm(TODAY)}</small></div></a>'
                     for c in fresh)
-    return f'<div class="phshow"><div class="shcnt">{cnt}</div><div class="shstack" data-show>{cards}</div></div>'
+    return f'<div class="phshow"><div class="shstack" data-show>{cards}</div></div>'
 
 
 def ph_route():
-    """«Как купить»: маршрут Китай → граница → ваш город, 45–65 дней — машина едет по линии."""
+    """«Как купить»: маршрут Китай → граница → ваш город, 45–65 дней — по линии едет машинка (Юрий 27.10.2026: бирюзовый вместо жёлтого)."""
     path = "M40 230 C 170 120, 300 270, 430 170 S 640 60, 720 110"
     return f"""<div class="phroute" aria-hidden="true"><svg viewBox="0 0 760 300" fill="none">
-<defs><linearGradient id="rtg" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ffd27a"/><stop offset=".6" stop-color="#ffb04a"/><stop offset="1" stop-color="#7fd3ff"/></linearGradient></defs>
+<defs><linearGradient id="rtg" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#3fe8c8"/><stop offset=".6" stop-color="#2fd2e6"/><stop offset="1" stop-color="#7fd3ff"/></linearGradient></defs>
 <path d="{path}" class="rt0"/><path d="{path}" class="rt1" stroke="url(#rtg)"/>
 <g class="nd"><circle cx="40" cy="230" r="9"/><circle cx="430" cy="170" r="9"/><circle cx="720" cy="110" r="11"/></g>
 <text x="40" y="272" text-anchor="middle">Китай</text><text x="430" y="212" text-anchor="middle">Граница</text><text x="720" y="70" text-anchor="middle">Ваш город</text>
-<g class="car"><circle r="15"/><path d="M-8 3h16l-2-6h-12zM-6 5a2 2 0 1 0 .01 0M6 5a2 2 0 1 0 .01 0" stroke="#0b1f45" stroke-width="1.6" fill="#fff"/>
-<animateMotion dur="7s" repeatCount="indefinite" rotate="0" keyPoints="0;1;1" keyTimes="0;.85;1" calcMode="linear" path="{path}"/></g>
+<g class="car"><g transform="scale(1.4) translate(0 -9)"><path class="bd" d="M-23 4v-6q1-4 6-4.5l8-1 6-6q2-1.5 5-1.5h8q3 0 5 3l4 4.5q5 1 5 5v6.5z"/>
+<path class="gl" d="M-6.5-7.5l4.5-5h6v5zM5.5-7.5v-5h4q2 0 3 1.5l2.5 3.5z"/>
+<circle class="wh" cx="-12" cy="4.5" r="4.6"/><circle class="wh" cx="12.5" cy="4.5" r="4.6"/></g>
+<animateMotion dur="7s" repeatCount="indefinite" rotate="auto" keyPoints="0;1;1" keyTimes="0;.85;1" calcMode="linear" path="{path}"/></g>
 </svg><div class="rtd"><b>45–65</b> дней от&nbsp;оплаты до&nbsp;выдачи</div></div>"""
 
 
@@ -874,7 +887,7 @@ def catalog_page(models):
     brands = sorted({m["brand"] for m in models})
     pmax = math.ceil(max(m["from"] for m in models) / 1e5) * 1e5
     body = f"""
-<section class="phead">{phv("katalog")}<div class="wrap">{crumbs((None, "Каталог"))}
+<section class="phead pkat">{phv("katalog")}<div class="wrap">{crumbs((None, "Каталог"))}
 <h1 class="rv in">{len(models)} моделей<br>под <em>льготный утильсбор</em></h1>
 <p class="lead">Цена в&nbsp;карточке&nbsp;— ориентир под&nbsp;ключ. Точную сумму на&nbsp;конкретный автомобиль считаем по&nbsp;курсу дня. Не&nbsp;нашли свою модель&nbsp;— привезём любую под&nbsp;заказ.</p>
 <div class="tiles">{tiles}</div></div></section>

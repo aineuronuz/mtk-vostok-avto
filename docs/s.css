@@ -759,3 +759,71 @@ body:not(.light) .hdr.sc:not(.solid){background:rgba(11,31,69,.97);box-shadow:0 
 .pcalc .phcalc{order:9}
 .docs4{grid-template-columns:repeat(2,1fr)}
 }
+/* 27.10.2026, вечер (Юрий): шапки на одной высоте, Каталог и «Стоимость» выше, витрина без счётчика, «Как купить» бирюзовый */
+.burger i:nth-child(1){top:15px}.burger i:nth-child(2){top:22px}.burger i:nth-child(3){top:29px}
+.burger i{animation:bnudge 3.4s 1.2s infinite}.burger i:nth-child(2){animation-delay:1.3s}.burger i:nth-child(3){animation-delay:1.4s}
+.burger.seen i,.open .burger i{animation:none}
+.open .burger i:nth-child(1){top:22px;transform:rotate(45deg)}.open .burger i:nth-child(2){opacity:0}.open .burger i:nth-child(3){top:22px;transform:rotate(-45deg)}
+@keyframes bnudge{0%,76%,100%{transform:none}82%{transform:translateX(-6px)}88%{transform:translateX(4px)}94%{transform:translateX(-2px)}}
+.phroute .rt0{stroke:rgba(63,232,200,.16)}
+.phroute .rt1{filter:drop-shadow(0 0 7px rgba(63,232,200,.85))}
+.phroute .nd circle{stroke:#3fe8c8}
+.phroute .nd circle:last-child{fill:#7fd3ff;stroke:#fff}
+.phroute text{filter:drop-shadow(0 0 10px rgba(63,232,200,.7))}
+.phroute .rtd b{color:#3fe8c8;text-shadow:0 0 22px rgba(63,232,200,.55)}
+.phroute .car{filter:drop-shadow(0 0 9px rgba(63,232,200,.95))}
+.phroute .car .bd{fill:#fff}.phroute .car .gl{fill:#16407f}
+.phroute .car circle.wh{fill:#0b1f45;stroke:#fff;stroke-width:2.2;filter:none}
+@media (min-width:1141px){
+.phead:not(.pcalc){min-height:600px}
+.pkat{padding-top:calc(var(--hh) + 26px);padding-bottom:34px}
+.pkat h1{font-size:clamp(36px,3.4vw,54px);margin-top:12px}
+.pkat .lead{margin-top:14px;max-width:580px}
+.pkat .tiles{margin-top:40px}
+.pkat .tile{aspect-ratio:2/1}
+.pkat .phv.fit{top:var(--hh);width:min(50vw,800px);-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 20%);mask-image:linear-gradient(90deg,transparent 0,#000 20%)}
+.pkat .phv.fit video{top:0;bottom:auto;width:100%;-webkit-mask-image:linear-gradient(180deg,transparent,#000 5%,#000 70%,transparent);mask-image:linear-gradient(180deg,transparent,#000 5%,#000 70%,transparent)}
+.pkat .phv:after{background:linear-gradient(90deg,rgba(11,31,69,.3),rgba(11,31,69,0) 55%)}
+.phshow{width:min(31vw,440px);transform:translateY(-44%)}
+.shstack{height:clamp(370px,29vw,440px)}
+.shc h3{font-size:18px}.shc b{font-size:24px}
+.pcalc{padding-top:calc(var(--hh) + 18px);padding-bottom:40px}
+.pcalc h1{margin-top:10px}
+.pcalc .phcalc{padding:18px 22px 16px}
+.pcalc .phcalc label{margin-top:10px}
+.pcalc .phcalc input,.pcalc .phcalc select{height:42px;margin-top:5px}
+.pcalc .phcalc .out{margin-top:14px;padding-top:12px}
+}
+@media (max-width:760px){
+.sec{padding:52px 0}.sec.tight{padding:36px 0}
+.how .st{padding:52px 0 40px}
+.track{margin-top:24px}
+.track .step{flex:0 0 84vw;width:84vw;min-height:240px;padding:24px}
+.track .step .n{font-size:52px}.track .step h3{font-size:21px;padding-top:14px}.track .step p{font-size:14.5px;line-height:1.45;margin-top:8px}
+.track .step.ph{padding:0}.track .step.ph>div{padding:22px}
+.track .step.ph:after{background:linear-gradient(180deg,rgba(6,18,44,.1),rgba(6,18,44,.86) 46%)}
+.track .step.ph.free:after{background:linear-gradient(180deg,rgba(4,40,26,.1),rgba(4,52,32,.9) 46%)}.track .step .pay{margin-top:10px;font-size:13.5px;padding:8px 12px}
+.tl{margin-top:28px;gap:26px}
+.fin{min-height:66svh}
+.phead{padding-bottom:30px}
+.phead .lead{margin-top:14px}
+.phead:has(>.phv.vid),.phead:has(>.phv.studio){padding-top:var(--hh)}
+.phv.vid,.phv.studio{position:relative;inset:auto;width:100%;height:auto;aspect-ratio:16/9;opacity:1;overflow:hidden;margin-bottom:-4px;
+  -webkit-mask-image:linear-gradient(180deg,#000 80%,transparent);mask-image:linear-gradient(180deg,#000 80%,transparent)}
+.phv.vid:after,.phv.studio:after{display:none}
+.phv.vid video{position:static;width:100%;height:100%;object-fit:cover;aspect-ratio:auto;-webkit-mask-image:none;mask-image:none}
+.phv.zoom video{transform:scale(1.35);transform-origin:50% 62%}
+.phv.studio img{position:static;width:100%;height:100%;max-width:none;max-height:none;object-fit:cover;-webkit-mask-image:none;mask-image:none;filter:none}
+.phead:has(>.phv.vid) .crumbs,.phead:has(>.phv.studio) .crumbs{margin-top:6px}
+.pcalc .lead{margin-top:12px}
+.pcalc .rates{grid-template-columns:repeat(3,1fr);gap:8px;margin-top:18px}
+.pcalc .rates div{padding:10px 10px 12px;border-radius:14px}
+.pcalc .rates small{font-size:11.5px;line-height:1.3}
+.pcalc .rates b{font-size:21px;margin-top:4px}
+.pcalc .phcalc{margin-top:16px}
+.totop{bottom:calc(14px + env(safe-area-inset-bottom));right:14px;width:48px;height:48px}
+.drawer{gap:0;padding:84px 28px 28px}
+.drawer a{font-size:21px;padding:4px 0;letter-spacing:0}
+.drawer .btn.w{margin-top:20px;height:50px;padding:0 28px;font-size:16px;font-weight:600;color:#fff;background:linear-gradient(135deg,#2fd2e6,#2b6cff);
+  box-shadow:0 0 0 1px rgba(255,255,255,.28) inset,0 12px 30px -8px rgba(47,170,255,.85)}
+}
