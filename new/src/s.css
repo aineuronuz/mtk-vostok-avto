@@ -837,20 +837,22 @@ body:not(.light) .hdr.sc:not(.solid){background:rgba(11,31,69,.97);box-shadow:0 
 .phead.pkat:has(>.phv.vid){padding-top:calc(var(--hh) + 30px)}
 .pkat .phv.vid{position:absolute;inset:0;height:auto;aspect-ratio:auto;margin:0;opacity:.45;-webkit-mask-image:none;mask-image:none}
 }
-/* 27.10.2026 (Юрий, видео): шапки разделов ниже — белая часть начинается выше; машины, мопед, витрина и калькулятор в шапках меньше */
+/* 27.10.2026 (Юрий, видео): машины, мопед и калькулятор в шапках меньше; вечером — шапки всех разделов одной высоты, на 1,5 см ниже,
+   плитки Каталога крупнее, витрина «Авто в Китае» крупнее и левее */
 @media (min-width:1141px){
-.phead:not(.pcalc){min-height:470px}
+.phead:not(.pcalc),.pcalc{min-height:600px}
 .pkat{padding-bottom:28px}
 .pkat .tiles{margin-top:26px}
-.pkat .tile{aspect-ratio:2.6/1}
+.pkat .tile{aspect-ratio:1.75/1}
+.pkat .tile b{font-size:24px}
 .phv.studio img{max-width:min(66%,520px);max-height:66%;bottom:5%}
-.phshow{width:min(22vw,300px);transform:translateY(-42%)}
-.shstack{height:clamp(270px,20vw,300px)}
+.phshow{width:min(25vw,340px);right:clamp(80px,11vw,190px);transform:translateY(-44%)}
+.shstack{height:clamp(310px,23vw,345px)}
 .shc .t{padding:9px 13px 11px}
-.shc h3{font-size:15px;margin-top:6px}.shc b{font-size:19px;margin-top:4px}
+.shc h3{font-size:16px;margin-top:6px}.shc b{font-size:21px;margin-top:4px}
 .phroute{width:min(38vw,560px)}
 .phroute .rtd b{font-size:46px}
-.pcalc{padding-top:calc(var(--hh) + 12px);padding-bottom:28px}
+.pcalc{padding-top:calc(var(--hh) + 6px);padding-bottom:9px}
 .pcalc h1{font-size:clamp(36px,3.6vw,58px)}
 .pcalc .phcalc{padding:13px 18px 12px;border-radius:18px}
 .pcalc .phcalc h3{font-size:17px}
