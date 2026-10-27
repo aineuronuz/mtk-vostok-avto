@@ -867,7 +867,12 @@ body:not(.light) .hdr.sc:not(.solid){background:rgba(11,31,69,.97);box-shadow:0 
 .pkat{padding-top:calc(var(--hh) + 12px);padding-bottom:18px}
 .pkat h1{font-size:clamp(36px,3.4vw,49px)}
 .pkat .lead{max-width:800px;margin-top:10px}
-.phv.studio img[src*="kontakty"]{bottom:18%}
+.phv.studio img[src*="kontakty"]{bottom:12%;max-height:60%}
+.phv.studio img[src*="mopedy"]{bottom:11%}
+.phead:has(img[src*="kontakty"]){min-height:440px}
 }
-/* под шапкой списка — сразу поиск, «Найдено» и сортировка (Юрий 27.10.2026) */
-.phead+.sec.tight:has(.lay,.dgrid,.mfacts){padding-top:24px}
+/* под шапкой сразу содержимое: поиск и «Найдено», первый шаг «Как купить», «О компании и договоре», карточки «Контактов» (Юрий 27.10.2026) */
+.phead+.sec.tight:has(.lay,.dgrid,.mfacts,.tl,.fgroup,.tgrid){padding-top:24px}
+.phead+.sec.tight>.wrap>.tl:first-child,.phead+.sec.tight>.wrap>.fgroup:first-child{margin-top:0}
+/* мопед вырезан из фона — за ним фон шапки, без тёмного пятна (Юрий 27.10.2026) */
+.phv.studio img[src*="mopedy"]{-webkit-mask-image:none;mask-image:none;filter:drop-shadow(0 22px 24px rgba(0,0,0,.32))}

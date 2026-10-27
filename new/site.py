@@ -122,14 +122,14 @@ def deck_src(k):
     return p if p.exists() else CARS / f"hero_sec{k}.jpg"
 
 
-def webp(src, dst, w, q=74, crop=None):
-    """Картинка в webp не шире w; пересобирается, только если исходник новее."""
+def webp(src, dst, w, q=74, crop=None, alpha=False):
+    """Картинка в webp не шире w; пересобирается, только если исходник новее. alpha — с прозрачностью."""
     dst = Path(dst)
     if dst.exists() and dst.stat().st_mtime >= Path(src).stat().st_mtime:
         with Image.open(dst) as im:
             return im.size
     dst.parent.mkdir(parents=True, exist_ok=True)
-    im = Image.open(src).convert("RGB")
+    im = Image.open(src).convert("RGBA" if alpha else "RGB")
     if crop:
         im = im.crop(crop)
     if im.width > w:
@@ -1419,7 +1419,8 @@ def main():
         webp(AC / "kp_v3" / "docs_light" / f"{src}.png", IMG / "docs" / f"{k}.webp", 1240, 82)
         webp(AC / "kp_v3" / "docs_light" / f"{src}.png", IMG / "docs" / f"{k}_t.webp", 520, 76)
     for n in ("vydannye", "mopedy", "kontakty"):           # шапки разделов: машина или мопед на синем фоне (Nano Banana, Юрий 27.10.2026)
-        webp(NEW / "src" / f"ph_{n}.jpg", IMG / "ph" / f"{n}.webp", 1500, 80)
+        cut = NEW / "src" / f"ph_{n}.png"                  # вырезан из фона (rembg), за ним фон шапки — мопед: «тёмное пятно» (Юрий 27.10.2026)
+        webp(cut if cut.exists() else NEW / "src" / f"ph_{n}.jpg", IMG / "ph" / f"{n}.webp", 1500, 82 if cut.exists() else 80, alpha=cut.exists())
     for k in range(4):
         webp(deck_src(k), IMG / f"sec{k}.webp", 2200, 74)
         webp(deck_src(k), IMG / f"sec{k}_m.webp", 1100, 74)

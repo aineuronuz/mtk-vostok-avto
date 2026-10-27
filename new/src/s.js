@@ -17,7 +17,7 @@ document.addEventListener('click',e=>{const a=e.target.closest('a[data-vt]');if(
 addEventListener('pageshow',()=>$$('a[data-vt] img').forEach(i=>i.style.viewTransitionName=''));
 
 // появление
-const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{rootMargin:'0px 0px -8% 0px'});
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{rootMargin:'0px'});   // блок появляется, как только край показался на экране (Юрий 27.10.2026: фото «Выданных» под шапкой)
 $$('.rv,.deck').forEach(e=>io.observe(e));
 // счётчики
 const co=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;co.unobserve(e.target);const b=e.target,n=+b.dataset.n,f=+(b.dataset.from||0),t0=performance.now();
@@ -132,9 +132,9 @@ if(L){
   const tiles=$$('.tiles [data-to]'),chip=b=>$(`[data-f="${b.dataset.to}"] [data-v="${b.dataset.v}"]`),sync=()=>tiles.forEach(b=>{const c=chip(b);b.classList.toggle('on',!!c&&c.classList.contains('on'))});
   const CAT={ev:'fuel:ev',hyb:'fuel:hybrid',fwd:'fuel:petrol',awd:'feat:awd'};
   (params.get('cat')||'').split(',').forEach(x=>{if(!CAT[x])return;const[f,v]=CAT[x].split(':'),c=$(`[data-f="${f}"] [data-v="${v}"]`);if(c)c.classList.add('on')});
-  tiles.forEach(b=>b.addEventListener('click',()=>{const c=chip(b);if(!c)return;c.classList.toggle('on');apply();requestAnimationFrame(toList)}));
+  tiles.forEach(b=>b.addEventListener('click',()=>{const c=chip(b);if(!c)return;const on=c.classList.toggle('on');apply();if(on)requestAnimationFrame(toList)}));   // выключение плитки — без прокрутки (Юрий 27.10.2026)
   groups.forEach(g=>{if(g.matches('.chips,.tiles'))g.addEventListener('click',e=>{const c=e.target.closest('[data-v]');if(!c)return;
-      if(g.dataset.one!=null)$$('[data-v]',g).forEach(x=>{if(x!=c)x.classList.remove('on')});c.classList.toggle('on');apply();if(g.matches('.tiles'))setTimeout(toList,60)});
+      if(g.dataset.one!=null)$$('[data-v]',g).forEach(x=>{if(x!=c)x.classList.remove('on')});const on=c.classList.toggle('on');apply();if(on&&g.matches('.tiles'))setTimeout(toList,60)});
     else g.addEventListener('input',()=>apply())});
   if(sortSel)sortSel.addEventListener('change',()=>apply());
   $$('[data-reset]').forEach(b=>b.onclick=()=>{groups.forEach(g=>{if(g.matches('.chips,.tiles'))$$('.on',g).forEach(c=>c.classList.remove('on'));else if(g.type=='range')g.value=g.max;else g.value=''});apply()});
