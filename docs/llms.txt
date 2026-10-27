@@ -12,6 +12,7 @@
 - [Выданные авто](https://mtk-vostok-avto.ru/vydannye/)
 - [Электромопеды](https://mtk-vostok-avto.ru/mopedy/)
 - [Стоимость](https://mtk-vostok-avto.ru/stoimost/)
+- [Калькулятор](https://mtk-vostok-avto.ru/kalkulyator/)
 - [Как купить](https://mtk-vostok-avto.ru/kak-kupit/)
 - [Вопросы](https://mtk-vostok-avto.ru/voprosy/)
 - [Контакты](https://mtk-vostok-avto.ru/kontakty/)

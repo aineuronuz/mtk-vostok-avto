@@ -56,7 +56,7 @@ MAX_HREF = "https://max.ru/u/f9LHodD0cOLQzwPoUyWBoejqc5iq940FAYmSIsMAm8Hr1FcNu85
 CHANNEL = "https://t.me/mtk_vostok_avto"
 
 MENU = [("katalog/", "Каталог"), ("avto/", "Авто в Китае"), ("premium/", "Премиум-авто"), ("vydannye/", "Выданные авто"), ("mopedy/", "Электромопеды"),
-        ("stoimost/", "Стоимость"), ("kak-kupit/", "Как купить"), ("voprosy/", "Вопросы"), ("kontakty/", "Контакты")]   # порядок, «Премиум-авто» и «Электромопеды» — Юрий 26.10.2026 («Авто» 26.10)
+        ("stoimost/", "Стоимость"), ("kalkulyator/", "Калькулятор"), ("kak-kupit/", "Как купить"), ("voprosy/", "Вопросы"), ("kontakty/", "Контакты")]   # порядок, «Премиум-авто» и «Электромопеды» — Юрий 26.10.2026 («Авто» 26.10); «Калькулятор» отдельно от «Стоимости» — Юрий 27.10.2026
 PAGES = []                                              # (путь, приоритет) — для sitemap.xml
 MIN_YEAR = 2022                                         # машины 2021 года не показывать (Юрий 06.10.2026)
 
@@ -68,6 +68,11 @@ def nb(s):
 
 def rub(v):
     return f"{round(v):,}".replace(",", "&nbsp;") + "&nbsp;₽"
+
+
+def nf(v):
+    """Число с неразрывными пробелами между тысячами: 20&nbsp;000."""
+    return f"{round(v):,}".replace(",", "&nbsp;")
 
 
 def mln(v):
@@ -759,7 +764,7 @@ def ph_calc(rates):
          "u27": PR.UTIL_2027.isoformat(), "arr": PR.ARRIVAL_DAYS[1]}   # с 2027 коммерческий утиль +10%, если машина может прийти в 2027 (Юрий 27.10.2026)
     return f"""<form class="phcalc" data-calc='{json.dumps(d)}' onsubmit="return false"><h3>Калькулятор</h3>
 <label>Цена машины в&nbsp;Китае, ¥ — без&nbsp;доставки<input type="number" name="y" value="80000" min="10000" step="1000" inputmode="numeric"></label>
-<p class="chint">Пошлины считаются от&nbsp;цены машины без&nbsp;доставки, как в&nbsp;таможенных калькуляторах. Доставку до&nbsp;границы и&nbsp;по&nbsp;Китаю калькулятор добавит сам отдельными строками.</p>
+<p class="chint">Доставка автовозом {nf(PR.DELIVERY_CNY)}&nbsp;¥ и&nbsp;погрузка по&nbsp;Китаю уже включены&nbsp;— отдельными строками в&nbsp;«Подробнее». Пошлины считаются от&nbsp;цены машины без&nbsp;доставки, как в&nbsp;таможенных калькуляторах.</p>
 <div class="two"><label>Двигатель<select name="t"><option value="ice">Бензин, гибрид</option><option value="ev">Электро</option><option value="erev">Гибрид EREV</option></select></label>
 <label>Возраст<select name="a"><option value="0">До&nbsp;3 лет</option><option value="1" selected>3–5 лет</option><option value="2">Старше 5 лет</option></select></label></div>
 <div class="two"><label class="cc">Объём, см³<input type="number" name="cc" value="1500" min="600" step="1" inputmode="numeric"></label>
@@ -829,7 +834,7 @@ def home(models, kp, rates, faq):
     <h1>Автомобили из&nbsp;Китая.<br><span>Под ключ.</span></h1>
     <p class="sub">Новые и&nbsp;б/у под&nbsp;льготный утильсбор. Подбираем, проверяем, везём, растаможиваем и&nbsp;передаём Вам с&nbsp;электронным ПТС.</p>
     <div class="btns"><a class="btn w" href="{u("katalog/")}">Смотреть каталог <span class="ar">→</span></a><a class="btn o" href="{u("avto/")}">Авто в Китае</a></div>
-    <a class="rate" href="{u("stoimost/")}"><i></i>Курс юаня для расчёта на&nbsp;{ddmm(TODAY)}: <b>{f"{rates['vtb']:.2f}".replace(".", ",")}&nbsp;₽</b></a>
+    <a class="rate" href="{u("kalkulyator/")}"><i></i>Курс юаня для расчёта на&nbsp;{ddmm(TODAY)}: <b>{f"{rates['vtb']:.2f}".replace(".", ",")}&nbsp;₽</b></a>
   </div>
   <div class="hint" aria-hidden="true"></div>
 </section>
@@ -1307,12 +1312,10 @@ def price_page(kp, rates):
     span = lambda ys: "&nbsp;– ".join(f"{y:,}".replace(",", "&nbsp;") for y in ys)
     rspan = lambda ys: "&nbsp;– ".join([f"{round(y * v):,}".replace(",", "&nbsp;") for y in ys[:-1]] + [rub(ys[-1] * v)])
     body = f"""
-<section class="phead phx pcalc"><div class="wrap">{ph_calc(rates)}{crumbs((None, "Стоимость"))}
+<section class="phead phx pinc"><div class="wrap">{crumbs((None, "Стоимость"))}
 <h1 class="rv in">Стоимость&nbsp;— <em>под&nbsp;ключ</em></h1>
 <p class="lead">Автомобиль, доставка, растаможка, документы и&nbsp;наши услуги. Оплата в&nbsp;четыре этапа по&nbsp;договору, без&nbsp;скрытых платежей.</p>
-<div class="rates"><div style="border-color:rgba(255,255,255,.2)"><small style="color:rgba(255,255,255,.65)">Курс юаня для расчёта на {ddmm(TODAY)}</small><b style="color:#fff">{f"{v:.2f}".replace(".", ",")}&nbsp;₽</b></div>
-<div style="border-color:rgba(255,255,255,.2)"><small style="color:rgba(255,255,255,.65)">Юань по ЦБ — для пошлины</small><b style="color:#fff">{f"{rates['cny']:.4f}".replace(".", ",")}&nbsp;₽</b></div>
-<div style="border-color:rgba(255,255,255,.2)"><small style="color:rgba(255,255,255,.65)">Евро по ЦБ — для пошлины</small><b style="color:#fff">{f"{rates['eur']:.2f}".replace(".", ",")}&nbsp;₽</b></div></div>
+{ph_inc()}
 </div></section>
 <section class="sec"><div class="wrap"><p class="kick rv">Платежи</p><h2 class="h2 rv d1">Четыре этапа <em>оплаты</em></h2>{PAYS}
 <p class="note rv">Оплачивается отдельно: постановка на&nbsp;учёт в&nbsp;ГИБДД и&nbsp;страховка&nbsp;— по&nbsp;тарифам ГИБДД и&nbsp;страховой.</p></div></section>
@@ -1323,6 +1326,36 @@ def price_page(kp, rates):
     page("stoimost/", "Стоимость автомобиля из Китая под ключ: из чего складывается цена | МТК Восток-Авто",
          f"Из чего складывается цена машины из Китая под ключ: автомобиль, доставка, комиссия банка, пошлина, утильсбор, СБКТС и ЭПТС, услуги. Курс юаня на {ddmm(TODAY)}.",
          body, active="stoimost/", jsonld=[bc_ld(("stoimost/", "Стоимость"))], prio="0.8")
+
+
+def ph_inc():
+    """«Стоимость под ключ»: справа в шапке — что входит в цену и кнопка в «Калькулятор» (Юрий 27.10.2026: калькулятор отдельным разделом)."""
+    import price as PR
+    items = ["Автомобиль по&nbsp;цене в&nbsp;Китае", f"Доставка автовозом {nf(PR.DELIVERY_CNY)}&nbsp;¥ и&nbsp;погрузка по&nbsp;Китаю",
+             "Пошлина, сборы и&nbsp;утильсбор", "Оформление: растаможка, СБКТС, ЭПТС", "Подбор автомобиля и&nbsp;сопровождение сделки"]
+    return (f'<div class="phinc"><h3>Что входит в&nbsp;цену</h3><ul>{"".join(f"<li>{t}</li>" for t in items)}</ul>'
+            f'<a class="btn w" href="{u("kalkulyator/")}">Посчитать в&nbsp;калькуляторе <span class="ar">→</span></a></div>')
+
+
+def calc_page(rates):
+    """«Калькулятор под ключ» (Юрий 27.10.2026, макет 3): курсы строкой под заголовком, поля в ряд, крупный итог под ними.
+    Вводится цена машины в Китае — калькулятор сам добавляет доставку, растаможку, оформление, подбор и сопровождение."""
+    import price as PR
+    v = rates["vtb"]
+    rl = (f'<p class="rline"><span>Курс юаня для&nbsp;расчёта на&nbsp;{ddmm(TODAY)} <b>{f"{v:.2f}".replace(".", ",")}&nbsp;₽</b></span>'
+          f'<span>Юань по&nbsp;ЦБ&nbsp;— для&nbsp;пошлины <b>{f"{rates['cny']:.4f}".replace(".", ",")}&nbsp;₽</b></span>'
+          f'<span>Евро по&nbsp;ЦБ&nbsp;— для&nbsp;пошлины <b>{f"{rates['eur']:.2f}".replace(".", ",")}&nbsp;₽</b></span></p>')
+    body = f"""
+<section class="phead phx pcalc pkalk"><div class="wrap">{crumbs((None, "Калькулятор"))}
+<h1 class="rv in">Калькулятор <em>под&nbsp;ключ</em></h1>
+<p class="lead">Вы вводите цену автомобиля в&nbsp;Китае&nbsp;— калькулятор считает цену под&nbsp;ключ с&nbsp;доставкой автовозом {nf(PR.DELIVERY_CNY)}&nbsp;¥, растаможкой и&nbsp;оформлением, подбором и&nbsp;сопровождением сделки.</p>
+{rl}{ph_calc(rates)}
+</div></section>
+<section class="sec tight"><div class="wrap"><p class="note rv"><a class="more" href="{u("stoimost/")}">Из&nbsp;чего складывается цена и&nbsp;как проходит оплата <span class="ar">→</span></a></p></div></section>
+{fin_block()}"""
+    page("kalkulyator/", "Калькулятор стоимости автомобиля из Китая под ключ | МТК Восток-Авто",
+         f"Калькулятор цены машины из Китая под ключ: доставка, пошлина, утильсбор, оформление и наши услуги. Курс юаня на {ddmm(TODAY)}.",
+         body, active="kalkulyator/", jsonld=[bc_ld(("kalkulyator/", "Калькулятор"))], prio="0.8")
 
 
 def deliv_page():
@@ -1468,6 +1501,7 @@ def main():
         moto_page(moto)
     how_page(faq)
     price_page(kp, rates)
+    calc_page(rates)
     deliv_page()
     if faq:
         faq_page(faq)

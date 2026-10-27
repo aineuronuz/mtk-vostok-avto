@@ -868,7 +868,9 @@ body:not(.light) .hdr.sc:not(.solid){background:rgba(11,31,69,.97);box-shadow:0 
 .pkat h1{font-size:clamp(36px,3.4vw,49px)}
 .pkat .lead{max-width:800px;margin-top:10px}
 .phv.studio img[src*="kontakty"]{bottom:12%;max-height:60%}
-.phv.studio img[src*="mopedy"]{bottom:11%}
+.phv.studio img[src*="mopedy"]{bottom:15%;max-height:54%;max-width:min(54%,430px)}
+.phv.studio img[src*="vydannye"]{bottom:13%}
+.phroute .rtd{margin:6px auto 0}
 .phead:has(img[src*="kontakty"]){min-height:440px}
 }
 /* под шапкой сразу содержимое: поиск и «Найдено», первый шаг «Как купить», «О компании и договоре», карточки «Контактов» (Юрий 27.10.2026) */
@@ -876,3 +878,43 @@ body:not(.light) .hdr.sc:not(.solid){background:rgba(11,31,69,.97);box-shadow:0 
 .phead+.sec.tight>.wrap>.tl:first-child,.phead+.sec.tight>.wrap>.fgroup:first-child{margin-top:0}
 /* мопед вырезан из фона — за ним фон шапки, без тёмного пятна (Юрий 27.10.2026) */
 .phv.studio img[src*="mopedy"]{-webkit-mask-image:none;mask-image:none;filter:drop-shadow(0 22px 24px rgba(0,0,0,.32))}
+/* «Калькулятор под ключ» отдельным разделом (Юрий 27.10.2026, макет 3): по центру — курсы строкой, поля в ряд, крупный итог */
+.rline{display:flex;flex-wrap:wrap;gap:6px 28px;margin-top:16px;color:rgba(255,255,255,.72);font-size:14px}
+.rline b{font-family:var(--disp);font-weight:300;font-size:22px;color:#9cc0ff;margin-left:6px;white-space:nowrap}
+@media (min-width:1141px){
+.pkalk .wrap{display:flex;flex-direction:column;align-items:center;text-align:center}
+.pkalk h1,.pkalk .lead{max-width:none}
+.pkalk .lead{max-width:1010px;margin-left:auto;margin-right:auto;margin-top:12px}
+.pkalk .rline{justify-content:center}
+.pkalk .phcalc{width:min(1080px,100%);margin-top:20px;display:grid;grid-template-columns:1.75fr 1.1fr 1fr .9fr 1.2fr;column-gap:14px;row-gap:0;text-align:left;padding:22px 26px}
+.pkalk .phcalc .two{display:contents}
+.pkalk .phcalc label{white-space:nowrap}
+.pkalk .phcalc h3{grid-column:1/-1;text-align:center}
+.pkalk .phcalc>label{grid-column:1;grid-row:2}
+.pkalk .phcalc>div.two:nth-of-type(1) label:nth-child(1){grid-column:2;grid-row:2}
+.pkalk .phcalc>div.two:nth-of-type(1) label:nth-child(2){grid-column:3;grid-row:2}
+.pkalk .phcalc>div.two:nth-of-type(2) label:nth-child(1){grid-column:4;grid-row:2}
+.pkalk .phcalc>div.two:nth-of-type(2) label:nth-child(2){grid-column:5;grid-row:2}
+.pkalk .phcalc>p,.pkalk .phcalc .out,.pkalk .phcalc .warn,.pkalk .phcalc .brkd{grid-column:1/-1;text-align:center}
+.pkalk .phcalc .out{margin-top:10px!important;padding-top:10px!important}
+.pkalk .phcalc .out b{font-size:52px;white-space:nowrap}
+.pkalk .phcalc .brk{text-align:left;max-width:640px;margin:8px auto 0}
+}
+/* «Стоимость под ключ»: справа в шапке — что входит в цену и кнопка в «Калькулятор» (Юрий 27.10.2026) */
+.phinc{position:absolute;right:clamp(20px,4vw,56px);top:50%;transform:translateY(-40%);width:min(34vw,420px);z-index:2;color:#fff;
+  background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);border-radius:22px;padding:22px 26px 24px}
+.phinc h3{font-family:var(--ui);font-size:20px;font-weight:600;letter-spacing:-.01em}
+.phinc ul{list-style:none;margin:14px 0 20px;padding:0;display:grid;gap:11px}
+.phinc li{position:relative;padding-left:30px;font-size:15.5px;line-height:1.35;color:rgba(255,255,255,.88)}
+.phinc li:before{content:"";position:absolute;left:0;top:1px;width:19px;height:19px;border-radius:50%;background:rgba(63,232,200,.16);border:1.5px solid #3fe8c8;box-sizing:border-box}
+.phinc li:after{content:"";position:absolute;left:6px;top:5px;width:5px;height:9px;border:solid #3fe8c8;border-width:0 2px 2px 0;transform:rotate(45deg)}
+.phinc .btn{width:100%;justify-content:center}
+@media (max-width:1140px){.phinc{position:relative;right:auto;top:auto;transform:none;width:100%;max-width:520px;margin-top:26px}}
+/* «Как купить»: номер шага вверху, без отрезка линии над «01» (Юрий 27.10.2026) */
+.ts{align-items:start}
+.ts>div:nth-child(2){padding-top:18px}
+@media (max-width:760px){.ts>div:nth-child(2){padding-top:10px}}
+/* меню из десяти пунктов (добавлен «Калькулятор», 27.10.2026) помещается в одну строку на ноутбуках */
+@media (max-width:1759px){.menu{gap:13px;font-size:15px}}
+@media (max-width:1599px){.menu{gap:11px;font-size:14.5px}}
+@media (max-width:1439px){.menu{gap:9px;font-size:13.5px}.logo .nm{width:205px}.logo .lg{width:50px;height:50px}}
