@@ -647,7 +647,7 @@ PAYS = f"""<div class="pays" id="pays">
 <div class="pay4 free"><div class="c">{CHECK}</div><h3>Бесплатно</h3><ul><li><b>Подбор автомобиля</b>: поиск оптимального варианта, несколько предложений на&nbsp;выбор</li><li><b>Видеоосмотр</b> после выбора конкретного автомобиля</li></ul></div>
 <div class="pay4"><div class="c">1</div><h3>Предоплата</h3><div class="s">50&nbsp;000&nbsp;₽</div><p>При подписании договора&nbsp;— в&nbsp;счёт подбора и&nbsp;сопровождения сделки (всего 90&nbsp;000&nbsp;₽).</p></div>
 <div class="pay4"><div class="c">2</div><h3>Оплата автомобиля</h3><div class="s">По&nbsp;курсу ВТБ</div><p>Через ВТБ по&nbsp;контракту и&nbsp;инвойсу. С&nbsp;этой оплаты автомобиль Ваш.</p><ul><li><b>Автомобиль</b> в&nbsp;Китае</li><li><b>Доставка</b> автовозом в&nbsp;Россию</li><li><b>Погрузка</b> и&nbsp;доставка по&nbsp;Китаю</li><li><b>Комиссия банка</b> 2%</li></ul></div>
-<div class="pay4"><div class="c">3</div><h3>Таможня</h3><div class="s">По&nbsp;прибытии</div><p>Пошлина, сборы, склад временного хранения и&nbsp;оформление документов.</p><ul><li><b>Утильсбор</b> льготный: 3&nbsp;400&nbsp;₽ до&nbsp;3&nbsp;лет, 5&nbsp;200&nbsp;₽ от&nbsp;3 до&nbsp;5</li><li><b>СБКТС и ЭПТС</b>, растаможка&nbsp;— 80&nbsp;000&nbsp;₽</li></ul></div>
+<div class="pay4"><div class="c">3</div><h3>Таможня</h3><div class="s">По&nbsp;прибытии</div><p>Пошлина, сборы, склад временного хранения и&nbsp;оформление документов.</p><ul><li><b>Утильсбор</b> льготный: 3&nbsp;400&nbsp;₽ до&nbsp;3&nbsp;лет, 5&nbsp;200&nbsp;₽ от&nbsp;3 до&nbsp;5</li><li><b>СБКТС и ЭПТС</b>, растаможка&nbsp;— 80&nbsp;000&nbsp;₽</li><li><b>СВХ</b>&nbsp;— 20&nbsp;500&nbsp;₽ за&nbsp;первые сутки, обычно их&nbsp;хватает</li></ul></div>
 <div class="pay4"><div class="c">4</div><h3>При выдаче</h3><div class="s">40&nbsp;000&nbsp;₽</div><p>Остаток за&nbsp;подбор и&nbsp;сопровождение. Получаете ключи, ЭПТС и&nbsp;таможенные документы.</p></div>
 </div>"""
 
@@ -1285,8 +1285,11 @@ def price_page(kp, rates):
 <div class="box rv d1"><table class="brk">{"".join(f"<tr><td>{E(k)}</td><td>{rub(v)}</td></tr>" for k, v in ex["price"]["lines"])}
 <tr><td><b>Итого под ключ</b></td><td><b>{rub(ex["total"])}</b></td></tr></table></div></div></section>"""
     v = rates["vtb"]
-    svc = [("Проверка машины", 1300, "Осмотр на&nbsp;месте с&nbsp;отчётом, фото и&nbsp;видео"), ("Оклейка элементов", 2500, "Капот, стойки, фары, зеркала"),
-           ("Полная оклейка", 3500, "Плёнка среднего класса"), ("Полная оклейка премиум", 5500, "Премиальная плёнка")]
+    # плёнка — как в КП: одна строка 3 500 – 6 000 ¥, без фронт-зоны (Юрий 09.10.2026, kp_v3 PPF_*; на сайте с 27.10.2026)
+    svc = [("Проверка машины", (1300,), "Осмотр на&nbsp;месте с&nbsp;отчётом, фото и&nbsp;видео"),
+           ("Плёнка PPF&nbsp;— полная оклейка", (3500, 6000), "Цена зависит от&nbsp;качества плёнки и&nbsp;марки автомобиля")]
+    span = lambda ys: "&nbsp;– ".join(f"{y:,}".replace(",", "&nbsp;") for y in ys)
+    rspan = lambda ys: "&nbsp;– ".join([f"{round(y * v):,}".replace(",", "&nbsp;") for y in ys[:-1]] + [rub(ys[-1] * v)])
     body = f"""
 <section class="phead phx pcalc"><div class="wrap">{ph_calc(rates)}{crumbs((None, "Стоимость"))}
 <h1 class="rv in">Стоимость&nbsp;— <em>под&nbsp;ключ</em></h1>
@@ -1299,7 +1302,7 @@ def price_page(kp, rates):
 <p class="note rv">Оплачивается отдельно: постановка на&nbsp;учёт в&nbsp;ГИБДД и&nbsp;страховка&nbsp;— по&nbsp;тарифам ГИБДД и&nbsp;страховой.</p></div></section>
 {exb}
 <section class="sec"><div class="wrap"><p class="kick rv">Дополнительно</p><h2 class="h2 rv d1">Услуги <em>по&nbsp;желанию</em></h2>
-<div class="svc">{"".join(f'<div class="rv"><b>{t}</b><span>{y:,}&nbsp;¥</span><p>≈&nbsp;{rub(y * v)} по&nbsp;курсу дня · {d}</p></div>'.replace(",", "&nbsp;") for t, y, d in svc)}</div></div></section>
+<div class="svc">{"".join(f'<div class="rv"><b>{t}</b><span>{span(ys)}&nbsp;¥</span><p>≈&nbsp;{rspan(ys)} по&nbsp;курсу дня · {d}</p></div>' for t, ys, d in svc)}</div></div></section>
 {fin_block()}"""
     page("stoimost/", "Стоимость автомобиля из Китая под ключ: из чего складывается цена | МТК Восток-Авто",
          f"Из чего складывается цена машины из Китая под ключ: автомобиль, доставка, комиссия банка, пошлина, утильсбор, СБКТС и ЭПТС, услуги. Курс юаня на {ddmm(TODAY)}.",

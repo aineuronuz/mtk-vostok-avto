@@ -331,7 +331,7 @@ h1,h2,h3{font-family:var(--disp);font-weight:400;letter-spacing:-.03em;line-heig
 .rates div{border:1px solid var(--line);border-radius:20px;padding:22px}
 .rates small{display:block;color:var(--muted);font-size:14px}
 .rates b{display:block;font-family:var(--disp);font-size:36px;font-weight:300;letter-spacing:-.03em;color:var(--navy2);margin-top:6px}
-.svc{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:40px}
+.svc{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:40px}
 .svc div{background:var(--bg);border-radius:20px;padding:24px}
 .svc b{display:block;font-size:18px;font-weight:600}
 .svc span{display:block;font-family:var(--disp);font-size:28px;font-weight:300;color:var(--navy2);margin-top:10px}
