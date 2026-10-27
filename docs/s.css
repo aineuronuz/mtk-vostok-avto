@@ -761,7 +761,7 @@ body:not(.light) .hdr.sc:not(.solid){background:rgba(11,31,69,.97);box-shadow:0 
 }
 /* 27.10.2026, вечер (Юрий): шапки на одной высоте, Каталог и «Стоимость» выше, витрина без счётчика, «Как купить» бирюзовый */
 .burger i:nth-child(1){top:15px}.burger i:nth-child(2){top:22px}.burger i:nth-child(3){top:29px}
-.burger i{animation:bnudge 3.4s 1.2s infinite}.burger i:nth-child(2){animation-delay:1.3s}.burger i:nth-child(3){animation-delay:1.4s}
+.burger i{animation:bnudge 2s 1.2s infinite}.burger i:nth-child(2){animation-delay:1.3s}.burger i:nth-child(3){animation-delay:1.4s}
 .burger.seen i,.open .burger i{animation:none}
 .open .burger i:nth-child(1){top:22px;transform:rotate(45deg)}.open .burger i:nth-child(2){opacity:0}.open .burger i:nth-child(3){top:22px;transform:rotate(-45deg)}
 @keyframes bnudge{0%,76%,100%{transform:none}82%{transform:translateX(-6px)}88%{transform:translateX(4px)}94%{transform:translateX(-2px)}}
@@ -867,11 +867,11 @@ body:not(.light) .hdr.sc:not(.solid){background:rgba(11,31,69,.97);box-shadow:0 
 .pkat{padding-top:calc(var(--hh) + 12px);padding-bottom:18px}
 .pkat h1{font-size:clamp(36px,3.4vw,49px)}
 .pkat .lead{max-width:800px;margin-top:10px}
-.phv.studio img[src*="kontakty"]{bottom:12%;max-height:60%}
+.phv.studio img[src*="kontakty"]{bottom:10%;max-height:68%}
 .phead:has(img[src*="kontakty"]) .phv{left:0;width:auto}
 .phv.studio img[src*="kontakty"]{right:auto;left:calc(((100% - min(100%,1360px))/2 + clamp(20px,4vw,56px) + 660px + 100%)/2);transform:translateX(-50%)}
-.phv.studio img[src*="mopedy"]{bottom:21%;max-height:54%;max-width:min(54%,430px)}
-.phv.studio img[src*="vydannye"]{bottom:19%}
+.phv.studio img[src*="mopedy"]{bottom:19%;max-height:60%;max-width:min(60%,480px)}
+.phv.studio img[src*="vydannye"]{bottom:17%;max-height:72%;max-width:min(72%,570px)}
 .phroute .rtd{margin:6px auto 0}
 .phead:has(img[src*="kontakty"]){min-height:440px}
 }
@@ -961,3 +961,39 @@ body:not(.light) .hdr.sc:not(.solid){background:rgba(11,31,69,.97);box-shadow:0 
 .pkat .lead{max-width:980px}
 }
 .kmore .wrap{text-align:center}
+/* 27.10.2026 (Юрий, ночь, 2): Toyota с прицепом и машина «Контактов» вырезаны из фона, как мопед; «Стоимость» — этапы оплаты видны
+   сразу; телефон: промежутки короче, плитки крупнее, карточки по две в ряд, витрина, Li Auto, Toyota и мопед */
+.phv.studio img[src*="vydannye"],.phv.studio img[src*="kontakty"]{filter:drop-shadow(0 22px 24px rgba(0,0,0,.32));-webkit-mask-image:none;mask-image:none}
+.phv.studio img[src*="vydannye"]{-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 16%);mask-image:linear-gradient(90deg,transparent 0,#000 16%)}
+@media (min-width:1141px){
+.phead.pinc{min-height:430px;padding-bottom:28px}
+.pinc h1{font-size:clamp(40px,3.8vw,60px)}
+.phinc{padding:16px 22px 18px;transform:translateY(-46%)}
+.phinc h3{font-size:18px}
+.phinc ul{margin:10px 0 14px;gap:7px}
+.phinc li{font-size:14.5px}
+.phinc .btn{height:44px}
+.pinc+.sec{padding-top:26px}
+.pinc+.sec .h2{font-size:clamp(32px,3vw,46px);margin-top:8px}
+.pinc+.sec .pays{margin-top:30px}
+}
+@media (max-width:760px){
+.sec{padding:36px 0}.sec.tight{padding:26px 0}
+.phead{padding-bottom:24px}
+.pkat .tile{aspect-ratio:1.05/1}
+.pkat .tile b{font-size:18px}
+.list{grid-template-columns:repeat(2,1fr);gap:10px}
+.list .card{border-radius:16px}
+.list .card .tag{left:8px;top:8px;font-size:10.5px;padding:3px 8px}
+.list .card .t{padding:10px 12px 12px}
+.list .card h3{font-size:14.5px}
+.list .card .sp{font-size:12px;margin-top:4px;line-height:1.35}
+.list .card .pr{font-size:16px;padding-top:8px}
+.list .card .pr small{font-size:11px}
+.list .card .pr.pr2{font-size:15px}
+.phshow{max-width:290px;margin-left:auto;margin-right:auto}
+.phv.zoom video{transform-origin:88% 62%}
+.phv.studio img[src*="vydannye"]{transform:scale(.8)}
+.phv.studio img[src*="mopedy"]{transform:scale(.86)}
+.pcalc .kcta{order:10;justify-content:flex-start}
+}

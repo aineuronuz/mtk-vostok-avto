@@ -127,6 +127,38 @@ def deck_src(k):
     return p if p.exists() else CARS / f"hero_sec{k}.jpg"
 
 
+TILE_SCALE = {1: 0.76, 2: 0.86, 3: 0.98}   # машины плиток Каталога в одном масштабе с Changan Q05 на «Электро» (Юрий 27.10.2026; замер rembg)
+
+
+def tile_img(k, w=1100, q=76):
+    """Картинка плитки Каталога: фото блока главной, машина уменьшена в TILE_SCALE[k] раз, по краям — продолжение фона
+    (крайние пиксели кадра, размытые) с мягким швом. Без масштаба — то же фото, что у блока главной."""
+    src, dst = deck_src(k), IMG / f"tile{k}.webp"
+    if dst.exists() and dst.stat().st_mtime >= max(Path(src).stat().st_mtime, Path(__file__).stat().st_mtime):
+        return
+    import numpy as np
+    from PIL import ImageFilter
+    im = Image.open(src).convert("RGB")
+    im = im.resize((w, round(im.height * w / im.width)), Image.LANCZOS)
+    sc = TILE_SCALE.get(k, 1)
+    if sc < 1:
+        W, H = im.size
+        sw, sh = round(W * sc), round(H * sc)
+        x0, y0 = (W - sw) // 2, (H - sh) // 2
+        small = np.asarray(im.resize((sw, sh), Image.LANCZOS))
+        pad = np.pad(small, ((y0, H - sh - y0), (x0, W - sw - x0), (0, 0)), mode="edge")
+        pad[y0 + sh:] = small[-1].mean(axis=0).astype(np.uint8)   # низ — ровный цвет пола: в крайнем ряду отражение машины
+        bg = Image.fromarray(pad).filter(ImageFilter.GaussianBlur(28))
+        f = round(min(sw, sh) * 0.08)
+        mask = Image.new("L", (sw, sh), 0)
+        mask.paste(255, (f, f, sw - f, sh - f))
+        mask = mask.filter(ImageFilter.GaussianBlur(f / 2))
+        bg.paste(Image.fromarray(small), (x0, y0), mask)
+        im = bg
+    dst.parent.mkdir(parents=True, exist_ok=True)
+    im.save(dst, quality=q, method=6)
+
+
 def webp(src, dst, w, q=74, crop=None, alpha=False):
     """Картинка в webp не шире w; пересобирается, только если исходник новее. alpha — с прозрачностью."""
     dst = Path(dst)
@@ -887,7 +919,7 @@ def catalog_page(models):
     # плитки — быстрый выбор того же, что в панели «Топливо» и «Привод» (Юрий 27.10.2026): Бензин — все бензиновые, Полный привод — все полноприводные
     to = {"ev": ("fuel", "ev"), "hyb": ("fuel", "hybrid"), "fwd": ("fuel", "petrol"), "awd": ("feat", "awd")}
     has = lambda m, f, v: (v in m["fuel"].split()) if f == "fuel" else m["awd"]
-    tiles = "".join(f'<button class="tile" type="button" data-to="{to[k][0]}" data-v="{to[k][1]}" data-cat="{k}"><img src="{u(f"img/sec{sec}_m.webp")}" alt="" loading="lazy"><div><b>{t}</b>'
+    tiles = "".join(f'<button class="tile" type="button" data-to="{to[k][0]}" data-v="{to[k][1]}" data-cat="{k}"><img src="{u(f"img/tile{sec}.webp")}" alt="" loading="lazy"><div><b>{t}</b>'
                     f'<small>{(n := sum(has(m, *to[k]) for m in models))} {plural(n, "модель", "модели", "моделей")}</small></div></button>'
                     for k, t, _, sec, _ in DIRS)
     fuels = [(k, t) for k, t in (("petrol", "Бензин"), ("hybrid", "Гибрид"), ("ev", "Электро")) if any(k in m["fuel"].split() for m in models)]
@@ -1458,6 +1490,7 @@ def main():
     for k in range(4):
         webp(deck_src(k), IMG / f"sec{k}.webp", 2200, 74)
         webp(deck_src(k), IMG / f"sec{k}_m.webp", 1100, 74)
+        tile_img(k)
 
     cbr = cbr_rates(offline)
     vtb, src = day_rate(cbr, offline)
