@@ -106,7 +106,7 @@ if(L){
       else if(g.value!=='')s[k]=g.value});return s};
   const lbl=$$('[data-out]');
   const apply=(push=true)=>{const s=st();let n=0;
-    lbl.forEach(o=>{const g=$(`[data-f="${o.dataset.out}"]`);o.textContent=+g.value>=+g.max?'любая':`до ${(+g.value/1e6).toFixed(1).replace('.',',')} млн ₽`});
+    lbl.forEach(o=>{const g=$(`[data-f="${o.dataset.out}"]`);o.textContent=+g.value>=+g.max?'любая':g.dataset.rub!=null?`до ${(+g.value).toLocaleString('ru-RU')} ₽`:`до ${(+g.value/1e6).toFixed(1).replace('.',',')} млн ₽`});
     cards.forEach(c=>{const d=c.dataset;let ok=true;
       for(const k in s){const v=s[k];
         if(Array.isArray(v)){if(k=='feat'){if(!v.every(x=>(d.feat||'').split(' ').includes(x)))ok=false}else if(!v.some(x=>(d[k]||'').split(' ').includes(x)))ok=false}
@@ -114,6 +114,7 @@ if(L){
         else if(k=='price'){if(+d.price>v)ok=false}
         else if(k=='ymin'){if(+d.year<+v)ok=false}
         else if(k=='kmmax'){if(+d.km>+v)ok=false}
+        else if(k=='rmin'){if(+d.range<+v)ok=false}
         else if((d[k]||'')!=v)ok=false;
         if(!ok)break}
       c.classList.toggle('x',!ok);if(ok){n++;if(!RM){c.style.animation='none';void c.offsetWidth;c.style.animation=''}}});
@@ -139,6 +140,9 @@ if(L){
   if(sortSel)sortSel.addEventListener('change',()=>apply());
   $$('[data-reset]').forEach(b=>b.onclick=()=>{groups.forEach(g=>{if(g.matches('.chips,.tiles'))$$('.on',g).forEach(c=>c.classList.remove('on'));else if(g.type=='range')g.value=g.max;else g.value=''});apply()});
   $$('[data-fopen]').forEach(b=>b.onclick=()=>document.body.classList.toggle('fopen'));
+  // панель фильтров на телефоне закрывается крестиком и нажатием на страницу над ней, в том числе на шапку с логотипом (Юрий 27.10.2026)
+  $$('[data-fclose]').forEach(b=>b.onclick=()=>document.body.classList.remove('fopen'));
+  document.addEventListener('click',e=>{if(document.body.classList.contains('fopen')&&!e.target.closest('.flt,[data-fopen]')){e.preventDefault();e.stopPropagation();document.body.classList.remove('fopen')}},true);
   apply(false);
 }
 
@@ -146,6 +150,7 @@ if(L){
 const G=$('.gmain');
 if(G){const ims=$$('img',G),th=$$('.gth img'),gn=$('.gn',G),lb=$('.lbox'),li=lb&&$('img',lb);let i=0;
   const go=k=>{i=(k+ims.length)%ims.length;ims.forEach((e,j)=>{e.classList.toggle('on',j==i);if(j==i&&e.dataset.src){e.src=e.dataset.src;delete e.dataset.src}});
+    G.style.setProperty('--gbg',`url("${ims[i].getAttribute('src')}")`);   // по краям фото целиком — оно же, размытое (Юрий 27.10.2026)
     th.forEach((e,j)=>e.classList.toggle('on',j==i));if(gn)gn.textContent=`${i+1} / ${ims.length}`;if(li&&lb.classList.contains('on'))li.src=ims[i].dataset.big||ims[i].src;
     const n=ims[(i+1)%ims.length];if(n.dataset.src){n.src=n.dataset.src;delete n.dataset.src}};
   th.forEach((e,j)=>e.onclick=()=>go(j));

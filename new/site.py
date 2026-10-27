@@ -710,7 +710,7 @@ DOCS = [("kontrakt", "Контракт купли-продажи с&nbsp;про�
 
 # ---------- шапки разделов: справа видео, фото или небольшой интерактив по теме (Юрий 26.10.2026) ----------
 PH_VIS = {"katalog": ("video", "ph_katalog", "fit"), "premium": ("video", "ph_premium", "zoom"),   # ролики syntx.ai от Юрия; сборка — tools/ph_video.py (27.10)
-          "vydannye": ("studio", "ph/vydannye.webp"), "mopedy": ("studio", "ph/mopedy.webp"),   # фото Юрия из Nano Banana на синем фоне (27.10)
+          "vydannye": ("studio", "ph/vydannye.svg", "anim"), "mopedy": ("studio", "ph/mopedy.svg", "anim"),   # фото Юрия из Nano Banana на синем фоне (27.10); въезжают в кадр — ph_anim.py (27.10, ночь)
           "voprosy": ("img", "road.webp"), "kontakty": ("studio", "ph/kontakty.webp")}            # «Авто в Китае» — витрина ph_show() (Юрий 27.10)
 
 
@@ -725,7 +725,16 @@ def phv(key):
                 f' data-src="{vv(src + ".mp4")}" data-src-m="{vv(src + "_m.mp4")}"></video></div>')
     if not (IMG / src).exists():
         return ""
+    if "anim" in cls:                                    # въезд в кадр начинается, когда картинка загрузилась (s.css .phv.anim)
+        v = hashlib.md5((IMG / src).read_bytes()).hexdigest()[:8]
+        return (f'<div class="phv {kind} anim" aria-hidden="true"><img src="{u("img/" + src)}?v={v}" alt="" decoding="async" onload="this.classList.add(\'go\')">'
+                f'{PH_TAGS.get(key, "")}</div>')
     return f'<div class="phv{" " + kind if kind != "img" else ""}" aria-hidden="true"><img src="{u("img/" + src)}" alt="" decoding="async"></div>'
+
+
+PH_TAGS = {"mopedy": '<ul class="mtags"><li>Без ОСАГО</li><li>Права M, A, B или&nbsp;C</li><li>Без учёта в&nbsp;ГИБДД</li><li>Ездить можно с&nbsp;16&nbsp;лет</li></ul>'}   # плашки по очереди вокруг мопеда (Юрий 27.10.2026, вариант 3)
+FCLOSE = ('<div class="fxw"><button class="fx" type="button" data-fclose aria-label="Закрыть фильтры"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">'
+          '<path d="M6 6l12 12M18 6L6 18"/></svg></button></div>')   # крестик панели фильтров на телефоне (Юрий 27.10.2026)
 
 
 POPULAR = {"mazda", "kia", "toyota", "geely", "honda", "hyundai", "haval", "chery", "changan", "nissan"}   # вперёд в «Авто в Китае» (Юрий 27.10.2026)
@@ -820,8 +829,11 @@ def faq_ld(items):
             "mainEntity": [{"@type": "Question", "name": q["q"], "acceptedAnswer": {"@type": "Answer", "text": q["a"]}} for q in items]}
 
 
+FIN_M_TOP = 520                                        # фон нижнего блока на телефоне: срезано небо сверху, пикселей исходника (Юрий 27.10.2026)
+
+
 def fin_block():
-    return f"""<section class="fin"><picture><source media="(max-width:760px)" srcset="{u("img/road_m.webp")}"><img class="bg" id="finbg" src="{u("img/road.webp")}" alt="" loading="lazy"></picture>
+    return f"""<section class="fin"><picture><source media="(max-width:760px)" srcset="{u("img/fin_m.webp")}"><img class="bg" id="finbg" src="{u("img/road.webp")}" alt="" loading="lazy"></picture>
 <div class="wrap"><h2 class="rv">Ваш автомобиль<br>из&nbsp;Китая. Под&nbsp;ключ.</h2><p class="rv d1">Новые машины, подборки и&nbsp;выданные автомобили&nbsp;— в&nbsp;нашем Telegram-канале.</p>
 <div class="btns rv d2"><a class="btn w" href="{CHANNEL}">Telegram-канал <span class="ar">→</span></a><a class="btn o" href="{u("kontakty/")}">Написать специалисту</a></div></div></section>"""
 
@@ -933,7 +945,7 @@ def catalog_page(models):
 <p class="lead">Цена в&nbsp;карточке&nbsp;— ориентир под&nbsp;ключ. Точную сумму на&nbsp;конкретный автомобиль считаем по&nbsp;курсу дня. Не&nbsp;нашли свою модель&nbsp;— привезём любую под&nbsp;заказ.</p>
 <div class="tiles">{tiles}</div></div></section>
 <section class="sec tight"><div class="wrap lay">
-<aside class="flt" aria-label="Фильтры">
+<aside class="flt" aria-label="Фильтры">{FCLOSE}
 <h4>Поиск</h4><input type="search" data-f="q" placeholder="Модель или марка">
 <h4>Топливо</h4><div class="chips" data-f="fuel">{"".join(f'<button class="chip" type="button" data-v="{k}">{t}</button>' for k, t in fuels)}</div>
 <h4>Привод</h4><div class="chips" data-f="feat"><button class="chip" type="button" data-v="awd">Только полный</button></div>
@@ -1027,7 +1039,7 @@ def avto_page(kp, rates):
 <p class="lead just">Реальные машины из&nbsp;наших расчётов для&nbsp;клиентов и&nbsp;свежие объявления в&nbsp;Китае&nbsp;— каждый день новые. Цена под&nbsp;ключ пересчитана {ddmm(TODAY)} по&nbsp;курсу юаня {f"{rates['vtb']:.2f}".replace(".", ",")}&nbsp;₽. Если машину уже продали&nbsp;— найдём аналогичную или&nbsp;похожую.</p>
 </div></section>
 <section class="sec tight"><div class="wrap lay">
-<aside class="flt" aria-label="Фильтры">
+<aside class="flt" aria-label="Фильтры">{FCLOSE}
 <h4>Поиск</h4><input type="search" data-f="q" placeholder="Модель или марка">
 <h4>Топливо</h4><div class="chips" data-f="fuel">{"".join(f'<button class="chip" type="button" data-v="{k}">{t}</button>' for k, t in fuels)}</div>
 <h4>Привод</h4><div class="chips" data-f="feat"><button class="chip" type="button" data-v="awd">Только полный</button></div>
@@ -1175,7 +1187,7 @@ def premium_page(prem, rates):
 <p class="lead">Ориентировочные цены под&nbsp;ключ на&nbsp;{ddmm(TODAY)}. Доставим в&nbsp;любой город России.</p>
 </div></section>
 <section class="sec tight prem"><div class="wrap lay">
-<aside class="flt" aria-label="Фильтры">
+<aside class="flt" aria-label="Фильтры">{FCLOSE}
 <h4>Поиск</h4><input type="search" data-f="q" placeholder="Модель или марка">
 <h4>Топливо</h4><div class="chips" data-f="fuel">{"".join(f'<button class="chip" type="button" data-v="{k}">{t}</button>' for k, t in fuels)}</div>
 <h4>Привод</h4><div class="chips" data-f="feat"><button class="chip" type="button" data-v="awd">Только полный</button></div>
@@ -1271,7 +1283,16 @@ def moto_page(d):
     ms, date_ = d["mopeds"], d["date"]
     brands = list(dict.fromkeys(m["brand"] for m in ms))
     chips = "".join(f'<button class="chip" type="button" data-v="{slugify(b)}">{E(b)} <i>{sum(m["brand"] == b for m in ms)}</i></button>' for b in brands)
-    grid = "".join(f'<div class="card pc mc" data-brand="{slugify(m["brand"])}"><div class="im ct"><img src="{u("img/moto/" + m["id"] + ".webp")}" alt="{E(m["name"])}, электромопед" loading="lazy" width="{m["size"][0]}" height="{m["size"][1]}"></div>'
+    for i, m in enumerate(ms):                          # для фильтров (Юрий 27.10.2026): запас хода — верхняя граница, батарея — из строки «… А·ч»
+        km = [int(x) for x in re.findall(r"\d+", next((x for x in m["specs"] if x.startswith("запас хода")), ""))]
+        bat = next((x for x in m["specs"] if "А·ч" in x), "")
+        m["_km"], m["_ord"] = max(km or [0]), i
+        m["_bat"] = "graphene" if "графен" in bat else "lithium" if "литие" in bat else "lead" if "свинцов" in bat else ""
+    pmax = math.ceil(max(m["price_from_rub"] for m in ms) / 5000) * 5000
+    pmin = math.floor(min(m["price_from_rub"] for m in ms) / 5000) * 5000
+    bats = [(k, t) for k, t in (("lead", "Свинцовая"), ("graphene", "Графеновая"), ("lithium", "Литиевая")) if any(m["_bat"] == k for m in ms)]
+    grid = "".join(f'<div class="card pc mc" data-brand="{slugify(m["brand"])}" data-price="{m["price_from_rub"]}" data-range="{m["_km"]}" data-bat="{m["_bat"]}"'
+                   f' data-ord="{m["_ord"]}" data-name="{E(m["name"])}" data-q="{E((m["name"] + " " + m["brand"]).lower())}"><div class="im ct"><img src="{u("img/moto/" + m["id"] + ".webp")}" alt="{E(m["name"])}, электромопед" loading="lazy" width="{m["size"][0]}" height="{m["size"][1]}"></div>'
                    f'<div class="t"><h3>{E(m["name"])}</h3><span class="cl">{E(m["class"])}</span>'
                    f'<ul class="ms">{"".join(f"<li>{E(x)}</li>" for x in m["specs"])}</ul>'
                    + (f'<p class="mn">{E(m["note"])}</p>' if m.get("note") else "")
@@ -1285,11 +1306,24 @@ def moto_page(d):
 <p class="lead">Помимо автомобилей, привозим из&nbsp;Китая электромопеды. «Восток-Мото»: {len(ms)} {plural(len(ms), "модель", "модели", "моделей")} до&nbsp;50&nbsp;км/ч и&nbsp;до&nbsp;4&nbsp;кВт под&nbsp;права категории M. Цены по&nbsp;курсу на&nbsp;{date_}: цена зависит от&nbsp;курса&nbsp;— актуальную цену уточняйте.</p>
 </div></section>
 <section class="sec tight prem moto"><div class="wrap">
-<ul class="mfacts">{facts}</ul>
-<div class="pfl"><div class="chips" data-f="brand" data-one><button class="chip all" type="button" data-reset>Все <i>{len(ms)}</i></button>{chips}</div>
-<span class="cnt">Найдено: <b id="cnt">{len(ms)}</b></span></div>
+<ul class="mfacts">{facts}</ul></div>
+<div class="wrap lay">
+<aside class="flt" aria-label="Фильтры">{FCLOSE}
+<h4>Поиск</h4><input type="search" data-f="q" placeholder="Модель или марка">
+<h4>Марка</h4><div class="chips" data-f="brand">{chips}</div>
+<h4>Цена</h4><input type="range" data-f="price" data-rub min="{pmin}" max="{pmax}" step="5000" value="{pmax}"><div class="rng"><span>до</span><b data-out="price">любая</b></div>
+<h4>Запас хода</h4><select data-f="rmin"><option value="">Любой</option>{"".join(f'<option value="{k}">от&nbsp;{k}&nbsp;км</option>' for k in (40, 50, 60, 80))}</select>
+<h4>Батарея</h4><div class="chips" data-f="bat">{"".join(f'<button class="chip" type="button" data-v="{k}">{t}</button>' for k, t in bats)}</div>
+<button class="btn ob sm reset" type="button" data-reset>Сбросить фильтры</button>
+<button class="btn b sm reset fbtn" type="button" data-fopen>Показать</button>
+</aside>
+<div>
+<div class="lhead"><span class="cnt">Найдено: <b id="cnt">{len(ms)}</b></span><span style="display:flex;gap:10px"><button class="btn ob sm fbtn" type="button" data-fopen>Фильтры</button>
+<select data-sort aria-label="Сортировка"><option value="ord-asc">По порядку</option><option value="price-asc">Сначала дешевле</option><option value="price-desc">Сначала дороже</option><option value="range-desc">Больше запас хода</option></select></span></div>
 <div class="list" data-list>{grid}</div>
-<p class="empty" id="empty">Моделей нет. <a class="more" href="#" data-reset>Показать все</a></p>
+<p class="empty" id="empty">По&nbsp;таким условиям моделей нет. <a class="more" href="#" data-reset>Сбросить фильтры</a></p>
+</div></div>
+<div class="wrap">
 <div class="box pcta"><div><h3>Узнать актуальную цену</h3><p>Цена зависит от&nbsp;курса юаня. Напишите&nbsp;— подберём модель и&nbsp;цвет и&nbsp;назовём цену на&nbsp;сегодня.</p></div>
 <a class="btn b" href="{u("kontakty/")}">Написать специалисту <span class="ar">→</span></a></div>
 </div></section>"""
@@ -1432,7 +1466,7 @@ def ph_chat():
     av = lambda p: f'<img src="{u("img/" + p["img"] + ".webp")}" alt="" width="40" height="40">'
     msgs = "".join(f'<div class="m">{av(p)}<div class="bb"><b>{p["name"].split()[0]}</b><p>{t}</p></div></div>' for p, t in zip(TEAM, lines))
     return (f'<div class="phchat"><div class="hd"><div class="av">{"".join(f"<span>{av(p)}</span>" for p in TEAM[:3])}</div>'
-            f'<div><b>Специалисты МТК</b><small><i></i>на&nbsp;связи</small></div></div>'
+            f'<div><b>Специалисты<br>МТК ВОСТОК&#8209;АВТО</b><small><i></i>на&nbsp;связи</small></div></div>'
             f'<div class="msgs">{msgs}<div class="typ" aria-hidden="true"><span></span><span></span><span></span></div></div>'
             f'<a class="in" href="#team">Напишите модель или бюджет<i>→</i></a></div>')
 
@@ -1491,6 +1525,7 @@ def main():
     road = MTK / "kp" / "fon_a4_polnyy.jpg"
     webp(road, IMG / "road.webp", 1600, 74, crop=(0, 700, 1400, 1700))
     webp(road, IMG / "road_m.webp", 900, 74)
+    webp(road, IMG / "fin_m.webp", 900, 74, crop=(0, FIN_M_TOP, 1400, 1980))   # нижний блок на телефоне — без лишнего неба (Юрий 27.10.2026)
     shutil.copyfile(NEW / "src" / "og_yu7.jpg", IMG / "og_yu7.jpg")   # превью ссылки: кадр из видео первого экрана (Юрий 17.10)
     for n in ("d_xrv_1", "d_xrv_2", "d_q05_1", "d_q05_2", "d_yaris_1", "d_yaris_2", "d_coolray_1", "d_coolray_2", "yura", "gleb", "ivan"):
         shutil.copy2(MAIN_IMG / f"{n}.webp", IMG / f"{n}.webp")
@@ -1502,6 +1537,9 @@ def main():
     for n in ("vydannye", "mopedy", "kontakty"):           # шапки разделов: машина или мопед на синем фоне (Nano Banana, Юрий 27.10.2026)
         cut = NEW / "src" / f"ph_{n}.png"                  # вырезан из фона (rembg), за ним фон шапки — мопед: «тёмное пятно» (Юрий 27.10.2026)
         webp(cut if cut.exists() else NEW / "src" / f"ph_{n}.jpg", IMG / "ph" / f"{n}.webp", 1500, 82 if cut.exists() else 80, alpha=cut.exists())
+    import ph_anim
+    for n in ph_anim.SCENES:                               # мопед и прицеп въезжают в кадр (Юрий 27.10.2026)
+        ph_anim.fresh(n)
     for k in range(4):
         deck_img(k, IMG / f"sec{k}.webp", 2200, 74)
         deck_img(k, IMG / f"sec{k}_m.webp", 1100, 74)
