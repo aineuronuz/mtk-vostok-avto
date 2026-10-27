@@ -1,5 +1,5 @@
 (()=>{
-const $=s=>document.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
+const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
 const RM=matchMedia('(prefers-reduced-motion:reduce)').matches;
 const mob=()=>innerWidth<=760;
 const clamp=(v,a=0,b=1)=>Math.min(b,Math.max(a,v));
@@ -181,4 +181,12 @@ function frame(){
 const req=()=>{if(!ticking){ticking=true;requestAnimationFrame(frame)}};
 addEventListener('scroll',req,{passive:true});addEventListener('resize',req);addEventListener('load',req);frame();
 if(!RM&&$('.dc'))setInterval(()=>$$('.dc').forEach((d,i)=>setTimeout(()=>d.classList.toggle('alt'),i*500)),4200);
+// «Контакты»: чат со специалистами — «печатает…», затем сообщение, по очереди; после всех трёх пауза и сначала (Юрий 27.10.2026)
+const CH=$('.phchat');
+if(CH){const ms=$$('.m',CH),ty=$('.typ',CH);let k=0;
+  if(RM)ms.forEach(m=>m.classList.add('on'));
+  else{const step=()=>{if(k<ms.length){ms[k].before(ty);ty.classList.add('on');
+        setTimeout(()=>{ty.classList.remove('on');ms[k].classList.add('on');k++;setTimeout(step,1100)},1300)}
+      else setTimeout(()=>{ms.forEach(m=>m.classList.remove('on'));k=0;setTimeout(step,700)},4500)};
+    setTimeout(step,500)}}
 })();

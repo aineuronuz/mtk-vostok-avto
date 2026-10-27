@@ -130,15 +130,16 @@ def deck_src(k):
 TILE_SCALE = {1: 0.76, 2: 0.86, 3: 0.98}   # машины плиток Каталога в одном масштабе с Changan Q05 на «Электро» (Юрий 27.10.2026; замер rembg)
 
 
-def tile_img(k, w=1100, q=76):
-    """Картинка плитки Каталога: фото блока главной, машина уменьшена в TILE_SCALE[k] раз, по краям — продолжение фона
-    (крайние пиксели кадра, размытые) с мягким швом. Без масштаба — то же фото, что у блока главной."""
-    src, dst = deck_src(k), IMG / f"tile{k}.webp"
+def deck_img(k, dst, w=1100, q=76):
+    """Фото блока главной и плитки Каталога: машина уменьшена в TILE_SCALE[k] раз, по краям — продолжение фона
+    (крайние пиксели кадра, размытые) с мягким швом. Ролики блоков уменьшает так же tools/deck_scale.py."""
+    src = deck_src(k)
     if dst.exists() and dst.stat().st_mtime >= max(Path(src).stat().st_mtime, Path(__file__).stat().st_mtime):
         return
     import numpy as np
     from PIL import ImageFilter
     im = Image.open(src).convert("RGB")
+    w = min(w, im.width)
     im = im.resize((w, round(im.height * w / im.width)), Image.LANCZOS)
     sc = TILE_SCALE.get(k, 1)
     if sc < 1:
@@ -836,8 +837,8 @@ def home(models, kp, rates, faq):
     decks = []
     for i, (key, label, cat, sec, _) in enumerate(DIRS):
         ms = [m for m in models if m["dir"] == key]
-        webp(deck_src(sec), IMG / f"sec{sec}.webp", 2200, 74)
-        webp(deck_src(sec), IMG / f"sec{sec}_m.webp", 1100, 74)
+        deck_img(sec, IMG / f"sec{sec}.webp", 2200, 74)
+        deck_img(sec, IMG / f"sec{sec}_m.webp", 1100, 74)
         vid = ""
         if (OUT / "assets" / "video" / f"deck{sec}.mp4").exists():   # живой блок: ролик из syntx.ai поверх фото (Юрий 18.10)
             vv = lambda n: u(f"assets/video/{n}") + "?v=" + hashlib.md5((OUT / "assets" / "video" / n).read_bytes()).hexdigest()[:8]   # новый ролик — новый адрес, мимо кэша
@@ -928,7 +929,7 @@ def catalog_page(models):
     pmax = math.ceil(max(m["from"] for m in models) / 1e5) * 1e5
     body = f"""
 <section class="phead pkat">{phv("katalog")}<div class="wrap">{crumbs((None, "Каталог"))}
-<h1 class="rv in">{len(models)} моделей<br>под <em>льготный утильсбор</em></h1>
+<h1 class="rv in">{len(models)} моделей <br class="kbr">под <em>льготный утильсбор</em></h1>
 <p class="lead">Цена в&nbsp;карточке&nbsp;— ориентир под&nbsp;ключ. Точную сумму на&nbsp;конкретный автомобиль считаем по&nbsp;курсу дня. Не&nbsp;нашли свою модель&nbsp;— привезём любую под&nbsp;заказ.</p>
 <div class="tiles">{tiles}</div></div></section>
 <section class="sec tight"><div class="wrap lay">
@@ -1313,7 +1314,7 @@ def how_page(faq):
     body = f"""
 <section class="phead phx"><div class="wrap">{ph_route()}{crumbs((None, "Как купить"))}
 <h1 class="rv in sm">Как купить автомобиль<br><em>из&nbsp;Китая под&nbsp;ключ</em></h1>
-<p class="lead">Семь шагов от&nbsp;выбора до&nbsp;ключей. Срок от&nbsp;оплаты до&nbsp;выдачи&nbsp;— обычно 45–65&nbsp;дней. На&nbsp;каждом шаге Вы знаете, что уже сделано и&nbsp;что дальше.</p></div></section>
+<p class="lead">Семь шагов от&nbsp;выбора до&nbsp;ключей. Срок от&nbsp;оплаты до&nbsp;выдачи&nbsp;— обычно 45–65&nbsp;дней. Каждый шаг прозрачен: присылаем фото, документы и&nbsp;сроки.</p></div></section>
 <section class="sec tight"><div class="wrap"><div class="tl">{"".join(tl)}</div></div></section>
 <section class="sec bg" id="docs"><div class="wrap"><div class="cols"><div><p class="kick rv">Документы</p><h2 class="h2 rv d1">Что Вы <em>получаете</em></h2>
 <p class="lead rv d2">Все платежи&nbsp;— по&nbsp;договору и&nbsp;через банк. После выдачи машину ставят на&nbsp;учёт в&nbsp;ГИБДД как обычную.</p></div>
@@ -1422,12 +1423,26 @@ def faq_page(faq):
          body, active="voprosy/", jsonld=[bc_ld(("voprosy/", "Вопросы")), faq_ld(faq)], prio="0.8")
 
 
+def ph_chat():
+    """«Контакты»: вместо машины — живой чат со специалистами (Юрий 27.10.2026, вариант 2): фото с отметкой «на связи»,
+    сообщения всплывают по очереди после «печатает…» (s.js), строка ввода ведёт к карточкам специалистов."""
+    lines = ["Здравствуйте! Подберу машину под&nbsp;ваш бюджет и&nbsp;пришлю несколько вариантов.",
+             "Северо-Запад: посчитаю цену под&nbsp;ключ с&nbsp;доставкой в&nbsp;ваш город.",
+             "Урал и&nbsp;Поволжье: отвечу в&nbsp;Telegram, WhatsApp или&nbsp;MAX."]
+    av = lambda p: f'<img src="{u("img/" + p["img"] + ".webp")}" alt="" width="40" height="40">'
+    msgs = "".join(f'<div class="m">{av(p)}<div class="bb"><b>{p["name"].split()[0]}</b><p>{t}</p></div></div>' for p, t in zip(TEAM, lines))
+    return (f'<div class="phchat"><div class="hd"><div class="av">{"".join(f"<span>{av(p)}</span>" for p in TEAM[:3])}</div>'
+            f'<div><b>Специалисты МТК</b><small><i></i>на&nbsp;связи</small></div></div>'
+            f'<div class="msgs">{msgs}<div class="typ" aria-hidden="true"><span></span><span></span><span></span></div></div>'
+            f'<a class="in" href="#team">Напишите модель или бюджет<i>→</i></a></div>')
+
+
 def contacts_page():
     body = f"""
-<section class="phead">{phv("kontakty")}<div class="wrap">{crumbs((None, "Контакты"))}
+<section class="phead pcont"><div class="wrap">{crumbs((None, "Контакты"))}
 <h1 class="rv in sm">Напишите <em>специалисту</em></h1>
-<p class="lead">Напишите модель или бюджет&nbsp;— бесплатно подберём несколько машин в&nbsp;Китае и&nbsp;посчитаем цену под&nbsp;ключ с&nbsp;доставкой в&nbsp;ваш город.</p></div></section>
-<section class="sec tight"><div class="wrap"><div class="tgrid" style="margin-top:0">{team_cards()}</div>
+<p class="lead">Напишите модель или бюджет&nbsp;— бесплатно подберём несколько машин в&nbsp;Китае и&nbsp;посчитаем цену под&nbsp;ключ с&nbsp;доставкой в&nbsp;ваш город.</p></div>{ph_chat()}</section>
+<section class="sec tight" id="team"><div class="wrap"><div class="tgrid" style="margin-top:0">{team_cards()}</div>
 <div class="box rv" style="margin-top:22px;display:flex;flex-wrap:wrap;gap:20px;align-items:center;justify-content:space-between"><div><h3>Telegram-канал МТК Восток-Авто</h3>
 <p style="color:var(--muted);margin-top:6px">Новые машины, подборки и&nbsp;выданные автомобили.</p></div><a class="btn b" href="{CHANNEL}">Открыть канал <span class="ar">→</span></a></div></div></section>
 {fin_block()}"""
@@ -1488,9 +1503,9 @@ def main():
         cut = NEW / "src" / f"ph_{n}.png"                  # вырезан из фона (rembg), за ним фон шапки — мопед: «тёмное пятно» (Юрий 27.10.2026)
         webp(cut if cut.exists() else NEW / "src" / f"ph_{n}.jpg", IMG / "ph" / f"{n}.webp", 1500, 82 if cut.exists() else 80, alpha=cut.exists())
     for k in range(4):
-        webp(deck_src(k), IMG / f"sec{k}.webp", 2200, 74)
-        webp(deck_src(k), IMG / f"sec{k}_m.webp", 1100, 74)
-        tile_img(k)
+        deck_img(k, IMG / f"sec{k}.webp", 2200, 74)
+        deck_img(k, IMG / f"sec{k}_m.webp", 1100, 74)
+        deck_img(k, IMG / f"tile{k}.webp")
 
     cbr = cbr_rates(offline)
     vtb, src = day_rate(cbr, offline)

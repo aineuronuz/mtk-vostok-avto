@@ -997,3 +997,51 @@ body:not(.light) .hdr.sc:not(.solid){background:rgba(11,31,69,.97);box-shadow:0 
 .phv.studio img[src*="mopedy"]{transform:scale(.86)}
 .pcalc .kcta{order:10;justify-content:flex-start}
 }
+/* «Контакты»: живой чат со специалистами вместо машины (Юрий 27.10.2026, вариант 2) */
+.phchat{position:relative;z-index:2;width:min(100%,390px);color:#fff;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);
+  border-radius:22px;padding:14px 16px 14px;box-shadow:0 30px 60px -30px rgba(0,0,0,.6);backdrop-filter:blur(6px)}
+.phchat .hd{display:flex;align-items:center;gap:12px;padding-bottom:10px;border-bottom:1px solid rgba(255,255,255,.14)}
+.phchat .av{display:flex}
+.phchat .av span{position:relative;margin-left:-10px}.phchat .av span:first-child{margin-left:0}
+.phchat .av img{width:38px;height:38px;border-radius:50%;object-fit:cover;border:2px solid #16346f;display:block}
+.phchat .av span:after{content:"";position:absolute;right:0;bottom:0;width:10px;height:10px;border-radius:50%;background:#2fd68c;border:2px solid #16346f}
+.phchat .hd b{display:block;font-size:15px;font-weight:600}
+.phchat .hd small{display:flex;align-items:center;gap:6px;font-size:12.5px;color:#8ff0bf}
+.phchat .hd small i{width:7px;height:7px;border-radius:50%;background:#2fd68c;animation:chpulse 1.6s infinite}
+@keyframes chpulse{0%,100%{opacity:1}50%{opacity:.35}}
+.phchat .msgs{display:flex;flex-direction:column;gap:8px;padding:10px 0 12px;min-height:214px}
+.phchat .m{display:flex;gap:9px;align-items:flex-end;opacity:0;transform:translateY(10px);transition:opacity .45s,transform .45s;max-height:0;overflow:hidden}
+.phchat .m.on{opacity:1;transform:none;max-height:120px}
+.phchat .m img{width:28px;height:28px;border-radius:50%;object-fit:cover;flex-shrink:0}
+.phchat .bb{background:#fff;color:var(--ink);border-radius:14px 14px 14px 4px;padding:7px 11px 8px;font-size:13.5px;line-height:1.35}
+.phchat .bb b{display:block;font-size:12px;color:var(--blue);margin-bottom:1px}
+.phchat .typ{display:none;gap:4px;align-self:flex-start;margin-left:37px;background:rgba(255,255,255,.9);border-radius:12px;padding:9px 11px}
+.phchat .typ.on{display:flex}
+.phchat .typ span{width:6px;height:6px;border-radius:50%;background:#7c8aa5;animation:chdot 1s infinite}
+.phchat .typ span:nth-child(2){animation-delay:.15s}.phchat .typ span:nth-child(3){animation-delay:.3s}
+@keyframes chdot{0%,60%,100%{transform:none;opacity:.5}30%{transform:translateY(-4px);opacity:1}}
+.phchat .in{display:flex;align-items:center;justify-content:space-between;border-radius:999px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);
+  padding:9px 9px 9px 16px;font-size:14px;color:rgba(255,255,255,.75)}
+.phchat .in i{font-style:normal;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:#fff;color:var(--navy2);font-weight:700}
+.phchat .in:hover{background:rgba(255,255,255,.18)}
+@media (min-width:1141px){
+.phead.pcont{min-height:470px}
+.phchat{position:absolute;top:calc(var(--hh) + (100% - var(--hh)) / 2);left:calc(((100% - min(100%,1360px))/2 + clamp(20px,4vw,56px) + 660px + 100%)/2);transform:translate(-50%,-50%)}
+}
+@media (max-width:1140px){.phchat{margin:22px auto 0}}
+/* 27.10.2026 (Юрий, ночь, 3): заголовок Каталога в одну строку — плитки крупнее; телефон: без блока «Из Китая — в ваш город»
+   (та же дорога есть внизу страницы), Li Auto ближе к центру, этапы оплаты компактнее */
+@media (min-width:1141px){.pkat h1 .kbr{display:none}.pkat .tiles{max-height:340px}}
+@media (max-width:760px){
+.grow{display:none}
+.phv.zoom video{transform-origin:100% 62%}
+.pays{margin-top:22px;row-gap:22px}
+.pay4{display:grid;grid-template-columns:44px 1fr;column-gap:12px;align-items:center}
+.pay4 .c{width:44px;height:44px;font-size:17px}
+.pay4.free .c svg{width:22px;height:22px}
+.pay4 h3{margin-top:0;font-size:19px}
+.pay4 .s,.pay4 p,.pay4 ul{grid-column:1/-1}
+.pay4 .s{margin-top:8px;font-size:26px}
+.pay4 p{margin-top:6px;font-size:14.5px}
+.pay4 ul,.pay4.free ul{margin-top:8px}
+}
