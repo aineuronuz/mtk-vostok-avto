@@ -55,7 +55,7 @@ if(CF){const d=JSON.parse(CF.dataset.calc),el=CF.elements,$c=s=>$(s,CF),out=$c('
   const R=n=>nf(n)+' ₽';
   const run=()=>{const y=+el.y.value||0,t=el.t.value,a=+el.a.value,c=+el.cc.value||0,el3=t!='ice',kwIn=el.u.value=='kw',p=+el.p.value||0;
     ccl.style.display=el3?'none':'';pl.textContent=el3?'Максимальная мощность':'Мощность';
-    const hp=kwIn?p*1.35962:p,kw=kwIn?p:p*.7355;
+    const hp=kwIn?p*1.35962:p,kw=kwIn?p:Math.round(p*735.5)/1000;   // без хвоста 294,20000000000005 — иначе 400 л.с. уходят в следующий диапазон утиля
     const car=Math.round(y*d.vtb),del=Math.round(d.deliv*d.vtb),ld=Math.round(d.load*d.vtb),bank=Math.round((car+del)*d.bank),cv=Math.round((y+d.deliv)*d.cny);
     const fee=step(d.fee,cv,d.feeTop),ak=a==0?'less_3':'over_3',L=[[`Автомобиль с доставкой (${nf(y+d.deliv)} ¥)`,car+del],['Погрузка и доставка по Китаю',ld],['Комиссия банка ВТБ 2%',bank]];
     let duty,akz=0,vat=0,rec,kw30=kw,pref;

@@ -752,7 +752,7 @@ def ph_calc(rates):
     d = {"vtb": rates["vtb"], "cny": rates["cny"], "eur": rates["eur"], "deliv": PR.DELIVERY_CNY, "load": PR.LOADING_CNY, "bank": PR.BANK_FEE,
          "fee": tab(AC_CALC.CUSTOM_FEE_TABLE), "feeTop": AC_CALC.CUSTOM_FEE_TABLE["above"],
          "lt3": tab(AC_CALC.PHYS_LESS_THAN_3), "lt3Top": AC_CALC.PHYS_LESS_THAN_3["above"],
-         "gt3": tab(AC_CALC.PHYS_MORE_THAN_3), "gt3Top": AC_CALC.PHYS_MORE_THAN_3["above"],
+         "gt3": tab(AC_CALC.PHYS_MORE_THAN_3), "gt3Top": [3.6, 5.7],   # свыше 3000 см³: 3–5 лет 3,6 €/см³, старше 5 — 5,7 (Решение ЕЭК № 107; в calc.py «Авто» 5,7 и для 3–5)
          "rec": {k: {a: [[r["max_kw"], r["coef"]] for r in v[a]] for a in ("less_3", "over_3")} for k, v in rec.items()},
          "akc": PR.AKCIZ, "svh": PR.TARIFF["svh"], "clr": PR.CLEARANCE, "svc": PR.TARIFF["services"], "k30": 0.45}
     return f"""<form class="phcalc" data-calc='{json.dumps(d)}' onsubmit="return false"><h3>Калькулятор</h3>
