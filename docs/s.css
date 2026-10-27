@@ -607,6 +607,9 @@ body{font-size:16px}
   -webkit-mask-image:linear-gradient(90deg,transparent 0,rgba(0,0,0,.55) 22%,#000 48%);mask-image:linear-gradient(90deg,transparent 0,rgba(0,0,0,.55) 22%,#000 48%)}
 .phv img,.phv video{width:100%;height:100%;object-fit:cover;display:block}
 .phv:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,31,69,.78),rgba(11,31,69,.18) 26%,rgba(11,31,69,0) 60%,rgba(11,31,69,.5)),linear-gradient(90deg,rgba(11,31,69,.3),rgba(11,31,69,0) 55%)}
+/* 27.10.2026 (Юрий): в Каталоге три машины видны целиком — ролик уже шапки, низ над плитками, края растворяются */
+.phv.fit video{position:absolute;right:0;bottom:9%;width:110%;height:auto;aspect-ratio:16/9;
+  -webkit-mask-image:linear-gradient(180deg,transparent,#000 24%,#000 80%,transparent);mask-image:linear-gradient(180deg,transparent,#000 24%,#000 80%,transparent)}
 .phv.cut{top:auto;height:50%;width:min(30vw,440px);right:clamp(20px,4vw,56px);display:grid;place-items:end center;-webkit-mask-image:none;mask-image:none}
 .phv.cut img{width:auto;height:92%;max-width:100%;object-fit:contain;margin-bottom:4%;
   -webkit-mask-image:radial-gradient(closest-side,#000 72%,transparent);mask-image:radial-gradient(closest-side,#000 72%,transparent);filter:drop-shadow(0 26px 34px rgba(0,0,0,.35))}
@@ -638,6 +641,7 @@ body{font-size:16px}
 .phx h1,.phx .lead{max-width:min(56vw,760px)}
 .phx .rates{max-width:calc(100% - min(36vw,420px) - 36px)}
 @media (max-width:1140px){
+.phv.fit video{position:static;width:100%;height:100%;aspect-ratio:auto;-webkit-mask-image:none;mask-image:none}
 .phv{width:100%;opacity:.4;-webkit-mask-image:linear-gradient(180deg,#000 40%,transparent);mask-image:linear-gradient(180deg,#000 40%,transparent)}
 .phv.cut{opacity:.55;height:52%;width:60%;right:0}
 .phroute{position:relative;right:auto;top:auto;transform:none;width:100%;max-width:560px;margin:10px 0 24px}

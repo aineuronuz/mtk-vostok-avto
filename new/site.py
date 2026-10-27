@@ -625,19 +625,19 @@ PAYS = f"""<div class="pays" id="pays">
 
 
 # ---------- шапки разделов: справа видео, фото или небольшой интерактив по теме (Юрий 26.10.2026) ----------
-PH_VIS = {"katalog": ("video", "ph_katalog"), "premium": ("video", "ph_premium"),          # ролики syntx.ai от Юрия 26.10, вперёд-назад
+PH_VIS = {"katalog": ("video", "ph_katalog", "fit"), "premium": ("video", "ph_premium"),   # ролики syntx.ai от Юрия; сборка — tools/ph_video.py (27.10)
           "avto": ("img", "kp/xiaomi-yu7-pro-2025-16000km/1.webp"), "vydannye": ("img", "d_yaris_1.webp"),
           "mopedy": ("cut", "moto/og.jpg"), "voprosy": ("img", "road.webp"), "kontakty": ("img", "d_q05_1.webp")}
 
 
 def phv(key):
-    kind, src = PH_VIS[key]
+    kind, src, *cls = PH_VIS[key]
     if kind == "video":
         vd = OUT / "assets" / "video"
         if not (vd / f"{src}.mp4").exists():
             return ""
         vv = lambda n: u(f"assets/video/{n}") + "?v=" + hashlib.md5((vd / n).read_bytes()).hexdigest()[:8]
-        return (f'<div class="phv" aria-hidden="true"><video muted loop playsinline preload="none" poster="{vv(src + ".webp")}"'
+        return (f'<div class="{" ".join(["phv", *cls])}" aria-hidden="true"><video muted loop playsinline preload="none" poster="{vv(src + ".webp")}"'
                 f' data-src="{vv(src + ".mp4")}" data-src-m="{vv(src + "_m.mp4")}"></video></div>')
     if not (IMG / src).exists():
         return ""
