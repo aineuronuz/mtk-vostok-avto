@@ -44,13 +44,40 @@ $$('.phv video').forEach(v=>{if(RM)return;v.muted=v.defaultMuted=true;v.src=mob(
   const go=()=>{const p=v.play();if(p&&p.catch)p.catch(()=>{})};v.addEventListener('canplay',go,{once:true});go();
   ['pointerdown','touchstart'].forEach(e=>addEventListener(e,go,{once:true,passive:true}))});
 const CF=$('.phcalc');
-if(CF){const d=JSON.parse(CF.dataset.calc),el=CF.elements,out=$('[data-total]',CF),ccl=$('.cc',CF);
-  const fee=v=>{for(const[k,x]of d.fee)if(v<=k)return x;return d.feeTop},per=c=>{for(const[k,x]of d.cc)if(c<=k)return x;return d.ccTop};
-  const run=()=>{const y=+el.y.value||0,ev=el.t.value=='ev',c=+el.cc.value||0;ccl.style.display=ev?'none':'';
-    const car=Math.round(y*d.vtb),del=Math.round(d.deliv*d.vtb),ld=Math.round(d.load*d.vtb),bank=Math.round((car+del)*.02),cv=Math.round((y+d.deliv)*d.cny);
-    let duty,vat=0,rec;if(ev){duty=Math.round(cv*.15);vat=Math.round((cv+duty)*.22);rec=3400}else{duty=Math.round(c*per(c)*d.eur);rec=5200}
-    out.textContent=y>=1000&&(ev||c>=600)?nf(car+del+ld+bank+duty+vat+fee(cv)+rec+d.fix)+' ₽':'—'};
-  CF.addEventListener('input',run);run()}
+// калькулятор «Стоимости» (Юрий 27.10.2026): двигатель, возраст, объём, мощность → под ключ и расшифровка, как в КП «Авто»
+if(CF){const d=JSON.parse(CF.dataset.calc),el=CF.elements,$c=s=>$(s,CF),out=$c('[data-total]'),ccl=$c('.cc'),pl=$c('[data-pl]'),hint=$c('[data-hint]'),ut=$c('[data-ut]'),
+    warn=$c('[data-warn]'),wt=$c('[data-wt]'),brk=$c('[data-brk]');
+  const step=(t,v,top)=>{for(const[k,x]of t)if(v<=k)return x;return top};
+  const coef=(t,kw)=>{for(const[m,c]of t)if(m==null||kw<=m)return c;return t[t.length-1][1]};
+  const akc=hp=>{for(const[t,r]of d.akc)if(t==null||hp<=t)return r};
+  const R=n=>nf(n)+' ₽';
+  const run=()=>{const y=+el.y.value||0,t=el.t.value,a=+el.a.value,c=+el.cc.value||0,el3=t!='ice',kwIn=el.u.value=='kw',p=+el.p.value||0;
+    ccl.style.display=el3?'none':'';pl.textContent=el3?'Максимальная мощность':'Мощность';
+    const hp=kwIn?p*1.35962:p,kw=kwIn?p:p*.7355;
+    const car=Math.round(y*d.vtb),del=Math.round(d.deliv*d.vtb),ld=Math.round(d.load*d.vtb),bank=Math.round((car+del)*d.bank),cv=Math.round((y+d.deliv)*d.cny);
+    const fee=step(d.fee,cv,d.feeTop),ak=a==0?'less_3':'over_3',L=[[`Автомобиль с доставкой (${nf(y+d.deliv)} ¥)`,car+del],['Погрузка и доставка по Китаю',ld],['Комиссия банка ВТБ 2%',bank]];
+    let duty,akz=0,vat=0,rec,kw30=kw,pref;
+    if(el3){kw30=kw*d.k30;const hp30=Math.round(kw30*1.35962);duty=Math.round(cv*.15);akz=hp30*akc(hp30);vat=Math.round((cv+duty+akz)*.22);
+      rec=Math.round(20000*coef(d.rec.electric_sequential[ak],kw30));
+      L.push(['Пошлина 15%',duty]);if(akz)L.push([`Акциз (${hp30} л.с.)`,akz]);L.push(['НДС 22%',vat]);
+      hint.textContent=`Сбор и акциз считаются по 30-минутной мощности: ≈${Math.round(kw30)} кВт (${hp30} л.с.) — 45% от максимальной. Точную берём из документов машины.`}
+    else{if(a==0){const[pc,ec]=step(d.lt3,cv/d.eur,d.lt3Top);duty=Math.round(Math.max(cv*pc,ec*c*d.eur))}else{duty=Math.round(c*step(d.gt3,c,d.gt3Top)[a==1?0:1]*d.eur)}
+      const tk=c<=1000?'ice_upto_1000':c<=2000?'ice_1000_2000':c<=3000?'ice_2000_3000':c<=3500?'ice_3000_3500':'ice_over_3500';
+      rec=Math.round(20000*coef(d.rec[tk][ak],kw));L.push(['Пошлина',duty]);
+      hint.textContent='У гибрида — суммарная мощность системы. Льготный утильсбор — до 160 л.с. и объёма до 3 л.'}
+    pref=rec<=5200;
+    L.push(['Таможенный сбор',fee],['Утильсбор'+(pref?' — льготный':' — полный'),rec],['Склад временного хранения',d.svh],['Оформление: растаможка, СБКТС, ЭПТС',d.clr],['Подбор и сопровождение сделки',d.svc]);
+    const ok=y>=1000&&p>0&&(el3||c>=600),tot=L.reduce((s,x)=>s+x[1],0);
+    out.textContent=ok?R(tot):'—';ut.textContent=ok?(pref?'Утильсбор льготный':'Утильсбор полный: '+R(rec)):'';ut.classList.toggle('bad',ok&&!pref);
+    warn.hidden=!ok||pref;if(ok&&!pref)wt.textContent=`Полный утильсбор — ${R(rec)}. Подберём похожую машину ${el3?'до 80 л.с. по 30-минутной мощности':'до 160 л.с.'} с льготным сбором 3 400–5 200 ₽. Напишите нам.`;
+    brk.innerHTML=ok?L.map(([k,v])=>`<tr><td>${k}</td><td>${R(v)}</td></tr>`).join('')+`<tr><td><b>Итого под ключ</b></td><td><b>${R(tot)}</b></td></tr>`:''};
+  CF.addEventListener('input',run);CF.addEventListener('change',run);run()}
+
+// «Авто в Китае»: витрина — карточки последних машин сменяют друг друга (Юрий 27.10.2026)
+const SH=$('[data-show]');
+if(SH){const cs=$$('.shc',SH);let k=0,tm;const set=()=>cs.forEach((c,i)=>{const q=(i-k+cs.length)%cs.length;c.dataset.d=q>3?4:q});
+  const go=()=>{clearInterval(tm);if(!RM&&cs.length>1)tm=setInterval(()=>{k=(k+1)%cs.length;set()},3600)};
+  set();go();SH.addEventListener('mouseenter',()=>clearInterval(tm));SH.addEventListener('mouseleave',go)}
 
 // слова подсвечиваются
 const W=$('#words');let ws=[];
@@ -89,11 +116,19 @@ if(L){
       c.classList.toggle('x',!ok);if(ok){n++;if(!RM){c.style.animation='none';void c.offsetWidth;c.style.animation=''}}});
     if(sortSel){const m=sortSel.value,[f,dir]=m.split('-');const arr=cards.slice().sort((a,b)=>{const x=a.dataset[f],y=b.dataset[f];
         const r=isNaN(+x)?x.localeCompare(y,'ru'):(+x)-(+y);return dir=='desc'?-r:r});arr.forEach(c=>L.appendChild(c))}
-    if(cnt)cnt.textContent=n;if(emp)emp.classList.toggle('on',n==0);
+    if(cnt)cnt.textContent=n;if(emp)emp.classList.toggle('on',n==0);if(typeof sync=='function')sync();
     if(push){const p=new URLSearchParams();for(const k in s)p.set(k,Array.isArray(s[k])?s[k].join(','):s[k]);if(sortSel&&sortSel.selectedIndex>0)p.set('sort',sortSel.value);
       history.replaceState(null,'',location.pathname+(p.toString()?'?'+p:''))}};
   // плитки каталога (Электро, Гибриды, Бензин, Полный привод): после выбора страница плавно уходит к списку моделей (Юрий 26.10.2026)
-  const toList=()=>{const t=L.closest('.lay')||L,h=$('#hdr'),hh=(h?h.offsetHeight:90)+16;scrollTo({top:t.getBoundingClientRect().top+scrollY-hh,behavior:RM?'auto':'smooth'})};
+  // плавно, около секунды, с разгоном и торможением — не рывком (Юрий 27.10.2026)
+  const toList=()=>{const t=L.closest('.lay')||L,h=$('#hdr'),hh=(h?h.offsetHeight:90)+16,y0=scrollY,y1=t.getBoundingClientRect().top+scrollY-hh;
+    if(RM){scrollTo(0,y1);return}const t0=performance.now(),D=Math.min(1300,Math.max(700,Math.abs(y1-y0)*.9)),ez=p=>p<.5?4*p*p*p:1-Math.pow(-2*p+2,3)/2;
+    const st=n=>{const p=clamp((n-t0)/D);scrollTo(0,y0+(y1-y0)*ez(p));if(p<1)requestAnimationFrame(st)};requestAnimationFrame(st)};
+  // плитки Каталога — быстрый выбор того же, что в панели «Топливо» и «Привод» (Юрий 27.10.2026)
+  const tiles=$$('.tiles [data-to]'),chip=b=>$(`[data-f="${b.dataset.to}"] [data-v="${b.dataset.v}"]`),sync=()=>tiles.forEach(b=>{const c=chip(b);b.classList.toggle('on',!!c&&c.classList.contains('on'))});
+  const CAT={ev:'fuel:ev',hyb:'fuel:hybrid',fwd:'fuel:petrol',awd:'feat:awd'};
+  (params.get('cat')||'').split(',').forEach(x=>{if(!CAT[x])return;const[f,v]=CAT[x].split(':'),c=$(`[data-f="${f}"] [data-v="${v}"]`);if(c)c.classList.add('on')});
+  tiles.forEach(b=>b.addEventListener('click',()=>{const c=chip(b);if(!c)return;c.classList.toggle('on');apply();setTimeout(toList,60)}));
   groups.forEach(g=>{if(g.matches('.chips,.tiles'))g.addEventListener('click',e=>{const c=e.target.closest('[data-v]');if(!c)return;
       if(g.dataset.one!=null)$$('[data-v]',g).forEach(x=>{if(x!=c)x.classList.remove('on')});c.classList.toggle('on');apply();if(g.matches('.tiles'))setTimeout(toList,60)});
     else g.addEventListener('input',()=>apply())});
@@ -125,7 +160,7 @@ const tt=$('.totop');if(tt)tt.addEventListener('click',e=>{e.preventDefault();sc
 let ticking=false;
 function frame(){
   ticking=false;const y=scrollY,vh=innerHeight,vw=innerWidth;
-  const past=y>(top0?top0.offsetHeight-90:0);hdr.classList.toggle('solid',past);
+  const past=y>(top0?top0.offsetHeight-90:0);hdr.classList.toggle('solid',past);hdr.classList.toggle('sc',!past&&y>6);   // над тёмной шапкой — тёмно-синий фон (Юрий 27.10.2026)
   if(tt)tt.classList.toggle('on',y>vh*1.5);
   if(RM)return;
   if(hc&&y<vh*1.2){const p=clamp(y/vh);hc.style.transform=mob()?`translateY(${p*-50}px)`:`translateY(calc(-42% - ${p*80}px))`;hc.style.opacity=mob()?1-p*.9:1-p*1.3}

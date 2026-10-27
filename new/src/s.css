@@ -650,3 +650,112 @@ body{font-size:16px}
 .phx .wrap{display:flex;flex-direction:column}
 .phx .wrap>.phroute{order:9}
 }
+
+/* ===== 27.10.2026 (Юрий): правки шапок, фильтров, калькулятора ===== */
+/* верх сайта при прокрутке над тёмной шапкой — тёмно-синий, заголовок уходит под него */
+body:not(.light) .hdr.sc:not(.solid){background:rgba(11,31,69,.97);box-shadow:0 12px 30px -18px rgba(0,0,0,.65);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
+/* подсветка при наведении — как у пунктов меню: плитки, карточки, фильтры */
+.tile{transition:border-color .3s,transform .35s cubic-bezier(.2,.7,.2,1),box-shadow .35s}
+.tile:hover{border-color:rgba(156,192,255,.95);transform:translateY(-3px);box-shadow:0 0 40px -4px rgba(120,170,255,.95),0 0 0 1.5px rgba(156,192,255,.85) inset}
+.card:not(.pc):hover{box-shadow:0 0 0 1.5px rgba(61,111,196,.55),0 0 36px -6px rgba(61,111,196,.6),0 26px 50px -30px rgba(11,31,69,.45)}
+.pc:hover{box-shadow:0 0 0 1.5px rgba(61,111,196,.45),0 0 30px -8px rgba(61,111,196,.5)}
+.chip:hover{box-shadow:0 0 18px -4px rgba(61,111,196,.55);border-color:var(--blue)}
+.dc{transition:box-shadow .35s,transform .35s cubic-bezier(.2,.7,.2,1)}
+.dc:hover{transform:translateY(-3px);box-shadow:0 0 0 1.5px rgba(156,192,255,.8),0 0 40px -6px rgba(120,170,255,.9)}
+.shc:hover{box-shadow:0 0 0 1.5px rgba(156,192,255,.9),0 0 44px -6px rgba(120,170,255,.95),0 30px 60px -30px rgba(0,0,0,.6)}
+/* кнопка «наверх» выше — не закрывает дату пересчёта цен в подвале */
+.totop{bottom:clamp(78px,7vw,108px)}
+/* заголовки поменьше: «Как купить», «Контакты», «Электромопеды» */
+.phead h1.sm{font-size:clamp(34px,4.3vw,66px)}
+.mlogo{width:clamp(60px,6.4vw,96px)}
+/* шапки с фото на синем фоне (Nano Banana): машина или мопед целиком, края растворяются в фоне */
+.phv.studio{-webkit-mask-image:none;mask-image:none}
+.phv.studio:after{display:none}
+.phv.studio img{position:absolute;right:clamp(8px,2.4vw,40px);bottom:3%;width:auto;height:auto;max-width:min(88%,700px);max-height:78%;object-fit:contain;
+  -webkit-mask-image:radial-gradient(ellipse 50% 50% at 50% 52%,#000 58%,transparent 100%);mask-image:radial-gradient(ellipse 50% 50% at 50% 52%,#000 58%,transparent 100%)}
+/* «Вопросы»: ссылка и кнопка к специалисту */
+.lead a.lk{color:#9cc0ff;text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1.5px}
+.lead a.lk:hover{color:#fff}
+.phbtn{margin-top:28px}
+/* «Авто в Китае»: текст по ширине, витрина справа */
+@media (min-width:761px){.lead.just{text-align:justify;-webkit-hyphens:auto;hyphens:auto}}
+.phs h1,.phs .lead{max-width:min(52vw,700px)}
+.phshow{position:absolute;right:clamp(20px,4vw,56px);top:50%;transform:translateY(-46%);width:min(28vw,380px);z-index:2}
+.shcnt{display:flex;align-items:baseline;gap:12px;margin-bottom:26px;color:rgba(255,255,255,.8);font-size:16px}
+.shcnt b{font-family:var(--disp);font-weight:300;font-size:40px;color:#fff;letter-spacing:-.03em}
+.shcnt span{margin-left:auto;background:rgba(47,214,140,.16);color:#8ff0bf;border:1px solid rgba(143,240,191,.4);border-radius:999px;padding:4px 12px;font-size:14px;font-weight:600}
+.shstack{position:relative;height:clamp(330px,26vw,380px)}
+.shc{position:absolute;left:0;right:0;top:0;border-radius:22px;overflow:hidden;background:#fff;color:var(--ink);box-shadow:0 30px 60px -30px rgba(0,0,0,.6);
+  transition:transform .8s cubic-bezier(.2,.7,.2,1),opacity .8s,box-shadow .35s;transform-origin:50% 0}
+.shc img{display:block;width:100%;aspect-ratio:17/10;object-fit:cover}
+.shc .t{padding:12px 16px 14px}
+.shc .nw{display:inline-block;font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.03em;border-radius:6px;padding:3px 8px;background:#dff5ea;color:#0a7a52}
+.shc h3{font-family:var(--ui);font-size:17px;font-weight:600;margin-top:8px;line-height:1.25;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.shc h3 i{font-style:normal;font-weight:400;color:var(--muted)}
+.shc b{display:block;font-family:var(--disp);font-weight:400;font-size:22px;color:var(--navy2);margin-top:6px;letter-spacing:-.02em}
+.shc small{font-size:12.5px;color:var(--muted)}
+.shc[data-d="0"]{z-index:4;opacity:1;transform:none}
+.shc[data-d="1"]{z-index:3;opacity:.85;transform:translateY(-16px) scale(.95)}
+.shc[data-d="2"]{z-index:2;opacity:.5;transform:translateY(-32px) scale(.9)}
+.shc[data-d="3"]{z-index:1;opacity:0;transform:translateY(-48px) scale(.85)}
+.shc[data-d="4"]{z-index:5;opacity:0;transform:translate(-70px,30px) rotate(-7deg);pointer-events:none}
+.shc:not([data-d="0"]){pointer-events:none}
+/* «Как купить»: маршрут крупнее и заметнее */
+.phx:not(.pcalc) h1,.phx:not(.pcalc) .lead{max-width:min(46vw,640px)}
+.phroute{width:min(44vw,640px);top:46%;transform:translateY(-56%)}
+.phroute .rt0{stroke:rgba(255,200,110,.16);stroke-width:12;stroke-linecap:round}
+.phroute .rt1{stroke-width:5;stroke-dasharray:14 12;filter:drop-shadow(0 0 7px rgba(255,180,80,.85))}
+.phroute .nd circle{fill:#0b1f45;stroke:#ffd27a;stroke-width:4}
+.phroute .nd circle:last-child{fill:#7fd3ff;stroke:#fff}
+.phroute text{fill:#fff;font:700 26px var(--ui);letter-spacing:.01em;filter:drop-shadow(0 0 10px rgba(255,190,90,.75))}
+.phroute .car circle{fill:#fff;filter:drop-shadow(0 0 14px rgba(255,200,110,1))}
+.phroute .rtd{font-size:17px;margin-top:10px}
+.phroute .rtd b{font-size:54px;color:#ffd27a;text-shadow:0 0 22px rgba(255,180,80,.55)}
+/* образцы документов сделки */
+.docs-h{font-family:var(--ui);font-size:22px;font-weight:600;margin-top:56px}
+.docs4{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:20px}
+.doc{display:flex;flex-direction:column;gap:10px;color:var(--ink);transition:transform .35s cubic-bezier(.2,.7,.2,1)}
+.doc .di{display:block;border-radius:14px;overflow:hidden;background:#fff;border:1px solid var(--line);aspect-ratio:3/4;transition:box-shadow .35s}
+.doc img{width:100%;height:100%;object-fit:cover;object-position:top}
+.doc .dn{font-size:14.5px;font-weight:600;line-height:1.3}
+.doc:hover{transform:translateY(-3px)}
+.doc:hover .di{box-shadow:0 0 0 1.5px rgba(61,111,196,.55),0 0 34px -6px rgba(61,111,196,.6)}
+/* выданные — компактнее */
+.dgrid{max-width:880px;margin-left:auto;margin-right:auto;gap:18px}
+.dc h3{font-size:clamp(18px,1.6vw,22px)}
+.dc .t{left:22px;right:22px;bottom:18px}
+.dc .pr{font-size:clamp(18px,1.5vw,22px)}
+/* премиум с панелью фильтров: три карточки в ряд */
+.prem .lay .list{grid-template-columns:repeat(3,1fr)}
+/* калькулятор «Стоимости»: колонка справа, шапка растёт под него */
+.pcalc .wrap{display:grid;grid-template-columns:minmax(0,1fr) min(36vw,440px);column-gap:clamp(28px,4vw,64px);align-items:start}
+.pcalc .wrap>*{grid-column:1}
+.pcalc .phcalc{grid-column:2;grid-row:1 / span 6;position:relative;right:auto;top:auto;width:auto}
+.pcalc .rates{max-width:none}
+.phcalc .pw{display:flex;gap:6px}
+.phcalc .pw input{flex:1;min-width:0}
+.phcalc .pw select{width:auto;flex:none;padding:0 10px}
+.phcalc .chint{margin-top:8px}
+.phcalc .ut{display:block;margin-top:6px;font-size:13.5px;color:#8ff0bf}
+.phcalc .ut.bad{color:#ffb4a8}
+.phcalc .warn{margin-top:12px;padding:12px 14px;border-radius:14px;background:rgba(255,120,100,.12);border:1px solid rgba(255,160,140,.35)}
+.phcalc .warn p{margin:0 0 10px;color:#ffd9d2;font-size:13.5px}
+.phcalc .warn .btn{height:40px;padding:0 16px;font-size:14px;margin:4px 6px 0 0}
+.phcalc .brkd{margin-top:12px}
+.phcalc .brkd summary{cursor:pointer;color:#9cc0ff;font-size:14.5px;font-weight:600}
+.phcalc .brk{width:100%;margin-top:8px;font-size:13px;border-collapse:collapse}
+.phcalc .brk td{padding:5px 0;border-bottom:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.82)}
+.phcalc .brk td+td{text-align:right;white-space:nowrap;padding-left:10px}
+@media (max-width:1279px){.prem .lay .list{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:1140px){
+.phv.studio{opacity:.3}
+.phroute{width:100%;max-width:560px;top:auto;transform:none}
+.phs .wrap{display:flex;flex-direction:column}
+.phs .wrap>.phshow{order:9}
+.phv.studio img{width:100%;right:0}
+.phshow{position:relative;right:auto;top:auto;transform:none;width:100%;max-width:420px;margin:30px 0 10px}
+.phs h1,.phs .lead,.phx:not(.pcalc) h1,.phx:not(.pcalc) .lead{max-width:none}
+.pcalc .wrap{display:flex;flex-direction:column}
+.pcalc .phcalc{order:9}
+.docs4{grid-template-columns:repeat(2,1fr)}
+}
