@@ -754,9 +754,11 @@ def ph_calc(rates):
          "lt3": tab(AC_CALC.PHYS_LESS_THAN_3), "lt3Top": AC_CALC.PHYS_LESS_THAN_3["above"],
          "gt3": tab(AC_CALC.PHYS_MORE_THAN_3), "gt3Top": [3.6, 5.7],   # свыше 3000 см³: 3–5 лет 3,6 €/см³, старше 5 — 5,7 (Решение ЕЭК № 107; в calc.py «Авто» 5,7 и для 3–5)
          "rec": {k: {a: [[r["max_kw"], r["coef"]] for r in v[a]] for a in ("less_3", "over_3")} for k, v in rec.items()},
-         "akc": PR.AKCIZ, "svh": PR.TARIFF["svh"], "clr": PR.CLEARANCE, "svc": PR.TARIFF["services"], "k30": 0.45}
+         "akc": PR.AKCIZ, "svh": PR.TARIFF["svh"], "clr": PR.CLEARANCE, "svc": PR.TARIFF["services"], "k30": 0.45,
+         "u27": PR.UTIL_2027.isoformat(), "arr": PR.ARRIVAL_DAYS[1]}   # с 2027 коммерческий утиль +10%, если машина может прийти в 2027 (Юрий 27.10.2026)
     return f"""<form class="phcalc" data-calc='{json.dumps(d)}' onsubmit="return false"><h3>Калькулятор</h3>
-<label>Цена в&nbsp;Китае, ¥<input type="number" name="y" value="80000" min="10000" step="1000" inputmode="numeric"></label>
+<label>Цена машины в&nbsp;Китае, ¥ — без&nbsp;доставки<input type="number" name="y" value="80000" min="10000" step="1000" inputmode="numeric"></label>
+<p class="chint">Пошлины считаются от&nbsp;цены машины без&nbsp;доставки, как в&nbsp;таможенных калькуляторах. Доставку до&nbsp;границы и&nbsp;по&nbsp;Китаю калькулятор добавит сам отдельными строками.</p>
 <div class="two"><label>Двигатель<select name="t"><option value="ice">Бензин, гибрид</option><option value="ev">Электро</option><option value="erev">Гибрид EREV</option></select></label>
 <label>Возраст<select name="a"><option value="0">До&nbsp;3 лет</option><option value="1" selected>3–5 лет</option><option value="2">Старше 5 лет</option></select></label></div>
 <div class="two"><label class="cc">Объём, см³<input type="number" name="cc" value="1500" min="600" step="1" inputmode="numeric"></label>

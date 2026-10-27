@@ -31,6 +31,7 @@ DELIVERY_CNY = 20_000         # доставка автовозом из Кит�
 LOADING_CNY = 1_300           # погрузка и доставка по Китаю
 BANK_FEE = 0.02               # комиссия ВТБ от суммы «машина + доставка»
 ARRIVAL_DAYS = (50, 65)       # срок от оплаты до выдачи по договору (CONTEXT.md, 04.10.2026)
+UTIL_2027 = date(2027, 1, 1)  # с 01.01.2027 коммерческий утильсбор +10%, льготный прежний (Юрий 27.10.2026)
 EV_DUTY = 0.15
 VAT = 0.22
 # акциз 2026 (ст. 193 НК РФ), ₽ за л.с. 30-минутной мощности, ставка бэнда на всю мощность
@@ -72,13 +73,26 @@ def age_categories(c, today):
     return sorted({_cat(made1, a0), _cat(made0, a1)}, key=_ORDER.get)
 
 
+def rec_on_arrival(rec, today):
+    """Утильсбор на дату прибытия: если окно прибытия (сегодня + 50…65 дней) задевает 2027 год — коммерческий × 1,1."""
+    if today and rec > 5_200 and today + timedelta(days=ARRIVAL_DAYS[1]) >= UTIL_2027:
+        return round(rec * 1.1)
+    return rec
+
+
+def util_label(rec, today):
+    if rec <= 5_200:
+        return "Утилизационный сбор — льготный"
+    return "Утилизационный сбор" + (" — ставка 2027 года" if today and today + timedelta(days=ARRIVAL_DAYS[1]) >= UTIL_2027 else "")
+
+
 def akciz_rate(hp):
     for top, rate in AKCIZ:
         if top is None or hp <= top:
             return rate
 
 
-def _one(c, vtb, cny, eur, age, t):
+def _one(c, vtb, cny, eur, age, t, today=None):
     rates = {"CNY": 1 / cny, "EUR": 1 / eur}           # формат calc.py: валюта за 1 ₽
     car_cny = c["car_cny"]
     dcny = c.get("delivery_cny") or DELIVERY_CNY
@@ -99,6 +113,7 @@ def _one(c, vtb, cny, eur, age, t):
         akciz = round(hp * akciz_rate(hp))
         vat = round((cost_rub + duty + akciz) * VAT)
         rec, coef = C.recycle(0, c["util_kw"], age, "electric")
+        rec = rec_on_arrival(rec, today)
         lines.append(("Таможенная пошлина 15%", duty))
         if akciz:
             lines.append((f"Акциз ({hp} л.с.)", akciz))
@@ -109,6 +124,7 @@ def _one(c, vtb, cny, eur, age, t):
         duty = round(duty_v)
         kw = c.get("util_kw") or c["power_hp"] * 0.7355
         rec, coef = C.recycle(c["volume_cc"], kw, age, c.get("util_table") or "gasoline")
+        rec = rec_on_arrival(rec, today)
         if kind == "vol":
             per_cc = f"{duty_v * rates['EUR'] / c['volume_cc']:.2f}".rstrip("0").rstrip(".").replace(".", ",")   # € за см³
             lines.append((f"Таможенная пошлина ({c['volume_cc']} см³ × {per_cc} €)", duty))
@@ -116,7 +132,7 @@ def _one(c, vtb, cny, eur, age, t):
             lines.append(("Таможенная пошлина (% от стоимости)", duty))
         extra = 0
     lines += [("Таможенный сбор", fee),
-              ("Утилизационный сбор" + (" — льготный" if rec <= 5_200 else ""), rec),
+              (util_label(rec, today), rec),
               (t["svh_label"], t["svh"]),
               ("Оформление: растаможка, СБКТС, ЭПТС", CLEARANCE),
               ("Подбор автомобиля и сопровождение сделки", t["services"])]
@@ -131,7 +147,7 @@ def calc(c, vtb, cny, eur, today):
     t = TARIFF
     best = None
     for age in age_categories(c, today):
-        r = _one(c, vtb, cny, eur, age, t)
+        r = _one(c, vtb, cny, eur, age, t, today)
         if best is None or r["total"] > best["total"]:
             best = r
     best.update(vtb=vtb, cny=cny, eur=eur, date=today.isoformat())
@@ -162,7 +178,7 @@ def calc_deal(c, vtb, cny, eur, today):
     excise = d["excise"] or 0
     vat = round((cv + duty + excise) * (d["vat_pct"] or 0))
     fee = C.custom_fee(cv)
-    rec = d["recycle"]
+    rec = rec_on_arrival(d["recycle"], today)
     r = f"{vtb:.2f}".replace(".", ",")
     if d["one_invoice"]:
         lines = [(f"Автомобиль с доставкой ({_n(d['car_cny'] + d['delivery_cny'])} ¥ × {r})", car_rub + deliv_rub)]
@@ -177,7 +193,7 @@ def calc_deal(c, vtb, cny, eur, today):
         lines.append(("Акциз", excise))
     if vat:
         lines.append((f"НДС {d['vat_pct'] * 100:.0f}%", vat))
-    lines += [("Таможенный сбор", fee), ("Утилизационный сбор" + (" — льготный" if rec <= 5_200 else ""), rec),
+    lines += [("Таможенный сбор", fee), (util_label(rec, today), rec),
               (t["svh_label"], t["svh"]), ("Оформление: растаможка, СБКТС, ЭПТС", CLEARANCE),
               ("Подбор автомобиля и сопровождение сделки", t["services"])]
     total = sum(v for _, v in lines)

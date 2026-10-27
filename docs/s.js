@@ -46,7 +46,8 @@ $$('.phv video').forEach(v=>{if(RM)return;v.muted=v.defaultMuted=true;v.src=mob(
   const go=()=>{const p=v.play();if(p&&p.catch)p.catch(()=>{})};v.addEventListener('canplay',go,{once:true});go();
   ['pointerdown','touchstart'].forEach(e=>addEventListener(e,go,{once:true,passive:true}))});
 const CF=$('.phcalc');
-// калькулятор «Стоимости» (Юрий 27.10.2026): двигатель, возраст, объём, мощность → под ключ и расшифровка, как в КП «Авто»
+// калькулятор «Стоимости» (Юрий 27.10.2026): двигатель, возраст, объём, мощность → под ключ и расшифровка, как в КП «Авто»;
+// таможенная стоимость — цена машины без доставки, как в таможенных калькуляторах (Юрий 27.10.2026, вечер); с 2027 коммерческий утиль +10%
 if(CF){const d=JSON.parse(CF.dataset.calc),el=CF.elements,$c=s=>$(s,CF),out=$c('[data-total]'),ccl=$c('.cc'),pl=$c('[data-pl]'),hint=$c('[data-hint]'),ut=$c('[data-ut]'),
     warn=$c('[data-warn]'),wt=$c('[data-wt]'),brk=$c('[data-brk]');
   const step=(t,v,top)=>{for(const[k,x]of t)if(v<=k)return x;return top};
@@ -56,21 +57,21 @@ if(CF){const d=JSON.parse(CF.dataset.calc),el=CF.elements,$c=s=>$(s,CF),out=$c('
   const run=()=>{const y=+el.y.value||0,t=el.t.value,a=+el.a.value,c=+el.cc.value||0,el3=t!='ice',kwIn=el.u.value=='kw',p=+el.p.value||0;
     ccl.style.display=el3?'none':'';pl.textContent=el3?'Максимальная мощность':'Мощность';
     const hp=kwIn?p*1.35962:p,kw=kwIn?p:Math.round(p*735.5)/1000;   // без хвоста 294,20000000000005 — иначе 400 л.с. уходят в следующий диапазон утиля
-    const car=Math.round(y*d.vtb),del=Math.round(d.deliv*d.vtb),ld=Math.round(d.load*d.vtb),bank=Math.round((car+del)*d.bank),cv=Math.round((y+d.deliv)*d.cny);
-    const fee=step(d.fee,cv,d.feeTop),ak=a==0?'less_3':'over_3',L=[[`Автомобиль с доставкой (${nf(y+d.deliv)} ¥)`,car+del],['Погрузка и доставка по Китаю',ld],['Комиссия банка ВТБ 2%',bank]];
+    const car=Math.round(y*d.vtb),del=Math.round(d.deliv*d.vtb),ld=Math.round(d.load*d.vtb),bank=Math.round((car+del)*d.bank),cv=Math.round(y*d.cny),late=Date.now()+d.arr*864e5>=Date.parse(d.u27);
+    const fee=step(d.fee,cv,d.feeTop),ak=a==0?'less_3':'over_3',L=[[`Автомобиль в Китае (${nf(y)} ¥)`,car],[`Доставка автовозом (${nf(d.deliv)} ¥)`,del],['Погрузка и доставка по Китаю',ld],['Комиссия банка ВТБ 2%',bank]];
     let duty,akz=0,vat=0,rec,kw30=kw,pref;
     if(el3){kw30=kw*d.k30;const hp30=Math.round(kw30*1.35962);duty=Math.round(cv*.15);akz=hp30*akc(hp30);vat=Math.round((cv+duty+akz)*.22);
-      rec=Math.round(20000*coef(d.rec.electric_sequential[ak],kw30));
+      rec=20000*coef(d.rec.electric_sequential[ak],kw30);
       L.push(['Пошлина 15%',duty]);if(akz)L.push([`Акциз (${hp30} л.с.)`,akz]);L.push(['НДС 22%',vat]);
       hint.textContent=`Сбор и акциз считаются по 30-минутной мощности: ≈${Math.round(kw30)} кВт (${hp30} л.с.) — 45% от максимальной. Точную берём из документов машины.`}
     else{if(a==0){const[pc,ec]=step(d.lt3,cv/d.eur,d.lt3Top);duty=Math.round(Math.max(cv*pc,ec*c*d.eur))}else{duty=Math.round(c*step(d.gt3,c,d.gt3Top)[a==1?0:1]*d.eur)}
       const tk=c<=1000?'ice_upto_1000':c<=2000?'ice_1000_2000':c<=3000?'ice_2000_3000':c<=3500?'ice_3000_3500':'ice_over_3500';
-      rec=Math.round(20000*coef(d.rec[tk][ak],kw));L.push(['Пошлина',duty]);
+      rec=20000*coef(d.rec[tk][ak],kw);L.push(['Пошлина',duty]);
       hint.textContent='У гибрида — суммарная мощность системы. Льготный утильсбор — до 160 л.с. и объёма до 3 л.'}
-    pref=rec<=5200;
-    L.push(['Таможенный сбор',fee],['Утильсбор'+(pref?' — льготный':' — полный'),rec],['Склад временного хранения',d.svh],['Оформление: растаможка, СБКТС, ЭПТС',d.clr],['Подбор и сопровождение сделки',d.svc]);
+    pref=rec<=5200;const y27=!pref&&late;rec=Math.round(y27?rec*1.1:rec);
+    L.push(['Таможенный сбор',fee],['Утильсбор'+(pref?' — льготный':y27?' — полный, ставка 2027 года':' — полный'),rec],['Склад временного хранения',d.svh],['Оформление: растаможка, СБКТС, ЭПТС',d.clr],['Подбор и сопровождение сделки',d.svc]);
     const ok=y>=1000&&p>0&&(el3||c>=600),tot=L.reduce((s,x)=>s+x[1],0);
-    out.textContent=ok?R(tot):'—';ut.textContent=ok?(pref?'Утильсбор льготный':'Утильсбор полный: '+R(rec)):'';ut.classList.toggle('bad',ok&&!pref);
+    out.textContent=ok?R(tot):'—';ut.textContent=ok?(pref?'Утильсбор льготный':'Утильсбор полный'+(y27?' по ставке 2027 года':'')+': '+R(rec)):'';ut.classList.toggle('bad',ok&&!pref);
     warn.hidden=!ok||pref;if(ok&&!pref)wt.textContent=`Полный утильсбор — ${R(rec)}. Подберём похожую машину ${el3?'до 80 л.с. по 30-минутной мощности':'до 160 л.с.'} с льготным сбором 3 400–5 200 ₽. Напишите нам.`;
     brk.innerHTML=ok?L.map(([k,v])=>`<tr><td>${k}</td><td>${R(v)}</td></tr>`).join('')+`<tr><td><b>Итого под ключ</b></td><td><b>${R(tot)}</b></td></tr>`:''};
   CF.addEventListener('input',run);CF.addEventListener('change',run);run()}
