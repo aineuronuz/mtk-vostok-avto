@@ -764,7 +764,7 @@ def ph_calc(rates):
          "u27": PR.UTIL_2027.isoformat(), "arr": PR.ARRIVAL_DAYS[1]}   # с 2027 коммерческий утиль +10%, если машина может прийти в 2027 (Юрий 27.10.2026)
     return f"""<form class="phcalc" data-calc='{json.dumps(d)}' onsubmit="return false"><h3>Калькулятор</h3>
 <label>Цена машины в&nbsp;Китае, ¥ — без&nbsp;доставки<input type="number" name="y" value="80000" min="10000" step="1000" inputmode="numeric"></label>
-<p class="chint">Доставка автовозом {nf(PR.DELIVERY_CNY)}&nbsp;¥ и&nbsp;погрузка по&nbsp;Китаю уже включены&nbsp;— отдельными строками в&nbsp;«Подробнее». Пошлины считаются от&nbsp;цены машины без&nbsp;доставки, как в&nbsp;таможенных калькуляторах.</p>
+<p class="chint">Доставка автовозом {nf(PR.DELIVERY_CNY)}&nbsp;¥ и&nbsp;погрузка по&nbsp;Китаю уже включены&nbsp;— строками в&nbsp;«Подробнее». Пошлины&nbsp;— от&nbsp;цены машины без&nbsp;доставки.</p>
 <div class="two"><label>Двигатель<select name="t"><option value="ice">Бензин, гибрид</option><option value="ev">Электро</option><option value="erev">Гибрид EREV</option></select></label>
 <label>Возраст<select name="a"><option value="0">До&nbsp;3 лет</option><option value="1" selected>3–5 лет</option><option value="2">Старше 5 лет</option></select></label></div>
 <div class="two"><label class="cc">Объём, см³<input type="number" name="cc" value="1500" min="600" step="1" inputmode="numeric"></label>
@@ -991,7 +991,7 @@ def avto_page(kp, rates):
     body = f"""
 <section class="phead phs"><div class="wrap">{ph_show(kp)}{crumbs((None, "Авто в Китае"))}
 <h1 class="rv in">Авто в&nbsp;Китае<br><em>с&nbsp;ценой на&nbsp;сегодня</em></h1>
-<p class="lead just">Реальные машины из&nbsp;наших расчётов для&nbsp;клиентов и&nbsp;свежие объявления в&nbsp;Китае&nbsp;— каждый день новые. Цена под&nbsp;ключ пересчитана {ddmm(TODAY)} по&nbsp;курсу юаня {f"{rates['vtb']:.2f}".replace(".", ",")}&nbsp;₽. Если машину уже продали&nbsp;— найдём такую&nbsp;же.</p>
+<p class="lead just">Реальные машины из&nbsp;наших расчётов для&nbsp;клиентов и&nbsp;свежие объявления в&nbsp;Китае&nbsp;— каждый день новые. Цена под&nbsp;ключ пересчитана {ddmm(TODAY)} по&nbsp;курсу юаня {f"{rates['vtb']:.2f}".replace(".", ",")}&nbsp;₽. Если машину уже продали&nbsp;— найдём аналогичную или&nbsp;похожую.</p>
 </div></section>
 <section class="sec tight"><div class="wrap lay">
 <aside class="flt" aria-label="Фильтры">
@@ -1350,8 +1350,9 @@ def calc_page(rates):
 <h1 class="rv in">Калькулятор <em>под&nbsp;ключ</em></h1>
 <p class="lead">Вы вводите цену автомобиля в&nbsp;Китае&nbsp;— калькулятор считает цену под&nbsp;ключ с&nbsp;доставкой автовозом {nf(PR.DELIVERY_CNY)}&nbsp;¥, растаможкой и&nbsp;оформлением, подбором и&nbsp;сопровождением сделки.</p>
 {rl}{ph_calc(rates)}
+<p class="kcta">Заинтересовало? Свяжитесь с&nbsp;нами&nbsp;— подберём машину под&nbsp;этот бюджет. <a class="btn w sm" href="{u("kontakty/")}">Написать нам <span class="ar">→</span></a></p>
 </div></section>
-<section class="sec tight"><div class="wrap"><p class="note rv"><a class="more" href="{u("stoimost/")}">Из&nbsp;чего складывается цена и&nbsp;как проходит оплата <span class="ar">→</span></a></p></div></section>
+<section class="sec kmore"><div class="wrap"><a class="more" href="{u("stoimost/")}">Из&nbsp;чего складывается цена и&nbsp;как проходит оплата <span class="ar">→</span></a></div></section>
 {fin_block()}"""
     page("kalkulyator/", "Калькулятор стоимости автомобиля из Китая под ключ | МТК Восток-Авто",
          f"Калькулятор цены машины из Китая под ключ: доставка, пошлина, утильсбор, оформление и наши услуги. Курс юаня на {ddmm(TODAY)}.",
