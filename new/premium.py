@@ -13,10 +13,12 @@ GROUPS, ORDER и SKIP из gen_catalog_prem_mtk.py (одна карточка н
 Запуск: python3 new/premium.py (после — python3 new/site.py --offline)
 """
 import ast
+import importlib.util
 import json
 import re
 import subprocess
 import sys
+import types
 from pathlib import Path
 
 from PIL import Image
@@ -29,6 +31,7 @@ PREM = CAT / "cars_prem26"
 PHOTOS = CAT / "site_photos" / "final"
 SOURCES = CAT / "site_photos" / "sources.json"
 BBOX = DATA / "premium_bbox.json"
+CALC_FIX = "9dd94ff"   # calc.py «Авто» 27.10.2026: пошлина 3–5 лет свыше 3000 см³ 3,6 €/см³, утиль на границах 340/400/460 л.с.
 W, H = 640, 376                                         # 17:10, как .card .im
 
 # группа фильтра — по стране марки (решение «Авто» 11.10.2026); Lotus — британская марка, Volvo — шведская
@@ -62,12 +65,12 @@ def catalog_rules():
     return got["GROUPS"], got["ORDER"], got["SKIP"], got.get("FILE_DATE") or got["PRICE_DATE"]
 
 
-def bu_rows():
-    """bu_row генератора каталога — тот же код, считает через prem26_calc (курсы дня — set_rates):
+def bu_rows(P=None):
+    """bu_row генератора каталога — тот же код, считает через prem26_calc (курсы дня — set_rates; P — другой экземпляр):
     fam → {label, spec, price} (price None — «цена по запросу»), None — у модели нет строки б/у."""
     got = _gen()
     f = PREM / "bu.json"
-    ns = {"P": _calc(), "DRIVE": got["DRIVE"], "BU": json.loads(f.read_text()) if f.exists() else {}}
+    ns = {"P": P or _calc(), "DRIVE": got["DRIVE"], "BU": json.loads(f.read_text()) if f.exists() else {}}
     exec(compile(ast.Module([got["bu_row"]], []), "gen_catalog_prem_mtk.py", "exec"), ns)
     return ns["bu_row"]
 
@@ -102,18 +105,38 @@ def _calc():
     return prem26_calc
 
 
-def calc_rows(mdls):
+def _calc_before_fix():
+    """prem26_calc на calc.py «Авто» до исправления CALC_FIX — так посчитан PDF премиум-каталога, пока его не пересобрали."""
+    src = subprocess.run(["git", "-C", str(CAT.parent), "show", f"{CALC_FIX}^:calc.py"], capture_output=True, text=True, check=True).stdout
+    old = types.ModuleType("calc")
+    old.__file__ = str(CAT.parent / "calc.py")
+    exec(compile(src, old.__file__, "exec"), old.__dict__)
+    cur = sys.modules.get("calc")
+    sys.modules["calc"] = old
+    try:
+        spec = importlib.util.spec_from_file_location("prem26_calc_before_fix", CAT / "prem26_calc.py")
+        P = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(P)
+    finally:
+        if cur is None:
+            sys.modules.pop("calc")
+        else:
+            sys.modules["calc"] = cur
+    return P
+
+
+def calc_rows(mdls, C=None):
     """Цены строк карточки каталога, как в load_group (gen_catalog_prem_mtk.py): три версии, по цене под ключ."""
-    C = _calc()
+    C = C or _calc()
     vs = sorted((v for x in mdls for v in x["versions"]), key=lambda v: v["msrp_cny"])
     vs = vs if len(vs) <= 3 else [vs[0], vs[len(vs) // 2], vs[-1]]
     return sorted(C.up10k(C.price(v)["total"]) for v in vs)
 
 
-def card_rows(m, bu_row):
+def card_rows(m, bu_row, C=None):
     """Строки карточки каталога, как в PDF: б/у (метка, цена или None) и версии ("", цена)."""
     b = bu_row(m["key"])
-    return ([(b["label"].upper(), b["price"])] if b else []) + [("", p) for p in calc_rows(m["mdls"])]
+    return ([(b["label"].upper(), b["price"])] if b else []) + [("", p) for p in calc_rows(m["mdls"], C)]
 
 
 def pdf_prices(names, date):
@@ -139,11 +162,17 @@ def pdf_prices(names, date):
 
 def day_prices(vtb, cny, eur):
     """{модель: {"from": цена «от» новых, "bu": строка б/у или None}} по курсам дня — для моделей, у которых расчёт
-    по курсам каталога совпал с PDF; и список моделей без цены."""
+    по курсам каталога совпал с PDF; и список моделей без цены. Пока PDF не пересобран после исправления calc.py (CALC_FIX),
+    с ценой и модели, чей PDF совпал с расчётом до исправления, — цена по исправленному расчёту (Юрий 27.10.2026, вариант 2).
+    После пересборки PDF они совпадают с исправленным расчётом и проходят обычной сверкой."""
     C, bu_row = _calc(), bu_rows()
     ms = models()
     pdf, _ = pdf_prices({m["name"] for m in ms}, catalog_rules()[3])
     ok = [m for m in ms if pdf.get(m["name"]) == card_rows(m, bu_row)]
+    if len(ok) < len(ms):
+        P0 = _calc_before_fix()
+        bu0, got = bu_rows(P0), {m["key"] for m in ok}
+        ok += [m for m in ms if m["key"] not in got and pdf.get(m["name"]) and pdf.get(m["name"]) == card_rows(m, bu0, P0)]
     old = C.set_rates(vtb, cny, eur)
     try:
         out = {m["key"]: {"from": calc_rows(m["mdls"])[0], "bu": bu_row(m["key"])} for m in ok}
