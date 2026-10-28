@@ -199,4 +199,10 @@ if(CH){const ms=$$('.m',CH),ty=$('.typ',CH);let k=0;
         setTimeout(()=>{ty.classList.remove('on');ms[k].classList.add('on');k++;setTimeout(step,1100)},1300)}
       else setTimeout(()=>{ms.forEach(m=>m.classList.remove('on'));k=0;setTimeout(step,700)},4500)};
     setTimeout(step,500)}}
+// «Получить КП в Telegram / MAX» (28.10.2026): из калькулятора в ссылку на бота уходят введённые цифры и итог — бот пришлёт их же; цель в Метрике
+document.addEventListener('click',e=>{const b=e.target.closest('[data-kpm]');if(!b)return;
+  const C=b.hasAttribute('data-kpcalc')&&$('.phcalc');
+  if(C){const g=n=>String(C.elements[n].value).replace(/\W/g,''),cc=$('.cc',C),t=$('[data-total]',C);
+    b.href=b.href.replace(/start=.*$/,'start='+['calc',g('y'),g('t'),g('a'),cc&&cc.offsetParent?g('cc'):0,g('p'),g('u'),t?t.textContent.replace(/\D/g,'')||0:0].join('_'))}
+  try{b.dataset.ym&&ym(+b.dataset.ym,'reachGoal','kp_'+b.dataset.kpm)}catch(_){}});
 })();

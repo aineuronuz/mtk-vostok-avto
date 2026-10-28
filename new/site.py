@@ -15,6 +15,7 @@ import html
 import importlib.util
 import json
 import math
+import os
 import random
 import re
 import shutil
@@ -56,6 +57,14 @@ _spec.loader.exec_module(_mb)
 TEAM = _mb.TEAM
 MAX_HREF = "https://max.ru/u/f9LHodD0cOLQzwPoUyWBoejqc5iq940FAYmSIsMAm8Hr1FcNu85zWG126zY"
 CHANNEL = "https://t.me/mtk_vostok_avto"
+# «Получить КП в Telegram / в MAX» (Сергей и «Авто» 28.10.2026): кнопка открывает бота заявок со ссылкой на машину, бот сразу присылает
+# расчёт под ключ (new/data/bot_cars.json — те же цифры, что на странице), потом просит согласие и номер. Бот — tools/mtk-zayavki/bot.py.
+# Кнопки и ссылка на политику в подвале включаются только после проверки «Анализа» и базы телефонов в России: KP_ON = True.
+# MTK_KP_PREVIEW=1 — пробная сборка с кнопками, её не публиковать.
+KP_ON = os.environ.get("MTK_KP_PREVIEW") == "1"
+TG_BOT = "vostokavto_zayavki_bot"                       # создал Юрий 28.10.2026
+MAX_BOT = ""                                            # бота МТК в MAX нет (28.10.2026)
+OPERATOR = ""                                           # оператор персональных данных: название и ИНН — ждём ответа Юрия («Анализ» 28.10.2026)
 # марки по-русски в заголовках и описаниях страниц: так их ищут в Яндексе и Google — «Чанган Q05», «Джили из Китая» (Юрий 28.10.2026, индексация)
 BRAND_RU = {"Arcfox": "Аркфокс", "Audi": "Ауди", "BMW": "БМВ", "BYD": "БИД", "Changan": "Чанган", "Chery": "Чери", "Chevrolet": "Шевроле",
             "Dongfeng": "Донгфенг", "Exeed": "Эксид", "Ford": "Форд", "GAC": "ГАК", "GWM": "Грейт Вол", "Geely": "Джили", "Haval": "Хавал",
@@ -325,7 +334,7 @@ def logo_html(cls="logo"):
 ASSET_V = ""
 
 
-def page(path, title, desc, body, active=None, jsonld=None, og=None, prio="0.6"):
+def page(path, title, desc, body, active=None, jsonld=None, og=None, prio="0.6", noindex=False):
     canon = SITE + u(path)
     menu = "".join(f'<a href="{u(p)}"{" class=\"on\"" if p == active else ""}>{t}</a>' for p, t in MENU)
     ld = "".join(f'<script type="application/ld+json">{json.dumps(j, ensure_ascii=False)}</script>' for j in (jsonld or []))
@@ -339,7 +348,7 @@ def page(path, title, desc, body, active=None, jsonld=None, og=None, prio="0.6")
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>{E(title)}</title>
 <meta name="description" content="{E(desc)}">
-{'<meta name="robots" content="noindex,nofollow">' if PREVIEW else ''}{VERIFY if path == "" else ''}
+{'<meta name="robots" content="noindex,nofollow">' if PREVIEW or noindex else ''}{VERIFY if path == "" else ''}
 {'' if PREVIEW else METRIKA}<link rel="canonical" href="{canon}">
 <meta property="og:type" content="website"><meta property="og:locale" content="ru_RU"><meta property="og:site_name" content="МТК Восток-Авто">
 <meta property="og:title" content="{E(title)}"><meta property="og:description" content="{E(desc)}"><meta property="og:url" content="{canon}"><meta property="og:image" content="{og_img}">
@@ -363,7 +372,7 @@ def page(path, title, desc, body, active=None, jsonld=None, og=None, prio="0.6")
 <div><h4>Каталог</h4><nav>{cat_links}<a href="{u("avto/")}">Авто в Китае</a></nav></div>
 <div><h4>Связаться</h4><nav>{team_links}<a href="{CHANNEL}">Telegram-канал</a></nav></div>
 </div>
-<div class="fbot"><span>© {TODAY.year} МТК Восток-Авто · Международная транспортная компания</span><span>Цены под ключ пересчитаны {ddmm(TODAY)}</span></div>
+<div class="fbot"><span>© {TODAY.year} МТК Восток-Авто · Международная транспортная компания</span><span>{f'<a href="{u("politika/")}">Политика обработки данных</a> · ' if KP_ON else ""}Цены под ключ пересчитаны {ddmm(TODAY)}</span></div>
 </div></footer>
 <a class="totop" href="#" aria-label="Наверх"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5.5 11.5L12 5l6.5 6.5"/></svg></a>
 <script src="{u("s.js")}?v={ASSET_V}" defer></script>
@@ -373,7 +382,27 @@ def page(path, title, desc, body, active=None, jsonld=None, og=None, prio="0.6")
     dst = OUT / path / "index.html"
     dst.parent.mkdir(parents=True, exist_ok=True)
     dst.write_text(s)
-    PAGES.append((path, prio))
+    if not noindex:
+        PAGES.append((path, prio))
+
+
+def bot_key(slug):
+    """Код машины в ссылке на бота: start в Telegram — до 64 знаков, латиница, цифры, _ и -."""
+    return slug if len(slug) <= 60 else slug[:51] + "-" + hashlib.md5(slug.encode()).hexdigest()[:8]
+
+
+def kp_btns(start, light=False, calc=False):
+    """Кнопки «Получить КП в Telegram» и «в MAX» (MAX — когда будет бот)."""
+    a = (" data-kpcalc" if calc else "") + f' data-ym="{SEARCH.get("metrika", "")}"'
+    b = f'<a class="btn {"w" if light else "b"}" href="https://t.me/{TG_BOT}?start={start}" data-kpm="tg"{a}>Получить КП в&nbsp;Telegram</a>'
+    if MAX_BOT:
+        b += f'<a class="btn {"o" if light else "ob"}" href="https://max.ru/{MAX_BOT}?start={start}" data-kpm="max"{a}>Получить КП в&nbsp;MAX</a>'
+    return b
+
+
+def kp_note(light=False):
+    """Под кнопками «Получить КП» — ссылка на политику обработки данных («Анализ» 28.10.2026)."""
+    return f'<p class="kpn{" l" if light else ""}">Расчёт придёт в&nbsp;мессенджер сразу. <a href="{u("politika/")}">Политика обработки данных</a></p>'
 
 
 def crumbs(*items):
@@ -1020,7 +1049,7 @@ def model_page(m, models, kp):
 <h1>{E(m["name"])}</h1>{f'<p class="cn">{E(m["china"])}</p>' if m.get("china") else f'<p class="cn">{E(m["plant"])}</p>'}
 <div class="tags">{"".join(f"<span>{E(t)}</span>" for t in tags if t)}</div>
 <div class="big{" pr2" if "bu_label" in m else ""}">{price_html(m)}<small>ориентир под&nbsp;ключ</small></div>
-<div class="btns"><a class="btn w" href="{u("kontakty/")}">Подобрать такую машину <span class="ar">→</span></a>{f'<a class="btn o" href="#found">Найденные машины · {len(found)}</a>' if found else ""}</div>
+<div class="btns">{kp_btns("m_" + bot_key(m["slug"]), light=True) if KP_ON else f'<a class="btn w" href="{u("kontakty/")}">Подобрать такую машину <span class="ar">→</span></a>'}{f'<a class="btn o" href="#found">Найденные машины · {len(found)}</a>' if found else ""}</div>{kp_note(True) if KP_ON else ""}
 </div><div class="mpic"><img src="{u("img/m/" + m["stem"] + ".webp")}" alt="{E(m["name"])}" width="1400" height="824"></div></div>
 </div></section>
 <section class="sec"><div class="wrap cols">
@@ -1118,7 +1147,7 @@ def car_page(c, kp, models, rates):
 <p class="rt">Доставим в&nbsp;любой город России, доставку посчитаем отдельно.</p>
 {f'<p class="rt">Объявление в&nbsp;Китае от&nbsp;{che_date(c)}.</p>' if c.get("source") == "che168" else ""}
 <details><summary>Из чего складывается цена</summary><table class="brk">{brk}</table></details>
-<div class="btns"><a class="btn b" href="{u("kontakty/")}">Заказать этот автомобиль</a><a class="btn ob" href="{u("kontakty/")}">Подобрать похожий</a></div>
+<div class="btns">{kp_btns("a_" + bot_key(c["slug"])) if KP_ON else f'<a class="btn b" href="{u("kontakty/")}">Заказать этот автомобиль</a>'}<a class="btn ob" href="{u("kontakty/")}">Подобрать похожий</a></div>{kp_note() if KP_ON else ""}
 <p class="sold">Объявления в&nbsp;Китае живут недолго. Если эту машину уже продали, найдём такую&nbsp;же: год, пробег и&nbsp;цена будут близки.</p></div></div>
 </div></section>
 <section class="sec bg"><div class="wrap"><div class="shead"><div><p class="kick rv">Похожие авто</p><h2 class="h2 rv d1">Ещё варианты <em>с&nbsp;ценой</em></h2></div>{ARROWS.format(id="reel2")}</div></div>
@@ -1222,7 +1251,7 @@ def premium_page(prem, rates):
 </div></div>
 <div class="wrap">
 <div class="box pcta"><div><h3>Узнать цену под&nbsp;ключ</h3><p>Фото&nbsp;— пример модели, не&nbsp;конкретный автомобиль. Цвет, комплектацию и&nbsp;город выдачи подберём под&nbsp;Ваш запрос и&nbsp;посчитаем итог до&nbsp;рубля.</p></div>
-<a class="btn b" href="{u("kontakty/")}">Написать специалисту <span class="ar">→</span></a></div>
+{f'<div>{kp_btns("p")}{kp_note()}</div>' if KP_ON else f'<a class="btn b" href="{u("kontakty/")}">Написать специалисту <span class="ar">→</span></a>'}</div>
 <div class="credits"><h2>Авторы фото</h2><p>Фото моделей&nbsp;— с&nbsp;Wikimedia Commons по&nbsp;свободным лицензиям. Снимки обрезаны и&nbsp;уменьшены под&nbsp;карточки.</p><ul>{credits}</ul></div>
 </div></section>"""
     ld = [bc_ld(("premium/", "Премиум-авто")),
@@ -1436,7 +1465,7 @@ def calc_page(rates):
 <h1 class="rv in">Калькулятор <em>под&nbsp;ключ</em></h1>
 <p class="lead">Вы вводите цену автомобиля в&nbsp;Китае&nbsp;— калькулятор считает цену под&nbsp;ключ с&nbsp;доставкой автовозом {nf(PR.DELIVERY_CNY)}&nbsp;¥, растаможкой и&nbsp;оформлением, подбором и&nbsp;сопровождением сделки.</p>
 {rl}{ph_calc(rates)}
-<p class="kcta">Заинтересовало? Свяжитесь с&nbsp;нами&nbsp;— подберём машину под&nbsp;этот бюджет. <a class="btn w sm" href="{u("kontakty/")}">Написать нам <span class="ar">→</span></a></p>
+<p class="kcta">Заинтересовало? Свяжитесь с&nbsp;нами&nbsp;— подберём машину под&nbsp;этот бюджет. {kp_btns("calc", light=True, calc=True).replace('class="btn w"', 'class="btn w sm"') if KP_ON else f'<a class="btn w sm" href="{u("kontakty/")}">Написать нам <span class="ar">→</span></a>'}</p>{kp_note(True) if KP_ON else ""}
 </div></section>
 <section class="sec kmore"><div class="wrap"><a class="more" href="{u("stoimost/")}">Из&nbsp;чего складывается цена и&nbsp;как проходит оплата <span class="ar">→</span></a></div></section>
 {fin_block()}"""
@@ -1494,7 +1523,8 @@ def contacts_page():
     body = f"""
 <section class="phead pcont"><div class="wrap">{crumbs((None, "Контакты"))}
 <h1 class="rv in sm">Напишите <em>специалисту</em></h1>
-<p class="lead">Напишите модель или бюджет&nbsp;— бесплатно подберём несколько машин в&nbsp;Китае и&nbsp;посчитаем цену под&nbsp;ключ с&nbsp;доставкой в&nbsp;ваш город.</p></div>{ph_chat()}</section>
+<p class="lead">Напишите модель или бюджет&nbsp;— бесплатно подберём несколько машин в&nbsp;Китае и&nbsp;посчитаем цену под&nbsp;ключ с&nbsp;доставкой в&nbsp;ваш город.</p>
+{f'<div class="btns">{kp_btns("kont", light=True)}</div>{kp_note(True)}' if KP_ON else ""}</div>{ph_chat()}</section>
 <section class="sec tight" id="team"><div class="wrap"><div class="tgrid" style="margin-top:0">{team_cards()}</div>
 <div class="box rv" style="margin-top:22px;display:flex;flex-wrap:wrap;gap:20px;align-items:center;justify-content:space-between"><div><h3>Telegram-канал МТК Восток-Авто</h3>
 <p style="color:var(--muted);margin-top:6px">Новые машины, подборки и&nbsp;выданные автомобили.</p></div><a class="btn b" href="{CHANNEL}">Открыть канал <span class="ar">→</span></a></div></div></section>
@@ -1533,6 +1563,41 @@ def extras(models, kp, rates, moto=None):
     if SEARCH.get("google_file"):                       # файл подтверждения Google Search Console, способ «HTML-файл» (аккаунт URUZ MARKET, Юрий 28.10.2026); не удалять
         (OUT / f"{SEARCH['google_file']}.html").write_text(f"google-site-verification: {SEARCH['google_file']}.html")
     (OUT / "robots.txt").write_text("User-agent: *\nDisallow: /\n" if PREVIEW else f"User-agent: *\nAllow: /\nSitemap: {SITE}{u('sitemap.xml')}\n")
+
+
+def politika_page():
+    """Политика обработки персональных данных («Анализ» 28.10.2026, ч. 2 ст. 18.1 152-ФЗ): сайт (Яндекс Метрика) и боты заявок.
+    Пока оператор — заглушка, страница не индексируется и в sitemap не попадает."""
+    op = OPERATOR or "[название оператора, ИНН — уточняется]"
+    sec = [("Общие положения", [f"Политика определяет, как {E(op)} (далее — Оператор) обрабатывает персональные данные посетителей сайта mtk-vostok-avto.ru и пользователей чат-ботов «МТК Восток-Авто» в&nbsp;Telegram и&nbsp;MAX. Политика составлена по&nbsp;Федеральному закону № 152-ФЗ «О&nbsp;персональных данных»."]),
+           ("Какие данные обрабатываются", ["На&nbsp;сайте: файлы cookie, IP-адрес, сведения о&nbsp;браузере и&nbsp;устройстве, действия на&nbsp;страницах&nbsp;— через сервис Яндекс Метрика.",
+                                            "В&nbsp;чат-ботах: имя, ник и&nbsp;ID в&nbsp;мессенджере, выбранный автомобиль, переписка в&nbsp;чате, номер телефона&nbsp;— если вы его отправили."]),
+           ("Цели обработки", ["Ответить на&nbsp;запрос и&nbsp;прислать расчёт стоимости и&nbsp;коммерческое предложение; связаться с&nbsp;вами по&nbsp;заявке; присылать рекламные предложения&nbsp;— только с&nbsp;отдельного согласия; вести статистику посещений сайта, чтобы улучшать его."]),
+           ("Основания", ["Расчёт по&nbsp;вашему запросу в&nbsp;боте&nbsp;— действия по&nbsp;запросу субъекта до&nbsp;заключения договора (п.&nbsp;5 ч.&nbsp;1 ст.&nbsp;6 152-ФЗ). Номер телефона и&nbsp;переписка&nbsp;— с&nbsp;вашего согласия (ст.&nbsp;9 152-ФЗ). Реклама&nbsp;— с&nbsp;отдельного согласия (ст.&nbsp;18 38-ФЗ «О&nbsp;рекламе», ст.&nbsp;15 152-ФЗ)."]),
+           ("Что Оператор делает с данными", ["Сбор, запись, систематизация, накопление, хранение, уточнение, использование, удаление и&nbsp;уничтожение. Обработка автоматизированная. Персональные данные граждан России записываются и&nbsp;хранятся в&nbsp;базах данных на&nbsp;территории Российской Федерации."]),
+           ("Срок обработки", ["До&nbsp;достижения цели или отзыва согласия, но&nbsp;не&nbsp;дольше 3&nbsp;лет с&nbsp;последнего обращения. После этого данные удаляются в&nbsp;течение 30&nbsp;дней."]),
+           ("Кому передаются данные", ["Специалистам Оператора, которые ведут вашу заявку. Сообщения в&nbsp;ботах передаются через Telegram и&nbsp;MAX по&nbsp;их правилам, статистика сайта&nbsp;— через Яндекс Метрику. Другим лицам Оператор данные не&nbsp;передаёт, кроме случаев, предусмотренных законом."]),
+           ("Ваши права", ["Узнать, какие ваши данные обрабатываются; потребовать уточнить или удалить их; отозвать согласие; обжаловать действия Оператора в&nbsp;Роскомнадзоре или в&nbsp;суде."]),
+           ("Как отозвать согласие", ["Напишите в&nbsp;чат-бот «Отозвать согласие»&nbsp;— номер телефона и&nbsp;данные заявки будут удалены. От&nbsp;рекламы&nbsp;— кнопка «Отписаться» под&nbsp;любым предложением. Можно также написать специалисту: " + f'<a href="{u("kontakty/")}">Контакты</a>.']),
+           ("Оператор", [f"{E(op)}. Связаться&nbsp;— " + f'<a href="{u("kontakty/")}">Контакты</a>.']),]
+    doc = "".join(f"<h2>{h}</h2>" + "".join(f"<p>{t}</p>" for t in ps) for h, ps in sec)
+    body = f"""
+<section class="phead"><div class="wrap">{crumbs((None, "Политика обработки данных"))}
+<h1 class="rv in sm">Политика обработки <em>персональных данных</em></h1>
+<p class="lead">Редакция от&nbsp;28.10.2026.</p></div></section>
+<section class="sec tight"><div class="wrap"><div class="doc">{doc}</div></div></section>"""
+    page("politika/", "Политика обработки персональных данных — МТК Восток-Авто",
+         "Как МТК Восток-Авто обрабатывает персональные данные посетителей сайта и пользователей чат-ботов.", body, noindex=not OPERATOR, prio="0.2")
+
+
+def bot_data(models, kp, rates):
+    """Данные для бота заявок (tools/mtk-zayavki/bot.py): по коду из ссылки «Получить КП» — те же цифры, что на странице сайта."""
+    cars = {bot_key(c["slug"]): {"slug": c["slug"], "t": f'{c["title"]} {c.get("year") or ""}'.strip(), "line": html.unescape(kp_line(c)),
+                                 "total": c["price"]["total"], "lines": [[k, v] for k, v in c["price"]["lines"]],
+                                 "img": f'img/kp/{c["slug"]}/1.webp'} for c in kp}
+    mods = {bot_key(m["slug"]): {"slug": m["slug"], "t": m["name"], "price": price_text(m), "img": f'img/m/{m["stem"]}.webp'} for m in models}
+    (DATA / "bot_cars.json").write_text(json.dumps({"date": ddmm(TODAY), "rate": f'{rates["vtb"]:.2f}'.replace(".", ","), "cars": cars, "models": mods},
+                                                   ensure_ascii=False, indent=0))
 
 
 def main():
@@ -1616,6 +1681,8 @@ def main():
     if faq:
         faq_page(faq)
     contacts_page()
+    politika_page()
+    bot_data(models, kp, rates)
     extras(models, kp, rates, moto)
     (DATA / "last_build.json").write_text(json.dumps({"date": TODAY.isoformat(), "rates": rates, "models": len(models), "kp": len(kp), "pages": len(PAGES)}, ensure_ascii=False, indent=1))
     size = sum(f.stat().st_size for f in OUT.rglob("*") if f.is_file())
