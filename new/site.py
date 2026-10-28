@@ -738,9 +738,9 @@ def phv(key):
                 f' data-src="{vv(src + ".mp4")}" data-src-m="{vv(src + "_m.mp4")}"></video></div>')
     if not (IMG / src).exists():
         return ""
-    if "anim" in cls:                                    # въезд в кадр начинается, когда картинка загрузилась (s.css .phv.anim)
+    if "anim" in cls:                                    # въезд в кадр начинается, когда картинка загрузилась (s.css .phv.anim); SVG грузит s.js — каждый раз заново
         v = hashlib.md5((IMG / src).read_bytes()).hexdigest()[:8]
-        return (f'<div class="phv {kind} anim" aria-hidden="true"><img src="{u("img/" + src)}?v={v}" alt="" decoding="async" onload="this.classList.add(\'go\')">'
+        return (f'<div class="phv {kind} anim" aria-hidden="true"><img data-svg="{u("img/" + src)}?v={v}" alt="" decoding="async" onload="this.classList.add(\'go\')">'
                 f'{PH_TAGS.get(key, "")}</div>')
     return f'<div class="phv{" " + kind if kind != "img" else ""}" aria-hidden="true"><img src="{u("img/" + src)}" alt="" decoding="async"></div>'
 
@@ -784,17 +784,18 @@ def ph_show(kp):
 
 def ph_route():
     """«Как купить»: маршрут Китай → граница → ваш город, 45–65 дней — по линии едет машинка капотом вперёд (Юрий 27.10.2026: бирюзовый вместо жёлтого;
-    рисунок отражён — капот слева, а движение по линии вправо)."""
+    рисунок отражён — капот слева, а движение по линии вправо). С 28.10.2026 весь маршрут зеркально (Юрий: Китай восточнее России) —
+    путь, точки и машинка в группе с отражением, Китай справа внизу, «Ваш город» слева; подписи не отражаются."""
     path = "M40 230 C 170 120, 300 270, 430 170 S 640 60, 720 110"
     return f"""<div class="phroute" aria-hidden="true"><svg viewBox="0 0 760 300" fill="none">
 <defs><linearGradient id="rtg" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#3fe8c8"/><stop offset=".6" stop-color="#2fd2e6"/><stop offset="1" stop-color="#7fd3ff"/></linearGradient></defs>
-<path d="{path}" class="rt0"/><path d="{path}" class="rt1" stroke="url(#rtg)"/>
+<g transform="matrix(-1 0 0 1 760 0)"><path d="{path}" class="rt0"/><path d="{path}" class="rt1" stroke="url(#rtg)"/>
 <g class="nd"><circle cx="40" cy="230" r="9"/><circle cx="430" cy="170" r="9"/><circle cx="720" cy="110" r="11"/></g>
-<text x="40" y="272" text-anchor="middle">Китай</text><text x="430" y="212" text-anchor="middle">Граница</text><text x="720" y="70" text-anchor="middle">Ваш город</text>
 <g class="car"><g transform="scale(-1.4 1.4) translate(0 -9)"><path class="bd" d="M-23 4v-6q1-4 6-4.5l8-1 6-6q2-1.5 5-1.5h8q3 0 5 3l4 4.5q5 1 5 5v6.5z"/>
 <path class="gl" d="M-6.5-7.5l4.5-5h6v5zM5.5-7.5v-5h4q2 0 3 1.5l2.5 3.5z"/>
 <circle class="wh" cx="-12" cy="4.5" r="4.6"/><circle class="wh" cx="12.5" cy="4.5" r="4.6"/></g>
-<animateMotion dur="7s" repeatCount="indefinite" rotate="auto" keyPoints="0;1;1" keyTimes="0;.85;1" calcMode="linear" path="{path}"/></g>
+<animateMotion dur="7s" repeatCount="indefinite" rotate="auto" keyPoints="0;1;1" keyTimes="0;.85;1" calcMode="linear" path="{path}"/></g></g>
+<text x="720" y="272" text-anchor="middle">Китай</text><text x="330" y="212" text-anchor="middle">Граница</text><text x="40" y="70" text-anchor="middle">Ваш город</text>
 </svg><div class="rtd"><b>45–65</b> дней от&nbsp;оплаты до&nbsp;выдачи</div></div>"""
 
 
@@ -955,7 +956,7 @@ def catalog_page(models):
     body = f"""
 <section class="phead pkat">{phv("katalog")}<div class="wrap">{crumbs((None, "Каталог"))}
 <h1 class="rv in">{len(models)} моделей <br class="kbr">под <em>льготный утильсбор</em></h1>
-<p class="lead">Цена в&nbsp;карточке&nbsp;— ориентир под&nbsp;ключ. Точную сумму на&nbsp;конкретный автомобиль считаем по&nbsp;курсу дня. В&nbsp;каталоге только часть моделей, любую другую привезём из&nbsp;Китая под&nbsp;заказ.</p>
+<p class="lead">Цена в&nbsp;карточке&nbsp;— ориентир под&nbsp;ключ. В&nbsp;неё входят доставка из&nbsp;Китая, таможенные платежи и&nbsp;оформление, получение СБКТС и&nbsp;электронного ПТС, подбор и&nbsp;сопровождение сделки. Точную сумму на&nbsp;конкретный автомобиль считаем по&nbsp;курсу дня. В&nbsp;каталоге только часть моделей, любую другую привезём из&nbsp;Китая под&nbsp;заказ.</p>
 <div class="tiles">{tiles}</div></div></section>
 <section class="sec tight"><div class="wrap lay">
 <aside class="flt" aria-label="Фильтры">{FCLOSE}
@@ -1049,7 +1050,7 @@ def avto_page(kp, rates):
     body = f"""
 <section class="phead phs"><div class="wrap">{ph_show(kp)}{crumbs((None, "Авто в Китае"))}
 <h1 class="rv in">Авто в&nbsp;Китае<br><em>с&nbsp;ценой на&nbsp;сегодня</em></h1>
-<p class="lead">Реальные машины из&nbsp;наших расчётов для&nbsp;клиентов и&nbsp;свежие объявления в&nbsp;Китае&nbsp;— каждый день новые. Цена под&nbsp;ключ пересчитана {ddmm(TODAY)} по&nbsp;курсу юаня {f"{rates['vtb']:.2f}".replace(".", ",")}&nbsp;₽. Если машину уже продали&nbsp;— найдём аналогичную или&nbsp;похожую.</p>
+<p class="lead">Реальные машины из&nbsp;наших расчётов для&nbsp;клиентов и&nbsp;свежие объявления в&nbsp;Китае&nbsp;— каждый день новые. Цена под&nbsp;ключ пересчитана {ddmm(TODAY)} по&nbsp;курсу юаня {f"{rates['vtb']:.2f}".replace(".", ",")}&nbsp;₽. В&nbsp;неё входят доставка из&nbsp;Китая, таможенные платежи и&nbsp;оформление, получение СБКТС и&nbsp;электронного ПТС, подбор и&nbsp;сопровождение сделки. Если машину уже продали&nbsp;— найдём аналогичную или&nbsp;похожую.</p>
 </div></section>
 <section class="sec tight"><div class="wrap lay">
 <aside class="flt" aria-label="Фильтры">{FCLOSE}
@@ -1198,7 +1199,7 @@ def premium_page(prem, rates):
     body = f"""
 <section class="phead">{phv("premium")}<div class="wrap">{crumbs((None, "Премиум-авто"))}
 <h1 class="rv in">Премиальные автомобили <em>из&nbsp;Китая</em>: б/у и&nbsp;новые</h1>
-<p class="lead">Ориентировочные цены под&nbsp;ключ на&nbsp;{ddmm(TODAY)}. Доставим в&nbsp;любой город России.</p>
+<p class="lead">Ориентировочные цены под&nbsp;ключ на&nbsp;{ddmm(TODAY)}. В&nbsp;них входят доставка из&nbsp;Китая, таможенные платежи и&nbsp;оформление, получение СБКТС и&nbsp;электронного ПТС, подбор и&nbsp;сопровождение сделки. Доставим в&nbsp;любой город России.</p>
 </div></section>
 <section class="sec tight prem"><div class="wrap lay">
 <aside class="flt" aria-label="Фильтры">{FCLOSE}
@@ -1317,7 +1318,7 @@ def moto_page(d):
 <section class="phead">{phv("mopedy")}<div class="wrap">{crumbs((None, "Электромопеды"))}
 <div class="mhd"><img class="mlogo" src="{u("img/moto/logo.webp")}" alt="Восток-Мото" width="120" height="120">
 <h1 class="rv in sm">Электромопеды <em>из&nbsp;Китая</em></h1></div>
-<p class="lead">Помимо автомобилей, привозим из&nbsp;Китая электромопеды. <span class="nobr">«Восток-Мото»</span>: {len(ms)} {plural(len(ms), "модель", "модели", "моделей")} до&nbsp;50&nbsp;км/ч и&nbsp;до&nbsp;4&nbsp;кВт под&nbsp;права категории M. Цены по&nbsp;курсу на&nbsp;{date_}: цена зависит от&nbsp;курса&nbsp;— актуальную цену уточняйте.</p>
+<p class="lead">Помимо автомобилей, привозим из&nbsp;Китая электромопеды. <span class="nohy">«Восток-Мото»</span>: {len(ms)} {plural(len(ms), "модель", "модели", "моделей")} до&nbsp;50&nbsp;км/ч и&nbsp;до&nbsp;4&nbsp;кВт под&nbsp;права категории M. Цены по&nbsp;курсу на&nbsp;{date_}: цена зависит от&nbsp;курса&nbsp;— актуальную цену уточняйте.</p>
 </div></section>
 <section class="sec tight prem moto"><div class="wrap">
 <ul class="mfacts">{facts}</ul></div>
@@ -1362,7 +1363,7 @@ def how_page(faq):
     body = f"""
 <section class="phead phx"><div class="wrap">{ph_route()}{crumbs((None, "Как купить"))}
 <h1 class="rv in sm">Как купить автомобиль<br><em>из&nbsp;Китая под&nbsp;ключ</em></h1>
-<p class="lead">Семь шагов от&nbsp;выбора до&nbsp;ключей. Срок от&nbsp;оплаты до&nbsp;выдачи&nbsp;— обычно 45–65&nbsp;дней. Каждый шаг прозрачен: присылаем фото, документы и&nbsp;сроки.</p></div></section>
+<p class="lead">Семь шагов от&nbsp;выбора до&nbsp;ключей. Срок от&nbsp;оплаты до&nbsp;выдачи&nbsp;— обычно <span class="nobr">45–65</span>&nbsp;дней. Каждый шаг прозрачен: присылаем фото, документы и&nbsp;сроки.</p></div></section>
 <section class="sec tight"><div class="wrap"><div class="tl">{"".join(tl)}</div></div></section>
 <section class="sec bg" id="docs"><div class="wrap"><div class="cols"><div><p class="kick rv">Документы</p><h2 class="h2 rv d1">Что Вы <em>получаете</em></h2>
 <p class="lead rv d2">Все платежи&nbsp;— по&nbsp;договору и&nbsp;через банк. После выдачи машину ставят на&nbsp;учёт в&nbsp;ГИБДД как обычную.</p></div>

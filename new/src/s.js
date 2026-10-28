@@ -76,6 +76,11 @@ if(CF){const d=JSON.parse(CF.dataset.calc),el=CF.elements,$c=s=>$(s,CF),out=$c('
     brk.innerHTML=ok?L.map(([k,v])=>`<tr><td>${k}</td><td>${R(v)}</td></tr>`).join('')+`<tr><td><b>Итого под ключ</b></td><td><b>${R(tot)}</b></td></tr>`:''};
   CF.addEventListener('input',run);CF.addEventListener('change',run);run()}
 
+// «Выданные авто», «Электромопеды»: SVG с колёсами и покачиванием грузится заново при каждом заходе — из памяти браузера
+// он приходит с уже отыгравшей анимацией (Юрий 28.10.2026); файл берётся из кэша, новый только адрес картинки
+$$('.phv.anim img[data-svg]').forEach(i=>{const s=i.dataset.svg;
+  fetch(s).then(r=>r.ok?r.blob():Promise.reject()).then(b=>{i.src=URL.createObjectURL(new Blob([b],{type:'image/svg+xml'}))}).catch(()=>{i.src=s})});
+
 // «Авто в Китае»: витрина — карточки последних машин сменяют друг друга (Юрий 27.10.2026)
 const SH=$('[data-show]');
 if(SH){const cs=$$('.shc',SH);let k=0,tm;const set=()=>cs.forEach((c,i)=>{const q=(i-k+cs.length)%cs.length;c.dataset.d=q>3?4:q});
