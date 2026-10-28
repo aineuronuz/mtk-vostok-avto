@@ -1526,6 +1526,8 @@ def extras(models, kp, rates, moto=None):
 """)
     if SEARCH.get("indexnow"):                           # ключ IndexNow: Яндекс и Bing узнают о новых и изменённых страницах сразу
         (OUT / f"{SEARCH['indexnow']}.txt").write_text(SEARCH["indexnow"])
+    if SEARCH.get("yandex"):                             # файл подтверждения Яндекс Вебмастера — на случай способа «HTML-файл»; мета-тег на главной ставит VERIFY
+        (OUT / f"yandex_{SEARCH['yandex']}.html").write_text(f'<html>\n    <head>\n        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">\n    </head>\n    <body>Verification: {SEARCH["yandex"]}</body>\n</html>\n')
     (OUT / "robots.txt").write_text("User-agent: *\nDisallow: /\n" if PREVIEW else f"User-agent: *\nAllow: /\nSitemap: {SITE}{u('sitemap.xml')}\n")
 
 
