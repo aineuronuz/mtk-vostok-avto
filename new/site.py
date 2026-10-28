@@ -890,7 +890,7 @@ def home(models, kp, rates, faq):
   <div class="wrap hc" id="hc">
     <p class="kick l">МТК Восток-Авто</p>
     <h1>Автомобили из&nbsp;Китая.<br><span>Под ключ.</span></h1>
-    <p class="sub">Новые и&nbsp;б/у под&nbsp;льготный утильсбор. Подбираем, проверяем, везём, растаможиваем и&nbsp;передаём Вам с&nbsp;электронным ПТС.</p>
+    <p class="sub"><span>Новые и&nbsp;б/у под&nbsp;льготный утильсбор. Подбираем, проверяем,</span> <span>везём, растаможиваем и&nbsp;передаём Вам с&nbsp;электронным ПТС.</span></p>
     <div class="btns"><a class="btn w" href="{u("katalog/")}">Смотреть каталог <span class="ar">→</span></a><a class="btn o" href="{u("avto/")}">Авто в Китае</a></div>
     <a class="rate" href="{u("kalkulyator/")}"><i></i>Курс юаня для расчёта на&nbsp;{ddmm(TODAY)}: <b>{f"{rates['vtb']:.2f}".replace(".", ",")}&nbsp;₽</b></a>
   </div>
@@ -955,7 +955,7 @@ def catalog_page(models):
     body = f"""
 <section class="phead pkat">{phv("katalog")}<div class="wrap">{crumbs((None, "Каталог"))}
 <h1 class="rv in">{len(models)} моделей <br class="kbr">под <em>льготный утильсбор</em></h1>
-<p class="lead">Цена в&nbsp;карточке&nbsp;— ориентир под&nbsp;ключ. Точную сумму на&nbsp;конкретный автомобиль считаем по&nbsp;курсу дня. Не&nbsp;нашли свою модель&nbsp;— привезём любую под&nbsp;заказ.</p>
+<p class="lead">Цена в&nbsp;карточке&nbsp;— ориентир под&nbsp;ключ. Точную сумму на&nbsp;конкретный автомобиль считаем по&nbsp;курсу дня. В&nbsp;каталоге только часть моделей. Любую другую привезём из&nbsp;Китая под&nbsp;заказ.</p>
 <div class="tiles">{tiles}</div></div></section>
 <section class="sec tight"><div class="wrap lay">
 <aside class="flt" aria-label="Фильтры">{FCLOSE}
@@ -1049,7 +1049,7 @@ def avto_page(kp, rates):
     body = f"""
 <section class="phead phs"><div class="wrap">{ph_show(kp)}{crumbs((None, "Авто в Китае"))}
 <h1 class="rv in">Авто в&nbsp;Китае<br><em>с&nbsp;ценой на&nbsp;сегодня</em></h1>
-<p class="lead just">Реальные машины из&nbsp;наших расчётов для&nbsp;клиентов и&nbsp;свежие объявления в&nbsp;Китае&nbsp;— каждый день новые. Цена под&nbsp;ключ пересчитана {ddmm(TODAY)} по&nbsp;курсу юаня {f"{rates['vtb']:.2f}".replace(".", ",")}&nbsp;₽. Если машину уже продали&nbsp;— найдём аналогичную или&nbsp;похожую.</p>
+<p class="lead">Реальные машины из&nbsp;наших расчётов для&nbsp;клиентов и&nbsp;свежие объявления в&nbsp;Китае&nbsp;— каждый день новые. Цена под&nbsp;ключ пересчитана {ddmm(TODAY)} по&nbsp;курсу юаня {f"{rates['vtb']:.2f}".replace(".", ",")}&nbsp;₽. Если машину уже продали&nbsp;— найдём аналогичную или&nbsp;похожую.</p>
 </div></section>
 <section class="sec tight"><div class="wrap lay">
 <aside class="flt" aria-label="Фильтры">{FCLOSE}
@@ -1317,7 +1317,7 @@ def moto_page(d):
 <section class="phead">{phv("mopedy")}<div class="wrap">{crumbs((None, "Электромопеды"))}
 <div class="mhd"><img class="mlogo" src="{u("img/moto/logo.webp")}" alt="Восток-Мото" width="120" height="120">
 <h1 class="rv in sm">Электромопеды <em>из&nbsp;Китая</em></h1></div>
-<p class="lead">Помимо автомобилей, привозим из&nbsp;Китая электромопеды. «Восток-Мото»: {len(ms)} {plural(len(ms), "модель", "модели", "моделей")} до&nbsp;50&nbsp;км/ч и&nbsp;до&nbsp;4&nbsp;кВт под&nbsp;права категории M. Цены по&nbsp;курсу на&nbsp;{date_}: цена зависит от&nbsp;курса&nbsp;— актуальную цену уточняйте.</p>
+<p class="lead">Помимо автомобилей, привозим из&nbsp;Китая электромопеды. <span class="nobr">«Восток-Мото»</span>: {len(ms)} {plural(len(ms), "модель", "модели", "моделей")} до&nbsp;50&nbsp;км/ч и&nbsp;до&nbsp;4&nbsp;кВт под&nbsp;права категории M. Цены по&nbsp;курсу на&nbsp;{date_}: цена зависит от&nbsp;курса&nbsp;— актуальную цену уточняйте.</p>
 </div></section>
 <section class="sec tight prem moto"><div class="wrap">
 <ul class="mfacts">{facts}</ul></div>
@@ -1367,7 +1367,7 @@ def how_page(faq):
 <section class="sec bg" id="docs"><div class="wrap"><div class="cols"><div><p class="kick rv">Документы</p><h2 class="h2 rv d1">Что Вы <em>получаете</em></h2>
 <p class="lead rv d2">Все платежи&nbsp;— по&nbsp;договору и&nbsp;через банк. После выдачи машину ставят на&nbsp;учёт в&nbsp;ГИБДД как обычную.</p></div>
 <ul class="pts rv d1">{"".join(f"<li>{d}</li>" for d in docs)}</ul></div>
-<h3 class="docs-h rv">Образцы документов из&nbsp;реальной сделки</h3>
+<h3 class="docs-h rv">Образцы документов из&nbsp;реальных сделок</h3>
 <div class="docs4">{"".join(f'<a class="doc rv" href="{u("img/docs/" + k + ".webp")}" target="_blank" rel="noopener"><span class="di"><img src="{u("img/docs/" + k + "_t.webp")}" alt="{E(t)}" loading="lazy"></span><span class="dn">{t}</span></a>' for k, t, _ in DOCS)}</div>
 <p class="note">Личные данные покупателя и&nbsp;продавца скрыты. Нажмите на&nbsp;документ, чтобы открыть его крупно.</p></div></section>
 {f'<section class="sec"><div class="wrap"><p class="kick rv">Вопросы</p><h2 class="h2 rv d1">Коротко <em>о&nbsp;главном</em></h2><div class="faq">{faq_items(qs)}</div><p class="note"><a class="more" href="{u("voprosy/")}">Все вопросы <span class="ar">→</span></a></p></div></section>' if qs else ""}
@@ -1378,11 +1378,13 @@ def how_page(faq):
 
 
 def price_page(kp, rates):
-    ex = next((c for c in kp if "kicks" in c["slug"]), kp[0] if kp else None)
+    # пример — Nissan Kicks Татьяны Парусовой, фото из её КП (Юрий 28.10.2026); имени клиентки на сайте нет
+    ex = next((c for c in kp if c["slug"].startswith("nissan-kicks-1-5-xv-deluxe-2022")), None) or next((c for c in kp if "kicks" in c["slug"]), kp[0] if kp else None)
     exb = ""
     if ex:
         exb = f"""<section class="sec bg"><div class="wrap cols"><div><p class="kick rv">Пример</p><h2 class="h2 rv d1">{E(ex["title"])} <em>{ex.get("year") or ""}</em></h2>
 <p class="lead rv d2">Так выглядит расчёт конкретной машины на&nbsp;{ddmm(TODAY)}: каждая строка&nbsp;— отдельный платёж, ничего сверху.</p>
+<a class="exph rv d2" href="{u("avto/" + ex["slug"] + "/")}"><img src="{u("img/kp/" + ex["slug"] + "/1.webp")}" alt="{E(ex["title"])} {ex.get("year") or ""}" loading="lazy"></a>
 <p class="rv d2" style="margin-top:26px"><a class="btn b" href="{u("avto/" + ex["slug"] + "/")}">Смотреть машину <span class="ar">→</span></a></p></div>
 <div class="box rv d1"><table class="brk">{"".join(f"<tr><td>{E(k)}</td><td>{rub(v)}</td></tr>" for k, v in ex["price"]["lines"])}
 <tr><td><b>Итого под ключ</b></td><td><b>{rub(ex["total"])}</b></td></tr></table></div></div></section>"""
