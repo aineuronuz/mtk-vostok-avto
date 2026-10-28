@@ -955,7 +955,7 @@ def catalog_page(models):
     body = f"""
 <section class="phead pkat">{phv("katalog")}<div class="wrap">{crumbs((None, "Каталог"))}
 <h1 class="rv in">{len(models)} моделей <br class="kbr">под <em>льготный утильсбор</em></h1>
-<p class="lead">Цена в&nbsp;карточке&nbsp;— ориентир под&nbsp;ключ. Точную сумму на&nbsp;конкретный автомобиль считаем по&nbsp;курсу дня. В&nbsp;каталоге только часть моделей. Любую другую привезём из&nbsp;Китая под&nbsp;заказ.</p>
+<p class="lead">Цена в&nbsp;карточке&nbsp;— ориентир под&nbsp;ключ. Точную сумму на&nbsp;конкретный автомобиль считаем по&nbsp;курсу дня. В&nbsp;каталоге только часть моделей, любую другую привезём из&nbsp;Китая под&nbsp;заказ.</p>
 <div class="tiles">{tiles}</div></div></section>
 <section class="sec tight"><div class="wrap lay">
 <aside class="flt" aria-label="Фильтры">{FCLOSE}
