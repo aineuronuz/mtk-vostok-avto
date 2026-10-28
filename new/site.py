@@ -1530,6 +1530,8 @@ def extras(models, kp, rates, moto=None):
         (OUT / f"{SEARCH['indexnow']}.txt").write_text(SEARCH["indexnow"])
     if SEARCH.get("yandex"):                             # файл подтверждения Яндекс Вебмастера — на случай способа «HTML-файл»; мета-тег на главной ставит VERIFY
         (OUT / f"yandex_{SEARCH['yandex']}.html").write_text(f'<html>\n    <head>\n        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">\n    </head>\n    <body>Verification: {SEARCH["yandex"]}</body>\n</html>\n')
+    if SEARCH.get("google_file"):                       # файл подтверждения Google Search Console, способ «HTML-файл» (аккаунт URUZ MARKET, Юрий 28.10.2026); не удалять
+        (OUT / f"{SEARCH['google_file']}.html").write_text(f"google-site-verification: {SEARCH['google_file']}.html")
     (OUT / "robots.txt").write_text("User-agent: *\nDisallow: /\n" if PREVIEW else f"User-agent: *\nAllow: /\nSitemap: {SITE}{u('sitemap.xml')}\n")
 
 
