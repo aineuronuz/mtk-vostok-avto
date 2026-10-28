@@ -35,6 +35,8 @@ SITE = "https://mtk-vostok-avto.ru"
 PREVIEW = False                                         # True — noindex, для пробной версии
 SEARCH = json.loads((DATA / "search.json").read_text()) if (DATA / "search.json").exists() else {}   # ключ IndexNow и коды подтверждения Яндекс Вебмастера, Google и Bing
 VERIFY = "".join(f'<meta name="{n}" content="{SEARCH[k]}">' for k, n in (("google", "google-site-verification"), ("yandex", "yandex-verification"), ("bing", "msvalidate.01")) if SEARCH.get(k))
+METRIKA_SNIP = '<!-- Yandex.Metrika counter -->\n<script type="text/javascript">\n    (function(m,e,t,r,i,k,a){\n        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};\n        m[i].l=1*new Date();\n        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}\n        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)\n    })(window, document,\'script\',\'https://mc.yandex.ru/metrika/tag.js?id=@@ID@@\', \'ym\');\n\n    ym(@@ID@@, \'init\', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});\n</script>\n<noscript><div><img src="https://mc.yandex.ru/watch/@@ID@@" style="position:absolute; left:-9999px;" alt="" /></div></noscript>\n<!-- /Yandex.Metrika counter -->'
+METRIKA = METRIKA_SNIP.replace("@@ID@@", SEARCH["metrika"]) + "\n" if SEARCH.get("metrika") else ""   # счётчик Яндекс Метрики 113843035 (Юрий 28.10.2026) — на всех страницах, кроме пробной версии
 AC = Path.home() / "auto-china"
 CARS = AC / "catalog" / "cars"
 CARS_MTK = AC / "catalog" / "cars_plate_mtk"           # те же фото с номером «ВОСТОК-АВТО», как в каталоге МТК
@@ -338,7 +340,7 @@ def page(path, title, desc, body, active=None, jsonld=None, og=None, prio="0.6")
 <title>{E(title)}</title>
 <meta name="description" content="{E(desc)}">
 {'<meta name="robots" content="noindex,nofollow">' if PREVIEW else ''}{VERIFY if path == "" else ''}
-<link rel="canonical" href="{canon}">
+{'' if PREVIEW else METRIKA}<link rel="canonical" href="{canon}">
 <meta property="og:type" content="website"><meta property="og:locale" content="ru_RU"><meta property="og:site_name" content="МТК Восток-Авто">
 <meta property="og:title" content="{E(title)}"><meta property="og:description" content="{E(desc)}"><meta property="og:url" content="{canon}"><meta property="og:image" content="{og_img}">
 <meta name="theme-color" content="#0b1f45">
