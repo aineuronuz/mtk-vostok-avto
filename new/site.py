@@ -56,7 +56,6 @@ _spec.loader.exec_module(_mb)
 TEAM = _mb.TEAM
 MAX_HREF = "https://max.ru/u/f9LHodD0cOLQzwPoUyWBoejqc5iq940FAYmSIsMAm8Hr1FcNu85zWG126zY"
 CHANNEL = "https://t.me/mtk_vostok_avto"
-KP_API = "https://api.mtk-vostok-avto.ru/zayavka"      # «Запросить КП»: форма → сервис tools/mtk-zayavki на нашем сервере → Telegram-бот специалистов (Юрий 28.10.2026)
 # марки по-русски в заголовках и описаниях страниц: так их ищут в Яндексе и Google — «Чанган Q05», «Джили из Китая» (Юрий 28.10.2026, индексация)
 BRAND_RU = {"Arcfox": "Аркфокс", "Audi": "Ауди", "BMW": "БМВ", "BYD": "БИД", "Changan": "Чанган", "Chery": "Чери", "Chevrolet": "Шевроле",
             "Dongfeng": "Донгфенг", "Exeed": "Эксид", "Ford": "Форд", "GAC": "ГАК", "GWM": "Грейт Вол", "Geely": "Джили", "Haval": "Хавал",
@@ -366,7 +365,6 @@ def page(path, title, desc, body, active=None, jsonld=None, og=None, prio="0.6")
 </div>
 <div class="fbot"><span>© {TODAY.year} МТК Восток-Авто · Международная транспортная компания</span><span>Цены под ключ пересчитаны {ddmm(TODAY)}</span></div>
 </div></footer>
-{kp_dlg()}
 <a class="totop" href="#" aria-label="Наверх"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5.5 11.5L12 5l6.5 6.5"/></svg></a>
 <script src="{u("s.js")}?v={ASSET_V}" defer></script>
 </body>
@@ -376,29 +374,6 @@ def page(path, title, desc, body, active=None, jsonld=None, og=None, prio="0.6")
     dst.parent.mkdir(parents=True, exist_ok=True)
     dst.write_text(s)
     PAGES.append((path, prio))
-
-
-def kp_btn(car="", cls="b", calc=False):
-    """Кнопка «Запросить КП» (Юрий 28.10.2026): открывает окно с формой, машина уже подставлена (s.js), заявка уходит в Telegram-бот."""
-    return f'<button class="btn {cls}" type="button" data-kp="{E(car)}"{" data-kpcalc" if calc else ""}>Запросить КП</button>'
-
-
-def kp_dlg():
-    """Окно «Запросить КП»: машина, город, имя, телефон. Поле site — ловушка для ботов, человек его не видит."""
-    return f"""<dialog class="kpd" id="kpd" aria-labelledby="kpdh" data-api="{KP_API}" data-ym="{SEARCH.get('metrika', '')}"><form novalidate>
-<button class="x" type="button" data-kpx aria-label="Закрыть"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
-<p class="kick">Бесплатно</p><h3 id="kpdh">Запросить КП</h3>
-<p class="sub">Пришлём коммерческое предложение с&nbsp;ценой под&nbsp;ключ. Специалист свяжется с&nbsp;Вами в&nbsp;Telegram, WhatsApp или&nbsp;по&nbsp;телефону.</p>
-<label>Автомобиль<input name="car" maxlength="200" placeholder="Модель или бюджет"></label>
-<label>Город<input name="city" maxlength="80" autocomplete="address-level2" required></label>
-<label>Имя<input name="name" maxlength="80" autocomplete="given-name" required></label>
-<label>Телефон<input name="phone" type="tel" maxlength="40" autocomplete="tel" inputmode="tel" placeholder="+7" required></label>
-<input class="hp" name="site" tabindex="-1" autocomplete="off" aria-hidden="true"><input type="hidden" name="calc">
-<p class="err" data-kperr hidden></p>
-<button class="btn b" type="submit">Отправить</button>
-<p class="pd">Нажимая «Отправить», Вы соглашаетесь на&nbsp;обработку персональных данных для&nbsp;ответа на&nbsp;заявку.</p></form>
-<div class="kpok" hidden><div class="c">{CHECK}</div><h3>Заявка отправлена</h3><p>Специалист свяжется с&nbsp;Вами в&nbsp;ближайшее время.</p><button class="btn ob" type="button" data-kpx>Закрыть</button></div>
-</dialog>"""
 
 
 def crumbs(*items):
@@ -1045,7 +1020,7 @@ def model_page(m, models, kp):
 <h1>{E(m["name"])}</h1>{f'<p class="cn">{E(m["china"])}</p>' if m.get("china") else f'<p class="cn">{E(m["plant"])}</p>'}
 <div class="tags">{"".join(f"<span>{E(t)}</span>" for t in tags if t)}</div>
 <div class="big{" pr2" if "bu_label" in m else ""}">{price_html(m)}<small>ориентир под&nbsp;ключ</small></div>
-<div class="btns">{kp_btn(m["name"], "w")}{f'<a class="btn o" href="#found">Найденные машины · {len(found)}</a>' if found else ""}</div>
+<div class="btns"><a class="btn w" href="{u("kontakty/")}">Подобрать такую машину <span class="ar">→</span></a>{f'<a class="btn o" href="#found">Найденные машины · {len(found)}</a>' if found else ""}</div>
 </div><div class="mpic"><img src="{u("img/m/" + m["stem"] + ".webp")}" alt="{E(m["name"])}" width="1400" height="824"></div></div>
 </div></section>
 <section class="sec"><div class="wrap cols">
@@ -1143,7 +1118,7 @@ def car_page(c, kp, models, rates):
 <p class="rt">Доставим в&nbsp;любой город России, доставку посчитаем отдельно.</p>
 {f'<p class="rt">Объявление в&nbsp;Китае от&nbsp;{che_date(c)}.</p>' if c.get("source") == "che168" else ""}
 <details><summary>Из чего складывается цена</summary><table class="brk">{brk}</table></details>
-<div class="btns">{kp_btn(f'{c["title"]} {c.get("year") or ""}'.strip())}<a class="btn ob" href="{u("kontakty/")}">Подобрать похожий</a></div>
+<div class="btns"><a class="btn b" href="{u("kontakty/")}">Заказать этот автомобиль</a><a class="btn ob" href="{u("kontakty/")}">Подобрать похожий</a></div>
 <p class="sold">Объявления в&nbsp;Китае живут недолго. Если эту машину уже продали, найдём такую&nbsp;же: год, пробег и&nbsp;цена будут близки.</p></div></div>
 </div></section>
 <section class="sec bg"><div class="wrap"><div class="shead"><div><p class="kick rv">Похожие авто</p><h2 class="h2 rv d1">Ещё варианты <em>с&nbsp;ценой</em></h2></div>{ARROWS.format(id="reel2")}</div></div>
@@ -1247,7 +1222,7 @@ def premium_page(prem, rates):
 </div></div>
 <div class="wrap">
 <div class="box pcta"><div><h3>Узнать цену под&nbsp;ключ</h3><p>Фото&nbsp;— пример модели, не&nbsp;конкретный автомобиль. Цвет, комплектацию и&nbsp;город выдачи подберём под&nbsp;Ваш запрос и&nbsp;посчитаем итог до&nbsp;рубля.</p></div>
-{kp_btn("Премиум-авто")}</div>
+<a class="btn b" href="{u("kontakty/")}">Написать специалисту <span class="ar">→</span></a></div>
 <div class="credits"><h2>Авторы фото</h2><p>Фото моделей&nbsp;— с&nbsp;Wikimedia Commons по&nbsp;свободным лицензиям. Снимки обрезаны и&nbsp;уменьшены под&nbsp;карточки.</p><ul>{credits}</ul></div>
 </div></section>"""
     ld = [bc_ld(("premium/", "Премиум-авто")),
@@ -1461,7 +1436,7 @@ def calc_page(rates):
 <h1 class="rv in">Калькулятор <em>под&nbsp;ключ</em></h1>
 <p class="lead">Вы вводите цену автомобиля в&nbsp;Китае&nbsp;— калькулятор считает цену под&nbsp;ключ с&nbsp;доставкой автовозом {nf(PR.DELIVERY_CNY)}&nbsp;¥, растаможкой и&nbsp;оформлением, подбором и&nbsp;сопровождением сделки.</p>
 {rl}{ph_calc(rates)}
-<p class="kcta">Заинтересовало? Подберём машину под&nbsp;этот бюджет. {kp_btn("", "w sm", calc=True)}</p>
+<p class="kcta">Заинтересовало? Свяжитесь с&nbsp;нами&nbsp;— подберём машину под&nbsp;этот бюджет. <a class="btn w sm" href="{u("kontakty/")}">Написать нам <span class="ar">→</span></a></p>
 </div></section>
 <section class="sec kmore"><div class="wrap"><a class="more" href="{u("stoimost/")}">Из&nbsp;чего складывается цена и&nbsp;как проходит оплата <span class="ar">→</span></a></div></section>
 {fin_block()}"""
@@ -1519,8 +1494,7 @@ def contacts_page():
     body = f"""
 <section class="phead pcont"><div class="wrap">{crumbs((None, "Контакты"))}
 <h1 class="rv in sm">Напишите <em>специалисту</em></h1>
-<p class="lead">Напишите модель или бюджет&nbsp;— бесплатно подберём несколько машин в&nbsp;Китае и&nbsp;посчитаем цену под&nbsp;ключ с&nbsp;доставкой в&nbsp;ваш город.</p>
-<div class="btns">{kp_btn("", "w")}</div></div>{ph_chat()}</section>
+<p class="lead">Напишите модель или бюджет&nbsp;— бесплатно подберём несколько машин в&nbsp;Китае и&nbsp;посчитаем цену под&nbsp;ключ с&nbsp;доставкой в&nbsp;ваш город.</p></div>{ph_chat()}</section>
 <section class="sec tight" id="team"><div class="wrap"><div class="tgrid" style="margin-top:0">{team_cards()}</div>
 <div class="box rv" style="margin-top:22px;display:flex;flex-wrap:wrap;gap:20px;align-items:center;justify-content:space-between"><div><h3>Telegram-канал МТК Восток-Авто</h3>
 <p style="color:var(--muted);margin-top:6px">Новые машины, подборки и&nbsp;выданные автомобили.</p></div><a class="btn b" href="{CHANNEL}">Открыть канал <span class="ar">→</span></a></div></div></section>

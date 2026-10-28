@@ -199,23 +199,4 @@ if(CH){const ms=$$('.m',CH),ty=$('.typ',CH);let k=0;
         setTimeout(()=>{ty.classList.remove('on');ms[k].classList.add('on');k++;setTimeout(step,1100)},1300)}
       else setTimeout(()=>{ms.forEach(m=>m.classList.remove('on'));k=0;setTimeout(step,700)},4500)};
     setTimeout(step,500)}}
-// «Запросить КП»: окно с формой, машина подставлена из кнопки; заявка уходит в Telegram-бот специалистов (Юрий 28.10.2026)
-const KD=$('#kpd');
-if(KD&&KD.showModal){const f=$('form',KD),ok=$('.kpok',KD),er=$('[data-kperr]',KD),F=n=>f.elements[n],sb=$('[type=submit]',f);
-  document.addEventListener('click',e=>{const b=e.target.closest('[data-kp]');if(!b)return;e.preventDefault();
-    f.hidden=false;ok.hidden=true;er.hidden=true;F('car').value=b.dataset.kp||'';F('calc').value='';
-    const C=b.hasAttribute('data-kpcalc')&&$('.phcalc');
-    if(C){const g=n=>C.elements[n],o=n=>g(n).options[g(n).selectedIndex].text,cc=$('.cc',C),t=$('[data-total]',C);
-      F('calc').value=`${nf(+g('y').value)} ¥, ${o('t')}, ${o('a')}`+(cc&&cc.offsetParent?`, ${g('cc').value} см³`:'')+`, ${g('p').value} ${o('u')}`+(t?` — ориентир ${t.textContent}`:'')}
-    KD.showModal();(F('car').value?F('city'):F('car')).focus()});
-  $$('[data-kpx]',KD).forEach(x=>x.onclick=()=>KD.close());
-  KD.addEventListener('click',e=>{if(e.target===KD)KD.close()});
-  f.onsubmit=async e=>{e.preventDefault();er.hidden=true;
-    const d=Object.fromEntries(new FormData(f));d.page=location.href;
-    if(!d.city.trim()||!d.name.trim()||d.phone.replace(/\D/g,'').length<10){er.textContent='Укажите город, имя и телефон.';er.hidden=false;return}
-    sb.disabled=true;sb.textContent='Отправляем…';
-    try{const r=await fetch(KD.dataset.api,{method:'POST',body:JSON.stringify(d)});if(!r.ok)throw 0;
-      f.reset();f.hidden=true;ok.hidden=false;try{KD.dataset.ym&&ym(+KD.dataset.ym,'reachGoal','kp_request')}catch(_){}}
-    catch(_){er.innerHTML='Не получилось отправить. Напишите нам в <a href="https://t.me/YuraZol">Telegram</a> или позвоните: <a href="tel:+79119261617">+7&nbsp;911&nbsp;926-16-17</a>.';er.hidden=false}
-    sb.disabled=false;sb.textContent='Отправить'}}
 })();
