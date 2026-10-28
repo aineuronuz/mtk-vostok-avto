@@ -1318,7 +1318,7 @@ def moto_page(d):
 <section class="phead">{phv("mopedy")}<div class="wrap">{crumbs((None, "Электромопеды"))}
 <div class="mhd"><img class="mlogo" src="{u("img/moto/logo.webp")}" alt="Восток-Мото" width="120" height="120">
 <h1 class="rv in sm">Электромопеды <em>из&nbsp;Китая</em></h1></div>
-<p class="lead">Помимо автомобилей, привозим из&nbsp;Китая электромопеды. <span class="nohy">«Восток-Мото»</span>: {len(ms)} {plural(len(ms), "модель", "модели", "моделей")} до&nbsp;50&nbsp;км/ч и&nbsp;до&nbsp;4&nbsp;кВт под&nbsp;права категории M. Цены по&nbsp;курсу на&nbsp;{date_}: цена зависит от&nbsp;курса&nbsp;— актуальную цену уточняйте.</p>
+<p class="lead">Помимо автомобилей, привозим из&nbsp;Китая электромопеды. <span class="nohy">«Восток-Мото»</span>: {len(ms)} {plural(len(ms), "модель", "модели", "моделей")} до&nbsp;50&nbsp;км/ч и&nbsp;до&nbsp;4&nbsp;кВт под&nbsp;права категории M. Цены с&nbsp;доставкой до&nbsp;вашего города в&nbsp;России, по&nbsp;курсу на&nbsp;{date_}: цена зависит от&nbsp;курса&nbsp;— актуальную цену уточняйте.</p>
 </div></section>
 <section class="sec tight prem moto"><div class="wrap">
 <ul class="mfacts">{facts}</ul></div>
@@ -1363,7 +1363,7 @@ def how_page(faq):
     body = f"""
 <section class="phead phx"><div class="wrap">{ph_route()}{crumbs((None, "Как купить"))}
 <h1 class="rv in sm">Как купить автомобиль<br><em>из&nbsp;Китая под&nbsp;ключ</em></h1>
-<p class="lead">Семь шагов от&nbsp;выбора до&nbsp;ключей. Срок от&nbsp;оплаты до&nbsp;выдачи&nbsp;— обычно <span class="nobr">45–65</span>&nbsp;дней. Каждый шаг прозрачен: присылаем фото, документы и&nbsp;сроки.</p></div></section>
+<p class="lead">Семь шагов от&nbsp;выбора до&nbsp;ключей. Срок от&nbsp;оплаты до&nbsp;выдачи&nbsp;— обычно <span class="nobr">45–65</span>&nbsp;дней. Каждый шаг прозрачен: присылаем фото, видео, документы и&nbsp;сроки.</p></div></section>
 <section class="sec tight"><div class="wrap"><div class="tl">{"".join(tl)}</div></div></section>
 <section class="sec bg" id="docs"><div class="wrap"><div class="cols"><div><p class="kick rv">Документы</p><h2 class="h2 rv d1">Что Вы <em>получаете</em></h2>
 <p class="lead rv d2">Все платежи&nbsp;— по&nbsp;договору и&nbsp;через банк. После выдачи машину ставят на&nbsp;учёт в&nbsp;ГИБДД как обычную.</p></div>
