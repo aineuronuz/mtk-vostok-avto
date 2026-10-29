@@ -83,12 +83,16 @@ def git(*a):
 def live(slug, n):
     """Обновить сервер сайта с GitHub и проверить страницу и все фото на нём самом."""
     files = " ".join([""] + [f"{i}.jpg t/{i}.jpg" for i in range(1, n + 1)])
-    cmd = (f'/usr/local/bin/mtk-vostok-avto-pull >/dev/null 2>&1; B=https://mtk-vostok-avto.ru/foto/{slug}/; '
-           f'R="--resolve mtk-vostok-avto.ru:443:127.0.0.1"; ok=0; bad=""; for p in "" {files}; do '
-           f'c=$(curl -s -o /dev/null -w %{{http_code}} $R $B$p); [ "$c" = 200 ] && ok=$((ok+1)) || bad="$bad $p:$c"; done; '
-           f'echo "$ok/{2 * n + 1}$bad"')
-    out = subprocess.run([sys.executable, "-I", str(BOX), cmd, "120"], capture_output=True, text=True).stdout.strip()
-    return out
+    # без $((…)): с ним сервер сайта команду не выполняет и не отвечает (seen 29.10.2026)
+    cmd = (f'timeout 90 /usr/local/bin/mtk-vostok-avto-pull >/dev/null 2>&1; B=https://mtk-vostok-avto.ru/foto/{slug}/; '
+           f'for p in "" {files}; do echo "$p:$(curl -s -o /dev/null -w %{{http_code}} '
+           f'--resolve mtk-vostok-avto.ru:443:127.0.0.1 $B$p)"; done')
+    out = subprocess.run([sys.executable, "-I", str(BOX), cmd, "120"], capture_output=True, text=True).stdout.split()
+    codes = [l.rsplit(":", 1) for l in out if ":" in l]
+    if not codes:
+        return ""
+    bad = [f"{p or '/'}:{c}" for p, c in codes if c != "200"]
+    return " ".join([f"{len(codes) - len(bad)}/{2 * n + 1}"] + bad)
 
 
 def main():
