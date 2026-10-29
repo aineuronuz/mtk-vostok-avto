@@ -12,7 +12,7 @@ echo "== $(date '+%F %T') КП изменились"
 git pull -q --rebase --autostash
 python3 new/site.py --offline
 echo "$SUM" > new/data/kp_deals.md5
-git add -A docs new/data/kp_deals.md5 new/data/mopedy.json new/data/last_build.json new/data/bot_cars.json
+git add -A docs new/data/kp_deals.md5 new/data/mopedy.json new/data/last_build.json new/data/bot_cars.json new/data/bot_calc.json
 if ! git diff --cached --quiet; then
   git -c user.name=aineuronuz -c user.email=aineuronuz@users.noreply.github.com commit -q -m "Машины из новых КП на $(date +%d.%m.%Y)"
   git push -q
