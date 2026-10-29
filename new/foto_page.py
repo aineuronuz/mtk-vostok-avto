@@ -116,7 +116,7 @@ def main():
     if dst.exists():
         shutil.rmtree(dst)
     if not a.no_push:
-        git("pull", "-q", "--rebase")
+        git("pull", "-q", "--rebase", "--autostash")
     n = build(a.src, dst, a.name)
     if a.no_push:
         print(f"{dst}: {n} фото, не выложено")
