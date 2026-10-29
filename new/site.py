@@ -851,7 +851,7 @@ def calc_data(rates):
 
 def ph_calc(rates):
     """«Стоимость»: калькулятор (Юрий 27.10.2026, подробнее): цена в Китае в юанях, двигатель, возраст, объём и мощность → ориентир под ключ
-    и расшифровка. Как в КП «Авто»: один инвойс «машина + доставка», таможенная стоимость по курсу ЦБ; бензин и гибриды (HEV, PHEV) —
+    и расшифровка. Как в КП «Авто»: один инвойс «машина + доставка», таможенная стоимость — он по курсу ЦБ (Юрий 29.10.2026, было без доставки); бензин и гибриды (HEV, PHEV) —
     пошлина по возрасту (до 3 лет — % или €/см³, 3–5 и старше 5 — €/см³), утильсбор по объёму и мощности; электро и EREV — пошлина 15%,
     акциз и утильсбор по 30-минутной мощности (нет в документах — 0,45 × максимальной), НДС 22% с акцизом в базе. Таблицы сборов,
     пошлин и утильсбора — calc.py и new_recycle.json «Авто», акциз — new/price.py (ставки 2026, «Авто» 27.10.2026)."""
@@ -859,7 +859,7 @@ def ph_calc(rates):
     d = calc_data(rates)
     return f"""<form class="phcalc" data-calc='{json.dumps(d)}' onsubmit="return false"><h3>Калькулятор</h3>
 <label>Цена машины в&nbsp;Китае, ¥ — без&nbsp;доставки<input type="number" name="y" value="80000" min="10000" step="1000" inputmode="numeric"></label>
-<p class="chint">Доставка автовозом {nf(PR.DELIVERY_CNY)}&nbsp;¥ и&nbsp;погрузка по&nbsp;Китаю уже включены&nbsp;— строками в&nbsp;«Подробнее». Пошлины&nbsp;— от&nbsp;цены машины без&nbsp;доставки.</p>
+<p class="chint">Доставка автовозом {nf(PR.DELIVERY_CNY)}&nbsp;¥ и&nbsp;погрузка по&nbsp;Китаю уже включены&nbsp;— строками в&nbsp;«Подробнее». Пошлина и&nbsp;сбор&nbsp;— от&nbsp;суммы инвойса: цена машины вместе с&nbsp;доставкой, как в&nbsp;КП.</p>
 <div class="two"><label>Двигатель<select name="t"><option value="ice">Бензин, гибрид</option><option value="ev">Электро</option><option value="erev">Гибрид EREV</option></select></label>
 <label>Возраст<select name="a"><option value="0">До&nbsp;3 лет</option><option value="1" selected>3–5 лет</option><option value="2">Старше 5 лет</option></select></label></div>
 <div class="two"><label class="cc">Объём, см³<input type="number" name="cc" value="1500" min="600" step="1" inputmode="numeric"></label>
