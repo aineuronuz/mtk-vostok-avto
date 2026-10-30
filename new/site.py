@@ -1323,7 +1323,8 @@ def prem_car_page(c, cards):
     same += [x for x in cards if x["slug"] != c["slug"] and x not in same and x["origin"] == c["origin"]][:4 - len(same)]
     vblock = (f'<h2 class="h2" style="font-size:clamp(28px,2.6vw,38px)">Версии и&nbsp;цены <em>под&nbsp;ключ</em></h2>'
               f'<table class="spec pver" style="margin-top:20px">{vr}</table>'
-              '<p class="note">Новые&nbsp;— по&nbsp;ценам производителя в&nbsp;Китае. Пошлина, утильсбор и&nbsp;доставка уже в&nbsp;цене под&nbsp;ключ. '
+              + (f'<div class="btns pvkp">{kp_btns("p_" + bot_key(c["slug"]))}</div>{kp_note()}' if KP_ON else "")   # вторая «Получить КП» под последней ценой (Юрий 30.10.2026)
+              + '<p class="note">Новые&nbsp;— по&nbsp;ценам производителя в&nbsp;Китае. Пошлина, утильсбор и&nbsp;доставка уже в&nbsp;цене под&nbsp;ключ. '
               f'Цена пересчитана {ddmm(TODAY)} по&nbsp;курсу юаня и&nbsp;меняется вместе с&nbsp;ним.</p>') if vr else ""
     body = f"""
 <section class="mhero"><div class="wrap">{crumbs(("premium/", "Премиум-авто"), (None, E(c["name"])))}

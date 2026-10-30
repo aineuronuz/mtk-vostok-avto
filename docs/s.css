@@ -494,6 +494,7 @@ body{font-size:16px}
 .pver th{width:auto;color:var(--ink);font-weight:600}
 .pver th small{display:block;font-size:13.5px;font-weight:400;color:var(--muted);margin-top:3px}
 .pver td{white-space:nowrap;text-align:right;font-family:var(--disp);font-size:19px;font-weight:400}
+.pvkp{display:flex;flex-wrap:wrap;gap:12px;margin-top:24px}.pvkp .btn{flex:1 1 260px}
 .pc .t{padding:14px 18px 16px}
 .pc h3{font-size:17px}
 .pc .pr{font-size:21px;padding-top:12px;white-space:nowrap}
