@@ -6,7 +6,7 @@ calc(c, vtb, cny, eur, today) -> dict(total, cny, eur, vtb, date, lines, age, ..
 
 Состав цены (как в КП, эталон kp_v3 «Как каталог»):
   машина × ВТБ, доставка автовозом 20 000 ¥ × ВТБ, погрузка и доставка по Китаю 1 300 ¥ × ВТБ, комиссия ВТБ 2% от (машина + доставка);
-  таможня от цены машины по курсу ЦБ (без доставки):
+  таможня от суммы инвойса «машина + доставка автовозом» по курсу ЦБ (Юрий 29.10.2026, с 30.10; до того от цены машины без доставки):
     бензин, HEV, PHEV — единая ставка calc.custom_duty (по возрасту: до 3 лет — % от стоимости, не менее €/см³; 3–5 и старше 5 — €/см³);
     электро, EREV, e-POWER — СТП: пошлина 15% + акциз по 30-мин мощности + НДС 22% от (стоимость + пошлина + акциз);
   таможенный сбор calc.custom_fee, утильсбор calc.recycle (бензин — по мощности ДВС, HEV/PHEV — по системной, электро — по 30-мин);
@@ -101,7 +101,7 @@ def _one(c, vtb, cny, eur, age, t, today=None):
     deliv_rub = round(dcny * vtb)
     load_rub = round(lcny * vtb)
     bank = round((car_rub + deliv_rub) * BANK_FEE)
-    cost_rub = C.cny_to_rub(car_cny, rates)             # таможенная стоимость: цена машины по курсу ЦБ, без доставки
+    cost_rub = C.cny_to_rub(car_cny + dcny, rates)      # таможенная стоимость: машина + доставка по курсу ЦБ (Юрий 29.10.2026)
     fee = C.custom_fee(cost_rub)
     lines = [(f"Автомобиль в Китае ({_n(car_cny)} ¥ × {vtb:.2f})".replace(".", ","), car_rub),
              (f"Доставка автовозом ({_n(dcny)} ¥)", deliv_rub),
@@ -167,13 +167,13 @@ if __name__ == "__main__":                              # проверка: pyth
 
 def calc_deal(c, vtb, cny, eur, today):
     """Цена под ключ на сегодня машины из КП после 06.10.2026 (~/auto-china/kp_v3/deals/*.py, данные — c["deal"], kp_deals.py):
-    формула КП gen_kp_v3.py — один контракт и инвойс (Юрий 18.10: таможенная стоимость — машина + доставка; в старых сделках
-    ONE_INVOICE = False), пошлина (% или €/см³), акциз, НДС и утильсбор — как в сделке; курсы — дня; оформление, СВХ и услуги — TARIFF.
+    формула КП gen_kp_v3.py — один контракт и инвойс (Юрий 18.10: таможенная стоимость — машина + доставка; с 30.10 и в старых сделках
+    с ONE_INVOICE = False — Юрий 29.10.2026, там это только две строки вместо одной), пошлина (% или €/см³), акциз, НДС и утильсбор — как в сделке; курсы — дня; оформление, СВХ и услуги — TARIFF.
     Возрастная категория — та, что в сделке на дату КП."""
     d, t = c["deal"], TARIFF
     car_rub, deliv_rub, load_rub = round(d["car_cny"] * vtb), round(d["delivery_cny"] * vtb), round(d["loading_cny"] * vtb)
     bank = round((car_rub + deliv_rub) * BANK_FEE)
-    cv = round((d["car_cny"] + (d["delivery_cny"] if d["one_invoice"] else 0)) * cny)   # таможенная стоимость по курсу ЦБ
+    cv = round((d["car_cny"] + d["delivery_cny"]) * cny)   # таможенная стоимость: машина + доставка по курсу ЦБ
     duty = round(cv * d["duty_pct"]) if d["duty_pct"] else round(d["engine_cc"] * d["duty_eur_cc"] * eur)
     excise = d["excise"] or 0
     vat = round((cv + duty + excise) * (d["vat_pct"] or 0))
