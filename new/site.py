@@ -1518,7 +1518,8 @@ def moto_item_page(m, ms, date_):
 <div class="rv"><h2 class="h2" style="font-size:clamp(28px,2.6vw,38px)">Характеристики</h2><table class="spec" style="margin-top:20px">{spec}</table>
 {f'<p class="note">{E(m["note"])}.</p>' if m.get("note") else ""}</div>
 <div class="rv d1"><h2 class="h2" style="font-size:clamp(28px,2.6vw,38px)">Что нужно <em>для&nbsp;езды</em></h2><ul class="mfacts mv">{facts}</ul>
-<p class="note">Цена зависит от&nbsp;курса юаня и&nbsp;пересчитывается каждый день. Цвет и&nbsp;точную цену на&nbsp;сегодня пришлём в&nbsp;КП.</p></div>
+<p class="note">Цена зависит от&nbsp;курса юаня и&nbsp;пересчитывается каждый день. Цвет и&nbsp;точную цену на&nbsp;сегодня пришлём в&nbsp;КП.</p>
+{f'<div class="btns pvkp">{kp_btns("e_" + bot_key(m["slug"]))}</div>{kp_note()}' if KP_ON else ""}</div>
 </div></section>
 <section class="sec bg prem moto"><div class="wrap"><div class="shead"><div><p class="kick rv">Электромопеды</p><h2 class="h2 rv d1">Похожие <em>модели</em></h2></div>
 <a class="more rv" href="{u("mopedy/")}">Все электромопеды <span class="ar">→</span></a></div>
