@@ -1186,25 +1186,50 @@ def bu_row(b):
 
 PREM_BRAND = {"mercedes": "Mercedes-Benz", "bmw": "BMW", "landrover": "Land Rover", "liauto": "Li Auto", "nio": "NIO", "aito": "AITO", "im": "IM"}
 PREM_FUEL = {"ICE": "petrol", "MHEV": "petrol", "HEV": "hybrid", "PHEV": "hybrid", "BEV": "ev", "EREV": "erev"}
+PREM_DRIVE = {"AWD": "Полный", "4WD": "Полный", "RWD": "Задний", "FWD": "Передний"}
+PREM_FUEL_T = {"petrol": "Бензин", "hybrid": "Гибрид", "ev": "Электро", "erev": "Гибрид EREV"}
+PREM_ORIGIN = {"eu": "Европейская марка", "jp": "Японская марка", "kr": "Корейская марка", "us": "Американская марка", "cn": "Китайская марка"}
 PREM_BODY = [("SUV", "Кроссовер"), ("三厢车", "Седан"), ("掀背车", "Лифтбек"), ("两厢车", "Хэтчбек"), ("旅行车", "Универсал"), ("MPV", "Минивэн"),
              ("跑车", "Купе и кабриолет"), ("敞篷车", "Купе и кабриолет")]
 
 
 def prem_facets(P):
-    """Топливо, привод и кузов модели премиум-каталога по её версиям (~/auto-china/catalog/cars_prem26) — для фильтров (Юрий 27.10.2026)."""
+    """Топливо, привод и кузов модели премиум-каталога по её версиям (~/auto-china/catalog/cars_prem26) — для фильтров (Юрий 27.10.2026);
+    привод, места, мощность и запас хода — для страницы модели (Юрий 30.10.2026)."""
     out = {}
     for m in P.models():
         vs = [v for x in m["mdls"] for v in x["versions"]]
         bodies = {t for v in vs for k, t in PREM_BODY if k in (v.get("body") or "")}
+        hp = [round(v["motor_peak_kw"] / 0.7355) if v["type"] in ("BEV", "EREV") else v.get("system_hp") or v.get("engine_hp") for v in vs]
         out[m["key"]] = {"fuel": sorted({PREM_FUEL[v["type"]] for v in vs if v.get("type") in PREM_FUEL}),
-                         "awd": any(v.get("drive") == "AWD" for v in vs), "body": sorted(bodies)}
+                         "awd": any(v.get("drive") == "AWD" for v in vs), "body": sorted(bodies),
+                         "drive": sorted({PREM_DRIVE[v["drive"]] for v in vs if v.get("drive") in PREM_DRIVE}),
+                         "seats": sorted({int(v["seats"]) for v in vs if str(v.get("seats") or "").isdigit()}),
+                         "hp": [min(h for h in hp if h), max(h for h in hp if h)] if any(hp) else None,
+                         "range": max((v.get("range_cltc_km") or 0) for v in vs) or None, "cn": m["cn"]}
     return out
+
+
+def prem_bg(c):
+    """Поля вокруг фото, вписанного целиком (premium.py edge_colors)."""
+    return f' style="background:linear-gradient({c["bg"][0]},{c["bg"][1]} 50%,{c["bg"][2]} 50%)"' if c.get("bg") else ""
+
+
+def prem_card(c):
+    """Карточка модели «Премиум» — ссылка на её страницу (Юрий 30.10.2026)."""
+    return (f'<a class="card pc" href="{u("premium/" + c["slug"] + "/")}" data-vt data-origin="{c["origin"]}" data-fuel="{" ".join(c["fuel"])}" data-feat="{"awd" if c["awd"] else ""}"'
+            f' data-body="{E(" ".join(c["body"]))}" data-brand="{E(c["brand_t"])}" data-cond="{c["cond"]}" data-price="{c["pmin"] or 10**10}" data-name="{E(c["name"])}"'
+            f' data-q="{E((c["name"] + " " + (c.get("cn") or "")).lower())}"><div class="im{" ct" if c.get("bg") else ""}"{prem_bg(c)}>'
+            f'<img src="{u(c["img"])}" alt="{E(c["name"])}" loading="lazy" width="{c["size"][0]}" height="{c["size"][1]}"></div>'
+            f'<div class="t"><h3>{E(c["name"])}</h3>'
+            + (f'<div class="pz">{bu_row(c["bu"])}<div class="pr">от&nbsp;{rub(c["price"])}<small>под ключ</small></div></div>' if c.get("price") else "")
+            + '</div></a>')
 
 
 def premium_page(prem, rates):
     """Премиальные автомобили из Китая: б/у и новые (Юрий 11.10.2026, заголовок — как в каталогах, «Авто» 25.10.2026): карточки с ценой «от» по курсу дня (как строки PDF премиум-каталога),
     над ней строка б/у и плашка «Новый 2026», как в каталоге (Юрий 24.10.2026), авторы фото.
-    Данные и фото готовит new/premium.py."""
+    Данные и фото готовит new/premium.py. У каждой модели — своя страница (prem_car_page). Возвращает карточки — для бота заявок."""
     import premium as P
     day, noprice = P.day_prices(rates["vtb"], rates["cny"], rates["eur"])
     if noprice:
@@ -1216,6 +1241,7 @@ def premium_page(prem, rates):
     fac = prem_facets(P)
     for c in cards:
         f = fac.get(c["key"], {})
+        c["slug"], c["fac"], c["versions"] = slugify(c["name"]), f, (day.get(c["key"]) or {}).get("versions") or []
         c["brand_t"] = PREM_BRAND.get(c["brand"], c["brand"].capitalize())
         c["fuel"], c["awd"], c["body"] = f.get("fuel", []), f.get("awd", False), f.get("body", [])
         c["cond"] = " ".join((["new"] if c.get("price") else []) + (["bu"] if c.get("bu") else []))
@@ -1224,15 +1250,7 @@ def premium_page(prem, rates):
     bodies = sorted({b for c in cards for b in c["body"]}, key=lambda b: -sum(b in c["body"] for c in cards))
     brands = sorted({c["brand_t"] for c in cards})
     pmax = math.ceil(max(c["pmin"] for c in cards) / 1e6) * 1e6
-    grid = "".join(f'<div class="card pc" data-origin="{c["origin"]}" data-fuel="{" ".join(c["fuel"])}" data-feat="{"awd" if c["awd"] else ""}" data-body="{E(" ".join(c["body"]))}"'
-                   f' data-brand="{E(c["brand_t"])}" data-cond="{c["cond"]}" data-price="{c["pmin"] or 10**10}" data-name="{E(c["name"])}" data-q="{E((c["name"] + " " + (c.get("cn") or "")).lower())}">'
-                   f'<div class="im{" ct" if c.get("bg") else ""}"'
-                   + (f' style="background:linear-gradient({c["bg"][0]},{c["bg"][1]} 50%,{c["bg"][2]} 50%)"' if c.get("bg") else "")
-                   + f'><img src="{u(c["img"])}" alt="{E(c["name"])}" loading="lazy" width="{c["size"][0]}" height="{c["size"][1]}"></div>'
-                   f'<div class="t"><h3>{E(c["name"])}</h3>'
-                   + (f'<div class="pz">{bu_row(c["bu"])}<div class="pr">от&nbsp;{rub(c["price"])}<small>под ключ</small></div></div>'
-                      if c.get("price") else "")
-                   + '</div></div>' for c in cards)
+    grid = "".join(prem_card(c) for c in cards)
     credits = "".join(f'<li>{E(c["name"])}&nbsp;— {E(c["author"])}, <a href="{E(c["license_url"])}" rel="license noopener" target="_blank">{E(c["license"])}</a>, '
                       f'<a href="{E(c["page"])}" rel="noopener" target="_blank">Wikimedia Commons</a></li>' for c in cards)
     body = f"""
@@ -1264,10 +1282,78 @@ def premium_page(prem, rates):
 </div></section>"""
     ld = [bc_ld(("premium/", "Премиум-авто")),
           {"@context": "https://schema.org", "@type": "ItemList", "name": "Премиальные автомобили из Китая: б/у и новые",
-           "itemListElement": [{"@type": "ListItem", "position": i, "name": c["name"]} for i, c in enumerate(cards, 1)]}]
+           "itemListElement": [{"@type": "ListItem", "position": i, "url": SITE + u("premium/" + c["slug"] + "/"), "name": c["name"]} for i, c in enumerate(cards, 1)]}]
     page("premium/", "Премиальные автомобили из Китая: б/у и новые под ключ | МТК Восток-Авто",
          f"{len(cards)} моделей премиальных автомобилей из Китая, б/у и новые: европейские, японские, корейские, американские и китайские марки. Подбор, доставка и растаможка под ключ.",
          body, active="premium/", jsonld=ld, og=cards[0]["img"], prio="0.8")
+    assert len({c["slug"] for c in cards}) == len(cards), "у двух моделей «Премиум» один адрес"
+    live = {c["slug"] for c in cards}
+    for x in (OUT / "premium").glob("*/index.html"):    # страницы моделей, убранных из премиум-каталога
+        if x.parent.name not in live:
+            x.unlink()
+            x.parent.rmdir()
+    for c in cards:
+        prem_car_page(c, cards)
+    return cards
+
+
+def prem_car_page(c, cards):
+    """Страница модели «Премиум» (Юрий 30.10.2026: как машина в «Каталоге» и «Авто в Китае» — характеристики и «Получить КП»):
+    фото, б/у и версии карточки премиум-каталога с ценой под ключ по курсу дня, характеристики по версиям модели."""
+    f = c["fac"]
+    tags = [PREM_ORIGIN[c["origin"]]] + [PREM_FUEL_T[x] for x in f.get("fuel", [])] + (["Полный привод"] if f.get("awd") else []) + f.get("body", [])
+    pr = (f'от&nbsp;{rub(c["pmin"])}<small>ориентир под&nbsp;ключ на&nbsp;{ddmm(TODAY)}</small>' if c["pmin"] else
+          'Цена по&nbsp;запросу<small>посчитаем под&nbsp;ключ по&nbsp;Вашему запросу</small>')
+    vr = ""
+    b = c.get("bu")
+    if b:
+        vr += (f'<tr><th>{E(b["label"])}' + (f'<small>{E(b["spec"])}</small>' if b["spec"] else "")
+               + f'</th><td>{rub(b["price"]) if b["price"] else "по&nbsp;запросу"}</td></tr>')
+    vr += "".join(f'<tr><th>{"Новый 2026 · " if b else ""}{E(lab)}<small>{E(sp)}</small></th><td>{rub(p)}</td></tr>' for lab, sp, p in c["versions"])
+    hp = f.get("hp")
+    low = lambda xs: ", ".join(xs).lower().capitalize() or None
+    rows = [("Марка", E(c["brand_t"])), ("Модель в&nbsp;Китае", E(f.get("cn") or "") or None), ("Кузов", low(f.get("body", []))),
+            ("Мест", ", ".join(map(str, f.get("seats", []))) or None), ("Топливо", low([PREM_FUEL_T[x] for x in f.get("fuel", [])])),
+            ("Привод", low(f.get("drive", []))),
+            ("Мощность", (f'{hp[0]}–{hp[1]}&nbsp;л.с.' if hp[0] != hp[1] else f'{hp[0]}&nbsp;л.с.') if hp else None),
+            ("Запас хода", f'до&nbsp;{f["range"]}&nbsp;км по&nbsp;CLTC' if f.get("range") else None),
+            ("Состояние", "Б/у и&nbsp;новые" if b else "Новые")]
+    spec = "".join(f"<tr><th>{k}</th><td>{v}</td></tr>" for k, v in rows if v)
+    same = [x for x in cards if x["slug"] != c["slug"] and x["brand"] == c["brand"]][:4]
+    same += [x for x in cards if x["slug"] != c["slug"] and x not in same and x["origin"] == c["origin"]][:4 - len(same)]
+    vblock = (f'<h2 class="h2" style="font-size:clamp(28px,2.6vw,38px)">Версии и&nbsp;цены <em>под&nbsp;ключ</em></h2>'
+              f'<table class="spec pver" style="margin-top:20px">{vr}</table>'
+              '<p class="note">Новые&nbsp;— по&nbsp;ценам производителя в&nbsp;Китае. Пошлина, утильсбор и&nbsp;доставка уже в&nbsp;цене под&nbsp;ключ. '
+              f'Цена пересчитана {ddmm(TODAY)} по&nbsp;курсу юаня и&nbsp;меняется вместе с&nbsp;ним.</p>') if vr else ""
+    body = f"""
+<section class="mhero"><div class="wrap">{crumbs(("premium/", "Премиум-авто"), (None, E(c["name"])))}
+<div class="mgrid"><div>
+<h1>{E(c["name"])}</h1>{f'<p class="cn">{E(f["cn"])}</p>' if f.get("cn") else ""}
+<div class="tags">{"".join(f"<span>{E(t)}</span>" for t in tags)}</div>
+<div class="big">{pr}</div>
+<div class="btns">{kp_btns("p_" + bot_key(c["slug"]), light=True) if KP_ON else f'<a class="btn w" href="{u("kontakty/")}">Подобрать такую машину <span class="ar">→</span></a>'}</div>{kp_note(True) if KP_ON else ""}
+</div><div class="mpic{" ct" if c.get("bg") else ""}"{prem_bg(c)}><img src="{u(c["img_l"])}" alt="{E(c["name"])}" width="{c["size_l"][0]}" height="{c["size_l"][1]}"></div></div>
+</div></section>
+<section class="sec"><div class="wrap cols">
+<div class="rv">{vblock}
+<p class="note">Фото&nbsp;— пример модели, не&nbsp;конкретный автомобиль. Цвет, комплектацию и&nbsp;город выдачи подберём под&nbsp;Ваш запрос и&nbsp;посчитаем итог до&nbsp;рубля.</p></div>
+<div class="rv d1"><h2 class="h2" style="font-size:clamp(28px,2.6vw,38px)">Характеристики</h2><table class="spec" style="margin-top:20px">{spec}</table>
+<p class="note">Фото: {E(c["author"])}, <a href="{E(c["license_url"])}" rel="license noopener" target="_blank">{E(c["license"])}</a>, <a href="{E(c["page"])}" rel="noopener" target="_blank">Wikimedia Commons</a>.</p></div>
+</div></section>
+<section class="sec bg prem"><div class="wrap"><div class="shead"><div><p class="kick rv">Премиум-авто</p><h2 class="h2 rv d1">Похожие <em>модели</em></h2></div>
+<a class="more rv" href="{u("premium/")}">Все премиум-авто <span class="ar">→</span></a></div>
+<div class="list" style="margin-top:46px">{"".join(prem_card(x) for x in same)}</div></div></section>
+{fin_block()}"""
+    ld = [bc_ld(("premium/", "Премиум-авто"), ("premium/" + c["slug"] + "/", c["name"])),
+          {"@context": "https://schema.org", "@type": "Product", "name": c["name"] + " из Китая под ключ", "brand": {"@type": "Brand", "name": c["brand_t"]},
+           "image": SITE + u(c["img_l"]), "category": "Премиальные автомобили"}]
+    if c["pmin"]:
+        ld[1]["offers"] = {"@type": "AggregateOffer", "priceCurrency": "RUB", "lowPrice": c["pmin"], "highPrice": max([p for _, _, p in c["versions"]] or [c["pmin"]]),
+                           "offerCount": len(c["versions"]) + bool(b), "availability": "https://schema.org/PreOrder", "seller": {"@type": "Organization", "name": "МТК Восток-Авто"}}
+    ptxt = f'от {html.unescape(rub(c["pmin"]))}' if c["pmin"] else "цена по запросу"
+    page(f'premium/{c["slug"]}/', f'{c["name"]} из Китая под ключ — {ptxt} | МТК Восток-Авто',
+         f'{c["name"]} из Китая, б/у и новые: версии, характеристики и цена под ключ на {ddmm(TODAY)} — {ptxt}. Подбор, доставка и растаможка.',
+         body, active="premium/", jsonld=ld, og=c["img_l"], prio="0.7")
 
 
 def load_moto(rates=None):
@@ -1599,14 +1685,17 @@ def politika_page():
          "Как МТК Восток-Авто обрабатывает персональные данные посетителей сайта и пользователей чат-ботов.", body, noindex=not OPERATOR, prio="0.2")
 
 
-def bot_data(models, kp, rates):
+def bot_data(models, kp, rates, prem=None):
     """Данные для бота заявок (tools/mtk-zayavki/bot.py): по коду из ссылки «Получить КП» — те же цифры, что на странице сайта."""
     cars = {bot_key(c["slug"]): {"slug": c["slug"], "t": f'{c["title"]} {c.get("year") or ""}'.strip(), "line": html.unescape(kp_line(c)),
                                  "total": c["price"]["total"], "lines": [[k, v] for k, v in c["price"]["lines"]],
                                  "img": f'img/kp/{c["slug"]}/1.webp'} for c in kp}
     mods = {bot_key(m["slug"]): {"slug": m["slug"], "t": m["name"], "price": price_text(m), "img": f'img/m/{m["stem"]}.webp'} for m in models}
+    prem = {bot_key(c["slug"]): {"slug": c["slug"], "t": c["name"], "img": c["img_l"],   # «Премиум» (Юрий 30.10.2026): б/у и версии, как на странице
+                                 "rows": ([[c["bu"]["label"], c["bu"]["spec"], c["bu"]["price"]]] if c.get("bu") else [])
+                                 + [[("Новый 2026 · " if c.get("bu") else "") + lab, sp, p] for lab, sp, p in c["versions"]]} for c in prem or []}
     (DATA / "bot_calc.json").write_text(json.dumps(calc_data(rates), ensure_ascii=False))   # калькулятор в боте — те же данные, что на странице
-    (DATA / "bot_cars.json").write_text(json.dumps({"date": ddmm(TODAY), "rate": f'{rates["vtb"]:.2f}'.replace(".", ","), "cars": cars, "models": mods},
+    (DATA / "bot_cars.json").write_text(json.dumps({"date": ddmm(TODAY), "rate": f'{rates["vtb"]:.2f}'.replace(".", ","), "cars": cars, "models": mods, "prem": prem},
                                                    ensure_ascii=False, indent=0))
 
 
@@ -1673,8 +1762,7 @@ def main():
     PAGES.clear()
     home(models, kp, rates, faq)
     catalog_page(models)
-    if (DATA / "premium.json").exists():
-        premium_page(json.loads((DATA / "premium.json").read_text()), rates)
+    prem = premium_page(json.loads((DATA / "premium.json").read_text()), rates) if (DATA / "premium.json").exists() else []
     for m in models:
         model_page(m, models, kp)
     if kp:
@@ -1692,7 +1780,7 @@ def main():
         faq_page(faq)
     contacts_page()
     politika_page()
-    bot_data(models, kp, rates)
+    bot_data(models, kp, rates, prem)
     extras(models, kp, rates, moto)
     (DATA / "last_build.json").write_text(json.dumps({"date": TODAY.isoformat(), "rates": rates, "models": len(models), "kp": len(kp), "pages": len(PAGES)}, ensure_ascii=False, indent=1))
     size = sum(f.stat().st_size for f in OUT.rglob("*") if f.is_file())

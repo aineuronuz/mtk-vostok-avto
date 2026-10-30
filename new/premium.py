@@ -10,6 +10,8 @@ GROUPS, ORDER и SKIP из gen_catalog_prem_mtk.py (одна карточка н
 по курсам дня тем же prem26_calc.price(v, age) («Авто» 25.10.2026). Цены ставятся, только если тот же расчёт по курсам
 каталога совпадает со всеми строками карточки (б/у и версии) PDF премиум-каталога на FILE_DATE, без неё — на PRICE_DATE
 (catalog/out/Katalog-MTK-Premium-*-SPB-telefon-<дата>.pdf); нет в PDF или расходится — карточка без цены.
+У каждой модели своя страница premium/<модель>/ (Юрий 30.10.2026): фото крупнее (img/p/<модель>_l.webp), версии карточки каталога
+(versions, по курсам дня) и кнопка «Получить КП».
 Запуск: python3 new/premium.py (после — python3 new/site.py --offline)
 """
 import ast
@@ -30,6 +32,7 @@ PHOTOS = CAT / "site_photos" / "final"
 SOURCES = CAT / "site_photos" / "sources.json"
 BBOX = DATA / "premium_bbox.json"
 W, H = 640, 376                                         # 17:10, как .card .im
+WL = 1280                                               # фото на странице модели (Юрий 30.10.2026), не шире кадра
 
 # группа фильтра — по стране марки (решение «Авто» 11.10.2026); Lotus — британская марка, Volvo — шведская
 ORIGINS = [("eu", "Европейские"), ("jp", "Японские"), ("kr", "Корейские"), ("us", "Американские"), ("cn", "Китайские")]
@@ -46,13 +49,13 @@ def _gen():
     for node in tree.body:
         if isinstance(node, ast.Assign) and len(node.targets) == 1 and isinstance(node.targets[0], ast.Name):
             name = node.targets[0].id
-            if name in ("GROUPS", "ORDER", "SKIP", "PRICE_DATE", "FILE_DATE", "DRIVE") and name not in got:
+            if name in ("GROUPS", "ORDER", "SKIP", "PRICE_DATE", "FILE_DATE", "DRIVE", "LABELS") and name not in got:
                 try:
                     got[name] = ast.literal_eval(node.value)
                 except ValueError:
                     pass
-        elif isinstance(node, ast.FunctionDef) and node.name == "bu_row":
-            got["bu_row"] = node
+        elif isinstance(node, ast.FunctionDef) and node.name in ("bu_row", "spec"):
+            got[node.name] = node
     return got
 
 
@@ -110,6 +113,18 @@ def calc_rows(mdls, C=None):
     return sorted(C.up10k(C.price(v)["total"]) for v in vs)
 
 
+def versions(mdls, C=None):
+    """Версии карточки каталога, как в load_group: (метка, строка версии — spec генератора, цена под ключ), по цене под ключ."""
+    C, got = C or _calc(), _gen()
+    ns = {"DRIVE": got["DRIVE"]}
+    exec(compile(ast.Module([got["spec"]], []), "gen_catalog_prem_mtk.py", "exec"), ns)
+    vs = sorted((v for x in mdls for v in x["versions"]), key=lambda v: v["msrp_cny"])
+    vs = vs if len(vs) <= 3 else [vs[0], vs[len(vs) // 2], vs[-1]]
+    vs = sorted(vs, key=lambda v: C.price(v)["total"])
+    return [(lab + (f" · {v['trim_ru']}" if v.get("trim_ru") else ""), ns["spec"](v), C.up10k(C.price(v)["total"]))
+            for lab, v in zip(got["LABELS"][len(vs)], vs)]
+
+
 def card_rows(m, bu_row, C=None):
     """Строки карточки каталога, как в PDF: б/у (метка, цена или None) и версии ("", цена)."""
     b = bu_row(m["key"])
@@ -138,7 +153,7 @@ def pdf_prices(names, date):
 
 
 def day_prices(vtb, cny, eur):
-    """{модель: {"from": цена «от» новых, "bu": строка б/у или None}} по курсам дня — для моделей, у которых расчёт
+    """{модель: {"from": цена «от» новых, "bu": строка б/у или None, "versions": версии карточки}} по курсам дня — для моделей, у которых расчёт
     по курсам каталога совпал с PDF; и список моделей без цены. Сверка с расчётом до исправления calc.py 27.10 убрана:
     PDF 30.10 посчитаны уже исправленным («Авто» 30.10.2026)."""
     C, bu_row = _calc(), bu_rows()
@@ -147,7 +162,7 @@ def day_prices(vtb, cny, eur):
     ok = [m for m in ms if pdf.get(m["name"]) == card_rows(m, bu_row)]
     old = C.set_rates(vtb, cny, eur)
     try:
-        out = {m["key"]: {"from": calc_rows(m["mdls"])[0], "bu": bu_row(m["key"])} for m in ok}
+        out = {m["key"]: {"from": calc_rows(m["mdls"])[0], "bu": bu_row(m["key"]), "versions": versions(m["mdls"])} for m in ok}
     finally:
         C.set_rates(*old)
     return out, [m["name"] for m in ms if m["key"] not in out]
@@ -226,6 +241,9 @@ def main():
         box, fit = crop_box(im.size, bbox(p, im))
         slug = m["key"].lower()
         im = im.crop(box)
+        kl = min(1, WL / im.width, WL * H / W / im.height) if fit else min(1, WL / im.width)
+        big = im.resize((round(im.width * kl), round(im.height * kl)), Image.LANCZOS) if kl < 1 else im
+        big.save(OUT_IMG / f"{slug}_l.webp", quality=76, method=6)
         k = min(W / im.width, H / im.height) if fit else W / im.width
         im = im.resize((round(im.width * k), round(im.height * k)) if fit else (W, H), Image.LANCZOS)
         im.save(OUT_IMG / f"{slug}.webp", quality=72, method=6)
@@ -233,9 +251,10 @@ def main():
             fitted.append(m["name"])
         if m["price"] is None:
             noprice.append(m["name"])
-        cards.append(dict(m, img=f"img/p/{slug}.webp", size=list(im.size), bg=list(edge_colors(im)) if fit else None,
+        cards.append(dict(m, img=f"img/p/{slug}.webp", size=list(im.size), img_l=f"img/p/{slug}_l.webp", size_l=list(big.size),
+                          bg=list(edge_colors(im)) if fit else None,
                           author=s["author"], license=s["license"], license_url=s["license_url"], page=s["page"]))
-    live = {Path(c["img"]).name for c in cards}
+    live = {Path(c[k]).name for c in cards for k in ("img", "img_l")}
     for f in OUT_IMG.glob("*.webp"):
         if f.name not in live:
             f.unlink()
