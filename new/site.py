@@ -393,8 +393,8 @@ def bot_key(slug):
 
 
 def kp_btns(start, light=False, calc=False):
-    """Кнопки «Получить КП в Telegram» и «в MAX» (MAX — когда будет бот)."""
-    a = (" data-kpcalc" if calc else "") + f' data-ym="{SEARCH.get("metrika", "")}"'
+    """Кнопки «Получить КП в Telegram» и «в MAX» (MAX — когда будет бот); мессенджер — в новой вкладке, сайт остаётся (Юрий 30.10.2026)."""
+    a = (" data-kpcalc" if calc else "") + f' data-ym="{SEARCH.get("metrika", "")}" target="_blank" rel="noopener"'
     b = f'<a class="btn {"w" if light else "b"}" href="https://t.me/{TG_BOT}?start={start}" data-kpm="tg"{a}>Получить КП в&nbsp;Telegram</a>'
     if MAX_BOT:
         b += f'<a class="btn {"o" if light else "ob"}" href="https://max.ru/{MAX_BOT}?start={start}" data-kpm="max"{a}>Получить КП в&nbsp;MAX</a>'
