@@ -1063,7 +1063,7 @@ def model_page(m, models, kp):
 <section class="sec"><div class="wrap cols">
 <div class="rv">{desc}<ul class="pts">{pts}</ul>
 <p class="note">Фото&nbsp;— пример модели. Цвет, комплектация и&nbsp;год конкретной машины&nbsp;— по&nbsp;Вашему запросу: присылаем фото, отчёт о&nbsp;проверке и&nbsp;итог до&nbsp;рубля.</p></div>
-<div class="rv d1"><table class="spec">{spec}</table></div>
+<div class="rv d1"><table class="spec">{spec}</table>{f'<div class="btns pvkp">{kp_btns("m_" + bot_key(m["slug"]))}</div>{kp_note()}' if KP_ON else ""}</div>
 </div></section>
 {fblock}
 <section class="sec"><div class="wrap"><div class="shead"><div><p class="kick rv">Похожие модели</p><h2 class="h2 rv d1">{m["dir_label"]}: <em>ещё варианты</em></h2></div>
@@ -1432,12 +1432,14 @@ def moto_page(d):
     pmax = math.ceil(max(m["price_from_rub"] for m in ms) / 5000) * 5000
     pmin = math.floor(min(m["price_from_rub"] for m in ms) / 5000) * 5000
     bats = [(k, t) for k, t in (("lead", "Свинцовая"), ("graphene", "Графеновая"), ("lithium", "Литиевая")) if any(m["_bat"] == k for m in ms)]
-    grid = "".join(f'<div class="card pc mc" data-brand="{slugify(m["brand"])}" data-price="{m["price_from_rub"]}" data-range="{m["_km"]}" data-bat="{m["_bat"]}"'
+    for m in ms:
+        m["slug"] = slugify(m["name"])
+    grid = "".join(f'<a class="card pc mc" href="{u("mopedy/" + m["slug"] + "/")}" data-vt data-brand="{slugify(m["brand"])}" data-price="{m["price_from_rub"]}" data-range="{m["_km"]}" data-bat="{m["_bat"]}"'
                    f' data-ord="{m["_ord"]}" data-name="{E(m["name"])}" data-q="{E((m["name"] + " " + m["brand"]).lower())}"><div class="im ct"><img src="{u("img/moto/" + m["id"] + ".webp")}" alt="{E(m["name"])}, электромопед" loading="lazy" width="{m["size"][0]}" height="{m["size"][1]}"></div>'
                    f'<div class="t"><h3>{E(m["name"])}</h3><span class="cl">{E(m["class"])}</span>'
                    f'<ul class="ms">{"".join(f"<li>{E(x)}</li>" for x in m["specs"])}</ul>'
                    + (f'<p class="mn">{E(m["note"])}</p>' if m.get("note") else "")
-                   + f'<div class="pr">{moto_price(m)}</div></div></div>' for m in ms)
+                   + f'<div class="pr">{moto_price(m)}</div></div></a>' for m in ms)
     lo = min(m["price_from_rub"] for m in ms)
     facts = "".join(f"<li>{t}</li>" for t in MOTO_FACTS) + '<li class="w">Шлем обязателен</li>'
     body = f"""
@@ -1475,6 +1477,68 @@ def moto_page(d):
          f"{len(ms)} {plural(len(ms), 'модель', 'модели', 'моделей')} электромопедов из Китая: {', '.join(brands[:4])} и другие. До 50 км/ч, права категории M, "
          f"учёт в ГИБДД не нужен. Цена от {html.unescape(rub(lo))}.",
          body, active="mopedy/", jsonld=ld, og="img/moto/og.jpg", prio="0.8")
+    for m in ms:
+        moto_item_page(m, ms, date_)
+
+
+MOTO_ROWS = [("мотор ", "Мотор"), ("до ", "Скорость"), ("запас хода ", "Запас хода"), ("масса ", "Масса")]
+
+
+def moto_spec(x):
+    """Строка характеристик «Мото» («мотор 600 Вт, пиковая 800 Вт») — (название, значение) для таблицы; батарея — строка с «А·ч»."""
+    if "А·ч" in x:
+        return "Батарея", x
+    for pre, t in MOTO_ROWS:
+        if x.startswith(pre):
+            return t, x if t == "Скорость" else x[len(pre):]
+    return "", x
+
+
+def moto_item_page(m, ms, date_):
+    """Страница электромопеда (Юрий 30.10.2026: как в «Премиуме» — карточка с характеристиками и одной кнопкой «Получить КП в Telegram»):
+    фото, цена от … до … (load_moto), характеристики и заметка «Мото», похожие модели."""
+    url = "mopedy/" + m["slug"] + "/"
+    a, b = m["price_from_rub"], m.get("price_to_rub")
+    pr = f'от&nbsp;{rub(a)}' + (f' до&nbsp;{rub(b)}' if b and b != a else "") + f'<small>с&nbsp;доставкой до&nbsp;вашего города, по&nbsp;курсу на&nbsp;{date_}</small>'
+    rows = [("Марка", E(m["brand"])), ("Класс", E(m["class"][:1].upper() + m["class"][1:].replace(" · ", ", ")))] + [(t, E(v)) for t, v in map(moto_spec, m["specs"])]
+    spec = "".join(f"<tr><th>{k}</th><td>{v}</td></tr>" for k, v in rows if k)
+    same = [x for x in ms if x is not m and x["brand"] == m["brand"]][:4]
+    same += sorted([x for x in ms if x is not m and x not in same], key=lambda x: abs(x["price_from_rub"] - a))[:4 - len(same)]
+    facts = "".join(f"<li>{t}</li>" for t in MOTO_FACTS) + '<li class="w">Шлем обязателен</li>'
+    body = f"""
+<section class="mhero"><div class="wrap">{crumbs(("mopedy/", "Электромопеды"), (None, E(m["name"])))}
+<div class="mgrid"><div>
+<h1>{E(m["name"])}</h1><p class="cn">Электромопед из&nbsp;Китая, <span class="nohy">«Восток-Мото»</span></p>
+<div class="tags"><span>{E(m["brand"])}</span><span>Права M</span><span>Без учёта в&nbsp;ГИБДД</span></div>
+<div class="big">{pr}</div>
+<div class="btns">{kp_btns("e_" + bot_key(m["slug"]), light=True) if KP_ON else f'<a class="btn w" href="{u("kontakty/")}">Узнать цену на&nbsp;сегодня <span class="ar">→</span></a>'}</div>{kp_note(True) if KP_ON else ""}
+</div><div class="mpic ct" style="background:#fff"><img src="{u("img/moto/" + m["id"] + ".webp")}" alt="{E(m["name"])}, электромопед" width="{m["size"][0]}" height="{m["size"][1]}"></div></div>
+</div></section>
+<section class="sec"><div class="wrap cols">
+<div class="rv"><h2 class="h2" style="font-size:clamp(28px,2.6vw,38px)">Характеристики</h2><table class="spec" style="margin-top:20px">{spec}</table>
+{f'<p class="note">{E(m["note"])}.</p>' if m.get("note") else ""}</div>
+<div class="rv d1"><h2 class="h2" style="font-size:clamp(28px,2.6vw,38px)">Что нужно <em>для&nbsp;езды</em></h2><ul class="mfacts mv">{facts}</ul>
+<p class="note">Цена зависит от&nbsp;курса юаня и&nbsp;пересчитывается каждый день. Цвет и&nbsp;точную цену на&nbsp;сегодня пришлём в&nbsp;КП.</p></div>
+</div></section>
+<section class="sec bg prem moto"><div class="wrap"><div class="shead"><div><p class="kick rv">Электромопеды</p><h2 class="h2 rv d1">Похожие <em>модели</em></h2></div>
+<a class="more rv" href="{u("mopedy/")}">Все электромопеды <span class="ar">→</span></a></div>
+<div class="list" style="margin-top:46px">{"".join(moto_card(x) for x in same)}</div></div></section>
+{fin_block()}"""
+    ld = [bc_ld(("mopedy/", "Электромопеды"), (url, m["name"])),
+          {"@context": "https://schema.org", "@type": "Product", "name": m["name"] + ", электромопед из Китая", "brand": {"@type": "Brand", "name": m["brand"]},
+           "image": SITE + u("img/moto/" + m["id"] + ".webp"), "category": "Электромопеды",
+           "offers": {"@type": "AggregateOffer", "priceCurrency": "RUB", "lowPrice": a, "highPrice": b or a, "availability": "https://schema.org/PreOrder",
+                      "seller": {"@type": "Organization", "name": "МТК Восток-Авто"}}}]
+    page(url, f'{m["name"]}: электромопед из Китая — от {html.unescape(rub(a))} | МТК Восток-Авто',
+         f'{m["name"]}, электромопед под права M: {", ".join(m["specs"][:3])}. Цена с доставкой от {html.unescape(rub(a))} на {date_}. Учёт в ГИБДД и ОСАГО не нужны.',
+         body, active="mopedy/", jsonld=ld, og="img/moto/" + m["id"] + ".webp", prio="0.6")
+
+
+def moto_card(m):
+    """Карточка мопеда в «Похожих моделях» — ссылка на его страницу."""
+    return (f'<a class="card pc mc" href="{u("mopedy/" + m["slug"] + "/")}" data-vt><div class="im ct"><img src="{u("img/moto/" + m["id"] + ".webp")}" alt="{E(m["name"])}, электромопед" loading="lazy" width="{m["size"][0]}" height="{m["size"][1]}"></div>'
+            f'<div class="t"><h3>{E(m["name"])}</h3><span class="cl">{E(m["class"])}</span>'
+            f'<ul class="ms">{"".join(f"<li>{E(x)}</li>" for x in m["specs"])}</ul><div class="pr">{moto_price(m)}</div></div></a>')
 
 
 def how_page(faq):
@@ -1643,7 +1707,7 @@ def extras(models, kp, rates, moto=None):
         lines += [f"- [{c['title']} {c.get('year') or ''}]({SITE}{u('avto/' + c['slug'] + '/')}): {kp_line(c)}; {c['total']:,} ₽ под ключ".replace(",", " ") for c in kp]
     if moto and moto["mopeds"]:
         lines += ["", f"## Электромопеды «Восток-Мото» ({len(moto['mopeds'])} {plural(len(moto['mopeds']), 'модель', 'модели', 'моделей')}, права категории M, цены по курсу на {moto['date']})", ""]
-        lines += [f"- [{m['name']}]({SITE}{u('mopedy/')}): {' · '.join(m['specs'])}; {html.unescape(re.sub('<[^>]+>', '', moto_price(m)))}" for m in moto["mopeds"]]
+        lines += [f"- [{m['name']}]({SITE}{u('mopedy/' + slugify(m['name']) + '/')}): {' · '.join(m['specs'])}; {html.unescape(re.sub('<[^>]+>', '', moto_price(m)))}" for m in moto["mopeds"]]
     lines += ["", "## Контакты", ""] + [f"- {p['name']} — {p['note']}: {p['tel']}, Telegram @{p['tg']}" for p in TEAM] + [f"- Telegram-канал: {CHANNEL}", ""]
     (OUT / "llms.txt").write_text("\n".join(lines))
     (OUT / "404.html").write_text(f"""<!doctype html><html lang="ru"><head><meta charset="utf-8"><title>Страница не найдена — МТК Восток-Авто</title>
@@ -1686,7 +1750,7 @@ def politika_page():
          "Как МТК Восток-Авто обрабатывает персональные данные посетителей сайта и пользователей чат-ботов.", body, noindex=not OPERATOR, prio="0.2")
 
 
-def bot_data(models, kp, rates, prem=None):
+def bot_data(models, kp, rates, prem=None, moto=None):
     """Данные для бота заявок (tools/mtk-zayavki/bot.py): по коду из ссылки «Получить КП» — те же цифры, что на странице сайта."""
     cars = {bot_key(c["slug"]): {"slug": c["slug"], "t": f'{c["title"]} {c.get("year") or ""}'.strip(), "line": html.unescape(kp_line(c)),
                                  "total": c["price"]["total"], "lines": [[k, v] for k, v in c["price"]["lines"]],
@@ -1695,8 +1759,11 @@ def bot_data(models, kp, rates, prem=None):
     prem = {bot_key(c["slug"]): {"slug": c["slug"], "t": c["name"], "img": c["img_l"],   # «Премиум» (Юрий 30.10.2026): б/у и версии, как на странице
                                  "rows": ([[c["bu"]["label"], c["bu"]["spec"], c["bu"]["price"]]] if c.get("bu") else [])
                                  + [[("Новый 2026 · " if c.get("bu") else "") + lab, sp, p] for lab, sp, p in c["versions"]]} for c in prem or []}
+    moto = {bot_key(slugify(m["name"])): {"slug": slugify(m["name"]), "t": m["name"], "img": f'img/moto/{m["id"]}.webp', "cls": m["class"], "specs": m["specs"],
+                                          "note": m.get("note") or "", "from": m["price_from_rub"], "to": m.get("price_to_rub"), "date": moto["date"]}
+            for m in (moto or {}).get("mopeds", [])}   # электромопеды (Юрий 30.10.2026): как на странице мопеда
     (DATA / "bot_calc.json").write_text(json.dumps(calc_data(rates), ensure_ascii=False))   # калькулятор в боте — те же данные, что на странице
-    (DATA / "bot_cars.json").write_text(json.dumps({"date": ddmm(TODAY), "rate": f'{rates["vtb"]:.2f}'.replace(".", ","), "cars": cars, "models": mods, "prem": prem},
+    (DATA / "bot_cars.json").write_text(json.dumps({"date": ddmm(TODAY), "rate": f'{rates["vtb"]:.2f}'.replace(".", ","), "cars": cars, "models": mods, "prem": prem, "moto": moto},
                                                    ensure_ascii=False, indent=0))
 
 
@@ -1781,7 +1848,7 @@ def main():
         faq_page(faq)
     contacts_page()
     politika_page()
-    bot_data(models, kp, rates, prem)
+    bot_data(models, kp, rates, prem, moto)
     extras(models, kp, rates, moto)
     (DATA / "last_build.json").write_text(json.dumps({"date": TODAY.isoformat(), "rates": rates, "models": len(models), "kp": len(kp), "pages": len(PAGES)}, ensure_ascii=False, indent=1))
     size = sum(f.stat().st_size for f in OUT.rglob("*") if f.is_file())
