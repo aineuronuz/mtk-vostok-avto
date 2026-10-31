@@ -1,3 +1,330 @@
 {
- "MG5": {"brand": "MG"}
+ "MG5": {
+  "brand": "MG",
+  "body": "седан"
+ },
+ "Changan Qiyuan Q05": {
+  "body": "кроссовер"
+ },
+ "Changan Qiyuan A06": {
+  "body": "седан"
+ },
+ "BYD Seagull (Дельфин мини)": {
+  "body": "хэтчбек"
+ },
+ "BYD Yuan UP 301 км": {
+  "body": "кроссовер"
+ },
+ "BYD Dolphin": {
+  "body": "хэтчбек"
+ },
+ "GAC Aion Y Plus": {
+  "body": "кроссовер"
+ },
+ "GAC Aion UT": {
+  "body": "хэтчбек"
+ },
+ "Geely Xingyuan (Geome Starwish)": {
+  "body": "хэтчбек"
+ },
+ "Arcfox T1": {
+  "body": "хэтчбек"
+ },
+ "Dongfeng Nammi 01": {
+  "body": "хэтчбек"
+ },
+ "NIO Firefly": {
+  "body": "хэтчбек"
+ },
+ "Leapmotor A05": {
+  "body": "хэтчбек"
+ },
+ "Leapmotor A10": {
+  "body": "кроссовер"
+ },
+ "Chery QQ3 EV": {
+  "body": "хэтчбек"
+ },
+ "GWM Ora Good Cat": {
+  "body": "хэтчбек"
+ },
+ "Wuling Bingo S": {
+  "body": "хэтчбек"
+ },
+ "Wuling Xingguang 730 EV": {
+  "body": "минивэн"
+ },
+ "Wuling Xingguang 560 EV": {
+  "body": "кроссовер"
+ },
+ "Wuling Yangguang EV": {
+  "body": "минивэн"
+ },
+ "Toyota Corolla / Levin Hybrid": {
+  "body": "седан"
+ },
+ "Honda Envix e:HEV": {
+  "body": "седан"
+ },
+ "Toyota Corolla (Levin)": {
+  "body": "седан"
+ },
+ "Toyota Yaris L": {
+  "body": "хэтчбек"
+ },
+ "Audi A3 / A3L": {
+  "body": "седан"
+ },
+ "Audi A4L": {
+  "body": "седан"
+ },
+ "Audi Q2L": {
+  "body": "кроссовер"
+ },
+ "Audi Q3": {
+  "body": "кроссовер"
+ },
+ "BMW 1-Series седан": {
+  "body": "седан"
+ },
+ "BMW X1": {
+  "body": "кроссовер"
+ },
+ "BMW X2 sDrive20i": {
+  "body": "кроссовер"
+ },
+ "BMW 320Li": {
+  "body": "седан"
+ },
+ "Chevrolet Monza": {
+  "body": "седан"
+ },
+ "Chevrolet Onix": {
+  "body": "седан"
+ },
+ "Ford Focus": {
+  "body": "седан"
+ },
+ "Ford Territory": {
+  "body": "кроссовер"
+ },
+ "Honda Civic": {
+  "body": "седан"
+ },
+ "Honda Fit": {
+  "body": "хэтчбек"
+ },
+ "Honda Vezel": {
+  "body": "кроссовер"
+ },
+ "Honda XR-V": {
+  "body": "кроссовер"
+ },
+ "Hyundai Elantra": {
+  "body": "седан"
+ },
+ "Hyundai ix25": {
+  "body": "кроссовер"
+ },
+ "Hyundai ix35": {
+  "body": "кроссовер"
+ },
+ "Hyundai Verna": {
+  "body": "седан"
+ },
+ "Kia K3 (Cerato)": {
+  "body": "седан"
+ },
+ "Kia KX1": {
+  "body": "кроссовер"
+ },
+ "Kia Pegas": {
+  "body": "седан"
+ },
+ "Mazda 3 Axella": {
+  "body": "седан"
+ },
+ "Mazda 6 Atenza": {
+  "body": "седан"
+ },
+ "Mazda CX-4": {
+  "body": "кроссовер"
+ },
+ "Mazda CX-5": {
+  "body": "кроссовер"
+ },
+ "Mazda CX-30": {
+  "body": "кроссовер"
+ },
+ "Mercedes-Benz A-class L": {
+  "body": "седан"
+ },
+ "Mercedes-Benz GLA": {
+  "body": "кроссовер"
+ },
+ "Mercedes-Benz GLB": {
+  "body": "кроссовер"
+ },
+ "Nissan Qashqai": {
+  "body": "кроссовер"
+ },
+ "Nissan Sylphy": {
+  "body": "седан"
+ },
+ "Nissan Tiida": {
+  "body": "хэтчбек"
+ },
+ "Nissan Kicks": {
+  "body": "кроссовер"
+ },
+ "Nissan X-Trail": {
+  "body": "кроссовер"
+ },
+ "Nissan Altima": {
+  "body": "седан"
+ },
+ "Skoda Kamiq": {
+  "body": "кроссовер"
+ },
+ "Skoda Karoq": {
+  "body": "кроссовер"
+ },
+ "Skoda Octavia": {
+  "body": "лифтбек"
+ },
+ "Volkswagen Bora": {
+  "body": "седан"
+ },
+ "Volkswagen Golf": {
+  "body": "хэтчбек"
+ },
+ "Volkswagen Lamando L": {
+  "body": "седан"
+ },
+ "Volkswagen Lavida": {
+  "body": "седан"
+ },
+ "Volkswagen Magotan": {
+  "body": "седан"
+ },
+ "Volkswagen Sagitar (Jetta)": {
+  "body": "седан"
+ },
+ "Volkswagen Santana": {
+  "body": "седан"
+ },
+ "Volkswagen Tharu": {
+  "body": "кроссовер"
+ },
+ "Volkswagen Tharu XR": {
+  "body": "кроссовер"
+ },
+ "Volkswagen Touran L": {
+  "body": "минивэн"
+ },
+ "Volkswagen T-ROC": {
+  "body": "кроссовер"
+ },
+ "Volkswagen Tayron": {
+  "body": "кроссовер"
+ },
+ "Geely Colorful (Coolray)": {
+  "body": "кроссовер"
+ },
+ "Geely Binrui": {
+  "body": "седан"
+ },
+ "Geely Emgrand L": {
+  "body": "седан"
+ },
+ "Geely Emgrand": {
+  "body": "седан"
+ },
+ "Geely Emgrand S": {
+  "body": "кроссовер"
+ },
+ "Chery Arrizo 5 / 5 Plus / 5 GT": {
+  "body": "седан"
+ },
+ "Chery Tiggo 3x": {
+  "body": "кроссовер"
+ },
+ "Chery Tiggo 5x": {
+  "body": "кроссовер"
+ },
+ "Chery Tiggo 7": {
+  "body": "кроссовер"
+ },
+ "Chery Tiggo 7 Plus": {
+  "body": "кроссовер"
+ },
+ "Chery Tiggo 8": {
+  "body": "кроссовер"
+ },
+ "Chery Omoda 5": {
+  "body": "кроссовер"
+ },
+ "Jetour X70 / X70 Plus": {
+  "body": "кроссовер"
+ },
+ "Jetour Dashing": {
+  "body": "кроссовер"
+ },
+ "Exeed LX": {
+  "body": "кроссовер"
+ },
+ "Haval M6 PLUS": {
+  "body": "кроссовер"
+ },
+ "Haval Chitu": {
+  "body": "кроссовер"
+ },
+ "Changan CS35 Plus": {
+  "body": "кроссовер"
+ },
+ "Dongfeng Aeolus Yixuan": {
+  "body": "седан"
+ },
+ "Dongfeng Forthing T5": {
+  "body": "кроссовер"
+ },
+ "Dongfeng Fengon S560": {
+  "body": "кроссовер"
+ },
+ "Venucia D60": {
+  "body": "седан"
+ },
+ "MG ZS": {
+  "body": "кроссовер"
+ },
+ "Roewe i5": {
+  "body": "седан"
+ },
+ "Wuling Xingchi": {
+  "body": "кроссовер"
+ },
+ "Wuling Victory": {
+  "body": "минивэн"
+ },
+ "Wuling Jiachen": {
+  "body": "минивэн"
+ },
+ "Jetta VS5": {
+  "body": "кроссовер"
+ },
+ "Jetta VS7": {
+  "body": "кроссовер"
+ },
+ "Livan X3 Pro": {
+  "body": "кроссовер"
+ },
+ "Subaru Forester": {
+  "body": "кроссовер"
+ },
+ "Subaru XV": {
+  "body": "кроссовер"
+ },
+ "Mitsubishi Eclipse Cross": {
+  "body": "кроссовер"
+ }
 }
