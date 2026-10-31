@@ -319,6 +319,8 @@ def brand():
         for i, c in enumerate(text):
             d.text((f.getlength(text[:i]) + i * ls, nm.height + gap - top), c, font=f, fill=col or (0x2b, 0x57, 0x97, 255))
         im.save(IMG / f"name_{name}.png", optimize=True)
+        # на сайте — webp 2× от экрана: втрое легче png 3× (PageSpeed, Юрий 31.10.2026); png остаётся для страниц фото КП
+        im.resize((W * 2 // 3, round(H * 2 / 3)), Image.LANCZOS).save(IMG / f"name_{name}.webp", lossless=True, method=6)
     return W // 3, round(H / 3)
 
 
@@ -328,8 +330,8 @@ NW = NH = 0
 def logo_html(cls="logo"):
     return (f'<a class="{cls}" href="{u()}" aria-label="МТК Восток-Авто — на главную"><picture><source type="image/webp" srcset="{u("img/logo64.webp")} 1x, {u("img/logo128.webp")} 2x, {u("img/logo192.webp")} 3x">'
             f'<img class="lg" src="{u("img/logo128.png")}" alt="" width="64" height="64"></picture>'
-            f'<span class="nm"><img class="w" src="{u("img/name_w.png")}" alt="Восток-Авто — международная транспортная компания" width="{NW}" height="{NH}">'
-            f'<img class="b" src="{u("img/name_b.png")}" alt="" width="{NW}" height="{NH}"></span></a>')
+            f'<span class="nm"><img class="w" src="{u("img/name_w.webp")}" alt="Восток-Авто — международная транспортная компания" width="{NW}" height="{NH}">'
+            f'<img class="b" src="{u("img/name_b.webp")}" alt="" width="{NW}" height="{NH}"></span></a>')
 
 
 ASSET_V = ""
@@ -369,9 +371,9 @@ def page(path, title, desc, body, active=None, jsonld=None, og=None, prio="0.6",
 <footer><div class="wrap">
 <div class="fcols">
 <div>{logo_html()}<p class="fabout">Привозим новые и&nbsp;б/у автомобили из&nbsp;Китая под&nbsp;ключ: подбор, проверка, договор, доставка, растаможка и&nbsp;электронный ПТС. Работаем с&nbsp;Китаем с&nbsp;2016 года.</p></div>
-<div><h4>Разделы</h4><nav>{"".join(f'<a href="{u(p)}">{t}</a>' for p, t in MENU)}</nav></div>
-<div><h4>Каталог</h4><nav>{cat_links}<a href="{u("avto/")}">Авто в Китае</a></nav></div>
-<div><h4>Связаться</h4><nav>{team_links}<a href="{CHANNEL}">Telegram-канал</a></nav></div>
+<div><div class="fh">Разделы</div><nav>{"".join(f'<a href="{u(p)}">{t}</a>' for p, t in MENU)}</nav></div>
+<div><div class="fh">Каталог</div><nav>{cat_links}<a href="{u("avto/")}">Авто в Китае</a></nav></div>
+<div><div class="fh">Связаться</div><nav>{team_links}<a href="{CHANNEL}">Telegram-канал</a></nav></div>
 </div>
 <div class="fbot"><span>© {TODAY.year} МТК Восток-Авто · Международная транспортная компания</span><span>{f'<a href="{u("politika/")}">Политика обработки данных</a> · ' if KP_ON else ""}Цены под ключ пересчитаны {ddmm(TODAY)}</span></div>
 </div></footer>
@@ -538,6 +540,7 @@ def load_models(rates=None):
 
 def model_imgs(m):
     webp(m["src"], IMG / "m" / f'{m["stem"]}_c.webp', 720, 74)
+    webp(m["src"], IMG / "m" / f'{m["stem"]}_480.webp', 480, 74)    # карточка на телефоне и ноутбуке (PageSpeed, Юрий 31.10.2026)
     webp(m["src"], IMG / "m" / f'{m["stem"]}.webp', 1400, 78)
 
 
@@ -546,7 +549,7 @@ def model_card(m, vt=True):
     tag = m["dir_label"] if m["dir"] != "fwd" else (m.get("body") or "Бензин").capitalize()
     return (f'<a class="card" href="{u("katalog/" + m["slug"] + "/")}"{" data-vt" if vt else ""} data-cat="{m["dir"]}" data-fuel="{m["fuel"]}" data-feat="{"awd" if m["awd"] else ""}" data-body="{E(m.get("body") or "")}"'
             f' data-brand="{E(m["brand"])}" data-price="{lo_price(m)}" data-name="{E(m["name"])}" data-q="{E((m["name"] + " " + (m.get("china") or "") + " " + m["plant"]).lower())}">'
-            f'<div class="im"><img src="{u("img/m/" + m["stem"] + "_c.webp")}" alt="{E(m["name"])}" loading="lazy" width="720" height="424"><span class="tag">{E(tag)}</span></div>'
+            f'<div class="im"><img src="{u("img/m/" + m["stem"] + "_c.webp")}" srcset="{u("img/m/" + m["stem"] + "_480.webp")} 480w, {u("img/m/" + m["stem"] + "_c.webp")} 720w" sizes="(max-width:1279px) 43vw, 295px" alt="{E(m["name"])}" loading="lazy" width="720" height="424"><span class="tag">{E(tag)}</span></div>'
             f'<div class="t"><h3>{E(m["name"])}</h3><div class="sp">{E(sp)}</div>'
             f'<div class="pr{" pr2" if "bu_label" in m else ""}">{price_html(m)}<small>ориентир под ключ</small></div></div></a>')
 
@@ -999,19 +1002,19 @@ def catalog_page(models):
 <div class="tiles">{tiles}</div></div></section>
 <section class="sec tight"><div class="wrap lay">
 <aside class="flt" aria-label="Фильтры">{FCLOSE}
-<h4>Поиск</h4><input type="search" data-f="q" placeholder="Модель или марка">
-<h4>Топливо</h4><div class="chips" data-f="fuel">{"".join(f'<button class="chip" type="button" data-v="{k}">{t}</button>' for k, t in fuels)}</div>
-<h4>Привод</h4><div class="chips" data-f="feat"><button class="chip" type="button" data-v="awd">Только полный</button></div>
-<h4>Кузов</h4><div class="chips" data-f="body">{"".join(f'<button class="chip" type="button" data-v="{E(b)}">{E(b.capitalize())}</button>' for b in bodies)}</div>
-<h4>Марка</h4><select data-f="brand"><option value="">Любая</option>{"".join(f"<option>{E(b)}</option>" for b in brands)}</select>
-<h4>Цена под ключ</h4><input type="range" data-f="price" min="1000000" max="{int(pmax)}" step="100000" value="{int(pmax)}"><div class="rng"><span>до</span><b data-out="price">любая</b></div>
+<div class="fh">Поиск</div><input type="search" data-f="q" placeholder="Модель или марка" aria-label="Поиск: модель или марка">
+<div class="fh">Топливо</div><div class="chips" data-f="fuel">{"".join(f'<button class="chip" type="button" data-v="{k}">{t}</button>' for k, t in fuels)}</div>
+<div class="fh">Привод</div><div class="chips" data-f="feat"><button class="chip" type="button" data-v="awd">Только полный</button></div>
+<div class="fh">Кузов</div><div class="chips" data-f="body">{"".join(f'<button class="chip" type="button" data-v="{E(b)}">{E(b.capitalize())}</button>' for b in bodies)}</div>
+<div class="fh">Марка</div><select data-f="brand" aria-label="Марка"><option value="">Любая</option>{"".join(f"<option>{E(b)}</option>" for b in brands)}</select>
+<div class="fh">Цена под ключ</div><input type="range" data-f="price" aria-label="Цена под ключ, до" min="1000000" max="{int(pmax)}" step="100000" value="{int(pmax)}"><div class="rng"><span>до</span><b data-out="price">любая</b></div>
 <button class="btn ob sm reset" type="button" data-reset>Сбросить фильтры</button>
 <button class="btn b sm reset fbtn" type="button" data-fopen>Показать</button>
 </aside>
 <div>
 <div class="lhead"><span class="cnt">Найдено: <b id="cnt">{len(models)}</b></span><span style="display:flex;gap:10px"><button class="btn ob sm fbtn" type="button" data-fopen>Фильтры</button>
 <select data-sort aria-label="Сортировка"><option value="price-asc">Сначала дешевле</option><option value="price-desc">Сначала дороже</option><option value="name-asc">По названию</option></select></span></div>
-<div class="list" data-list>{"".join(model_card(m) for m in models)}</div>
+<h2 class="sr">Модели в каталоге</h2><div class="list" data-list>{"".join(model_card(m) for m in models)}</div>
 <p class="empty" id="empty">По&nbsp;таким условиям моделей нет. <a class="more" href="#" data-reset>Сбросить фильтры</a></p>
 <p class="note">Цены&nbsp;— ориентир под&nbsp;ключ: автомобиль, доставка, растаможка, документы и&nbsp;наши услуги. Пересчитаны {ddmm(TODAY)} по&nbsp;курсу юаня на&nbsp;сегодня; точную цену конкретной машины считаем при&nbsp;подборе. Доставим в&nbsp;любой город России.</p>
 </div></div></section>
@@ -1093,20 +1096,20 @@ def avto_page(kp, rates):
 </div></section>
 <section class="sec tight"><div class="wrap lay">
 <aside class="flt" aria-label="Фильтры">{FCLOSE}
-<h4>Поиск</h4><input type="search" data-f="q" placeholder="Модель или марка">
-<h4>Топливо</h4><div class="chips" data-f="fuel">{"".join(f'<button class="chip" type="button" data-v="{k}">{t}</button>' for k, t in fuels)}</div>
-<h4>Привод</h4><div class="chips" data-f="feat"><button class="chip" type="button" data-v="awd">Только полный</button></div>
-<h4>Марка</h4><select data-f="brand"><option value="">Любая</option>{"".join(f"<option>{E(b)}</option>" for b in brands)}</select>
-<h4>Цена под ключ</h4><input type="range" data-f="price" min="1000000" max="{int(pmax)}" step="100000" value="{int(pmax)}"><div class="rng"><span>до</span><b data-out="price">любая</b></div>
-<h4>Год и пробег</h4><div class="two"><select data-f="ymin"><option value="">Год от</option>{"".join(f'<option value="{y}">{y}</option>' for y in years)}</select>
-<select data-f="kmmax"><option value="">Пробег до</option>{"".join(f'<option value="{k}">{k // 1000} тыс. км</option>' for k in (10000, 30000, 50000, 80000, 120000))}</select></div>
+<div class="fh">Поиск</div><input type="search" data-f="q" placeholder="Модель или марка" aria-label="Поиск: модель или марка">
+<div class="fh">Топливо</div><div class="chips" data-f="fuel">{"".join(f'<button class="chip" type="button" data-v="{k}">{t}</button>' for k, t in fuels)}</div>
+<div class="fh">Привод</div><div class="chips" data-f="feat"><button class="chip" type="button" data-v="awd">Только полный</button></div>
+<div class="fh">Марка</div><select data-f="brand" aria-label="Марка"><option value="">Любая</option>{"".join(f"<option>{E(b)}</option>" for b in brands)}</select>
+<div class="fh">Цена под ключ</div><input type="range" data-f="price" aria-label="Цена под ключ, до" min="1000000" max="{int(pmax)}" step="100000" value="{int(pmax)}"><div class="rng"><span>до</span><b data-out="price">любая</b></div>
+<div class="fh">Год и пробег</div><div class="two"><select data-f="ymin" aria-label="Год от"><option value="">Год от</option>{"".join(f'<option value="{y}">{y}</option>' for y in years)}</select>
+<select data-f="kmmax" aria-label="Пробег до"><option value="">Пробег до</option>{"".join(f'<option value="{k}">{k // 1000} тыс. км</option>' for k in (10000, 30000, 50000, 80000, 120000))}</select></div>
 <button class="btn ob sm reset" type="button" data-reset>Сбросить фильтры</button>
 <button class="btn b sm reset fbtn" type="button" data-fopen>Показать</button>
 </aside>
 <div>
 <div class="lhead"><span class="cnt">Найдено: <b id="cnt">{len(kp)}</b></span><span style="display:flex;gap:10px"><button class="btn ob sm fbtn" type="button" data-fopen>Фильтры</button>
 <select data-sort aria-label="Сортировка"><option value="pop-asc">Популярные</option><option value="price-asc">Сначала дешевле</option><option value="price-desc">Сначала дороже</option><option value="year-desc">Сначала новее</option><option value="km-asc">Меньше пробег</option></select></span></div>
-<div class="list" data-list>{"".join(kp_card(c) for c in pop_rank(kp))}</div>
+<h2 class="sr">Автомобили в Китае</h2><div class="list" data-list>{"".join(kp_card(c) for c in pop_rank(kp))}</div>
 <p class="empty" id="empty">По&nbsp;таким условиям машин нет. <a class="more" href="#" data-reset>Сбросить фильтры</a></p>
 <p class="note">Цена под&nbsp;ключ: автомобиль, доставка, комиссия банка, пошлина и&nbsp;сборы, утильсбор, СБКТС и&nbsp;ЭПТС, склад и&nbsp;наши услуги. Курс юаня меняется каждый день&nbsp;— вместе с&nbsp;ним меняется и&nbsp;цена. Объявления в&nbsp;Китае живут недолго: если машину продали, подберём такую&nbsp;же по&nbsp;году, пробегу и&nbsp;цене.</p>
 </div></div></section>
@@ -1260,19 +1263,19 @@ def premium_page(prem, rates):
 </div></section>
 <section class="sec tight prem"><div class="wrap lay">
 <aside class="flt" aria-label="Фильтры">{FCLOSE}
-<h4>Поиск</h4><input type="search" data-f="q" placeholder="Модель или марка">
-<h4>Топливо</h4><div class="chips" data-f="fuel">{"".join(f'<button class="chip" type="button" data-v="{k}">{t}</button>' for k, t in fuels)}</div>
-<h4>Привод</h4><div class="chips" data-f="feat"><button class="chip" type="button" data-v="awd">Только полный</button></div>
-<h4>Кузов</h4><div class="chips" data-f="body">{"".join(f'<button class="chip" type="button" data-v="{E(b)}">{E(b)}</button>' for b in bodies)}</div>
-<h4>Марка</h4><select data-f="brand"><option value="">Любая</option>{"".join(f"<option>{E(b)}</option>" for b in brands)}</select>
-<h4>Цена под ключ</h4><input type="range" data-f="price" min="2000000" max="{int(pmax)}" step="500000" value="{int(pmax)}"><div class="rng"><span>до</span><b data-out="price">любая</b></div>
+<div class="fh">Поиск</div><input type="search" data-f="q" placeholder="Модель или марка" aria-label="Поиск: модель или марка">
+<div class="fh">Топливо</div><div class="chips" data-f="fuel">{"".join(f'<button class="chip" type="button" data-v="{k}">{t}</button>' for k, t in fuels)}</div>
+<div class="fh">Привод</div><div class="chips" data-f="feat"><button class="chip" type="button" data-v="awd">Только полный</button></div>
+<div class="fh">Кузов</div><div class="chips" data-f="body">{"".join(f'<button class="chip" type="button" data-v="{E(b)}">{E(b)}</button>' for b in bodies)}</div>
+<div class="fh">Марка</div><select data-f="brand" aria-label="Марка"><option value="">Любая</option>{"".join(f"<option>{E(b)}</option>" for b in brands)}</select>
+<div class="fh">Цена под ключ</div><input type="range" data-f="price" aria-label="Цена под ключ, до" min="2000000" max="{int(pmax)}" step="500000" value="{int(pmax)}"><div class="rng"><span>до</span><b data-out="price">любая</b></div>
 <button class="btn ob sm reset" type="button" data-reset>Сбросить фильтры</button>
 <button class="btn b sm reset fbtn" type="button" data-fopen>Показать</button>
 </aside>
 <div>
 <div class="pfl"><div class="chips" data-f="origin" data-one><button class="chip all" type="button" data-reset>Все <i>{len(cards)}</i></button>{chips}</div>
 <span style="display:flex;gap:10px;align-items:center"><span class="cnt">Найдено: <b id="cnt">{len(cards)}</b></span><button class="btn ob sm fbtn" type="button" data-fopen>Фильтры</button></span></div>
-<div class="list" data-list>{grid}</div>
+<h2 class="sr">Модели премиум</h2><div class="list" data-list>{grid}</div>
 <p class="empty" id="empty">По&nbsp;таким условиям моделей нет. <a class="more" href="#" data-reset>Сбросить фильтры</a></p>
 </div></div>
 <div class="wrap">
@@ -1452,18 +1455,18 @@ def moto_page(d):
 <ul class="mfacts">{facts}</ul></div>
 <div class="wrap lay">
 <aside class="flt" aria-label="Фильтры">{FCLOSE}
-<h4>Поиск</h4><input type="search" data-f="q" placeholder="Модель или марка">
-<h4>Марка</h4><div class="chips" data-f="brand">{chips}</div>
-<h4>Цена</h4><input type="range" data-f="price" data-rub min="{pmin}" max="{pmax}" step="5000" value="{pmax}"><div class="rng"><span>до</span><b data-out="price">любая</b></div>
-<h4>Запас хода</h4><select data-f="rmin"><option value="">Любой</option>{"".join(f'<option value="{k}">от&nbsp;{k}&nbsp;км</option>' for k in (40, 50, 60, 80))}</select>
-<h4>Батарея</h4><div class="chips" data-f="bat">{"".join(f'<button class="chip" type="button" data-v="{k}">{t}</button>' for k, t in bats)}</div>
+<div class="fh">Поиск</div><input type="search" data-f="q" placeholder="Модель или марка" aria-label="Поиск: модель или марка">
+<div class="fh">Марка</div><div class="chips" data-f="brand">{chips}</div>
+<div class="fh">Цена</div><input type="range" data-f="price" aria-label="Цена, до" data-rub min="{pmin}" max="{pmax}" step="5000" value="{pmax}"><div class="rng"><span>до</span><b data-out="price">любая</b></div>
+<div class="fh">Запас хода</div><select data-f="rmin" aria-label="Запас хода"><option value="">Любой</option>{"".join(f'<option value="{k}">от&nbsp;{k}&nbsp;км</option>' for k in (40, 50, 60, 80))}</select>
+<div class="fh">Батарея</div><div class="chips" data-f="bat">{"".join(f'<button class="chip" type="button" data-v="{k}">{t}</button>' for k, t in bats)}</div>
 <button class="btn ob sm reset" type="button" data-reset>Сбросить фильтры</button>
 <button class="btn b sm reset fbtn" type="button" data-fopen>Показать</button>
 </aside>
 <div>
 <div class="lhead"><span class="cnt">Найдено: <b id="cnt">{len(ms)}</b></span><span style="display:flex;gap:10px"><button class="btn ob sm fbtn" type="button" data-fopen>Фильтры</button>
 <select data-sort aria-label="Сортировка"><option value="ord-asc">По порядку</option><option value="price-asc">Сначала дешевле</option><option value="price-desc">Сначала дороже</option><option value="range-desc">Больше запас хода</option></select></span></div>
-<div class="list" data-list>{grid}</div>
+<h2 class="sr">Модели электромопедов</h2><div class="list" data-list>{grid}</div>
 <p class="empty" id="empty">По&nbsp;таким условиям моделей нет. <a class="more" href="#" data-reset>Сбросить фильтры</a></p>
 </div></div>
 <div class="wrap">
@@ -1813,7 +1816,7 @@ def main():
         if x.parent.name not in live_m:
             x.unlink()
             x.parent.rmdir()
-    live_i = {f'{m["stem"]}{t}.webp' for m in models for t in ("", "_c")}
+    live_i = {f'{m["stem"]}{t}.webp' for m in models for t in ("", "_c", "_480")}
     for x in (IMG / "m").glob("*.webp"):
         if x.name not in live_i:
             x.unlink()
