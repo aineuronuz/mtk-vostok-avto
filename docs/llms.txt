@@ -129,7 +129,7 @@
 - [Subaru XV (Субару)](https://mtk-vostok-avto.ru/katalog/subaru-xv/): 2.0 литра · AWD, 154 л.с.; от 2,72 до 3,14 млн ₽
 - [Mitsubishi Eclipse Cross (Мицубиси)](https://mtk-vostok-avto.ru/katalog/mitsubishi-eclipse-cross/): 1.5T литра · 4WD, 150 л.с.; от 2,1 до 2,41 млн ₽
 
-## Авто в Китае (239 машин, цена под ключ на 01.11.2026)
+## Авто в Китае (240 машин, цена под ключ на 01.11.2026)
 
 - [Jinbei X30 1.5 2022](https://mtk-vostok-avto.ru/avto/jinbei-x30-2022-42600km/): 42 600 км  1451 см³  102 л.с.  Бензин  задний привод; 1 057 628 ₽ под ключ
 - [Chevrolet Onix 1.0T AT 2022](https://mtk-vostok-avto.ru/avto/chevrolet-onix-2022-54000km/): 54 000 км  999 см³  125 л.с.  Бензин  передний привод; 1 105 074 ₽ под ключ
@@ -279,6 +279,7 @@
 - [Mazda CX-30 2.0 AT 2022](https://mtk-vostok-avto.ru/avto/mazda-cx-30-obsidian-2022-50000km/): 50 000 км  1998 см³  158 л.с.  Бензин  передний привод; 2 279 932 ₽ под ключ
 - [Volkswagen Tharu XR 1.5 AT 2025](https://mtk-vostok-avto.ru/avto/vw-tharu-xr-2025-942km/): 942 км  110 л.с.  Бензин  передний привод; 2 280 880 ₽ под ключ
 - [Changan Qiyuan Q05 506 Max 2026](https://mtk-vostok-avto.ru/avto/changan-q05-506max-2026-10400km/): 10 402 км  163 л.с.  506 км хода  Электро  передний привод; 2 281 274 ₽ под ключ
+- [Changan Qiyuan Q05 506 Max 2025](https://mtk-vostok-avto.ru/avto/changan-q05-506max-2025-7950km/): 7 950 км  163 л.с.  506 км хода  Электро  передний привод; 2 281 274 ₽ под ключ
 - [Changan Qiyuan Q05 506Max 2025](https://mtk-vostok-avto.ru/avto/changan-qiyuan-q05-506max-2025-7000km-2/): 7 000 км  163 л.с.  506 км хода  Электро  передний привод; 2 298 712 ₽ под ключ
 - [Changan Qiyuan Q05 405 Laser Ultra 2026](https://mtk-vostok-avto.ru/avto/changan-q05-405-laser-ultra-2026-130km/): 130 км  163 л.с.  405 км хода  Электро  передний привод; 2 333 591 ₽ под ключ
 - [Mazda CX-5 2.0 2WD 2022](https://mtk-vostok-avto.ru/avto/mazda-cx-5-2022-68000km/): 68 000 км  1998 см³  155 л.с.  Бензин  передний привод; 2 342 771 ₽ под ключ
