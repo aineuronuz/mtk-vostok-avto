@@ -129,7 +129,7 @@
 - [Subaru XV (Субару)](https://mtk-vostok-avto.ru/katalog/subaru-xv/): 2.0 литра · AWD, 154 л.с.; от 2,72 до 3,14 млн ₽
 - [Mitsubishi Eclipse Cross (Мицубиси)](https://mtk-vostok-avto.ru/katalog/mitsubishi-eclipse-cross/): 1.5T литра · 4WD, 150 л.с.; от 2,1 до 2,41 млн ₽
 
-## Авто в Китае (243 машин, цена под ключ на 01.11.2026)
+## Авто в Китае (246 машин, цена под ключ на 01.11.2026)
 
 - [Jinbei X30 1.5 2022](https://mtk-vostok-avto.ru/avto/jinbei-x30-2022-42600km/): 42 600 км  1451 см³  102 л.с.  Бензин  задний привод; 1 057 628 ₽ под ключ
 - [Chevrolet Onix 1.0T AT 2022](https://mtk-vostok-avto.ru/avto/chevrolet-onix-2022-54000km/): 54 000 км  999 см³  125 л.с.  Бензин  передний привод; 1 105 074 ₽ под ключ
@@ -210,6 +210,7 @@
 - [Geely Coolray 1.4T 2023](https://mtk-vostok-avto.ru/avto/geely-coolray-1-4t-2023-45000km/): 45 000 км  1398 см³  141 л.с.  Бензин  передний привод; 1 813 017 ₽ под ключ
 - [GAC Aion Y Plus 70 2023](https://mtk-vostok-avto.ru/avto/gac-aion-y-plus-70-2023-60000km/): 60 000 км  63 л.с.  510 км хода  Электро  передний привод; 1 821 041 ₽ под ключ
 - [Volkswagen Tharu 280TSI 2WD Comfort 2022](https://mtk-vostok-avto.ru/avto/volkswagen-tharu-280tsi-2wd-comfort-2022-68000km/): 68 000 км  1395 см³  150 л.с.  Бензин  передний привод; 1 823 407 ₽ под ключ
+- [Volkswagen T-Cross 1.5 2024](https://mtk-vostok-avto.ru/avto/vw-t-cross-1-5-fashion-2024-45200km/): 45 207 км  1498 см³  110 л.с.  Бензин  передний привод; 1 831 387 ₽ под ключ
 - [Kia KX1 1.4 CVT 2024](https://mtk-vostok-avto.ru/avto/kia-kx1-1-4-cvt-2024-28000km/): 28 000 км  1368 см³  100 л.с.  Бензин  передний привод; 1 831 388 ₽ под ключ
 - [Hyundai Elantra 1.5L 2023](https://mtk-vostok-avto.ru/avto/hyundai-elantra-1-5l-2023-36000km-che59934243/): 36 000 км  1497 см³  115 л.с.  Бензин  передний привод; 1 833 394 ₽ под ключ
 - [Kia K3 1.5L 2023](https://mtk-vostok-avto.ru/avto/kia-k3-1-5l-2023-20000km-che60311133/): 20 000 км  1497 см³  115 л.с.  Бензин  передний привод; 1 833 394 ₽ под ключ
@@ -237,7 +238,9 @@
 - [Changan Qiyuan Q05 405Air 2026](https://mtk-vostok-avto.ru/avto/changan-qiyuan-q05-405air-2026-10000km-2/): 10 000 км  163 л.с.  405 км хода  Электро  передний привод; 1 967 371 ₽ под ключ
 - [Nissan Kicks 1.5 XL 2024](https://mtk-vostok-avto.ru/avto/nissan-kicks-1-5-xl-2024-2200km/): 2 200 км  1498 см³  122 л.с.  Бензин  передний привод; 1 978 346 ₽ под ключ
 - [Volkswagen Tharu 280TSI 2022](https://mtk-vostok-avto.ru/avto/vw-tharu-280tsi-2022-40000km/): 40 000 км  1395 см³  150 л.с.  Бензин  передний привод; 1 983 743 ₽ под ключ
+- [Kia KX3 (Seltos) 1.5 2022](https://mtk-vostok-avto.ru/avto/kia-kx3-seltos-1-5-trend-2022-32000km/): 32 935 км  1497 см³  115 л.с.  Бензин  передний привод; 1 986 722 ₽ под ключ
 - [Volkswagen Tharu 280TSI 2WD Fashion 2022](https://mtk-vostok-avto.ru/avto/volkswagen-tharu-280tsi-2wd-fashion-2022-26547km/): 26 547 км  1395 см³  150 л.с.  Бензин  передний привод; 2 020 543 ₽ под ключ
+- [Kia Seltos 1.5 2023](https://mtk-vostok-avto.ru/avto/kia-seltos-1-5-luxury-2023-40000km/): 40 000 км  1497 см³  115 л.с.  Бензин  передний привод; 2 024 427 ₽ под ключ
 - [Honda XR-V 1.5 CVT Obsidian 2022](https://mtk-vostok-avto.ru/avto/honda-xr-v-1-5-cvt-obsidian-2022-5000km/): 5 000 км  1498 см³  131 л.с.  Бензин  передний привод; 2 024 580 ₽ под ключ
 - [Skoda Karoq 1.4 TSI DSG 2022](https://mtk-vostok-avto.ru/avto/skoda-karoq-2022-45336km/): 45 336 км  1395 см³  150 л.с.  Бензин  передний привод; 2 034 015 ₽ под ключ
 - [Skoda Karoq 1.4TSI TSI280 2022](https://mtk-vostok-avto.ru/avto/skoda-karoq-1-4tsi-tsi280-2022-58000km/): 58 000 км  1395 см³  150 л.с.  Бензин  передний привод; 2 046 583 ₽ под ключ
