@@ -820,18 +820,11 @@ def ph_show(kp):
 def ph_route():
     """«Как купить»: маршрут Китай → граница → ваш город, 45–65 дней — по линии едет машинка капотом вперёд (Юрий 27.10.2026: бирюзовый вместо жёлтого;
     рисунок отражён — капот слева, а движение по линии вправо). С 28.10.2026 весь маршрут зеркально (Юрий: Китай восточнее России) —
-    путь, точки и машинка в группе с отражением, Китай справа внизу, «Ваш город» слева; подписи не отражаются."""
-    path = "M40 230 C 170 120, 300 270, 430 170 S 640 60, 720 110"
-    return f"""<div class="phroute" aria-hidden="true"><svg viewBox="0 0 760 300" fill="none">
-<defs><linearGradient id="rtg" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#3fe8c8"/><stop offset=".6" stop-color="#2fd2e6"/><stop offset="1" stop-color="#7fd3ff"/></linearGradient></defs>
-<g transform="matrix(-1 0 0 1 760 0)"><path d="{path}" class="rt0"/><path d="{path}" class="rt1" stroke="url(#rtg)"/>
-<g class="nd"><circle cx="40" cy="230" r="9"/><circle cx="430" cy="170" r="9"/><circle cx="720" cy="110" r="11"/></g>
-<g class="car"><g transform="scale(-1.4 1.4) translate(0 -9)"><path class="bd" d="M-23 4v-6q1-4 6-4.5l8-1 6-6q2-1.5 5-1.5h8q3 0 5 3l4 4.5q5 1 5 5v6.5z"/>
-<path class="gl" d="M-6.5-7.5l4.5-5h6v5zM5.5-7.5v-5h4q2 0 3 1.5l2.5 3.5z"/>
-<circle class="wh" cx="-12" cy="4.5" r="4.6"/><circle class="wh" cx="12.5" cy="4.5" r="4.6"/></g>
-<animateMotion dur="7s" repeatCount="indefinite" rotate="auto" keyPoints="0;1;1" keyTimes="0;.85;1" calcMode="linear" path="{path}"/></g></g>
-<text x="720" y="272" text-anchor="middle">Китай</text><text x="330" y="212" text-anchor="middle">Граница</text><text x="40" y="70" text-anchor="middle">Ваш город</text>
-</svg><div class="rtd"><b>45–65</b> дней от&nbsp;оплаты до&nbsp;выдачи</div></div>"""
+    путь и машинка в группе с отражением, Китай справа внизу, «Ваш город» слева; подписи не отражаются.
+    С 04.11.2026 на Границе шлагбаум со светофором в проекции (Юрий 04.11, вариант 6): машина встаёт на красный, на зелёный стрела
+    поднимается; Граница — на ровном дне дороги. Разметка — new/src/route.svg, её собирает ~/yurazol-sites/proposals/shlagbaum/render.py --svg 6."""
+    svg = (NEW / "src" / "route.svg").read_text().strip()
+    return f"""<div class="phroute" aria-hidden="true">{svg}<div class="rtd"><b>45–65</b> дней от&nbsp;оплаты до&nbsp;выдачи</div></div>"""
 
 
 def calc_data(rates):
