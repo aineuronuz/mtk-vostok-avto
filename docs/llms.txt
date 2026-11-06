@@ -129,7 +129,7 @@
 - [Subaru XV (Субару)](https://mtk-vostok-avto.ru/katalog/subaru-xv/): 2.0 литра · AWD, 154 л.с.; от 2,77 до 3,19 млн ₽
 - [Mitsubishi Eclipse Cross (Мицубиси)](https://mtk-vostok-avto.ru/katalog/mitsubishi-eclipse-cross/): 1.5T литра · 4WD, 150 л.с.; от 2,13 до 2,44 млн ₽
 
-## Авто в Китае (274 машин, цена под ключ на 06.11.2026)
+## Авто в Китае (276 машин, цена под ключ на 06.11.2026)
 
 - [Jinbei X30 1.5 2022](https://mtk-vostok-avto.ru/avto/jinbei-x30-2022-42600km/): 42 600 км  1451 см³  102 л.с.  Бензин  задний привод; 1 073 805 ₽ под ключ
 - [Chevrolet Onix 1.0T AT 2022](https://mtk-vostok-avto.ru/avto/chevrolet-onix-2022-54000km/): 54 000 км  999 см³  125 л.с.  Бензин  передний привод; 1 120 948 ₽ под ключ
@@ -294,6 +294,7 @@
 - [Volkswagen Tharu 280TSI 2022](https://mtk-vostok-avto.ru/avto/vw-tharu-280tsi-flagship-2022-48000km/): 48 000 км  1395 см³  150 л.с.  Бензин  передний привод; 2 231 292 ₽ под ключ
 - [Volkswagen Tharu 280TSI 2022](https://mtk-vostok-avto.ru/avto/vw-tharu-280tsi-luxury-2022-18400km/): 18 400 км  1395 см³  150 л.с.  Бензин  передний привод; 2 231 292 ₽ под ключ
 - [Honda Vezel 1.5L 2023](https://mtk-vostok-avto.ru/avto/honda-vezel-1-5l-2023-27000km-che60212098/): 27 000 км  1498 см³  124 л.с.  Бензин  передний привод; 2 232 109 ₽ под ключ
+- [Changan Qiyuan Q05 506 Max+ 2025](https://mtk-vostok-avto.ru/avto/changan-q05-506maxplus-2025-16685km/): 16 685 км  163 л.с.  506 км хода  Электро  передний привод; 2 238 435 ₽ под ключ
 - [Honda XR-V 1.5L 2023](https://mtk-vostok-avto.ru/avto/honda-xr-v-1-5l-2023-19000km-che60043345/): 19 000 км  1498 см³  124 л.с.  Бензин  передний привод; 2 244 876 ₽ под ключ
 - [Mazda CX-30 2.0 Obsidian 2022](https://mtk-vostok-avto.ru/avto/mazda-cx-30-2-0-obsidian-2022-65000km/): 65 000 км  1998 см³  158 л.с.  Бензин  передний привод; 2 254 576 ₽ под ключ
 - [Volkswagen Tharu 280TSI 2022](https://mtk-vostok-avto.ru/avto/vw-tharu-280tsi-luxury-2022-50157km/): 50 157 км  1395 см³  150 л.с.  Бензин  передний привод; 2 256 823 ₽ под ключ
@@ -366,6 +367,7 @@
 - [Mazda CX-50 2.0 AT 2023](https://mtk-vostok-avto.ru/avto/mazda-cx-50-2023-60000km/): 60 000 км  1998 см³  155 л.с.  Бензин  передний привод; 3 173 722 ₽ под ключ
 - [Dongfeng eπ007 EREV 200 2024](https://mtk-vostok-avto.ru/avto/dongfeng-ep007-erev-2024-61600km/): 61 600 км  218 л.с.  1200 км хода  Гибрид EREV  задний привод; 3 177 359 ₽ под ключ
 - [Dongfeng eπ007 530 Pro 2024](https://mtk-vostok-avto.ru/avto/dongfeng-ep007-530pro-2024-30000km/): 30 000 км  218 л.с.  530 км хода  Электро  задний привод; 3 212 769 ₽ под ключ
+- [BMW 320Li M Sport 2022](https://mtk-vostok-avto.ru/avto/bmw-320li-m-sport-2022-28000km/): 28 000 км  1998 см³  156 л.с.  Бензин  задний привод; 3 224 786 ₽ под ключ
 - [Mazda CX-5 2.0 2025](https://mtk-vostok-avto.ru/avto/mazda-cx-5-2-0-2025-3500km/): 3 500 км  1998 см³  158 л.с.  Бензин  передний привод; 3 278 982 ₽ под ключ
 - [Mazda CX-50 2.0 AT 2024](https://mtk-vostok-avto.ru/avto/mazda-cx-50-2024-49000km/): 49 000 км  1998 см³  155 л.с.  Бензин  передний привод; 3 291 748 ₽ под ключ
 - [Subaru Forester 2.0i AWD 2022](https://mtk-vostok-avto.ru/avto/subaru-forester-2022-72800km/): 72 800 км  1995 см³  154 л.с.  Бензин  полный постоянный привод; 3 326 167 ₽ под ключ
